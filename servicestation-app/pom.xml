@@ -7,9 +7,9 @@
     <artifactId>servicestation</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.expositds.sjc</groupId>
+
   <artifactId>servicestation-app</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+
   <packaging>war</packaging>
   <name>servicestation-app Maven Webapp</name>
   <url>http://maven.apache.org</url>
