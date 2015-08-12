@@ -1,0 +1,105 @@
+
+
+body {
+  
+  font-family: "Trebuchet MS", serif;
+}
+
+h1 {
+  margin: 0 0 .5em;
+  font-weight: 500;
+}
+
+h6 {
+  font-size: .7em;
+  color: #999;
+  margin: 0 0 2em;
+}
+h6 i {
+  font-style: italic;
+  display: inline-block;
+}
+
+output {
+  width: 3em;
+  display: inline-block;
+  font-size: .8em;
+}
+output#outclass {
+  display: block;
+  width: 100%;
+  color: #999;
+}
+
+input {
+  width: 108px;
+}
+
+.sect {
+  width: 20em;
+  margin: 4em auto;
+  background-color: #fff;
+  padding: 5em;
+  border-radius: .5em;
+  text-align: center;
+}
+.sect #stars {
+  display: inline-block;
+  width: 250px;
+  height: 45px;
+  position: relative;
+  bottom: 60%; /* Положение от нижнего края */
+  right: 40%;
+  background-color: #ccc;
+  overflow: hidden;
+}
+.sect #stars:before {
+  background-color: orange;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIyMCUiIHN0b3AtY29sb3I9IiNmZGI1OGYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmYzcyMTciLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #fdb58f), color-stop(100%, #fc7217));
+  background-image: -webkit-linear-gradient(top, #fdb58f 20%, #fc7217 100%);
+  background-image: linear-gradient(to bottom, #fdb58f 20%, #fc7217 100%);
+  position: absolute;
+  content: "";
+  left: 0;
+  right: 100%;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+}
+.sect #stars:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-image: url(http://imgh.us/icon_star.svg);
+  z-index: 1;
+}
+
+#stars.rating-0:before {
+  right: 100%;
+}
+
+#stars.rating-1:before {
+  right: 80%;
+}
+
+#stars.rating-2:before {
+  right: 60%;
+}
+
+#stars.rating-3:before {
+  right: 40%;
+}
+
+#stars.rating-4:before {
+  right: 20%;
+}
+
+#stars.rating-5:before {
+  right: 0%;
+}
+
