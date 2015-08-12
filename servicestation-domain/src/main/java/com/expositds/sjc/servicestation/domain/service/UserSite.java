@@ -47,5 +47,12 @@ public interface UserSite {
 	 * @return списоу отзывов
 	 */
 	public Set<Comment> getServiceStationComments(Station serviceStation);
-
+	
+	/**
+	 * Метод возвращает среднюю оценку указанной станции.
+	 * @param station СТО
+	 * @return средняя оценка
+	 */
+	public Double getAverageStationMark(Station station);
+	
 }

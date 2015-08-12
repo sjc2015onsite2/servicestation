@@ -116,5 +116,13 @@ public abstract class SiteUserImpl implements UserSite {
 		return commentsModel;
 	}
 	
+	@Override
+	public Double getAverageStationMark(Station station) {
+		Set<Mark> stationMarks = getServiceStationMark(station);
+		Double summMark = 0.0;
+		for (Mark currentMark : stationMarks) 
+			summMark = summMark + currentMark.getMark();
+		return summMark / stationMarks.size();
+	}
 	
 }
