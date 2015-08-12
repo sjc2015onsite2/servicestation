@@ -36,7 +36,7 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.expositds.sjc.servicestation.app.repository.entity"/>
+		<property name="packagesToScan" value="com.expositds.sjc.servicestation.business.repository.entity"/>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.show_sql">true</prop>
