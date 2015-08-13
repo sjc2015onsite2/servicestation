@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
 import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
+import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderStatus;
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
@@ -33,6 +35,9 @@ public class ServiceStationImpl implements ServiceStation{
 	private StationDao stationDao;
 	
 	@Autowired
+	private AffilateDao affilateDao;
+	
+	@Autowired
 	private BasicEntityModelObjectConverter basicEntityModelObjectConverter;
 	
 	@Override
@@ -44,7 +49,8 @@ public class ServiceStationImpl implements ServiceStation{
 		orderEntity.setStatus(OrderStatus.NEW);
 		orderEntity.setOrderId(orderDao.save(orderEntity));
 		StationEntity stationEntity = stationDao.findById(serviceStation.getStationId());
-		stationEntity.getOrders().put(orderEntity, null);
+		AffilateEntity nullAffilateEntity = affilateDao.findById(1L);
+		stationEntity.getOrders().put(orderEntity, nullAffilateEntity);
 		Order order = (Order) basicEntityModelObjectConverter.convert(orderEntity, Order.class);
 		stationDao.update(stationEntity);
 		return order;
