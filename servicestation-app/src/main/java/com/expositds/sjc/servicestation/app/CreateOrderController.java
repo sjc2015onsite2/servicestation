@@ -47,9 +47,6 @@ public class CreateOrderController {
 		
 		nonAuthorizedUserSite.createOrder(contacts, problem, station);
 		
-		
-		
-		
 		return "redirect:/createorder";
 	}
 	
