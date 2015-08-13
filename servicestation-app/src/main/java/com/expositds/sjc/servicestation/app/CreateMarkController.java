@@ -36,4 +36,7 @@ public class CreateMarkController {
 		mav.setViewName("createMark");
 		return mav;
 	}
+	
+	
+	
 }
