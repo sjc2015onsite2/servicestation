@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.24, for Win32 (x86)
 --
--- Host: localhost    Database: servicestation
+-- Host: 127.0.0.1    Database: servicestation
 -- ------------------------------------------------------
--- Server version	5.5.23
+-- Server version	5.6.25-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -265,34 +265,37 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (1,'Удобная станция. Советую.','2015-08-02',1,''),(2,'Грамотный специалист. Рекомендую.','2015-08-02',1,'');
+INSERT INTO `comments` VALUES (1,'Удобная станция. Советую.','2015-08-02',2,''),(2,'Грамотный специалист. Рекомендую.','2015-08-02',3,'');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `credentials`
+-- Table structure for table `logginers`
 --
 
-DROP TABLE IF EXISTS `credentials`;
+DROP TABLE IF EXISTS `logginers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `credentials` (
-  `credential_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `logginers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL DEFAULT '',
   `login` varchar(45) NOT NULL,
-  `password` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`credential_id`),
-  UNIQUE KEY `credential_id_UNIQUE` (`credential_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `password` varchar(45) NOT NULL,
+  `role` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`,`name`,`login`,`role`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `login_UNIQUE` (`login`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `credentials`
+-- Dumping data for table `logginers`
 --
 
-LOCK TABLES `credentials` WRITE;
-/*!40000 ALTER TABLE `credentials` DISABLE KEYS */;
-INSERT INTO `credentials` VALUES (1,'pit','pit'),(3,'petrovich','petrovich');
-/*!40000 ALTER TABLE `credentials` ENABLE KEYS */;
+LOCK TABLES `logginers` WRITE;
+/*!40000 ALTER TABLE `logginers` DISABLE KEYS */;
+INSERT INTO `logginers` VALUES (1,'Петрович','petrovich','petrovich','MECHANIC'),(2,'Петя','pit','pit','USER'),(3,'Боря','boris','boris','USER'),(4,'Иваныч','ivanych','ivanych','MECHANIC');
+/*!40000 ALTER TABLE `logginers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -318,7 +321,7 @@ CREATE TABLE `marks` (
 
 LOCK TABLES `marks` WRITE;
 /*!40000 ALTER TABLE `marks` DISABLE KEYS */;
-INSERT INTO `marks` VALUES (1,4,'2015-08-02',1);
+INSERT INTO `marks` VALUES (1,4,'2015-08-02',2);
 /*!40000 ALTER TABLE `marks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -381,7 +384,8 @@ DROP TABLE IF EXISTS `order_has_parts_counts`;
 CREATE TABLE `order_has_parts_counts` (
   `order_id` int(11) NOT NULL,
   `part_id` int(11) NOT NULL,
-  `count` int(11) NOT NULL DEFAULT '0'
+  `count` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -404,7 +408,8 @@ DROP TABLE IF EXISTS `order_has_services`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `order_has_services` (
   `order_id` int(11) NOT NULL,
-  `service_id` int(11) NOT NULL
+  `service_id` int(11) NOT NULL,
+  PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -428,7 +433,8 @@ DROP TABLE IF EXISTS `order_has_services_costs`;
 CREATE TABLE `order_has_services_costs` (
   `order_id` int(11) NOT NULL,
   `service_id` int(11) NOT NULL,
-  `cost` int(11) NOT NULL DEFAULT '0'
+  `cost` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -460,7 +466,7 @@ CREATE TABLE `orders` (
   `order_contact_data` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   UNIQUE KEY `order_id_UNIQUE` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -469,7 +475,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'NEW','2015-08-01',NULL,'Сильная вибрация при скорости больше 80 км//ч',1,NULL,NULL),(12,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(13,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(14,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(15,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(16,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(18,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(19,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(20,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(21,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(22,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(23,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(24,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(25,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(26,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(27,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(28,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(29,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(30,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б');
+INSERT INTO `orders` VALUES (1,'NEW','2015-08-01',NULL,'Сильная вибрация при скорости больше 80 км//ч',1,NULL,NULL),(12,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(13,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(14,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(15,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(16,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(18,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(19,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(20,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(21,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(22,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(23,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(24,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(25,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(26,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(27,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(28,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(29,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(30,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(31,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(32,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(33,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(34,'NEW','2015-08-12',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(35,'NEW','2015-08-14',NULL,'ÐÑÐ¾Ð±Ð»ÐµÐ¼Ñ Ñ ÐºÐ¾Ð´Ð¸ÑÐ¾Ð²ÐºÐ¾Ð¹',NULL,NULL,'ÐÐ¾Ð¼ Ñ Ð¾Ð·ÐµÑÐ°');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -483,7 +489,8 @@ DROP TABLE IF EXISTS `part_order_has_parts_counts`;
 CREATE TABLE `part_order_has_parts_counts` (
   `part_order_id` int(11) NOT NULL,
   `part_id` int(11) NOT NULL,
-  `count` int(11) NOT NULL DEFAULT '0'
+  `count` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`part_order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -559,7 +566,8 @@ DROP TABLE IF EXISTS `person_has_dates_salarys`;
 CREATE TABLE `person_has_dates_salarys` (
   `person_id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `salary` int(11) NOT NULL DEFAULT '0'
+  `salary` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`person_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -582,10 +590,9 @@ DROP TABLE IF EXISTS `persons`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `persons` (
   `person_id` int(11) NOT NULL AUTO_INCREMENT,
-  `person_name` varchar(45) NOT NULL,
   PRIMARY KEY (`person_id`),
   UNIQUE KEY `person_id_UNIQUE` (`person_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -594,7 +601,7 @@ CREATE TABLE `persons` (
 
 LOCK TABLES `persons` WRITE;
 /*!40000 ALTER TABLE `persons` DISABLE KEYS */;
-INSERT INTO `persons` VALUES (1,'Петрович');
+INSERT INTO `persons` VALUES (1),(4);
 /*!40000 ALTER TABLE `persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -625,30 +632,6 @@ INSERT INTO `services` VALUES (1,'ТС-3','Замена передних тор�
 UNLOCK TABLES;
 
 --
--- Table structure for table `site_aggregator_has_credentials_site_users`
---
-
-DROP TABLE IF EXISTS `site_aggregator_has_credentials_site_users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `site_aggregator_has_credentials_site_users` (
-  `site_aggregator_id` int(11) NOT NULL,
-  `credential_id` int(11) NOT NULL,
-  `site_user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `site_aggregator_has_credentials_site_users`
---
-
-LOCK TABLES `site_aggregator_has_credentials_site_users` WRITE;
-/*!40000 ALTER TABLE `site_aggregator_has_credentials_site_users` DISABLE KEYS */;
-INSERT INTO `site_aggregator_has_credentials_site_users` VALUES (1,1,1);
-/*!40000 ALTER TABLE `site_aggregator_has_credentials_site_users` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `site_aggregator_has_logins`
 --
 
@@ -657,7 +640,8 @@ DROP TABLE IF EXISTS `site_aggregator_has_logins`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `site_aggregator_has_logins` (
   `site_aggregator_id` int(11) NOT NULL,
-  `login` varchar(45) NOT NULL
+  `login` varchar(45) NOT NULL,
+  PRIMARY KEY (`site_aggregator_id`,`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -667,7 +651,7 @@ CREATE TABLE `site_aggregator_has_logins` (
 
 LOCK TABLES `site_aggregator_has_logins` WRITE;
 /*!40000 ALTER TABLE `site_aggregator_has_logins` DISABLE KEYS */;
-INSERT INTO `site_aggregator_has_logins` VALUES (1,'pit');
+INSERT INTO `site_aggregator_has_logins` VALUES (1,'boris'),(1,'pit');
 /*!40000 ALTER TABLE `site_aggregator_has_logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -692,7 +676,7 @@ CREATE TABLE `site_aggregator_has_orders_stations` (
 
 LOCK TABLES `site_aggregator_has_orders_stations` WRITE;
 /*!40000 ALTER TABLE `site_aggregator_has_orders_stations` DISABLE KEYS */;
-INSERT INTO `site_aggregator_has_orders_stations` VALUES (1,1,1),(1,12,1),(1,13,1),(1,14,1),(1,15,1),(1,16,1),(1,18,1),(1,19,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),(1,28,1),(1,29,1),(1,30,1);
+INSERT INTO `site_aggregator_has_orders_stations` VALUES (1,1,1),(1,12,1),(1,13,1),(1,14,1),(1,15,1),(1,16,1),(1,18,1),(1,19,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),(1,28,1),(1,29,1),(1,30,1),(1,31,1),(1,32,1),(1,33,1),(1,34,1),(1,35,2);
 /*!40000 ALTER TABLE `site_aggregator_has_orders_stations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -747,6 +731,30 @@ INSERT INTO `site_aggregator_has_stations_station_profiles` VALUES (1,1,1),(1,2,
 UNLOCK TABLES;
 
 --
+-- Table structure for table `site_aggregator_site_users`
+--
+
+DROP TABLE IF EXISTS `site_aggregator_site_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `site_aggregator_site_users` (
+  `site_aggregator_id` int(11) NOT NULL,
+  `site_user_id` int(11) NOT NULL,
+  PRIMARY KEY (`site_aggregator_id`,`site_user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `site_aggregator_site_users`
+--
+
+LOCK TABLES `site_aggregator_site_users` WRITE;
+/*!40000 ALTER TABLE `site_aggregator_site_users` DISABLE KEYS */;
+INSERT INTO `site_aggregator_site_users` VALUES (1,2),(1,3);
+/*!40000 ALTER TABLE `site_aggregator_site_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `site_aggregators`
 --
 
@@ -791,7 +799,7 @@ CREATE TABLE `site_user_has_orders_stations` (
 
 LOCK TABLES `site_user_has_orders_stations` WRITE;
 /*!40000 ALTER TABLE `site_user_has_orders_stations` DISABLE KEYS */;
-INSERT INTO `site_user_has_orders_stations` VALUES (1,1,1);
+INSERT INTO `site_user_has_orders_stations` VALUES (2,1,1);
 /*!40000 ALTER TABLE `site_user_has_orders_stations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -804,10 +812,9 @@ DROP TABLE IF EXISTS `site_users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `site_users` (
   `site_user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `site_user_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`site_user_id`),
   UNIQUE KEY `site_user_id_UNIQUE` (`site_user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -816,7 +823,7 @@ CREATE TABLE `site_users` (
 
 LOCK TABLES `site_users` WRITE;
 /*!40000 ALTER TABLE `site_users` DISABLE KEYS */;
-INSERT INTO `site_users` VALUES (1,'Петя');
+INSERT INTO `site_users` VALUES (2),(3);
 /*!40000 ALTER TABLE `site_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -830,7 +837,8 @@ DROP TABLE IF EXISTS `station_has_affilates_affilate_profiles`;
 CREATE TABLE `station_has_affilates_affilate_profiles` (
   `station_id` int(11) NOT NULL,
   `affilate_id` int(11) NOT NULL,
-  `affilate_profile_id` int(11) NOT NULL
+  `affilate_profile_id` int(11) NOT NULL,
+  PRIMARY KEY (`station_id`,`affilate_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -845,31 +853,6 @@ INSERT INTO `station_has_affilates_affilate_profiles` VALUES (1,1,1);
 UNLOCK TABLES;
 
 --
--- Table structure for table `station_has_credentials_persons`
---
-
-DROP TABLE IF EXISTS `station_has_credentials_persons`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `station_has_credentials_persons` (
-  `station_id` int(11) NOT NULL,
-  `credential_id` int(11) NOT NULL,
-  `person_id` int(11) NOT NULL,
-  PRIMARY KEY (`credential_id`,`person_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `station_has_credentials_persons`
---
-
-LOCK TABLES `station_has_credentials_persons` WRITE;
-/*!40000 ALTER TABLE `station_has_credentials_persons` DISABLE KEYS */;
-INSERT INTO `station_has_credentials_persons` VALUES (1,3,1);
-/*!40000 ALTER TABLE `station_has_credentials_persons` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `station_has_logins`
 --
 
@@ -878,7 +861,8 @@ DROP TABLE IF EXISTS `station_has_logins`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `station_has_logins` (
   `station_id` int(11) NOT NULL,
-  `login` varchar(45) NOT NULL
+  `login` varchar(45) NOT NULL,
+  PRIMARY KEY (`login`,`station_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -888,7 +872,7 @@ CREATE TABLE `station_has_logins` (
 
 LOCK TABLES `station_has_logins` WRITE;
 /*!40000 ALTER TABLE `station_has_logins` DISABLE KEYS */;
-INSERT INTO `station_has_logins` VALUES (1,'petrovich');
+INSERT INTO `station_has_logins` VALUES (2,'ivanych'),(1,'petrovich');
 /*!40000 ALTER TABLE `station_has_logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -913,33 +897,32 @@ CREATE TABLE `station_has_orders_affilates` (
 
 LOCK TABLES `station_has_orders_affilates` WRITE;
 /*!40000 ALTER TABLE `station_has_orders_affilates` DISABLE KEYS */;
-INSERT INTO `station_has_orders_affilates` VALUES (1,1,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),(1,28,1),(1,29,1),(1,30,1);
+INSERT INTO `station_has_orders_affilates` VALUES (1,1,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),(1,28,1),(1,29,1),(1,30,1),(1,31,1),(1,32,1),(1,33,1),(1,34,1),(2,35,1);
 /*!40000 ALTER TABLE `station_has_orders_affilates` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `station_has_persons_positions`
+-- Table structure for table `station_persons`
 --
 
-DROP TABLE IF EXISTS `station_has_persons_positions`;
+DROP TABLE IF EXISTS `station_persons`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `station_has_persons_positions` (
+CREATE TABLE `station_persons` (
   `station_id` int(11) NOT NULL,
   `person_id` int(11) NOT NULL,
-  `position` varchar(45) NOT NULL,
   PRIMARY KEY (`person_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `station_has_persons_positions`
+-- Dumping data for table `station_persons`
 --
 
-LOCK TABLES `station_has_persons_positions` WRITE;
-/*!40000 ALTER TABLE `station_has_persons_positions` DISABLE KEYS */;
-INSERT INTO `station_has_persons_positions` VALUES (1,1,'MECHANIC');
-/*!40000 ALTER TABLE `station_has_persons_positions` ENABLE KEYS */;
+LOCK TABLES `station_persons` WRITE;
+/*!40000 ALTER TABLE `station_persons` DISABLE KEYS */;
+INSERT INTO `station_persons` VALUES (1,1),(2,4);
+/*!40000 ALTER TABLE `station_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1049,4 +1032,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-11 14:28:05
+-- Dump completed on 2015-08-14 21:53:42

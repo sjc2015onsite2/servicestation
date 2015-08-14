@@ -19,7 +19,7 @@
                 	<td>MTC (29)884-21-43<p> ул. Кабяка 12/1</td>
                 	<td class="text-center"><a href="${viewStationsCommentsUrl}">Comments</a></td>
                 	<td class="text-center"><a href="${viewMechanicsListUrl}">Mechanics</a></td>
-                	<td class="text-center text-warning"><h2>5</h2></td>
+                	<td class="text-center text-warning"><h2>${stationMarks.get(station.stationId)}</h2></td>
                 </tr>
              </c:forEach>
     </table>

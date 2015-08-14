@@ -1,5 +1,6 @@
 package com.expositds.sjc.servicestation.app;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -36,10 +37,14 @@ public class StationsListController {
 		
 		Set<Station> stations = nonAuthorizedUserSite.getServiceStations();
 		
-		//nonAuthorizedUserSite.getServiceStationComments(serviceStation);
-				
+		Map<Long, Double> stationMarks = new HashMap<>();
+		for(Station currentStation : stations){
+			stationMarks.put(currentStation.getStationId(), nonAuthorizedUserSite.getAverageStationMark(currentStation));
+		}
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("stations",  stations);
+		mav.addObject("stationMarks", stationMarks);
+		
 		mav.setViewName("stations.list");
 		return mav;
 	}
