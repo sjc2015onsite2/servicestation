@@ -10,6 +10,8 @@ import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.expositds.sjc.servicestation.domain.model.LogginerRole;
  
 /**
  * Класс содержит информацию о пользователе сайта.
@@ -37,13 +39,14 @@ public class SiteUserEntity extends LogginerEntity{
 	 * 
 	 * @param name имя
 	 */
-	public SiteUserEntity(String name) {
+	public SiteUserEntity(String name, LogginerRole role) {
 		setName(name);
+		setRole(role);
 		this.orders = new HashMap<>();
 	}
 	
 	public SiteUserEntity() {
-		this(null);
+		this(null, null);
 	}
 
 	public Map<OrderEntity, StationEntity> getOrders() {

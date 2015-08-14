@@ -20,23 +20,22 @@
     <property name="show_sql">true</property>
     <property name="format_sql">true</property>
   
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.AffilateEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.AffilateProfileEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.ClientNotificationEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.CommentEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.CredentialEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.MarkEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.OrderEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.PartEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.PartOrderEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.PersonEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.ServiceEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.SiteAggregatorEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.SiteUserEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.StationEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.StationProfileEntity" />
-	<mapping class="com.expositds.sjc.servicestation.app.repository.entity.MechanicProfileEntity" />
-		       
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.AffilateProfileEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.ClientNotificationEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.CommentEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.MarkEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.OrderEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.PartEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.PartOrderEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.PersonEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.ServiceEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.SiteAggregatorEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.SiteUserEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.StationEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.StationProfileEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.MechanicProfileEntity" />
+	<mapping class="com.expositds.sjc.servicestation.business.repository.entity.LogginerEntity" />	       
   
   </session-factory> 
  

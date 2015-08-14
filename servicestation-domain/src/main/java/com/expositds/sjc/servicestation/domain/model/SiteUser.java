@@ -19,12 +19,13 @@ public class SiteUser extends Logginer {
 	 * 
 	 * @param name имя
 	 */
-	public SiteUser(String name) {
+	public SiteUser(String name, LogginerRole role) {
 		setName(name);
+		setRole(role);
 	}
 	
 	public SiteUser() {
-		this(null);
+		this(null, null);
 	}
 
 	public HashMap<Order, Station> getOrders() {

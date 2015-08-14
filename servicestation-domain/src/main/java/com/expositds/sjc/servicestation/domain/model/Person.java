@@ -20,12 +20,13 @@ public class Person extends Logginer {
 	 * 
 	 * @param name имя нового сотрудника.
 	 */
-	public Person(String name) {
+	public Person(String name, LogginerRole role) {
 		setName(name);
+		setRole(role);
 	}
 	
 	public Person() {
-		this(null);
+		this(null, null);
 	}
 
 	public TreeMap<Calendar, Integer> getSalary() {

@@ -1,14 +1,13 @@
 package com.expositds.sjc.servicestation.business.repository;
 
-import java.util.GregorianCalendar;
-import java.util.Map;
-
 import org.hibernate.Session;
 
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
-import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
+import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
+import com.expositds.sjc.servicestation.business.repository.entity.SiteUserEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.hibernate.HibernateUtil;
+import com.expositds.sjc.servicestation.domain.model.LogginerRole;
 
 public class StartHibernate {
 
@@ -17,13 +16,17 @@ public class StartHibernate {
 		session.beginTransaction();
 		
 		//SiteAggregatorEntity sa = new SiteAggregatorEntity();
-		//SiteUserEntity su = new SiteUserEntity("Петя");
+		SiteUserEntity su = new SiteUserEntity("Боря", LogginerRole.USER);
+		su.setLogin("boris");
+		su.setPassword("boris");
 		//CredentialEntity cr = new CredentialEntity("petrovich", "petrovich");
-		//PersonEntity psn = new PersonEntity("Петрович");
+		PersonEntity psn = new PersonEntity("Иваныч", LogginerRole.MECHANIC);
+		psn.setLogin("ivanych");
+		psn.setPassword("ivanych");
 		//MechanicProfileEntity mpr = new MechanicProfileEntity();
 		//StationEntity st = new StationEntity("Южная автосервисная станция", "south");
 		//StationProfileEntity stpr = new StationProfileEntity();
-		OrderEntity ord = new OrderEntity("Сильная вибрация при скорости больше 80 км//ч", new GregorianCalendar());
+		//OrderEntity ord = new OrderEntity("Сильная вибрация при скорости больше 80 км//ч", new GregorianCalendar());
 		//AffilateEntity afl = new AffilateEntity("altufievo");
 		//AffilateProfileEntity afpr = new AffilateProfileEntity();
 		//PartOrderEntity po = new PartOrderEntity();
@@ -39,8 +42,8 @@ public class StartHibernate {
 		//SiteUserEntity su = (SiteUserEntity) session.get(SiteUserEntity.class, 1L);
 		//PersonEntity psn = (PersonEntity) session.get(PersonEntity.class, 1L);
 		//MechanicProfileEntity mpr = (MechanicProfileEntity) session.get(MechanicProfileEntity.class, 1L);
-		StationEntity st = (StationEntity) session.get(StationEntity.class, 1L);
-		AffilateEntity afl = (AffilateEntity) session.get(AffilateEntity.class, 1L);
+		//StationEntity st = (StationEntity) session.get(StationEntity.class, 1L);
+		//AffilateEntity afl = (AffilateEntity) session.get(AffilateEntity.class, 1L);
 		//AffilateProfileEntity afpr = (AffilateProfileEntity) session.get(AffilateProfileEntity.class, 1L);
 		//OrderEntity ord = (OrderEntity) session.get(OrderEntity.class, 1L);
 		//ClientNotificationEntity clnt = (ClientNotificationEntity) session.get(ClientNotificationEntity.class, 1L);
@@ -56,8 +59,8 @@ public class StartHibernate {
 		//sa.getStationProfiles().put(st, stpr);
 		//sa.getOrders().put(ord, st);
 		//st.getAffilates().put(afl, afpr);
-		Map<OrderEntity, AffilateEntity> orders = st.getOrders();
-		orders.put(ord, afl);
+		//Map<OrderEntity, AffilateEntity> orders = st.getOrders();
+		//orders.put(ord, afl);
 		//st.getEmployees().put(psn, Position.MECHANIC);
 		//st.getPersons().put(cr, psn);
 		//st.getLogins().add("petrovich");
@@ -80,10 +83,12 @@ public class StartHibernate {
 		//session.saveOrUpdate(prt);
 		//session.saveOrUpdate(mpr);
 		//session.saveOrUpdate(cr);
-		session.save(ord);
-		session.update(st);
+		//session.save(ord);
+		//session.update(st);
 		//session.saveOrUpdate(stpr);
 		//session.saveOrUpdate(sa);
+		session.saveOrUpdate(su);
+		session.saveOrUpdate(psn);
 		
 		session.getTransaction().commit();
 		session.close();

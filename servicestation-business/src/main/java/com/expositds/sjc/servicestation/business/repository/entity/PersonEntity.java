@@ -13,6 +13,8 @@ import javax.persistence.MapKeyColumn;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.expositds.sjc.servicestation.domain.model.LogginerRole;
+
 /**
  * Класс, содержащий информацию о сотруднике.
  * 
@@ -39,13 +41,14 @@ public class PersonEntity extends LogginerEntity{
 	 * 
 	 * @param name имя нового сотрудника.
 	 */
-	public PersonEntity(String name) {
+	public PersonEntity(String name, LogginerRole role) {
 		setName(name);
+		setRole(role);
 		this.salary = new TreeMap<>();
 	}
 	
 	public PersonEntity() {
-		this(null);
+		this(null, null);
 	}
 
 	public Map<Calendar, Integer> getSalary() {

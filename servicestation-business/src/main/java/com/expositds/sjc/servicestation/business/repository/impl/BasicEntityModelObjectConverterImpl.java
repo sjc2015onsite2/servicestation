@@ -70,7 +70,7 @@ public class BasicEntityModelObjectConverterImpl implements BasicEntityModelObje
 		
 		if (clazz == Comment.class) {
 			CommentEntity commentEntity = (CommentEntity) entity;
-			SiteUser siteUser = new SiteUser(commentEntity.getAuthor().getName());
+			SiteUser siteUser = new SiteUser(commentEntity.getAuthor().getName(), commentEntity.getAuthor().getRole());
 			siteUser.setId(commentEntity.getAuthor().getId());
 			Comment comment = new Comment(commentEntity.getComment(), siteUser, commentEntity.isVisible());
 			comment.setCommentId(commentEntity.getCommentId());
@@ -80,7 +80,7 @@ public class BasicEntityModelObjectConverterImpl implements BasicEntityModelObje
 		
 		if (clazz == Mark.class) {
 			MarkEntity markEntity = (MarkEntity) entity;
-			SiteUser siteUser = new SiteUser(markEntity.getAuthor().getName());
+			SiteUser siteUser = new SiteUser(markEntity.getAuthor().getName(), markEntity.getAuthor().getRole());
 			siteUser.setId(markEntity.getAuthor().getId());
 			Mark mark = new Mark(markEntity.getMark(), siteUser);
 			mark.setMarkId(markEntity.getMarkId());
@@ -168,7 +168,7 @@ public class BasicEntityModelObjectConverterImpl implements BasicEntityModelObje
 		
 		if (clazz == Person.class) {
 			PersonEntity personEntity = (PersonEntity) entity;
-			Person person = new Person(personEntity.getName());
+			Person person = new Person(personEntity.getName(), personEntity.getRole());
 			person.setId(personEntity.getId());
 			return person;
 		}
@@ -189,7 +189,7 @@ public class BasicEntityModelObjectConverterImpl implements BasicEntityModelObje
 		
 		if (clazz == SiteUser.class) {
 			SiteUserEntity siteUserEntity = (SiteUserEntity) entity;
-			SiteUser siteUser = new SiteUser(siteUserEntity.getName());
+			SiteUser siteUser = new SiteUser(siteUserEntity.getName(), siteUserEntity.getRole());
 			siteUser.setId(siteUserEntity.getId());
 			return siteUser;
 		}
