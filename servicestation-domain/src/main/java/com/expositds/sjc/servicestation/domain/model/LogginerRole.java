@@ -6,7 +6,7 @@ package com.expositds.sjc.servicestation.domain.model;
  * @author Alexey Suslov
  *
  */
-public enum SiteUserRole {
+public enum LogginerRole {
 	
 	/**
 	 * Администратор сайта.
@@ -16,6 +16,21 @@ public enum SiteUserRole {
 	/**
 	 * Пользователь сайта
 	 */
-	USER
+	USER,
+	
+	/**
+	 * Директор.
+	 */
+	CEO,
+
+	/**
+	 * Бухгалтер.
+	 */
+	ACCOUNTANT,
+
+	/**
+	 * Механик.
+	 */
+	MECHANIC
 
 }

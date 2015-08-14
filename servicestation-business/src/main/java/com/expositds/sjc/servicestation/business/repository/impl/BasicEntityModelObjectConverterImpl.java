@@ -9,14 +9,11 @@ import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntit
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateProfileEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.ClientNotificationEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.CommentEntity;
-import com.expositds.sjc.servicestation.business.repository.entity.CredentialEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.MarkEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.MechanicProfileEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
-import com.expositds.sjc.servicestation.business.repository.entity.OrderStatus;
 import com.expositds.sjc.servicestation.business.repository.entity.PartEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PartOrderEntity;
-import com.expositds.sjc.servicestation.business.repository.entity.PartOrderStatus;
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.ServiceEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.SiteAggregatorEntity;
@@ -28,7 +25,6 @@ import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.AffilateProfile;
 import com.expositds.sjc.servicestation.domain.model.ClientNotification;
 import com.expositds.sjc.servicestation.domain.model.Comment;
-import com.expositds.sjc.servicestation.domain.model.Credential;
 import com.expositds.sjc.servicestation.domain.model.Mark;
 import com.expositds.sjc.servicestation.domain.model.MechanicProfile;
 import com.expositds.sjc.servicestation.domain.model.Order;
@@ -75,24 +71,17 @@ public class BasicEntityModelObjectConverterImpl implements BasicEntityModelObje
 		if (clazz == Comment.class) {
 			CommentEntity commentEntity = (CommentEntity) entity;
 			SiteUser siteUser = new SiteUser(commentEntity.getAuthor().getName());
-			siteUser.setSiteUserId(commentEntity.getAuthor().getSiteUserId());
+			siteUser.setId(commentEntity.getAuthor().getId());
 			Comment comment = new Comment(commentEntity.getComment(), siteUser, commentEntity.isVisible());
 			comment.setCommentId(commentEntity.getCommentId());
 			comment.setDate(commentEntity.getDate());
 			return comment;
 		}
 		
-		if (clazz == Credential.class) {
-			CredentialEntity credentialEntity = (CredentialEntity) entity;
-			Credential credential = new Credential(credentialEntity.getLogin(), credentialEntity.getPassword());
-			credential.setCredentialId(credentialEntity.getCredentialId());
-			return credential;
-		}
-		
 		if (clazz == Mark.class) {
 			MarkEntity markEntity = (MarkEntity) entity;
 			SiteUser siteUser = new SiteUser(markEntity.getAuthor().getName());
-			siteUser.setSiteUserId(markEntity.getAuthor().getSiteUserId());
+			siteUser.setId(markEntity.getAuthor().getId());
 			Mark mark = new Mark(markEntity.getMark(), siteUser);
 			mark.setMarkId(markEntity.getMarkId());
 			mark.setDate(markEntity.getDate());
@@ -129,7 +118,7 @@ public class BasicEntityModelObjectConverterImpl implements BasicEntityModelObje
 			
 			order.setProblemDescription(orderEntity.getProblemDescription());
 			
-			order.setStatus(getModelOrderStaus(orderEntity.getStatus()));
+			order.setStatus(orderEntity.getStatus());
 			
 			order.setOrderServicesPriceList(new HashMap<Service, Integer>());
 			for (ServiceEntity currentServiceEntity : orderEntity.getOrderServicesPriceList().keySet()) {
@@ -167,7 +156,7 @@ public class BasicEntityModelObjectConverterImpl implements BasicEntityModelObje
 			partOrder.setPartOrderId(partOrderEntity.getPartOrderId());
 			partOrder.setClientPartOrderId(partOrderEntity.getClientPartOrderId());
 			partOrder.setDate(partOrderEntity.getDate());
-			partOrder.setStatus(getModelPartOrderStatus(partOrderEntity.getStatus()));
+			partOrder.setStatus(partOrderEntity.getStatus());
 			partOrder.setParts(new HashMap<Part, Integer>());
 			for (PartEntity currentPartEntity : partOrderEntity.getParts().keySet()) {
 				Part currentPart = (Part) convert(currentPartEntity, Part.class);
@@ -180,7 +169,7 @@ public class BasicEntityModelObjectConverterImpl implements BasicEntityModelObje
 		if (clazz == Person.class) {
 			PersonEntity personEntity = (PersonEntity) entity;
 			Person person = new Person(personEntity.getName());
-			person.setPersonId(personEntity.getPersonId());
+			person.setId(personEntity.getId());
 			return person;
 		}
 		
@@ -201,7 +190,7 @@ public class BasicEntityModelObjectConverterImpl implements BasicEntityModelObje
 		if (clazz == SiteUser.class) {
 			SiteUserEntity siteUserEntity = (SiteUserEntity) entity;
 			SiteUser siteUser = new SiteUser(siteUserEntity.getName());
-			siteUser.setSiteUserId(siteUserEntity.getSiteUserId());
+			siteUser.setId(siteUserEntity.getId());
 			return siteUser;
 		}
 		
@@ -221,26 +210,6 @@ public class BasicEntityModelObjectConverterImpl implements BasicEntityModelObje
 		
 		return null;
 	}
-	
-	private com.expositds.sjc.servicestation.domain.model.OrderStatus getModelOrderStaus(OrderStatus orderStatusEntity) {
-		switch (orderStatusEntity) {
-			case NEW : return com.expositds.sjc.servicestation.domain.model.OrderStatus.NEW;
-			case ACCEPTED : return com.expositds.sjc.servicestation.domain.model.OrderStatus.ACCEPTED;
-			case PENDING : return com.expositds.sjc.servicestation.domain.model.OrderStatus.PENDING;
-			case READY : return com.expositds.sjc.servicestation.domain.model.OrderStatus.READY;
-		}
-		return null;
-	}
-	
-	private com.expositds.sjc.servicestation.domain.model.PartOrderStatus getModelPartOrderStatus(PartOrderStatus partOrderStatusEntity) {
-		switch (partOrderStatusEntity) {
-			case PENDING : return com.expositds.sjc.servicestation.domain.model.PartOrderStatus.PENDING;
-			case READY : return com.expositds.sjc.servicestation.domain.model.PartOrderStatus.READY;
-		}
-		return null;
-	};
-		
-	
 	
 	
 }

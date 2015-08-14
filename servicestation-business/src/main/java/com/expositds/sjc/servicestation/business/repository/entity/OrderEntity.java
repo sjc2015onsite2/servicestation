@@ -25,6 +25,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.expositds.sjc.servicestation.domain.model.OrderStatus;
+
 /**
  * Класс представляет собой заяву на ремонт.
  * 

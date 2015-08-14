@@ -21,6 +21,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.expositds.sjc.servicestation.domain.model.PartOrderStatus;
+
 /**
  * Класс, содержащий заявку на поставку запчастей.
  * 

@@ -42,11 +42,10 @@ public class SiteAggregatorEntity {
 	 */
 	@OneToMany
 	@JoinTable(
-			name = "site_aggregator_has_credentials_site_users",
+			name = "site_aggregator_site_users",
 			joinColumns = @JoinColumn(name = "site_aggregator_id"),
 			inverseJoinColumns = @JoinColumn(name = "site_user_id"))
-	@MapKeyJoinColumn(name = "credential_id")
-	private Map<CredentialEntity, SiteUserEntity> siteUsers;
+	private Set<SiteUserEntity> siteUsers;
 	
 	/**
 	 * Список логинов на сайте
@@ -95,7 +94,7 @@ public class SiteAggregatorEntity {
 	 * Создаёт новый сайт агрегатор.
 	 */
 	public SiteAggregatorEntity() {
-		this.siteUsers = new HashMap<>();
+		this.siteUsers = new HashSet<>();
 		this.logins = new HashSet<>();
 		this.mechanicPofiles = new HashMap<>();
 		this.stationProfiles = new HashMap<>();
@@ -137,11 +136,11 @@ public class SiteAggregatorEntity {
 		this.siteAggregatorId = siteAggregatorId;
 	}
 
-	public Map<CredentialEntity, SiteUserEntity> getSiteUsers() {
+	public Set<SiteUserEntity> getSiteUsers() {
 		return siteUsers;
 	}
 
-	public void setSiteUsers(Map<CredentialEntity, SiteUserEntity> siteUsers) {
+	public void setSiteUsers(Set<SiteUserEntity> siteUsers) {
 		this.siteUsers = siteUsers;
 	}
 

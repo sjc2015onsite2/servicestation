@@ -2,6 +2,7 @@ package com.expositds.sjc.servicestation.domain.model;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Класс содержит информацию о СТО.
@@ -26,14 +27,9 @@ public class Station  {
 	private HashMap<Order, Affilate> orders = new HashMap<>();
 	
 	/**
-	 * Список сотрудников СТО с их должностями.
+	 * Список сотрудников СТО.
 	 */
-	private HashMap<Person, Position> employees = new HashMap<>();
-	
-	/**
-	 * Список мандатов и соответствующих им (мандатам) пользователей, работающих на СТО.
-	 */
-	private HashMap<Credential, Person> persons = new HashMap<>();
+	private Set<Person> employees = new HashSet<>();
 	
 	/**
 	 * Список логинов на СТО
@@ -81,22 +77,6 @@ public class Station  {
 		this.orders = orders;
 	}
 
-	public HashMap<Person, Position> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(HashMap<Person, Position> employees) {
-		this.employees = employees;
-	}
-
-	public HashMap<Credential, Person> getPersons() {
-		return persons;
-	}
-
-	public void setPersons(HashMap<Credential, Person> persons) {
-		this.persons = persons;
-	}
-
 	public HashSet<String> getLogins() {
 		return logins;
 	}
@@ -120,5 +100,23 @@ public class Station  {
 	public void setStationId(Long stationId) {
 		this.stationId = stationId;
 	}
+
+	public Set<Person> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Set<Person> employees) {
+		this.employees = employees;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPersonStationId(String personStationId) {
+		this.personStationId = personStationId;
+	}
+	
+	
 	
 }

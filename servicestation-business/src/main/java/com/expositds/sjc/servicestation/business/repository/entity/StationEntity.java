@@ -9,8 +9,6 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -62,27 +60,14 @@ public class StationEntity  {
 	private Map<OrderEntity, AffilateEntity> orders;
 	
 	/**
-	 * Список сотрудников СТО с их должностями.
-	 */
-	@ElementCollection
-	@CollectionTable(
-	        name="station_has_persons_positions",
-	        joinColumns=@JoinColumn(name="station_id"))
-	@MapKeyJoinColumn(name = "person_id")
-	@Column(name = "position")
-	@Enumerated(EnumType.STRING)
-	private Map<PersonEntity, Position> employees;
-	
-	/**
-	 * Список мандатов и соответствующих им (мандатам) пользователей, работающих на СТО.
+	 * Список пользователей, работающих на СТО.
 	 */
 	@OneToMany
 	@JoinTable(
-	        name="station_has_credentials_persons",
+	        name="station_persons",
 	        joinColumns=@JoinColumn(name="station_id"),
 	        inverseJoinColumns = @JoinColumn(name = "person_id"))
-	@MapKeyJoinColumn(name = "credential_id")
-	private Map<CredentialEntity, PersonEntity> persons;
+	private Set<PersonEntity> persons;
 	
 	/**
 	 * Список логинов на СТО.
@@ -117,8 +102,7 @@ public class StationEntity  {
 		this.personStationId = personStationId;
 		this.affilates = new HashMap<>();
 		this.orders = new HashMap<>();
-		this.employees = new HashMap<>();
-		this.persons = new HashMap<>();
+		this.persons = new HashSet<>();
 		this.logins = new HashSet<>();
 	}
 	
@@ -175,19 +159,11 @@ public class StationEntity  {
 		this.orders = orders;
 	}
 
-	public Map<PersonEntity, Position> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(Map<PersonEntity, Position> employees) {
-		this.employees = employees;
-	}
-
-	public Map<CredentialEntity, PersonEntity> getPersons() {
+	public Set<PersonEntity> getPersons() {
 		return persons;
 	}
 
-	public void setPersons(Map<CredentialEntity, PersonEntity> persons) {
+	public void setPersons(Set<PersonEntity> persons) {
 		this.persons = persons;
 	}
 
@@ -215,5 +191,7 @@ public class StationEntity  {
 		this.personStationId = personStationId;
 	}
 
+	
+	
 		
 }

@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
-import com.expositds.sjc.servicestation.business.repository.entity.OrderStatus;
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
-import com.expositds.sjc.servicestation.business.repository.entity.Position;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelObjectConverter;
+import com.expositds.sjc.servicestation.domain.model.LogginerRole;
 import com.expositds.sjc.servicestation.domain.model.Order;
+import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.PreOrder;
 import com.expositds.sjc.servicestation.domain.model.Station;
@@ -65,10 +65,10 @@ public class ServiceStationImpl implements ServiceStation{
 	@Override
 	public Set<Person> getMechanics(Station station) {
 		StationEntity stationEntity = (StationEntity) stationDao.findById(station.getStationId());
-		Set<PersonEntity> personsEntiry = stationEntity.getEmployees().keySet();
+		Set<PersonEntity> personsEntiry = stationEntity.getPersons();
 		Set<Person> mechanics = new HashSet<>();
 		for (PersonEntity currentPersonEntity : personsEntiry) {
-			if (stationEntity.getEmployees().get(currentPersonEntity) == Position.MECHANIC) 
+			if (currentPersonEntity.getRole() == LogginerRole.MECHANIC) 
 				mechanics.add((Person) basicEntityModelObjectConverter.convert(currentPersonEntity, Person.class));
 		}
 		return mechanics;

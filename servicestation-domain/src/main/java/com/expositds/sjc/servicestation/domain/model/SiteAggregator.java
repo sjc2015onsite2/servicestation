@@ -2,6 +2,8 @@ package com.expositds.sjc.servicestation.domain.model;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Класс представляет собой хранилище состояния сайта агрегатора. Этот класс имеет только один экземпляр.
@@ -16,31 +18,31 @@ public class SiteAggregator {
 	private Long siteAggregatorId;
 	
 	/**
-	 * Список мандатов и соответствующих пользователей, зарегистрированных на сайте.
+	 * Список пользователей, зарегистрированных на сайте.
 	 */
-	private HashMap<Credential, SiteUser> siteUsers = new HashMap<>();
+	private Set<SiteUser> siteUsers = new HashSet<>();
 	
 	/**
 	 * Список логинов на сайте
 	 */
-	private HashSet<String> logins = new HashSet<>();
+	private Set<String> logins = new HashSet<>();
 
 	/**
 	 * Список механиков (Person) и их профилей на сайте.
 	 */
-	private HashMap<Person, MechanicProfile> mechanicPofiles = new HashMap<>();
+	private Map<Person, MechanicProfile> mechanicPofiles = new HashMap<>();
 
 	/**
 	 * Список СТО и их профилей, зарегистрированных на сайте.
 	 */
-	private HashMap<Station, StationProfile> stationProfiles = new HashMap<>();
+	private Map<Station, StationProfile> stationProfiles = new HashMap<>();
 
 	/**
 	 * Список заявок клиентов и СТО, которым они (заявки) были переданы на исполнение.
 	 */
-	private HashMap<Order, Station> orders = new HashMap<>();
+	private Map<Order, Station> orders = new HashMap<>();
 	
-		public HashMap<Person, MechanicProfile> getMechanicPofiles() {
+		public Map<Person, MechanicProfile> getMechanicPofiles() {
 		return mechanicPofiles;
 	}
 		
@@ -73,34 +75,6 @@ public class SiteAggregator {
 		this.mechanicPofiles = mechanicPofiles;
 	}
 
-	public HashMap<Station, StationProfile> getStationProfiles() {
-		return stationProfiles;
-	}
-
-	public void setStationProfiles(HashMap<Station, StationProfile> stationProfiles) {
-		this.stationProfiles = stationProfiles;
-	}
-
-	public HashMap<Order, Station> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(HashMap<Order, Station> orders) {
-		this.orders = orders;
-	}
-
-	public HashMap<Credential, SiteUser> getSiteUsers() {
-		return siteUsers;
-	}
-
-	public void setSiteUsers(HashMap<Credential, SiteUser> siteUsers) {
-		this.siteUsers = siteUsers;
-	}
-
-	public HashSet<String> getLogins() {
-		return logins;
-	}
-
 	public void setLogins(HashSet<String> logins) {
 		this.logins = logins;
 	}
@@ -111,6 +85,42 @@ public class SiteAggregator {
 
 	public void setSiteAggregatorId(Long siteAggregatorId) {
 		this.siteAggregatorId = siteAggregatorId;
+	}
+
+	public Set<SiteUser> getSiteUsers() {
+		return siteUsers;
+	}
+
+	public void setSiteUsers(Set<SiteUser> siteUsers) {
+		this.siteUsers = siteUsers;
+	}
+
+	public Set<String> getLogins() {
+		return logins;
+	}
+
+	public void setLogins(Set<String> logins) {
+		this.logins = logins;
+	}
+
+	public Map<Station, StationProfile> getStationProfiles() {
+		return stationProfiles;
+	}
+
+	public void setStationProfiles(Map<Station, StationProfile> stationProfiles) {
+		this.stationProfiles = stationProfiles;
+	}
+
+	public Map<Order, Station> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Map<Order, Station> orders) {
+		this.orders = orders;
+	}
+
+	public void setMechanicPofiles(Map<Person, MechanicProfile> mechanicPofiles) {
+		this.mechanicPofiles = mechanicPofiles;
 	}
 	
 	

@@ -17,7 +17,6 @@ import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.AffilateProfile;
 import com.expositds.sjc.servicestation.domain.model.ClientNotification;
 import com.expositds.sjc.servicestation.domain.model.Comment;
-import com.expositds.sjc.servicestation.domain.model.Credential;
 import com.expositds.sjc.servicestation.domain.model.Mark;
 import com.expositds.sjc.servicestation.domain.model.MechanicProfile;
 import com.expositds.sjc.servicestation.domain.model.Order;
@@ -85,12 +84,6 @@ public class IdentificationImpl implements Identification {
 	@Override
 	public Comment getCommentById(String id) {
 		return (Comment) basicEntityModelObjectConverter.convert(commentDao.findById(new Long(id)), Comment.class);
-	}
-
-	@Override
-	public Credential getCredentialById(String id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

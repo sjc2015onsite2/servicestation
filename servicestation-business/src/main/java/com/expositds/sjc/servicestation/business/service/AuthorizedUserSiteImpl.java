@@ -39,7 +39,7 @@ public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUs
 	
 	@Override
 	public Map<Order, Station> getOrders(SiteUser user) {
-		Map<OrderEntity, StationEntity> ordersEntity = siteUserDao.findById(user.getSiteUserId()).getOrders();
+		Map<OrderEntity, StationEntity> ordersEntity = siteUserDao.findById(user.getId()).getOrders();
 		
 		Map<Order, Station> ordersModel = new HashMap<>();
 		

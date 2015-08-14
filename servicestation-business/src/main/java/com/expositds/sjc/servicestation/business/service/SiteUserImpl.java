@@ -49,7 +49,7 @@ public abstract class SiteUserImpl implements UserSite {
 	@Override
 	public Set<Comment> getMechanicComments(Person mechanic) {
 		Map<PersonEntity, MechanicProfileEntity> mechanicsEntity = siteAggregatorDao.findById(1L).getMechanicPofiles();
-		PersonEntity personEntity = personDao.findById(mechanic.getPersonId());
+		PersonEntity personEntity = personDao.findById(mechanic.getId());
 		MechanicProfileEntity mechanicProfileEntity = mechanicsEntity.get(personEntity);
 		Set<CommentEntity> commentsEntity = mechanicProfileEntity.getComments();
 		
