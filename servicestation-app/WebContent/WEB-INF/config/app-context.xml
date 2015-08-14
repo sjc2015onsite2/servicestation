@@ -89,5 +89,6 @@
 	<!-- Configuration Import -->
 
 	<import resource="app-data.xml" />
+	<import resource="app-security.xml" />
 
 </beans>

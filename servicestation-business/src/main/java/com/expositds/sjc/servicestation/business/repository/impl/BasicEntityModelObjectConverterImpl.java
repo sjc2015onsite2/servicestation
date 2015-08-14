@@ -9,6 +9,7 @@ import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntit
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateProfileEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.ClientNotificationEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.CommentEntity;
+import com.expositds.sjc.servicestation.business.repository.entity.LogginerEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.MarkEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.MechanicProfileEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
@@ -25,6 +26,7 @@ import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.AffilateProfile;
 import com.expositds.sjc.servicestation.domain.model.ClientNotification;
 import com.expositds.sjc.servicestation.domain.model.Comment;
+import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Mark;
 import com.expositds.sjc.servicestation.domain.model.MechanicProfile;
 import com.expositds.sjc.servicestation.domain.model.Order;
@@ -206,6 +208,17 @@ public class BasicEntityModelObjectConverterImpl implements BasicEntityModelObje
 			StationProfile stationProfile = new StationProfile();
 			stationProfile.setStationProfileId(stationProfileEntity.getStationProfileId());
 			return stationProfile;
+		}
+		
+		if (clazz == Logginer.class) {
+			LogginerEntity logginerEntity = (LogginerEntity) entity;
+			Logginer logginer = new Logginer();
+			logginer.setId(logginerEntity.getId());
+			logginer.setName(logginerEntity.getName());
+			logginer.setLogin(logginerEntity.getLogin());
+			logginer.setPassword(logginerEntity.getPassword());
+			logginer.setRole(logginerEntity.getRole());
+			return logginer;
 		}
 		
 		return null;

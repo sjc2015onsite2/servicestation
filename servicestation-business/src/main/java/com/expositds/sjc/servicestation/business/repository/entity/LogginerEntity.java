@@ -22,7 +22,7 @@ import com.expositds.sjc.servicestation.domain.model.LogginerRole;
 @Entity
 @Table(name = "logginers")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class LogginerEntity {
+public class LogginerEntity {
 
 	/**
 	 * Идентификатор залогинивающегося.

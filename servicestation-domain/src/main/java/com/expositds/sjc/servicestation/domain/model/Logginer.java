@@ -6,7 +6,7 @@ package com.expositds.sjc.servicestation.domain.model;
  * @author Alexey Suslov
  *
  */
-public abstract class Logginer {
+public class Logginer {
 
 	/**
 	 * Идентификатор залогинивающегося.

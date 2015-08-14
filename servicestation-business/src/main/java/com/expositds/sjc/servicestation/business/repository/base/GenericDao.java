@@ -3,6 +3,8 @@ package com.expositds.sjc.servicestation.business.repository.base;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.criterion.Criterion;
+
 /**
  * Интерфейс содеожит базовые методы (CRUD) для работы со слоем persistance.
  * 
@@ -56,5 +58,13 @@ public interface GenericDao<T, PK extends Serializable> {
 	 * @param persistentObject заданный объект.
 	 */
 	void delete(T persistentObject);
+	
+	/**
+	 * Возвращает список объект указанного типа по заданному критерию.
+	 * 
+	 * @param criterion
+	 * @return список объектов
+	 */
+	public List<T> findByCriteria(Criterion criterion);
 
 }

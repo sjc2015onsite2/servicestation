@@ -4,6 +4,7 @@ import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.AffilateProfile;
 import com.expositds.sjc.servicestation.domain.model.ClientNotification;
 import com.expositds.sjc.servicestation.domain.model.Comment;
+import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Mark;
 import com.expositds.sjc.servicestation.domain.model.MechanicProfile;
 import com.expositds.sjc.servicestation.domain.model.Order;
@@ -17,7 +18,7 @@ import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.model.StationProfile;
 
 /**
- * Интерфейс предоставляет набор методов для идентификации объектов по ключу.
+ * Интерфейс предоставляет набор методов для идентификации объектов по ключу, имени.
  * 
  * @author Alexey Suslov
  *
@@ -53,5 +54,7 @@ public interface Identification {
 	public Station getStationById(String id);
 	
 	public StationProfile getStationProfileById(String id);
+	
+	public Logginer getLogginerByName(String name);
 
 }

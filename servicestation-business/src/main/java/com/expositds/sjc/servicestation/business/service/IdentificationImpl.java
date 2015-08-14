@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
 import com.expositds.sjc.servicestation.business.repository.dao.CommentDao;
+import com.expositds.sjc.servicestation.business.repository.dao.LogginerDao;
 import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PartDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PersonDao;
@@ -17,6 +18,7 @@ import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.AffilateProfile;
 import com.expositds.sjc.servicestation.domain.model.ClientNotification;
 import com.expositds.sjc.servicestation.domain.model.Comment;
+import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Mark;
 import com.expositds.sjc.servicestation.domain.model.MechanicProfile;
 import com.expositds.sjc.servicestation.domain.model.Order;
@@ -60,6 +62,9 @@ public class IdentificationImpl implements Identification {
 	
 	@Autowired
 	private SiteUserDao siteUserDao;
+	
+	@Autowired
+	private LogginerDao logginerDao;
 	
 	@Autowired
 	private BasicEntityModelObjectConverter basicEntityModelObjectConverter;
@@ -144,6 +149,11 @@ public class IdentificationImpl implements Identification {
 	public StationProfile getStationProfileById(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Logginer getLogginerByName(String name) {
+		return (Logginer) basicEntityModelObjectConverter.convert(logginerDao.findByName(name), Logginer.class);
 	}
 
 	

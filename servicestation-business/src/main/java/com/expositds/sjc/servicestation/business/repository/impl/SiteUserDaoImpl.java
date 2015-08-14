@@ -11,6 +11,6 @@ import com.expositds.sjc.servicestation.business.repository.hibernate.AbstractHi
  *
  */
 @Repository
-public class SiteUserDaoImpl extends AbstractHibernateDao<SiteUserEntity, Long>implements SiteUserDao {
+public class SiteUserDaoImpl extends AbstractHibernateDao<SiteUserEntity, Long> implements SiteUserDao {
 
 }
