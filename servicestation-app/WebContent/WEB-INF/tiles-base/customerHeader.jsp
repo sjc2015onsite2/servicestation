@@ -64,10 +64,10 @@
              	</c:if>
               
 				<c:if test="${empty user}">
-            		<form action="createorder" method='POST' class="navbar-form navbar-right"> 
+            		<form action="j_spring_security_check" method='POST' class="navbar-form navbar-right"> 
                 		<div class="form-group has-feedback">
                 			<label class="sr-only" for="exampleInputEmail2">Enter user name</label>
-                			<input type="email" class="form-control" name="username" id="exampleInputEmail2" placeholder="Enter user name">
+                			<input type="text" class="form-control" name="username" id="exampleInputEmail2" placeholder="Enter user name">
               			</div>
               			<div class="form-group has-feedback">
                		 		<label class="sr-only" for="exampleInputPassword2">Enter password</label>
