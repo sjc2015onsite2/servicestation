@@ -361,7 +361,7 @@ CREATE TABLE `mechanic_profiles` (
   `mechanic_profile_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`mechanic_profile_id`),
   UNIQUE KEY `mechanic_profile_id_UNIQUE` (`mechanic_profile_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -370,7 +370,7 @@ CREATE TABLE `mechanic_profiles` (
 
 LOCK TABLES `mechanic_profiles` WRITE;
 /*!40000 ALTER TABLE `mechanic_profiles` DISABLE KEYS */;
-INSERT INTO `mechanic_profiles` VALUES (1);
+INSERT INTO `mechanic_profiles` VALUES (1),(2);
 /*!40000 ALTER TABLE `mechanic_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -466,7 +466,7 @@ CREATE TABLE `orders` (
   `order_contact_data` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   UNIQUE KEY `order_id_UNIQUE` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -475,7 +475,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'NEW','2015-08-01',NULL,'Сильная вибрация при скорости больше 80 км//ч',1,NULL,NULL),(12,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(13,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(14,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(15,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(16,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(18,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(19,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(20,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(21,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(22,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(23,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(24,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(25,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(26,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(27,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(28,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(29,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(30,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(31,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(32,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(33,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(34,'NEW','2015-08-12',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(35,'NEW','2015-08-14',NULL,'ÐÑÐ¾Ð±Ð»ÐµÐ¼Ñ Ñ ÐºÐ¾Ð´Ð¸ÑÐ¾Ð²ÐºÐ¾Ð¹',NULL,NULL,'ÐÐ¾Ð¼ Ñ Ð¾Ð·ÐµÑÐ°');
+INSERT INTO `orders` VALUES (1,'NEW','2015-08-01',NULL,'Сильная вибрация при скорости больше 80 км//ч',1,NULL,NULL),(12,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(13,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(14,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(15,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(16,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(18,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(19,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(20,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(21,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(22,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(23,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(24,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(25,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(26,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(27,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(28,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(29,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(30,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(31,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(32,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(33,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(34,'NEW','2015-08-12',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(35,'NEW','2015-08-14',NULL,'ÐÑÐ¾Ð±Ð»ÐµÐ¼Ñ Ñ ÐºÐ¾Ð´Ð¸ÑÐ¾Ð²ÐºÐ¾Ð¹',NULL,NULL,'ÐÐ¾Ð¼ Ñ Ð¾Ð·ÐµÑÐ°'),(36,'NEW','2015-08-15',NULL,'ÐÑÑ ÑÐ°Ðº Ð¶Ðµ Ð¿Ð¾ÑÐµÑÑ ÑÑÑÐºÐ»Ð°',NULL,NULL,'ÐÐ¾Ð¼ Ñ Ð²Ð¾Ð´Ñ');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -676,7 +676,7 @@ CREATE TABLE `site_aggregator_has_orders_stations` (
 
 LOCK TABLES `site_aggregator_has_orders_stations` WRITE;
 /*!40000 ALTER TABLE `site_aggregator_has_orders_stations` DISABLE KEYS */;
-INSERT INTO `site_aggregator_has_orders_stations` VALUES (1,1,1),(1,12,1),(1,13,1),(1,14,1),(1,15,1),(1,16,1),(1,18,1),(1,19,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),(1,28,1),(1,29,1),(1,30,1),(1,31,1),(1,32,1),(1,33,1),(1,34,1),(1,35,2);
+INSERT INTO `site_aggregator_has_orders_stations` VALUES (1,1,1),(1,12,1),(1,13,1),(1,14,1),(1,15,1),(1,16,1),(1,18,1),(1,19,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),(1,28,1),(1,29,1),(1,30,1),(1,31,1),(1,32,1),(1,33,1),(1,34,1),(1,35,2),(1,36,2);
 /*!40000 ALTER TABLE `site_aggregator_has_orders_stations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -701,7 +701,7 @@ CREATE TABLE `site_aggregator_has_persons_mechanic_profiles` (
 
 LOCK TABLES `site_aggregator_has_persons_mechanic_profiles` WRITE;
 /*!40000 ALTER TABLE `site_aggregator_has_persons_mechanic_profiles` DISABLE KEYS */;
-INSERT INTO `site_aggregator_has_persons_mechanic_profiles` VALUES (1,1,1);
+INSERT INTO `site_aggregator_has_persons_mechanic_profiles` VALUES (1,1,1),(1,4,2);
 /*!40000 ALTER TABLE `site_aggregator_has_persons_mechanic_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -726,7 +726,7 @@ CREATE TABLE `site_aggregator_has_stations_station_profiles` (
 
 LOCK TABLES `site_aggregator_has_stations_station_profiles` WRITE;
 /*!40000 ALTER TABLE `site_aggregator_has_stations_station_profiles` DISABLE KEYS */;
-INSERT INTO `site_aggregator_has_stations_station_profiles` VALUES (1,1,1),(1,2,4);
+INSERT INTO `site_aggregator_has_stations_station_profiles` VALUES (1,1,1),(1,2,2),(1,3,3),(1,4,4);
 /*!40000 ALTER TABLE `site_aggregator_has_stations_station_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -897,7 +897,7 @@ CREATE TABLE `station_has_orders_affilates` (
 
 LOCK TABLES `station_has_orders_affilates` WRITE;
 /*!40000 ALTER TABLE `station_has_orders_affilates` DISABLE KEYS */;
-INSERT INTO `station_has_orders_affilates` VALUES (1,1,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),(1,28,1),(1,29,1),(1,30,1),(1,31,1),(1,32,1),(1,33,1),(1,34,1),(2,35,1);
+INSERT INTO `station_has_orders_affilates` VALUES (1,1,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),(1,28,1),(1,29,1),(1,30,1),(1,31,1),(1,32,1),(1,33,1),(1,34,1),(2,35,1),(2,36,1);
 /*!40000 ALTER TABLE `station_has_orders_affilates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1019,7 +1019,7 @@ CREATE TABLE `stations` (
 
 LOCK TABLES `stations` WRITE;
 /*!40000 ALTER TABLE `stations` DISABLE KEYS */;
-INSERT INTO `stations` VALUES (1,'Северная автосервисная станция','nord'),(2,'Южная автосервисная станция','south'),(3,'Южная автосервисная станция','south'),(4,'Южная автосервисная станция','south');
+INSERT INTO `stations` VALUES (1,'Северная автосервисная станция','nord'),(2,'Южная автосервисная станция','south'),(3,'Западная автосервисная станция','west'),(4,'Восточная автосервисная станция','east');
 /*!40000 ALTER TABLE `stations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1032,4 +1032,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-14 21:53:42
+-- Dump completed on 2015-08-15 22:06:09
