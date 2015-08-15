@@ -1,7 +1,7 @@
 package com.expositds.sjc.servicestation.business.repository.dao;
 
 import com.expositds.sjc.servicestation.business.repository.base.GenericDao;
-import com.expositds.sjc.servicestation.domain.model.Comment;
+import com.expositds.sjc.servicestation.business.repository.entity.CommentEntity;
 
 /**
  * Интерфейс для работы с Comment.
@@ -9,6 +9,6 @@ import com.expositds.sjc.servicestation.domain.model.Comment;
  * @author Alexey Suslov
  *
  */
-public interface CommentDao extends GenericDao<Comment, Long> {
+public interface CommentDao extends GenericDao<CommentEntity, Long> {
 
 }

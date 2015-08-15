@@ -7,12 +7,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
 import com.expositds.sjc.servicestation.business.repository.dao.CommentDao;
 import com.expositds.sjc.servicestation.business.repository.dao.LogginerDao;
+import com.expositds.sjc.servicestation.business.repository.dao.MarkDao;
+import com.expositds.sjc.servicestation.business.repository.dao.MechanicProfileDao;
 import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PartDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PersonDao;
 import com.expositds.sjc.servicestation.business.repository.dao.SiteAggregatorDao;
 import com.expositds.sjc.servicestation.business.repository.dao.SiteUserDao;
 import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
+import com.expositds.sjc.servicestation.business.repository.dao.StationProfileDao;
 import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelObjectConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.AffilateProfile;
@@ -67,6 +70,15 @@ public class IdentificationImpl implements Identification {
 	private LogginerDao logginerDao;
 	
 	@Autowired
+	private StationProfileDao stationProfileDao;
+	
+	@Autowired
+	private MarkDao markDao;
+	
+	@Autowired
+	private MechanicProfileDao mechanicProfileDao;
+	
+	@Autowired
 	private BasicEntityModelObjectConverter basicEntityModelObjectConverter;
 		
 	@Override
@@ -93,14 +105,12 @@ public class IdentificationImpl implements Identification {
 
 	@Override
 	public Mark getMarkById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Mark) basicEntityModelObjectConverter.convert(markDao.findById(new Long(id)), Mark.class);
 	}
 
 	@Override
 	public MechanicProfile getMechanicProfileById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (MechanicProfile) basicEntityModelObjectConverter.convert(mechanicProfileDao.findById(new Long(id)), MechanicProfile.class);
 	}
 
 	@Override
@@ -147,9 +157,8 @@ public class IdentificationImpl implements Identification {
 
 	@Override
 	public StationProfile getStationProfileById(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		return (StationProfile) basicEntityModelObjectConverter.convert(stationProfileDao.findById(new Long(id)), StationProfile.class);
+		}
 
 	@Override
 	public Logginer getLogginerByName(String name) {

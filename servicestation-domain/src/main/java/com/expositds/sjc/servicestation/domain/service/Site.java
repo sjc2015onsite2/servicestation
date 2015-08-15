@@ -51,4 +51,20 @@ public interface Site {
 	 */
 	public Mark createMark(SiteUser user, Integer markValue);
 	
+	/**
+	 * Метод создаёт комментарий с указанием в нем указанного пользователя сайта.
+	 * @param user пользователь сайта
+	 * @param comment комментарий
+	 * @param visible виден ли комментарий всем посетителям сайта
+	 * @return экземпляр класса Comment
+	 */
+	public Comment createComment(SiteUser user, String comment, boolean visible);
+	
+	/**
+	 * Метод публикует оценку о станции.
+	 * @param station СТО
+	 * @param mark оценка
+	 */
+	public void publicMark(Station station, Mark mark);
+	
 }
