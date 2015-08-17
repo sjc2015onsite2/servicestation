@@ -21,7 +21,7 @@
             	<li><a href="<c:url value="/stationslist" />" >Stations list</a></li>
             
             	<c:if test="${empty user}">
-       	    		<li class="dropdown">
+       	    		<li data-toggle ="modal" data-target="#authorization-modal" class="dropdown">
    	        	    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Create comment <b class="caret"></b></a>
                    		<ul class="dropdown-menu">
                    			<li><a href="<c:url value="/createstationcomment" />" >Create comment about Station</a></li>
@@ -43,14 +43,14 @@
            		</c:if>
            
            		<c:if test="${empty user}">
-           			<li><a href="<c:url value="/createmark" />" >Create mark</a></li>
+           			<li data-toggle ="modal" data-target="#authorization-modal"><a href="<c:url value="/createmark" />" >Create mark</a></li>
            		</c:if>
           	
      	  		<c:if test="${not empty user}">
           			<li><a href="<c:url value="/createmark" />" >Create mark</a></li>
            		</c:if>
             	
-           		<c:if test="${empty user}">
+           		<c:if test="${not empty user}">
            			<li><a href="<c:url value="/myorders" />" >My orders</a></li>
            		</c:if>
           	</ul>
@@ -64,19 +64,76 @@
              	</c:if>
               
 				<c:if test="${empty user}">
-            		<form action="j_spring_security_check" method='POST' class="navbar-form navbar-right"> 
-                		<div class="form-group has-feedback">
-                			<label class="sr-only" for="exampleInputEmail2">Enter user name</label>
-                			<input type="text" class="form-control" name="username" id="exampleInputEmail2" placeholder="Enter user name">
-              			</div>
-              			<div class="form-group has-feedback">
-               		 		<label class="sr-only" for="exampleInputPassword2">Enter password</label>
-                			<input type="password" class="form-control" name="password" id="exampleInputPassword2" placeholder="Enter password">
-              			</div>
-              			<button name="submit" type="submit" class="btn btn-success">Sign in</button>
+            		<form class="navbar-form navbar-right"> 
+              			<button name="submit" type="submit" class="btn btn-success" data-toggle ="modal" data-target="#authorization-modal">Sign in</button>
+              			<button name="submit" type="submit" class="btn btn-warning" data-toggle ="modal" data-target="#registration-modal">Sign up</button>
               		</form>
            		</c:if>
            
         </div>
     </div>
 </nav>
+
+<div class="modal fade" id="authorization-modal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content col-sm-offset-4 col-sm-6">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Authorization</h4>
+      </div>
+
+      <div class="modal-body">
+        <form class="form-horizontal"  action="j_spring_security_check" method='POST' role="form">
+          <div class="form-group has-feedback  ">
+                <input type="email" class="form-control" name="username" id="exampleInputEmail2" placeholder="Enter user name">
+          </div>
+          <div class="form-group has-feedback">
+                <input type="password" class="form-control" name="password" id="exampleInputPassword2" placeholder="Enter password">
+          </div>
+          <div class="col-sm-offset-8 col-sm-10">
+              <button type="submit" class="btn btn-success" >Sing in</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="registration-modal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content col-sm-offset-4 col-sm-6">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Registration</h4>
+      </div>
+
+      <div class="modal-body">
+        <form class="form-horizontal" role="form">
+          <div class="form-group has-feedback  ">
+                <input type="email" type="text" class="form-control" placeholder="Enter yuor email">
+          </div>
+          <div class="form-group has-feedback  ">
+                <input type="text" class="form-control" placeholder="Enter your phone namber">
+          </div>
+          <div class="form-group has-feedback">
+                <input type="password" class="form-control" name="password" placeholder="Enter new password">
+          </div>
+          <div class="form-group has-feedback">
+                <input type="password" class="form-control" name="password" placeholder="Repeat password">
+          </div>
+          <div class="col-sm-offset-8 col-sm-10">
+              <button type="submit" class="btn btn-success" >Sing up</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,7 @@
          </tr>
          
       <c:forEach var="mechanic" items="${mechanicsList}" >
-      <c:url value="/mechanicscomments/${mechanic.personId}" var="viewMechanicsCommentsUrl" />
+      <c:url value="/mechanicscomments/${mechanic.id}" var="viewMechanicsCommentsUrl" />
                <tr>
                 	<td>${mechanic.name}</td>
                 	<td>стаж: 200 лет<p> механик года 2025</td>

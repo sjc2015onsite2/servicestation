@@ -17,13 +17,15 @@
         http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
-
+	
+	
 	<context:annotation-config />
 
 	<context:component-scan base-package="com.expositds.sjc.servicestation.app" />
 	<context:component-scan base-package="com.expositds.sjc.servicestation.business" />
 	
 	<mvc:annotation-driven conversion-service="conversionService" />
+	
 
 	<bean id="conversionService"
 		class="org.springframework.context.support.ConversionServiceFactoryBean">
@@ -66,6 +68,11 @@
 	</bean>
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+	    <property name="defaultErrorView" value="base.error"></property>  
+	</bean>
+	
 
 	<!-- Tiles 3 integration -->
 
