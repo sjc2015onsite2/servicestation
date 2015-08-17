@@ -46,7 +46,7 @@ public class CreateCommentsController {
 	}
 	
 	@RequestMapping(value = "/createstationcomment", method = RequestMethod.POST )
-	public String createStationComment(
+	public ModelAndView createStationComment(
 			@RequestParam(value = "stationId", required = true) Station station,
 			Authentication auth,
 			@RequestParam(required = true) String comment,
@@ -62,6 +62,10 @@ public class CreateCommentsController {
 		
 		authorizedUserSite.publicServiceStationComment(station, authorizedUserSite.createComment(user, comment, visible));
 		
-		return "redirect:/createstationcomment";
+		Set<Comment> stationsComments = authorizedUserSite.getServiceStationComments(station);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("stationsComments", stationsComments);
+		mav.setViewName("stationsComments");
+		return mav;
 	}
 }

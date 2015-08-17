@@ -26,15 +26,15 @@
 			
 			<div class="radio col-sm-offset-4">
   				<label>
-          			<input name="notvisible" type="radio" id="optionsRadios1" value="yes" checked>
-          				visible only to the Director
-        		</label>
-			</div>
-			<div class="radio col-sm-offset-4">
-  				<label>
           			<input name="notvisible" type="radio"id="optionsRadios2" value="no">
           				visible to all        		
           		</label>
+			</div>
+			<div class="radio col-sm-offset-4">
+  				<label>
+          			<input name="notvisible" type="radio" id="optionsRadios1" value="yes" checked>
+          				visible only to the Director
+        		</label>
 			</div>
 			
 			<div class="col-sm-offset-4">
