@@ -5,9 +5,15 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
-                  
-<form:form action="/createorder" class="form-horizontal" role="form"  method="POST">
+<security:authorize access="hasRole('ROLE_USER')">
+<c:url value="createorder/user" var="action" />
+</security:authorize>
 
+<security:authorize access="isAnonymous()">
+<c:url value="createorder" var="action" />
+</security:authorize>
+
+<form:form action="${action}" class="form-horizontal" role="form"  method="POST">
 
             <div class="form-group has-default">
               <label class="control-label col-sm-4" for="id1">Select station:</label>
