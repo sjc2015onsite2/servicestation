@@ -16,32 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `affilate_has_orders`
---
-
-DROP TABLE IF EXISTS `affilate_has_orders`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `affilate_has_orders` (
-  `affilate_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  PRIMARY KEY (`order_id`),
-  UNIQUE KEY `order_id_UNIQUE` (`order_id`),
-  KEY `order_id_idx` (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `affilate_has_orders`
---
-
-LOCK TABLES `affilate_has_orders` WRITE;
-/*!40000 ALTER TABLE `affilate_has_orders` DISABLE KEYS */;
-INSERT INTO `affilate_has_orders` VALUES (2,1);
-/*!40000 ALTER TABLE `affilate_has_orders` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `affilate_has_part_orders_persons`
 --
 
@@ -140,6 +114,33 @@ LOCK TABLES `affilate_has_services_costs` WRITE;
 /*!40000 ALTER TABLE `affilate_has_services_costs` DISABLE KEYS */;
 INSERT INTO `affilate_has_services_costs` VALUES (2,1,15);
 /*!40000 ALTER TABLE `affilate_has_services_costs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `affilate_orders_persons`
+--
+
+DROP TABLE IF EXISTS `affilate_orders_persons`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `affilate_orders_persons` (
+  `affilate_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `person_id` int(11) NOT NULL,
+  PRIMARY KEY (`order_id`,`person_id`),
+  UNIQUE KEY `order_id_UNIQUE` (`order_id`),
+  KEY `order_id_idx` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `affilate_orders_persons`
+--
+
+LOCK TABLES `affilate_orders_persons` WRITE;
+/*!40000 ALTER TABLE `affilate_orders_persons` DISABLE KEYS */;
+INSERT INTO `affilate_orders_persons` VALUES (2,1,0);
+/*!40000 ALTER TABLE `affilate_orders_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -285,7 +286,7 @@ CREATE TABLE `logginers` (
   PRIMARY KEY (`id`,`name`,`login`,`role`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +295,7 @@ CREATE TABLE `logginers` (
 
 LOCK TABLES `logginers` WRITE;
 /*!40000 ALTER TABLE `logginers` DISABLE KEYS */;
-INSERT INTO `logginers` VALUES (1,'Петрович','petrovich','petrovich','MECHANIC'),(2,'Петя','pit','pit','USER'),(3,'Боря','boris','boris','USER'),(4,'Иваныч','ivanych','ivanych','MECHANIC');
+INSERT INTO `logginers` VALUES (0,'NULL','NULL',';lsdfmsl;admflsamdclsakmfwasc klmwefmwlkm','MECHANIC'),(1,'Петрович','petrovich','petrovich','MECHANIC'),(2,'Петя','pit','pit','USER'),(3,'Боря','boris','boris','USER'),(4,'Иваныч','ivanych','ivanych','MECHANIC');
 /*!40000 ALTER TABLE `logginers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -466,7 +467,7 @@ CREATE TABLE `orders` (
   `order_contact_data` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   UNIQUE KEY `order_id_UNIQUE` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -475,7 +476,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'NEW','2015-08-01',NULL,'Сильная вибрация при скорости больше 80 км//ч',1,NULL,NULL),(12,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(13,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(14,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(15,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(16,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(18,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(19,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(20,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(21,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(22,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(23,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(24,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(25,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(26,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(27,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(28,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(29,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(30,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(31,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(32,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(33,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(34,'NEW','2015-08-12',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(35,'NEW','2015-08-14',NULL,'ÐÑÐ¾Ð±Ð»ÐµÐ¼Ñ Ñ ÐºÐ¾Ð´Ð¸ÑÐ¾Ð²ÐºÐ¾Ð¹',NULL,NULL,'ÐÐ¾Ð¼ Ñ Ð¾Ð·ÐµÑÐ°'),(36,'NEW','2015-08-15',NULL,'ÐÑÑ ÑÐ°Ðº Ð¶Ðµ Ð¿Ð¾ÑÐµÑÑ ÑÑÑÐºÐ»Ð°',NULL,NULL,'ÐÐ¾Ð¼ Ñ Ð²Ð¾Ð´Ñ');
+INSERT INTO `orders` VALUES (1,'NEW','2015-08-01',NULL,'Сильная вибрация при скорости больше 80 км//ч',1,NULL,NULL),(12,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(13,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(14,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(15,'NEW','2015-08-10',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(16,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(18,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(19,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(20,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(21,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(22,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(23,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(24,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(25,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(26,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(27,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(28,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(29,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(30,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(31,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(32,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(33,'NEW','2015-08-11',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(34,'NEW','2015-08-12',NULL,'потеют стёкла',NULL,NULL,'Поповича 2Б'),(35,'NEW','2015-08-14',NULL,'ÐÑÐ¾Ð±Ð»ÐµÐ¼Ñ Ñ ÐºÐ¾Ð´Ð¸ÑÐ¾Ð²ÐºÐ¾Ð¹',NULL,NULL,'ÐÐ¾Ð¼ Ñ Ð¾Ð·ÐµÑÐ°'),(36,'NEW','2015-08-15',NULL,'ÐÑÑ ÑÐ°Ðº Ð¶Ðµ Ð¿Ð¾ÑÐµÑÑ ÑÑÑÐºÐ»Ð°',NULL,NULL,'ÐÐ¾Ð¼ Ñ Ð²Ð¾Ð´Ñ'),(37,'NEW','2015-08-16',NULL,'проба пера',NULL,NULL,'всё там же');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -592,7 +593,7 @@ CREATE TABLE `persons` (
   `person_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`person_id`),
   UNIQUE KEY `person_id_UNIQUE` (`person_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -601,7 +602,7 @@ CREATE TABLE `persons` (
 
 LOCK TABLES `persons` WRITE;
 /*!40000 ALTER TABLE `persons` DISABLE KEYS */;
-INSERT INTO `persons` VALUES (1),(4);
+INSERT INTO `persons` VALUES (1),(4),(5);
 /*!40000 ALTER TABLE `persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -676,7 +677,7 @@ CREATE TABLE `site_aggregator_has_orders_stations` (
 
 LOCK TABLES `site_aggregator_has_orders_stations` WRITE;
 /*!40000 ALTER TABLE `site_aggregator_has_orders_stations` DISABLE KEYS */;
-INSERT INTO `site_aggregator_has_orders_stations` VALUES (1,1,1),(1,12,1),(1,13,1),(1,14,1),(1,15,1),(1,16,1),(1,18,1),(1,19,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),(1,28,1),(1,29,1),(1,30,1),(1,31,1),(1,32,1),(1,33,1),(1,34,1),(1,35,2),(1,36,2);
+INSERT INTO `site_aggregator_has_orders_stations` VALUES (1,1,1),(1,12,1),(1,13,1),(1,14,1),(1,15,1),(1,16,1),(1,18,1),(1,19,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),(1,28,1),(1,29,1),(1,30,1),(1,31,1),(1,32,1),(1,33,1),(1,34,1),(1,35,2),(1,36,2),(1,37,3);
 /*!40000 ALTER TABLE `site_aggregator_has_orders_stations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -897,7 +898,7 @@ CREATE TABLE `station_has_orders_affilates` (
 
 LOCK TABLES `station_has_orders_affilates` WRITE;
 /*!40000 ALTER TABLE `station_has_orders_affilates` DISABLE KEYS */;
-INSERT INTO `station_has_orders_affilates` VALUES (1,1,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),(1,28,1),(1,29,1),(1,30,1),(1,31,1),(1,32,1),(1,33,1),(1,34,1),(2,35,1),(2,36,1);
+INSERT INTO `station_has_orders_affilates` VALUES (1,1,1),(1,20,1),(1,21,1),(1,22,1),(1,23,1),(1,24,1),(1,25,1),(1,26,1),(1,27,1),(1,28,1),(1,29,1),(1,30,1),(1,31,1),(1,32,1),(1,33,1),(1,34,1),(2,35,1),(2,36,1),(3,37,1);
 /*!40000 ALTER TABLE `station_has_orders_affilates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1032,4 +1033,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-15 22:06:09
+-- Dump completed on 2015-08-17 10:41:01
