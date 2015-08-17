@@ -1,5 +1,6 @@
 package com.expositds.sjc.servicestation.app.security;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -21,7 +22,10 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
  *
  */
 @Service("userDetailsService")
-public class LogginerDetailsProvider implements UserDetailsService{
+public class LogginerDetailsProvider implements UserDetailsService, Serializable{
+	
+	
+	private static final long serialVersionUID = 6914090858516617146L;
 	
 	@Autowired
 	private Identification identification;
@@ -38,7 +42,7 @@ public class LogginerDetailsProvider implements UserDetailsService{
 			@Override
 			public Collection<? extends GrantedAuthority> getAuthorities() {
 				List<GrantedAuthority> auth = new ArrayList<>();
-				auth.add(new SimpleGrantedAuthority("ROLE" + logginer.getRole().toString()));
+				auth.add(new SimpleGrantedAuthority("ROLE_" + logginer.getRole().toString()));
 				return auth;
 			}
 

@@ -3,9 +3,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
                   
-<form:form action="createorder" class="form-horizontal" role="form"  method="POST">
+<form:form action="/createorder" class="form-horizontal" role="form"  method="POST">
 
 
             <div class="form-group has-default">
@@ -19,7 +20,7 @@
               </div>
             </div>
             
-            <c:if test="${not empty user}">
+            <security:authorize access="hasRole('ROLE_USER')">
             	<div class="form-group has-default">
               		<label class="control-label col-sm-4" for="id1">Problem:</label>
               		<div class="col-sm-4">
@@ -28,18 +29,16 @@
                	 		<button type="submit"  class="btn btn-success">Create</button>
               		</div>
             	</div>
+            </security:authorize>
             
-            </c:if>
-            
-            <c:if test="${empty user}">
+            <security:authorize access="isAnonymous()">
             	<div class="form-group has-default">
               		<label class="control-label col-sm-4" for="id1">Problem:</label>
               		<div class="col-sm-4">
                 		<textarea name="problem" class="form-control" rows="6"></textarea>
               		</div>
             	</div>
-            
-            
+           
             	<div class="form-group has-default">
              	 	<label class="control-label col-sm-4" for="id1">How to contact with you?</label>
              	 	<div class="col-sm-4">
@@ -48,5 +47,5 @@
                	 		<button type="submit"  class="btn btn-success">Create</button>
             	  	</div>
            		 </div>
-            </c:if>
+            </security:authorize>
 </form:form>

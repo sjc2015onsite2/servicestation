@@ -9,10 +9,12 @@
 	<global-method-security pre-post-annotations="enabled" />
 
 	<http auto-config="true" use-expressions="true">
+	
+	<intercept-url pattern="/mechanic/**" access="hasRole('MECHANIC')"/>
 
 
 		<form-login login-page="/login" 
-					default-target-url="/client/list"
+					default-target-url="/createorder"
 					authentication-failure-url="/login/failure" 
 					username-parameter="username"
 					password-parameter="password" />

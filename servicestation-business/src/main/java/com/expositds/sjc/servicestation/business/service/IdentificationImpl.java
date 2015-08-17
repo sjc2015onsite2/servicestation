@@ -16,6 +16,9 @@ import com.expositds.sjc.servicestation.business.repository.dao.SiteAggregatorDa
 import com.expositds.sjc.servicestation.business.repository.dao.SiteUserDao;
 import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
 import com.expositds.sjc.servicestation.business.repository.dao.StationProfileDao;
+import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
+import com.expositds.sjc.servicestation.business.repository.entity.SiteAggregatorEntity;
+import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelObjectConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.AffilateProfile;
@@ -163,6 +166,18 @@ public class IdentificationImpl implements Identification {
 	@Override
 	public Logginer getLogginerByName(String name) {
 		return (Logginer) basicEntityModelObjectConverter.convert(logginerDao.findByName(name), Logginer.class);
+	}
+
+	@Override
+	public Station getStationByAffilate(Affilate affilate) {
+		SiteAggregatorEntity siteAggregatorEntity = siteAggregatorDao.findById(1L);
+		AffilateEntity affilateEntity = affilateDao.findById(affilate.getAffilateId());
+		
+		for (StationEntity currentStationEntity : siteAggregatorEntity.getStationProfiles().keySet()) 
+			if (currentStationEntity.getAffilates().keySet().contains(affilateEntity)) 
+				return (Station) basicEntityModelObjectConverter.convert(currentStationEntity, Station.class);
+		
+		return null;
 	}
 
 	
