@@ -6,7 +6,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
                   
-<form:form action="/createorder" class="form-horizontal" role="form"  method="POST">
+<form:form action="createorder" class="form-horizontal" role="form"  method="POST">
 
 
             <div class="form-group has-default">
