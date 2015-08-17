@@ -2,14 +2,15 @@ package com.expositds.sjc.servicestation.business.service;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.SiteUserDao;
+import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
+import com.expositds.sjc.servicestation.business.repository.entity.SiteUserEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelObjectConverter;
 import com.expositds.sjc.servicestation.domain.model.Comment;
@@ -19,20 +20,30 @@ import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.AuthorizedUserSite;
+import com.expositds.sjc.servicestation.domain.service.Site;
 
 /**
  * Реализует интерфейс AuthorizedUserSite.
  * 
  * @author Rybakov Sergey
+ * @author Alexey Suslov
  *
  */
-
 @Service
 @Transactional
 public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUserSite{
 
 	@Autowired
 	private SiteUserDao siteUserDao;
+	
+	@Autowired
+	private OrderDao orderDao;
+	
+	@Autowired
+	private StationDao stationDao;
+	
+	@Autowired
+	private Site siteService;
 	
 	@Autowired
 	private BasicEntityModelObjectConverter basicEntityModelObjectConverterTool;
@@ -54,64 +65,47 @@ public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUs
 	}
 
 	@Override
-	public void createOrder(SiteUser user, String problemDescription,
-			Station serviceStation) {
-		// TODO Auto-generated method stub
+	public void createOrder(SiteUser user, String problemDescription, Station serviceStation) {
 		
+		Order order = siteService.createOrder(problemDescription, serviceStation);
+		
+		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		StationEntity stationEntity = stationDao.findById(serviceStation.getStationId());
+		SiteUserEntity siteUserEntity = siteUserDao.findById(user.getId());
+		
+		siteUserEntity.getOrders().put(orderEntity, stationEntity);
+		siteUserDao.update(siteUserEntity);
 	}
 
 	@Override
 	public void changeServiceStation(Order order, Station newServiceStation) {
-		// TODO Auto-generated method stub
-		
+		siteService.changeServiceStation(order, newServiceStation);
 	}
 
 	@Override
 	public void publicServiceStationComment(Station serviceStation,
 			Comment comment) {
-		// TODO Auto-generated method stub
-		
+		siteService.publicServiceStationComment(serviceStation, comment);
 	}
 
 	@Override
 	public void publicMark(Station serviceStation, Mark mark) {
-		// TODO Auto-generated method stub
-		
+		siteService.publicMark(serviceStation, mark);
 	}
 
 	@Override
 	public Mark createMark(SiteUser user, Integer markValue) {
-		// TODO Auto-generated method stub
-		return null;
+		return siteService.createMark(user, markValue);
 	}
-
-	@Override
-	public Set<Station> getContactorServiceStations(SiteUser user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public Comment createComment(SiteUser user, String comment, boolean visible) {
-		// TODO Auto-generated method stub
-		return null;
+		return siteService.createComment(user, comment, visible);
 	}
 
 	@Override
 	public void publicMechanicComment(Person mechanic, Comment comment) {
-		// TODO Auto-generated method stub
-		
+		siteService.publicMechanicComment(mechanic, comment);
 	}
 
-	@Override
-	public Set<Person> getContactorMechanic(SiteUser user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void logout(SiteUser user) {
-		// TODO Auto-generated method stub
-		
-	}
 }

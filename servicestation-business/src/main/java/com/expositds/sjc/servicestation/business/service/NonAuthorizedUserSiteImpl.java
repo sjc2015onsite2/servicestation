@@ -12,7 +12,6 @@ import com.expositds.sjc.servicestation.business.repository.entity.SiteAggregato
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.PreOrder;
-import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.NonAuthorizedUserSite;
 import com.expositds.sjc.servicestation.domain.service.ServiceStation;
@@ -63,12 +62,5 @@ public class NonAuthorizedUserSiteImpl extends SiteUserImpl implements NonAuthor
 		// сохраняемся
 		siteAggregatorDao.update(siteAggregatorEntity);
 	}
-
-	@Override
-	public SiteUser getUser(String login, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }

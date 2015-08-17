@@ -1,8 +1,6 @@
 package com.expositds.sjc.servicestation.domain.service;
 
 import java.util.Map;
-import java.util.Set;
-
 import com.expositds.sjc.servicestation.domain.model.Comment;
 import com.expositds.sjc.servicestation.domain.model.Mark;
 import com.expositds.sjc.servicestation.domain.model.Order;
@@ -63,13 +61,6 @@ public interface AuthorizedUserSite extends UserSite {
 	public Mark createMark(SiteUser user, Integer markValue);
 
 	/**
-	 * Метод возвращает все СТО с которыми работал заданный пользователь.
-	 * @param user пользователь сайта
-	 * @return список СТО
-	 */
-	public Set<Station> getContactorServiceStations(SiteUser user);
-
-	/**
 	 * Метод создаёт комментарий с указанием в ней указанного пользователя сайта.
 	 * @param user пользователь сайта
 	 * @param comment комментарий
@@ -84,18 +75,5 @@ public interface AuthorizedUserSite extends UserSite {
 	 * @param comment комментарий
 	 */
 	public void publicMechanicComment(Person mechanic, Comment comment);
-
-	/**
-	 * Метод возвращает всех механиков с которыми работал заданный пользователь.
-	 * @param user пользователь сайта
-	 * @return список механиков
-	 */
-	public Set<Person> getContactorMechanic(SiteUser user);
-
-	/**
-	 * Метод разлогинивает заданного пользователя.
-	 * @param user пользователь сайта
-	 */
-	public void logout(SiteUser user);
 
 }
