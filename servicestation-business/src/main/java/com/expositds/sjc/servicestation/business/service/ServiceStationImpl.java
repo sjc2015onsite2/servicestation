@@ -14,13 +14,15 @@ import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelObjectConverter;
+import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.LogginerRole;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.PreOrder;
 import com.expositds.sjc.servicestation.domain.model.Station;
-import com.expositds.sjc.servicestation.domain.service.ServiceStation;;
+import com.expositds.sjc.servicestation.domain.service.ServiceStation;
+import com.expositds.sjc.servicestation.domain.service.StationAffilate;;
 
 @Service
 public class ServiceStationImpl implements ServiceStation{
@@ -33,6 +35,9 @@ public class ServiceStationImpl implements ServiceStation{
 	
 	@Autowired
 	private AffilateDao affilateDao;
+	
+	@Autowired
+	private StationAffilate stationAffilateService;
 	
 	@Autowired
 	private BasicEntityModelObjectConverter basicEntityModelObjectConverter;
@@ -55,14 +60,36 @@ public class ServiceStationImpl implements ServiceStation{
 
 	@Override
 	public void deleteOrder(Station serviceStation, Order order) {
-		// TODO Auto-generated method stub
+		
+		StationEntity stationEntity = stationDao.findById(serviceStation.getStationId());
+		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		
+		AffilateEntity affilateEntity = stationEntity.getOrders().get(orderEntity);	
+		Affilate affilate = (Affilate) basicEntityModelObjectConverter.convert(affilateEntity, Affilate.class);
+		stationAffilateService.deleteOrder(affilate, order);
+		
+		orderEntity.setCompleteDate(null);
+		orderEntity.setCreateDate(new GregorianCalendar());
+		orderEntity.setNotification(null);
+		orderEntity.getParts().clear();
+		orderEntity.getServices().clear();
+		orderEntity.getOrderServicesPriceList().clear();
+		orderEntity.setStatus(OrderStatus.NEW);
+		orderDao.update(orderEntity);
+		
+		stationEntity.getOrders().remove(orderEntity);
+		stationDao.update(stationEntity);
 		
 	}
 
 	@Override
 	public void takeOrder(Station serviceStation, Order order) {
-		// TODO Auto-generated method stub
+		StationEntity stationEntity = stationDao.findById(serviceStation.getStationId());
+		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		AffilateEntity nullAffilate = affilateDao.findById(1L);
 		
+		stationEntity.getOrders().put(orderEntity, nullAffilate);
+		stationDao.update(stationEntity);
 	}
 
 	@Override
