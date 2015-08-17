@@ -1,6 +1,5 @@
 package com.expositds.sjc.servicestation.domain.service;
 
-import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
 
 /**
@@ -18,13 +17,5 @@ public interface NonAuthorizedUserSite extends UserSite {
 	 * @param serviceStation СТО
 	 */
 	public void createOrder(String contact, String problemDescription, Station serviceStation);
-
-	/**
-	 * Метод возвращает зарегестрированного пользователя по заданному логину и заданному паролю.
-	 * @param login логин
-	 * @param password палоль
-	 * @return пользователя сайта
-	 */
-	public SiteUser getUser(String login, String password);
 
 }

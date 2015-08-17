@@ -53,10 +53,11 @@ public class AffilateEntity {
 	 */
 	@OneToMany
 	@JoinTable(
-			name = "affilate_has_orders",
+			name = "affilate_orders_persons",
 			joinColumns = @JoinColumn(name = "affilate_id"),
-			inverseJoinColumns = @JoinColumn(name = "order_id"))
-	private Set<OrderEntity> orders;
+			inverseJoinColumns = @JoinColumn(name = "person_id"))
+	@MapKeyJoinColumn(name = "order_id")
+	private Map<OrderEntity, PersonEntity> orders;
 
 	/**
 	 * Список заявок на запчасти с указанием механика, который создал завку на запчасть.
@@ -104,7 +105,7 @@ public class AffilateEntity {
 	public AffilateEntity(String affilateCode) {
 		this.affilateCode = affilateCode;
 		this.parts = new HashMap<>();
-		this.orders = new HashSet<>();
+		this.orders = new HashMap<>();
 		this.partOrders = new HashMap<>();
 		this.persons = new HashSet<>();
 		this.services = new HashMap<>();
@@ -155,11 +156,11 @@ public class AffilateEntity {
 		this.parts = parts;
 	}
 
-	public Set<OrderEntity> getOrders() {
+		public Map<OrderEntity, PersonEntity> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(Set<OrderEntity> orders) {
+	public void setOrders(Map<OrderEntity, PersonEntity> orders) {
 		this.orders = orders;
 	}
 

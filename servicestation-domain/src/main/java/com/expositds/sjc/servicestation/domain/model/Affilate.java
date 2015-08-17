@@ -2,6 +2,7 @@ package com.expositds.sjc.servicestation.domain.model;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 /**
  * Класс Affilate содержит иформацию о Person, Part, Service, PartOrder, Order.
@@ -21,9 +22,9 @@ public class Affilate {
 	private HashMap<Part, Integer> parts = new HashMap<>();
 
 	/**
-	 * Список заявок у филиала.
+	 * Список заявок и принадлежность к механику у филиала.
 	 */
-	private HashSet<Order> orders = new HashSet<>();
+	private Map<Order, Person> orders = new HashMap<>();
 
 	/**
 	 * Список заявок на запчасти с указанием механика, который создал завку на запчасть.
@@ -99,11 +100,11 @@ public class Affilate {
 		this.parts = parts;
 	}
 
-	public HashSet<Order> getOrders() {
+	public Map<Order, Person> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(HashSet<Order> orders) {
+	public void setOrders(Map<Order, Person> orders) {
 		this.orders = orders;
 	}
 
