@@ -19,20 +19,34 @@
               </div>
             </div>
             
+            <c:if test="${not empty user}">
+            	<div class="form-group has-default">
+              		<label class="control-label col-sm-4" for="id1">Problem:</label>
+              		<div class="col-sm-4">
+                		<textarea name="problem" class="form-control" rows="6"></textarea>
+                		<p></p>
+               	 		<button type="submit"  class="btn btn-success">Create</button>
+              		</div>
+            	</div>
             
-            <div class="form-group has-default">
-              <label class="control-label col-sm-4" for="id1">Problem:</label>
-              <div class="col-sm-4">
-                <textarea name="problem" class="form-control" rows="6"></textarea>
-              </div>
-            </div>
+            </c:if>
             
-            <div class="form-group has-default">
-              <label class="control-label col-sm-4" for="id1">How to contact with you?</label>
-              <div class="col-sm-4">
-                <textarea name="contacts" class="form-control" rows="2" placeholder="Enter phone number or email"></textarea>
-                <p></p>
-                <button type="submit"  class="btn btn-success">Create</button>
-              </div>
-            </div>
+            <c:if test="${empty user}">
+            	<div class="form-group has-default">
+              		<label class="control-label col-sm-4" for="id1">Problem:</label>
+              		<div class="col-sm-4">
+                		<textarea name="problem" class="form-control" rows="6"></textarea>
+              		</div>
+            	</div>
+            
+            
+            	<div class="form-group has-default">
+             	 	<label class="control-label col-sm-4" for="id1">How to contact with you?</label>
+             	 	<div class="col-sm-4">
+              	  		<textarea name="contacts" class="form-control" rows="2" placeholder="Enter phone number or email"></textarea>
+              	  		<p></p>
+               	 		<button type="submit"  class="btn btn-success">Create</button>
+            	  	</div>
+           		 </div>
+            </c:if>
 </form:form>

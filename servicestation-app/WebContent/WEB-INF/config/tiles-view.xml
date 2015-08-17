@@ -10,6 +10,8 @@
 		<put-attribute name="footer" value="/WEB-INF/tiles-base/footer.jsp" />
 	</definition>
 	
+	<definition name="base.error" template="/WEB-INF/views/error.jsp"/>
+	
 	<definition name="createOrder" extends="base.definition">
 		<put-attribute name="header" value="/WEB-INF/tiles-base/customerHeader.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/customer/createOrder.jsp" />

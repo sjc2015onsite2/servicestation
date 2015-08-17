@@ -46,16 +46,16 @@ public class CreateCommentsController {
 	@RequestMapping(value = "/createmechaniccomment", method = { RequestMethod.GET })
 	public ModelAndView getMechanicCommentForm() {
 		
-		Set<Station> stations = nonAuthorizedUserSite.getServiceStations();
-		Set<Person> mechanics = new HashSet<Person>();
-		for(Station station : stations)
-		{
-			mechanics.addAll(nonAuthorizedUserSite.getServiceStationMechanics(station));
-		}
+		//Set<Station> stations = nonAuthorizedUserSite.getServiceStations();
+		//Set<Person> mechanics = new HashSet<Person>();
+		//for(Station station : stations)
+		//{
+			//mechanics.addAll(nonAuthorizedUserSite.getServiceStationMechanics(station));
+		//}
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("mechanics", mechanics);
-		mav.setViewName("createStationComment");
+		//mav.addObject("mechanics", mechanics);
+		mav.setViewName("createMechanicComment");
 		return mav;
 	}
 	
