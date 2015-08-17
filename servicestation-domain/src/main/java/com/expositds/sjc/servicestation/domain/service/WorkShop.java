@@ -53,5 +53,12 @@ public interface WorkShop {
 	 * @param notification сообщение 
 	 */
 	public void createClientNotification(Order order, ClientNotification notification);
+	
+	/**
+	 * Метод создаёт заявку на запчати с указанным списком запчастей, у указанным механиком.
+	 * @param mechanic механик
+	 * @param parts список запчастей с их количеством
+	 */
+	public void createPartOrder(Person mechanic, Map<Part, Integer> parts);
 
 }

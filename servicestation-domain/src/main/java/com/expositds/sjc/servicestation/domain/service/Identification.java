@@ -58,5 +58,7 @@ public interface Identification {
 	public Logginer getLogginerByName(String name);
 	
 	public Station getStationByAffilate(Affilate affilate);
+	
+	public Affilate getAffilateByMechanic(Person mechanic);
 
 }

@@ -1,5 +1,6 @@
 package com.expositds.sjc.servicestation.domain.service;
 
+import java.util.Calendar;
 import java.util.Set;
 
 import com.expositds.sjc.servicestation.domain.model.Affilate;
@@ -26,5 +27,12 @@ public interface Storage {
 	 * @return список заявок на запчасти
 	 */
 	public Set<PartOrder> getPartOrders(Affilate affilate);
+	
+	/**
+	 * Метод устанавливает дату поставки запчастей из PartOrder.
+	 * @param partOrder заявка на запчасти
+	 * @param date дата предпологаемой поставки
+	 */
+	public void setPartOrderCompleteDate(PartOrder partOrder, Calendar date);
 
 }

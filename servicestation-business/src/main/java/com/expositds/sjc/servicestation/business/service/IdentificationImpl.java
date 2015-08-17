@@ -17,6 +17,7 @@ import com.expositds.sjc.servicestation.business.repository.dao.SiteUserDao;
 import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
 import com.expositds.sjc.servicestation.business.repository.dao.StationProfileDao;
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
+import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.SiteAggregatorEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelObjectConverter;
@@ -176,6 +177,19 @@ public class IdentificationImpl implements Identification {
 		for (StationEntity currentStationEntity : siteAggregatorEntity.getStationProfiles().keySet()) 
 			if (currentStationEntity.getAffilates().keySet().contains(affilateEntity)) 
 				return (Station) basicEntityModelObjectConverter.convert(currentStationEntity, Station.class);
+		
+		return null;
+	}
+
+	@Override
+	public Affilate getAffilateByMechanic(Person mechanic) {
+		SiteAggregatorEntity siteAggregatorEntity = siteAggregatorDao.findById(1L);
+		PersonEntity mechanicEntity = personDao.findById(mechanic.getId());
+		
+		for (StationEntity currentStationEntity : siteAggregatorEntity.getStationProfiles().keySet()) 
+			for (AffilateEntity currentAffilateEntity : currentStationEntity.getAffilates().keySet())
+				if (currentAffilateEntity.getPersons().contains(mechanicEntity)) 
+					return (Affilate) basicEntityModelObjectConverter.convert(currentAffilateEntity, Affilate.class);
 		
 		return null;
 	}

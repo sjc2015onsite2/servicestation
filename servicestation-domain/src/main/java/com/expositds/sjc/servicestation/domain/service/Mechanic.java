@@ -39,7 +39,7 @@ public interface Mechanic extends StoreKeeper {
 	 * @param oder заявка
 	 * @param orderCopmleteDate дата исполнения 
 	 */
-	public void setOrderCompletionDate(Order oder, Calendar orderCopmleteDate);
+	public void setOrderCompletionDate(Order order, Calendar orderCopmleteDate);
 
 	/**
 	 * Метод возвращает список запчастей с их количеством в заданном филиале.
