@@ -3,21 +3,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
- 
 
-<form class="form-horizontal" role="form">
-              <label class="control-label col-sm-4" for="id1">Select station:</label>
+<form:form action="createmark" method="POST" oninput="out.value=(pct.value), outp.value=pct.value+'%', outclass.value=''+stars.className">
+              <label class="control-label col-sm-4" >Select station:</label>
               <div class="col-sm-4">
-                <select multiple class="form-control" id="id1">
+                <select name="stationId" multiple class="form-control" >
                   <c:forEach var="station" items="${stations}" >
-                  	<option>${station.getName()}</option>
+                  	<option value="${station.stationId }">${station.name}</option>
                   </c:forEach>
                 </select>
               </div>
 
-</form>
+
 
 	<section class="sect">
 		<article class="art">
@@ -25,11 +25,11 @@
 			<br />
 			<span class="text-left"	 id="stars"></span>
 		</article>
-		<form oninput="out.value=(pct.value), outp.value=pct.value+'%', outclass.value=''+stars.className">
-				<h2><output id="out" for="pct">0</output></h2>
-				<input type="range"  min="0" max="5" value="0" id="pct" name="pct"/>
+		<h2><output id="out" for="pct">0</output></h2>
+				<input type="range"  min="0" max="5" value="0" id="pct" name="markValue"/>
 				<output id="outclass"></output>
-		</form>
 		<br />
 				<button type="submit"  class="btn btn-success">Create</button>
+		
 	</section>
+</form:form>

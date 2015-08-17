@@ -2,6 +2,7 @@ package com.expositds.sjc.servicestation.app;
 
 import java.util.Set;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,9 +10,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.expositds.sjc.servicestation.business.repository.dao.SiteUserDao;
+import com.expositds.sjc.servicestation.business.repository.entity.SiteUserEntity;
+import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Mark;
+import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
+import com.expositds.sjc.servicestation.domain.service.AuthorizedUserSite;
+import com.expositds.sjc.servicestation.domain.service.Identification;
 import com.expositds.sjc.servicestation.domain.service.NonAuthorizedUserSite;
+import com.expositds.sjc.servicestation.domain.service.Site;
 
 /**
  * <b>CreateMarkController</b>
@@ -28,12 +36,18 @@ import com.expositds.sjc.servicestation.domain.service.NonAuthorizedUserSite;
 public class CreateMarkController {
 
 	@Autowired
-	private NonAuthorizedUserSite nonAuthorizedUserSite;
+	private AuthorizedUserSite authorizedUserSite;
+	
+	@Autowired
+	private SiteUserDao siteUserDao;
+	
+	@Autowired
+	private Identification identificationService;
 	
 	@RequestMapping(value = "/createmark", method = { RequestMethod.GET })
 	public ModelAndView getForm() {
 		
-		Set<Station> stations = nonAuthorizedUserSite.getServiceStations();
+		Set<Station> stations = authorizedUserSite.getServiceStations();
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("stations",  stations);
 		mav.setViewName("createMark");
@@ -41,13 +55,18 @@ public class CreateMarkController {
 		
 	}
 	
-	@RequestMapping(value = "/createmark", method = { RequestMethod.POST })
-	public String createMark(@RequestParam("stationId") Station station, Mark mark) {
+	@RequestMapping(value = "/createmark", method = RequestMethod.POST )
+	public String createMark(
+			@RequestParam(value = "stationId", required = true) Station station,
+			Authentication auth,
+			@RequestParam(required = true) Integer markValue) {
 		
-		/* TODO: Saving Mark object to DB. Save method needed in NonAuthorizedUserSiteImpl (ServiceStationImpl)
-		 * 
-		 * nonAuthorizedUserSite.createMark(station, mark)???
-		 * */
+		Logginer logginer = identificationService.getLogginerByName(auth.getName());
+		SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
+		
+		//authorizedUserSite.createMark(user, markValue);
+		authorizedUserSite.publicMark(station, authorizedUserSite.createMark(user, markValue));
+		
 		return "redirect:/stationslist";
 	}
 	

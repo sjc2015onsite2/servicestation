@@ -1,6 +1,7 @@
 <!-- header of customer -->
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <nav class="navbar navbar-default" role="navigation">
 	<div class="container-fluid">
@@ -20,7 +21,7 @@
   	        	<li><a href="<c:url value="/createorder" />" >Creating order</a></li>
             	<li><a href="<c:url value="/stationslist" />" >Stations list</a></li>
             
-            	<c:if test="${empty user}">
+            	<security:authorize access="isAnonymous()">
        	    		<li data-toggle ="modal" data-target="#authorization-modal" class="dropdown">
    	        	    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Create comment <b class="caret"></b></a>
                    		<ul class="dropdown-menu">
@@ -29,9 +30,9 @@
                 	    	<li><a href="<c:url value="/createmechaniccomment" />" >Create comment about Mechanic</a></li>
                    		</ul>
                 	</li>
-           		</c:if>
+           		</security:authorize>
            
-           		<c:if test="${not empty user}">
+           		<security:authorize access="hasRole('ROLE_USER')">
  		       		<li class="dropdown">
                	    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Create comment <b class="caret"></b></a>
                    		<ul class="dropdown-menu">
@@ -40,35 +41,35 @@
               	        	<li><a href="<c:url value="/createmechaniccomment" />" >Create comment about Mechanic</a></li>
                     	</ul>
                 	</li>
-           		</c:if>
+           		</security:authorize>
            
-           		<c:if test="${empty user}">
+           		<security:authorize access="isAnonymous()">
            			<li data-toggle ="modal" data-target="#authorization-modal"><a href="<c:url value="/createmark" />" >Create mark</a></li>
-           		</c:if>
+           		</security:authorize>
           	
-     	  		<c:if test="${not empty user}">
+     	  		<security:authorize access="hasRole('ROLE_USER')">
           			<li><a href="<c:url value="/createmark" />" >Create mark</a></li>
-           		</c:if>
+           		</security:authorize>
             	
-           		<c:if test="${not empty user}">
+           		<security:authorize access="hasRole('ROLE_USER')">
            			<li><a href="<c:url value="/myorders" />" >My orders</a></li>
-           		</c:if>
+           		</security:authorize>
           	</ul>
               
-              	<c:if test="${not empty user}">
+              	<security:authorize access="hasRole('ROLE_USER')">
               		<ul class="nav navbar-nav navbar-right">
-                		<form  class="navbar-form navbar-right">
-                  			<li><a href="<c:url value="/logout"/>"><button type="button" class="btn btn-default">Logout</button></a></li>
+                		<form class="navbar-form navbar-right">
+                  			<li><a href="<c:url value="/createorder"/>"><button type="button" class="btn btn-default">Logout</button></a></li>
                 		</form>
               		</ul>
-             	</c:if>
+             	</security:authorize>
               
-				<c:if test="${empty user}">
+				<security:authorize access="isAnonymous()">
             		<form class="navbar-form navbar-right"> 
               			<button name="submit" type="submit" class="btn btn-success" data-toggle ="modal" data-target="#authorization-modal">Sign in</button>
               			<button name="submit" type="submit" class="btn btn-warning" data-toggle ="modal" data-target="#registration-modal">Sign up</button>
               		</form>
-           		</c:if>
+           		</security:authorize>
            
         </div>
     </div>
@@ -85,7 +86,7 @@
       <div class="modal-body">
         <form class="form-horizontal"  action="j_spring_security_check" method='POST' role="form">
           <div class="form-group has-feedback  ">
-                <input type="email" class="form-control" name="username" id="exampleInputEmail2" placeholder="Enter user name">
+                <input type="text" class="form-control" name="username" id="exampleInputEmail2" placeholder="Enter user name">
           </div>
           <div class="form-group has-feedback">
                 <input type="password" class="form-control" name="password" id="exampleInputPassword2" placeholder="Enter password">
