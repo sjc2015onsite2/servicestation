@@ -12,6 +12,7 @@ import com.expositds.sjc.servicestation.business.repository.dao.ClientNotificati
 import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.entity.ClientNotificationEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
+import com.expositds.sjc.servicestation.business.repository.tools.ModelEntityConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
@@ -36,6 +37,9 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 	
 	@Autowired
 	private WorkShop workShopService;
+	
+	@Autowired
+	private ModelEntityConverter modelEntityConverterTool;
 	
 	@Override
 	public Set<Order> getMechanicOrders(Affilate affilate, Person mechanic) {
@@ -83,20 +87,44 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 
 	@Override
 	public void addPartsToOrder(Order order, Map<Part, Integer> parts) {
+		
+		for (Part currentPart : parts.keySet()) {
+			if (order.getParts().containsKey(currentPart)) 
+				order.getParts().put(currentPart, order.getParts().get(currentPart) + parts.get(currentPart));
+			else order.getParts().put(currentPart, parts.get(currentPart));
+		}
+		
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		
+		orderEntity.setParts(modelEntityConverterTool.mapPartIntegerConvert(parts));
+		
+		orderDao.update(orderEntity);
 		
 	}
 
 	@Override
 	public void addServicesPriceListToOrder(Order order, Map<com.expositds.sjc.servicestation.domain.model.Service, Integer> servicesPriceList) {
-		// TODO Auto-generated method stub
-
+		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		
+		orderEntity.getOrderServicesPriceList().
+			putAll(modelEntityConverterTool.mapServiceIntegerConverter(servicesPriceList));
+		
+		orderDao.update(orderEntity);
+	
 	}
 
 	@Override
 	public void addServicesToOrder(Order order, Map<com.expositds.sjc.servicestation.domain.model.Service, Integer> services) {
-		// TODO Auto-generated method stub
-
+		
+		for (com.expositds.sjc.servicestation.domain.model.Service currentService : services.keySet()) 
+			for (int i = 0; i < services.get(currentService); i++) 
+				order.getServices().add(currentService);
+		
+		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		
+		orderEntity.setServices(modelEntityConverterTool.listServiceConverter(order.getServices()));
+		
+		orderDao.update(orderEntity);
 	}
 
 }

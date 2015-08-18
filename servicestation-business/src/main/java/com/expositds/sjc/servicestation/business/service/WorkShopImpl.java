@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
-import com.expositds.sjc.servicestation.business.repository.dao.PartDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PartOrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PersonDao;
 import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
@@ -21,6 +20,7 @@ import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.ServiceEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
+import com.expositds.sjc.servicestation.business.repository.tools.ModelEntityConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Part;
@@ -46,9 +46,6 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 	private StationDao stationDao;
 	
 	@Autowired
-	private PartDao partDao;
-	
-	@Autowired
 	private PartOrderDao partOrderDao;
 	
 	@Autowired
@@ -56,6 +53,9 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 	
 	@Autowired
 	private EntityModelConverter entityModelConverterTool;
+	
+	@Autowired
+	private ModelEntityConverter modelEntityConverter;
 
 	@Override
 	public Set<Order> getMechanicOrders(Affilate affilate, Person mechanic) {
@@ -123,10 +123,7 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 		PersonEntity mechanicEntity = personDao.findById(mechanic.getId());
 		PartOrderEntity partOrderEntity = new PartOrderEntity();
 		
-		for (Part currentPart : parts.keySet()) {
-			PartEntity currentPartEntity = partDao.findById(currentPart.getPartId());
-			partOrderEntity.getParts().put(currentPartEntity, parts.get(currentPart));
-		}
+		partOrderEntity.setParts(modelEntityConverter.mapPartIntegerConvert(parts));
 		
 		affilateEntity.getPartOrders().put(partOrderEntity, mechanicEntity);
 		

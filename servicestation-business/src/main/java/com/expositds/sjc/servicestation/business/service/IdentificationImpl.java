@@ -14,11 +14,13 @@ import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PartDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PartOrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PersonDao;
+import com.expositds.sjc.servicestation.business.repository.dao.ServiceDao;
 import com.expositds.sjc.servicestation.business.repository.dao.SiteAggregatorDao;
 import com.expositds.sjc.servicestation.business.repository.dao.SiteUserDao;
 import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
 import com.expositds.sjc.servicestation.business.repository.dao.StationProfileDao;
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
+import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.SiteAggregatorEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
@@ -91,6 +93,9 @@ public class IdentificationImpl implements Identification {
 	private ClientNotificationDao clientNotificationDao;
 	
 	@Autowired
+	private ServiceDao serviceDao;
+	
+	@Autowired
 	private EntityModelConverter entityModelConverterTool;
 		
 	@Override
@@ -146,8 +151,7 @@ public class IdentificationImpl implements Identification {
 
 	@Override
 	public com.expositds.sjc.servicestation.domain.model.Service getServiceId(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (com.expositds.sjc.servicestation.domain.model.Service) entityModelConverterTool.convert(serviceDao.findById(new Long(id)), com.expositds.sjc.servicestation.domain.model.Service.class);
 	}
 
 	@Override
@@ -198,6 +202,16 @@ public class IdentificationImpl implements Identification {
 					return (Affilate) entityModelConverterTool.convert(currentAffilateEntity, Affilate.class);
 		
 		return null;
+	}
+
+	@Override
+	public Station gerStationByOrder(Order order) {
+		SiteAggregatorEntity siteAggregatorEntity = siteAggregatorDao.findById(1L);
+		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		
+		StationEntity stationEntity = siteAggregatorEntity.getOrders().get(orderEntity);
+		
+		return (Station) entityModelConverterTool.convert(stationEntity, Station.class);
 	}
 
 	
