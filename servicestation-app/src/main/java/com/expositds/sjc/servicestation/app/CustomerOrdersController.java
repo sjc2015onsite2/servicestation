@@ -1,6 +1,8 @@
 package com.expositds.sjc.servicestation.app;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -39,8 +41,11 @@ public class CustomerOrdersController {
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
 			SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
 			
+			Map<Order, Station> orders = authorizedUserSiteService.getOrders(user);
+			Set<Order> order = orders.keySet();
+			
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("orders", authorizedUserSiteService.getOrders(user));
+			mav.addObject("orders", order);
 			mav.setViewName("myOrders");
 			return mav;
 		}
