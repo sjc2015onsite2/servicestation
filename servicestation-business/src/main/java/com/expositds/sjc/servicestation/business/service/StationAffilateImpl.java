@@ -11,7 +11,7 @@ import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelConverter;
+import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Person;
@@ -31,7 +31,7 @@ public class StationAffilateImpl implements StationAffilate {
 	private OrderDao orderDao;
 	
 	@Autowired
-	private BasicEntityModelConverter entityModelObjectConverter;
+	private EntityModelConverter entityModelConverterTool;
 
 	@Override
 	public void deleteOrder(Affilate affilate, Order order) {
@@ -51,7 +51,7 @@ public class StationAffilateImpl implements StationAffilate {
 		
 		Set<Person> mechanics = new HashSet<>();
 		for (PersonEntity currentMechanicEntity : mechanicsEntity) {
-			mechanics.add((Person) entityModelObjectConverter.convert(currentMechanicEntity, Person.class));
+			mechanics.add((Person) entityModelConverterTool.convert(currentMechanicEntity, Person.class));
 		}
 		
 		return mechanics;

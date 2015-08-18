@@ -20,7 +20,7 @@ import com.expositds.sjc.servicestation.business.repository.entity.PartOrderEnti
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.ServiceEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelConverter;
+import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Part;
@@ -55,7 +55,7 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 	private Identification identificationService;
 	
 	@Autowired
-	private BasicEntityModelConverter basicEntityModelObjectConverter;
+	private EntityModelConverter entityModelConverterTool;
 
 	@Override
 	public Set<Order> getMechanicOrders(Affilate affilate, Person mechanic) {
@@ -68,7 +68,7 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 		
 		for (OrderEntity currentOrderEntity : affilateOtdersEntity.keySet()) {
 			if (affilateOtdersEntity.get(currentOrderEntity).equals(mechanicEntity))
-				orders.add((Order) basicEntityModelObjectConverter.convert(currentOrderEntity, Order.class));
+				orders.add((Order) entityModelConverterTool.convert(currentOrderEntity, Order.class));
 		}
 		
 		Station station = identificationService.getStationByAffilate(affilate);
@@ -77,7 +77,7 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 		
 		for (OrderEntity currentOrderEntity : stationEntity.getOrders().keySet())
 			if (stationEntity.getOrders().get(currentOrderEntity).getAffilateId() == 1)
-				orders.add((Order) basicEntityModelObjectConverter.convert(currentOrderEntity, Order.class));
+				orders.add((Order) entityModelConverterTool.convert(currentOrderEntity, Order.class));
 		
 		return orders;
 	}
@@ -88,7 +88,7 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 		Map<Part, Integer> parts = new HashMap<>();
 		
 		for (PartEntity currentPartEntity : affilateEntity.getParts().keySet())
-			parts.put((Part) basicEntityModelObjectConverter.convert(currentPartEntity, Part.class), affilateEntity.getParts().get(currentPartEntity));
+			parts.put((Part) entityModelConverterTool.convert(currentPartEntity, Part.class), affilateEntity.getParts().get(currentPartEntity));
 	
 		return parts;
 	}
@@ -102,7 +102,7 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 			
 			com.expositds.sjc.servicestation.domain.model.Service service = 
 					(com.expositds.sjc.servicestation.domain.model.Service) 
-						basicEntityModelObjectConverter.convert(currentServiceEntity, 
+						entityModelConverterTool.convert(currentServiceEntity, 
 							com.expositds.sjc.servicestation.domain.model.Service.class);
 			
 			services.put(service, affilateEntity.getParts().get(currentServiceEntity));

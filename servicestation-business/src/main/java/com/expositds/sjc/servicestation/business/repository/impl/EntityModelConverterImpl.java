@@ -21,7 +21,7 @@ import com.expositds.sjc.servicestation.business.repository.entity.SiteAggregato
 import com.expositds.sjc.servicestation.business.repository.entity.SiteUserEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationProfileEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelConverter;
+import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.AffilateProfile;
 import com.expositds.sjc.servicestation.domain.model.ClientNotification;
@@ -44,7 +44,7 @@ import com.expositds.sjc.servicestation.domain.model.StationProfile;
  *
  */
 @Component
-public class BasicEntityModelConverterImpl implements BasicEntityModelConverter {
+public class EntityModelConverterImpl implements EntityModelConverter {
 
 	@Override
 	public Object convert(Object entity, Class<?> clazz) {

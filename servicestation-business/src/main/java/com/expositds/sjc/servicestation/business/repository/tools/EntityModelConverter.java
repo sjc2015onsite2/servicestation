@@ -7,7 +7,7 @@ package com.expositds.sjc.servicestation.business.repository.tools;
  * @author Alexey Suslov
  *
  */
-public interface BasicEntityModelConverter {
+public interface EntityModelConverter {
 	
 	Object convert(Object entity, Class<?> clazz);
 
