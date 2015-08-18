@@ -36,7 +36,7 @@ public interface AuthorizedUserSite extends UserSite {
 	 * @param order заявка
 	 * @param newServiceStation новая СТО 
 	 */
-	public void changeServiceStation(Order order, Station newServiceStation);
+	public void changeServiceStation(SiteUser user, Order order, Station newServiceStation);
 
 	/**
 	 * Метод публикует заданный комментарий о заданном СТО.
