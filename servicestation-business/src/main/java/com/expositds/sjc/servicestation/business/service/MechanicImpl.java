@@ -110,7 +110,6 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 			putAll(modelEntityConverterTool.mapServiceIntegerConverter(servicesPriceList));
 		
 		orderDao.update(orderEntity);
-	
 	}
 
 	@Override
@@ -125,6 +124,12 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 		orderEntity.setServices(modelEntityConverterTool.listServiceConverter(order.getServices()));
 		
 		orderDao.update(orderEntity);
+	}
+
+	@Override
+	public void giveOrder(Person mechanic, Order order) {
+		workShopService.giveOrder(mechanic, order);
+		
 	}
 
 }

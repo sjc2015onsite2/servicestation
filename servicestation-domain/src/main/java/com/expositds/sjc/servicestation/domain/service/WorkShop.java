@@ -40,11 +40,10 @@ public interface WorkShop {
 
 	/**
 	 * Метод назначает заданную заявку заданному механнику в заданном филиале.
-	 * @param affilate филиал
 	 * @param mechanic механик
 	 * @param order заявка
 	 */
-	public void giveOrder(Affilate affilate, Person mechanic, Order order);
+	public void giveOrder(Person mechanic, Order order);
 
 	/**
 	 * Метод создаёт заявку на запчати с указанным списком запчастей, у указанным механиком.

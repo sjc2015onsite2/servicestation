@@ -11,14 +11,12 @@ import org.springframework.stereotype.Service;
 import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PartOrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PersonDao;
-import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PartEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PartOrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.ServiceEntity;
-import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.business.repository.tools.ModelEntityConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
@@ -26,6 +24,7 @@ import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.Station;
+import com.expositds.sjc.servicestation.domain.service.HeadOffice;
 import com.expositds.sjc.servicestation.domain.service.Identification;
 import com.expositds.sjc.servicestation.domain.service.WorkShop;
 
@@ -43,13 +42,13 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 	private PersonDao personDao;
 	
 	@Autowired
-	private StationDao stationDao;
-	
-	@Autowired
 	private PartOrderDao partOrderDao;
 	
 	@Autowired
 	private Identification identificationService;
+	
+	@Autowired
+	private HeadOffice headOfficeService;
 	
 	@Autowired
 	private EntityModelConverter entityModelConverterTool;
@@ -62,22 +61,18 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 		AffilateEntity affilateEntity = affilateDao.findById(affilate.getAffilateId());
 		PersonEntity mechanicEntity = personDao.findById(mechanic.getId());
 		
-		Map<OrderEntity, PersonEntity> affilateOtdersEntity = affilateEntity.getOrders();
+		Map<OrderEntity, PersonEntity> affilateOrdersEntity = affilateEntity.getOrders();
 		
 		Set<Order> orders = new HashSet<>();
 		
-		for (OrderEntity currentOrderEntity : affilateOtdersEntity.keySet()) {
-			if (affilateOtdersEntity.get(currentOrderEntity).equals(mechanicEntity))
+		for (OrderEntity currentOrderEntity : affilateOrdersEntity.keySet()) {
+			if (affilateOrdersEntity.get(currentOrderEntity).equals(mechanicEntity))
 				orders.add((Order) entityModelConverterTool.convert(currentOrderEntity, Order.class));
 		}
 		
 		Station station = identificationService.getStationByAffilate(affilate);
 		
-		StationEntity stationEntity = stationDao.findById(station.getStationId());
-		
-		for (OrderEntity currentOrderEntity : stationEntity.getOrders().keySet())
-			if (stationEntity.getOrders().get(currentOrderEntity).getAffilateId() == 1)
-				orders.add((Order) entityModelConverterTool.convert(currentOrderEntity, Order.class));
+		orders.addAll(headOfficeService.getNewOrders(station));
 		
 		return orders;
 	}
@@ -111,7 +106,7 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 	}
 
 	@Override
-	public void giveOrder(Affilate affilate, Person mechanic, Order order) {
+	public void giveOrder(Person mechanic, Order order) {
 		// TODO Auto-generated method stub
 
 	}
