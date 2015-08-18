@@ -23,7 +23,7 @@ import com.expositds.sjc.servicestation.business.repository.entity.SiteAggregato
 import com.expositds.sjc.servicestation.business.repository.entity.SiteUserEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationProfileEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelObjectConverter;
+import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Comment;
 import com.expositds.sjc.servicestation.domain.model.Mark;
 import com.expositds.sjc.servicestation.domain.model.Order;
@@ -68,7 +68,7 @@ public class SiteImpl implements Site {
 	private MechanicProfileDao mechanicProfileDao;
 	
 	@Autowired
-	private BasicEntityModelObjectConverter basicEntityModelObjectConverter;
+	private EntityModelConverter entityModelConverterTool;
 
 	@Override
 	public Order createOrder(String problemDescription, Station serviceStation) {
@@ -87,7 +87,7 @@ public class SiteImpl implements Site {
 	public void changeServiceStation(Order order, Station newServiceStation) {
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
 		SiteAggregatorEntity siteAggregatorEntity = siteAggregatorDao.findById(1L);
-		Station oldStation = (Station) basicEntityModelObjectConverter.convert(siteAggregatorEntity.getOrders().get(orderEntity), Station.class);
+		Station oldStation = (Station) entityModelConverterTool.convert(siteAggregatorEntity.getOrders().get(orderEntity), Station.class);
 		
 		serviceStationService.deleteOrder(oldStation, order);
 		serviceStationService.takeOrder(newServiceStation, order);
@@ -130,7 +130,7 @@ public class SiteImpl implements Site {
 		markEntity.setDate(new GregorianCalendar());
 		markEntity.setMarkId(markDao.save(markEntity));
 		
-		Mark mark = (Mark) basicEntityModelObjectConverter.convert(markEntity, Mark.class);
+		Mark mark = (Mark) entityModelConverterTool.convert(markEntity, Mark.class);
 		return mark;
 	}
 
@@ -141,7 +141,7 @@ public class SiteImpl implements Site {
 		commentEntity.setDate(new GregorianCalendar());
 		commentEntity.setCommentId(commentDao.save(commentEntity));
 		
-		Comment comment = (Comment) basicEntityModelObjectConverter.convert(commentEntity, Comment.class);
+		Comment comment = (Comment) entityModelConverterTool.convert(commentEntity, Comment.class);
 		return comment;
 	}
 
