@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.expositds.sjc.servicestation.domain.model.Logginer;
@@ -35,6 +36,7 @@ public class CustomerOrdersController {
 	@Autowired
 	private Identification identificationService;
 	
+	
 		@RequestMapping(value = "/user/myorders", method = { RequestMethod.GET })
 		public ModelAndView myorders(Authentication auth) {
 			
@@ -49,14 +51,16 @@ public class CustomerOrdersController {
 			return mav;
 		}
 	
-		@RequestMapping(value = "user/myorders/{orderId}", method = RequestMethod.GET)
+		@RequestMapping(value = "/user/myorders/{orderId}", method = RequestMethod.GET)
 		public ModelAndView myorder(
 				
 				@PathVariable("orderId") Order order) {
 			
 			Set<Station> stations = authorizedUserSiteService.getServiceStations();
 			
+			Station station = identificationService.gerStationByOrder(order);
 			ModelAndView mav = new ModelAndView();
+			mav.addObject("station", station);
 			mav.addObject("order", order);
 			mav.addObject("stations", stations);
 			mav.setViewName("customer.order.data");
@@ -64,6 +68,17 @@ public class CustomerOrdersController {
 			return mav;
 		}
 		
-		//@RequestMapping(value = "user/myorders.{oredrId}", method = RequestMethod.POST)
+		@RequestMapping(value = "/user/myorders", method = RequestMethod.POST)
+		public ModelAndView myorder(
+				@RequestParam(value = "orderId") Order order,
+				@RequestParam(value = "stationId") Station station){
+				
+			   authorizedUserSiteService.changeServiceStation(order, station);
+			   
+			   ModelAndView mav = new ModelAndView();
+				mav.setViewName("myOrders");
+			
+			return mav;
+		}
 	
 }

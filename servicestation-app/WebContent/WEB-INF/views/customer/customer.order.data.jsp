@@ -5,7 +5,7 @@
 
 <div class="col-sm-12">
 	<div class="col-sm-6">
-		<h4 class="text-center">Order 3</h4>
+		<h4 class="text-center">Order ${order.orderId}</h4>
 	</div>
 	<div>
 		<button data-toggle ="modal" data-target="#change-modal" type="button" class="btn btn-warning col-sm-offset-3">Change station</button>
@@ -18,7 +18,7 @@
         	<p class="text-left"><strong>Station: </strong></p>
         </div>
     	<div class="col-sm-9">
-    		<p class="text-left"><em>Station 1</em></p>
+    		<p class="text-left"><em>${station.name}</em></p>
     	</div>
 	</div>
 
@@ -99,7 +99,7 @@
       </div>
 
       <div class="modal-body">
-        <form class="form-horizontal"  action="" method='POST' role="form">
+        <form class="form-horizontal" action="../../user/myorders" method='POST' role="form">
         	<div class="col-sm-2">
           		<label class="text-left" >Select stationé:</label>
           	</div>
@@ -109,6 +109,7 @@
                   	<option value="${station.stationId }">${station.name}</option>
                   </c:forEach>
                 </select>
+                <input name="orderId" value="${order.orderId }" hidden="true">
               </div>
           <div>
           		<br />
