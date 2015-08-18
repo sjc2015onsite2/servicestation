@@ -36,7 +36,7 @@ public class CreateCommentsController {
 	@Autowired
 	private Identification identificationService;
 	
-	@RequestMapping(value = "/createstationcomment", method = { RequestMethod.GET })
+	@RequestMapping(value = "/user/createstationcomment", method = { RequestMethod.GET })
 	public ModelAndView createStationComment() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -45,7 +45,7 @@ public class CreateCommentsController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/createstationcomment", method = RequestMethod.POST )
+	@RequestMapping(value = "/user/createstationcomment", method = RequestMethod.POST )
 	public ModelAndView createStationComment(
 			@RequestParam(value = "stationId", required = true) Station station,
 			Authentication auth,

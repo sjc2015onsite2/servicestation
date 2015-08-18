@@ -6,9 +6,24 @@
 
 <div class="col-sm-offset-1 col-sm-10">
 	<table class="table table-striped table-hover table-bordered">
-  		<tr><th>Problem</th><th>Status</th><th>Station</th><th>Mechanic</th><th>price</th><th>Date</th></tr>
+  		<tr>
+  		<th>Problem</th>
+  		<th>Status</th>
+  		<th>Station</th>
+  		<th>Mechanic</th>
+  		<th>price</th>
+  		<th>Date</th>
+  		</tr>
   		<c:forEach var="order" items="${orders}" >
-  			<tr class="warning"><td>${order.problemDescription}</td><td>Working</td><td>StationName</td><td>Mechanic</td><td>price</td><td>date of registration</td></tr>
+  			<c:url value="/user/myorders/${order.key.orderId}" var="myorder" />
+  			<tr class="warning">
+  			<td><a href="${myorder}">${order.key.problemDescription}</a></td>
+  			<td>Working</td>
+  			<td>${order.value.name}</td>
+  			<td>Mechanic</td>
+  			<td>price</td>
+  			<td>date of registration</td>
+  			</tr>
   		</c:forEach>
   	</table>
 </div>

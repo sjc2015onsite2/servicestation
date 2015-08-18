@@ -1,85 +1,126 @@
 <!-- Page for data about order of customer -->
 
-<h4 class="text-center">Order 3</h4>
-	<br />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-    <div class="col-sm-offset-1 col-sm-11">
-    	<div class="col-sm-2">
-        	<p class="text-right"><strong>Station: </strong></p>
-        </div>
-    <div class="col-sm-4">
-    	<p class="text-left"><em>Station 1</em></p>
-    </div>
-    <div class="col-sm-2">
-	    <p class="text-right"><strong>Change station: </strong></p>
-    </div>
-    <div class=" col-sm-3">
-    	<select class="form-control input-sm" >
-        	<option>Station 1</option>
-            <option>Station 2</option>
-            <option>Station 3</option>
-        </select>
-    </div>
-    <button type="button" class="btn btn-warning input-sm">Change</button>
+<div class="col-sm-12">
+	<div class="col-sm-6">
+		<h4 class="text-center">Order ${order.orderId}</h4>
+	</div>
+	<div>
+		<button data-toggle ="modal" data-target="#change-modal" type="button" class="btn btn-warning col-sm-offset-3">Change station</button>
+	</div>
 </div>
+    <div class="col-sm-offset-1 col-sm-10">
+    <br /> 
+    <br />
+    	<div class="col-sm-3">
+        	<p class="text-left"><strong>Station: </strong></p>
+        </div>
+    	<div class="col-sm-9">
+    		<p class="text-left"><em>${station.name}</em></p>
+    	</div>
+	</div>
 
-<div class="col-sm-offset-1 col-sm-11">
-	<div class="col-sm-2">
-    	<p class="text-right"><strong>Mechanic: </strong></p>
+<div class="col-sm-offset-1 col-sm-10">
+	<div class="col-sm-3">
+    	<p class="text-left"><strong>Mechanic: </strong></p>
     </div>
-	<div class="col-sm-4">
+	<div class="col-sm-9">
     	<p class="text-left"><em>Mechanic 1</em></p>
     </div>    
 </div>
 
 
-<div class="col-sm-offset-3 col-sm-6">
-	<br />
-    <p class="text-right col-sm-5"><strong>Description of the problem: </strong></p>
-    <div class="text-left col-sm-7">
-    	<p><em>Dent and blood on the hood.</em></p>
+<div class="col-sm-offset-1 col-sm-10">
+	<br /> 
+	<div class="col-sm-3">
+    	<p class="text-left"><strong>Description of the problem: </strong></p>
     </div>
-    <br />
+    <div class="col-sm-9">
+    	<p class="text-left"><em>${order.problemDescription}</em></p>
+    </div>
 </div>
 
-<div class="col-sm-offset-3 col-sm-6">
-	<p class="text-right col-sm-5"><strong>Status: </strong></p>
-    	<div class="text-left col-sm-7">
-        	<p><em>on the go</em></p>
-      	</div>
-      	<br />
+<div class="col-sm-offset-1 col-sm-10">
+<br /> 
+	<div class="col-sm-3">
+		<p class="text-left"><strong>Status: </strong></p>
+	</div>
+    <div class="col-sm-9">
+        <p class="text-left"><em>...</em></p>
+    </div>
 </div>
       
-<div class="col-sm-offset-3 col-sm-6">
-	<p class="text-right col-sm-5"><strong>Works list: </strong></p>
-    	<div class="text-left col-sm-7">
-        	<p><em>Work 1, work 2, work 3, work 4, work 5, work 6, work 7, work 8, work 9, work 10, work 11, work 12</em></p>
-      	</div>
-     	<br />
-</div>
-
-<div class="col-sm-offset-3 col-sm-6">
-	<p class="text-right col-sm-5"><strong>Cost: </strong></p>
-    <div class="text-left col-sm-7">
-	    <p><em>2.000.000</em> BYR</p>
+<div class="col-sm-offset-1 col-sm-10">
+	<div class="col-sm-3">
+		<p class="text-left"><strong>Works list: </strong></p>
+	</div>
+    <div class="col-sm-9">
+        <p class="text-left"><em>...</em></p>
     </div>
-    <br />
 </div>
 
-<div class="col-sm-offset-3 col-sm-6">
-	<p class="text-right col-sm-5"><strong>Date of readiness: </strong></p>
-    	<div class="text-left col-sm-7">
-        	<p><em>17.08.2015</em></p>
-      	</div>
-      	<br />
-      	<br />
-      	<br />
-</div>
-
-<div class="col-sm-offset-3 col-sm-6">
-	<p class="text-right col-sm-5"><strong>Notification: </strong></p>
-    <div class="text-left col-sm-7">
-    	<p><em>Trulala  </em></p>
+<div class="col-sm-offset-1 col-sm-10">
+	<div class="col-sm-3">
+		<p class="text-left"><strong>Cost: </strong></p>
+	</div>
+    <div class="col-sm-9">
+        <p class="text-left"><em>...</em> BYR</p>
     </div>
-    <br />
+</div>
+
+<div class="col-sm-offset-1 col-sm-10">
+	<div class="col-sm-3">
+		<p class="text-left"><strong>Date of readiness: </strong></p>
+	</div>
+    <div class="col-sm-9">
+        <p class="text-left"><em>...</em></p>
+    </div>
+</div>
+
+<div class="col-sm-offset-1 col-sm-10">
+<br /> 
+<br /> 
+	<div class="col-sm-3">
+		<p class="text-left"><strong>Notification: </strong></p>
+	</div>
+    <div class="col-sm-9">
+        <p class="text-left"><em>...</em></p>
+    </div>
+</div>
+
+<div class="modal fade" id="change-modal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content col-sm-offset-1 col-sm-10">
+      <div class="modal-header">
+        <button class="close" type="button" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Change station</h4>
+      </div>
+
+      <div class="modal-body">
+        <form class="form-horizontal" action="../../user/myorders" method='POST' role="form">
+        	<div class="col-sm-2">
+          		<label class="text-left" >Select stationé:</label>
+          	</div>
+              <div class="col-sm-10">
+                <select name="stationId" multiple class="form-control" >
+                  <c:forEach var="station" items="${stations}">
+                  	<option value="${station.stationId }">${station.name}</option>
+                  </c:forEach>
+                </select>
+                <input name="orderId" value="${order.orderId }" hidden="true">
+              </div>
+          <div>
+          		<br />
+              <button type="submit" class="btn btn-warning btn-sm" >Change</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
 </div>

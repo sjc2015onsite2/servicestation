@@ -26,9 +26,7 @@ import com.expositds.sjc.servicestation.domain.service.Site;
  * 
  * Shows form for mark creating and gets data from it.
  * 
- * @author Sergey Rybakov, Oleg Ryzhko
- * 
- * @see <a href="https://bitbucket.org/sjc2015onsite2/service-station-domain/wiki/RU/Пользовательский%20интерфейс/Пользователь%20сайта/Поставить%20оценку%20СТО">Site user/ Rate service station</a>
+ * @author Sergey Rybakov
  * */
 
 
@@ -44,7 +42,7 @@ public class CreateMarkController {
 	@Autowired
 	private Identification identificationService;
 	
-	@RequestMapping(value = "/createmark", method = { RequestMethod.GET })
+	@RequestMapping(value = "/user/createmark", method = { RequestMethod.GET })
 	public ModelAndView getForm() {
 		
 		Set<Station> stations = authorizedUserSite.getServiceStations();
@@ -55,7 +53,7 @@ public class CreateMarkController {
 		
 	}
 	
-	@RequestMapping(value = "/createmark", method = RequestMethod.POST )
+	@RequestMapping(value = "/user/createmark", method = RequestMethod.POST )
 	public String createMark(
 			@RequestParam(value = "stationId", required = true) Station station,
 			Authentication auth,

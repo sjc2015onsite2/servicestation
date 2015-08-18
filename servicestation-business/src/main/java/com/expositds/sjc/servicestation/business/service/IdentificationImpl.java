@@ -1,5 +1,7 @@
 package com.expositds.sjc.servicestation.business.service;
 
+import java.io.Serializable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,7 +50,9 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
  */
 @Service
 @Transactional
-public class IdentificationImpl implements Identification {
+public class IdentificationImpl implements Identification, Serializable {
+
+	private static final long serialVersionUID = 3213650922607892651L;
 
 	@Autowired
 	private AffilateDao affilateDao;
