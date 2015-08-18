@@ -57,11 +57,9 @@
           	</ul>
               
               	<security:authorize access="hasRole('ROLE_USER')">
-              		<ul class="nav navbar-nav navbar-right">
                 		<form class="navbar-form navbar-right">
-                  			<li><a href="<c:url value="/createorder"/>"><button type="button" class="btn btn-default">Logout</button></a></li>
+                  			<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default">Logout</button></a>
                 		</form>
-              		</ul>
              	</security:authorize>
               
 				<security:authorize access="isAnonymous()">
