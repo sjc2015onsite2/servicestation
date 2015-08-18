@@ -71,9 +71,13 @@ public class CustomerOrdersController {
 		@RequestMapping(value = "/user/myorders", method = RequestMethod.POST)
 		public ModelAndView myorder(
 				@RequestParam(value = "orderId") Order order,
-				@RequestParam(value = "stationId") Station station){
+				@RequestParam(value = "stationId") Station station,
+				Authentication auth){
+			
+			Logginer logginer = identificationService.getLogginerByName(auth.getName());
+			SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
 				
-			   authorizedUserSiteService.changeServiceStation(order, station);
+			   authorizedUserSiteService.changeServiceStation(user, order, station);
 			   
 			   ModelAndView mav = new ModelAndView();
 				mav.setViewName("myOrders");
