@@ -2,6 +2,7 @@ package com.expositds.sjc.servicestation.app;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -66,6 +67,47 @@ public class CreateCommentsController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("stationsComments", stationsComments);
 		mav.setViewName("stationsComments");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/user/createmechaniccomment", method = { RequestMethod.GET })
+	public ModelAndView createMechanicComment() {
+		
+		Set<Station> stations = authorizedUserSite.getServiceStations();
+		Set<Person> mechanics = new HashSet<>();
+		
+		for(Station currentstation : stations) {
+			Set<Person> currentPersons = authorizedUserSite.getServiceStationMechanics(currentstation);
+			mechanics.addAll(currentPersons);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("mechanics", mechanics);
+		mav.setViewName("createMechanicComment");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/user/createmechaniccomment", method = RequestMethod.POST )
+	public ModelAndView createMechanicComment(
+			@RequestParam(value = "mechanicId", required = true) Person mechanic,
+			Authentication auth,
+			@RequestParam(required = true) String comment,
+			@RequestParam String notvisible){
+		
+		boolean visible = true;
+		if(notvisible == "yes"){
+			visible = false;
+		}
+		
+		Logginer logginer = identificationService.getLogginerByName(auth.getName());
+		SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
+		
+		authorizedUserSite.publicMechanicComment(mechanic, authorizedUserSite.createComment(user, comment, visible));
+		
+		Set<Comment> mechanicsComments = authorizedUserSite.getMechanicComments(mechanic);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("mechanicsComments", mechanicsComments);
+		mav.setViewName("mechanicsComments");
 		return mav;
 	}
 }
