@@ -42,8 +42,8 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 	private ModelEntityConverter modelEntityConverterTool;
 	
 	@Override
-	public Set<Order> getMechanicOrders(Affilate affilate, Person mechanic) {
-		return workShopService.getMechanicOrders(affilate, mechanic);
+	public Set<Order> getMechanicOrders(Person mechanic) {
+		return workShopService.getMechanicOrders(mechanic);
 	}
 
 	@Override

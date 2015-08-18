@@ -17,12 +17,11 @@ import com.expositds.sjc.servicestation.domain.model.Service;
 public interface WorkShop {
 	
 	/**
-	 * Метод возвращает список доступных для работы заданному механику заявок в заданном филиале.
+	 * Метод возвращает список доступных для работы заданному механику заявок.
 	 * @param mechanic механик
-	 * @param affilate филиал
 	 * @return список заявок
 	 */
-	public Set<Order> getMechanicOrders(Affilate affilate, Person mechanic);
+	public Set<Order> getMechanicOrders(Person mechanic);
 
 	/**
 	 * Метод возвращает список запчастей с их количеством в заданном филиале.

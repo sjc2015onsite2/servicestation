@@ -1,5 +1,6 @@
 package com.expositds.sjc.servicestation.domain.service;
 
+import java.util.Calendar;
 import java.util.Set;
 
 import com.expositds.sjc.servicestation.domain.model.Affilate;
@@ -26,5 +27,12 @@ public interface StoreKeeper {
 	 * @param newPartOrderStatus новый статус
 	 */
 	public void setPartOrderStatus(PartOrder partOrder, PartOrderStatus newPartOrderStatus);
+	
+	/**
+	 * Метод устанавливает дату поставки запчастей из PartOrder.
+	 * @param partOrder заявка на запчасти
+	 * @param date дата предпологаемой поставки
+	 */
+	public void setPartOrderCompleteDate(PartOrder partOrder, Calendar date);
 
 }
