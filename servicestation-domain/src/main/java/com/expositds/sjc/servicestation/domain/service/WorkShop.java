@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.Set;
 
 import com.expositds.sjc.servicestation.domain.model.Affilate;
-import com.expositds.sjc.servicestation.domain.model.ClientNotification;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.model.Person;
@@ -47,13 +46,6 @@ public interface WorkShop {
 	 */
 	public void giveOrder(Affilate affilate, Person mechanic, Order order);
 
-	/**
-	 * Метод в заданной заявке создаёт заданное сообщение клиент.
-	 * @param order заявка
-	 * @param notification сообщение 
-	 */
-	public void createClientNotification(Order order, ClientNotification notification);
-	
 	/**
 	 * Метод создаёт заявку на запчати с указанным списком запчастей, у указанным механиком.
 	 * @param mechanic механик

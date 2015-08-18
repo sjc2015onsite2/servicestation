@@ -16,7 +16,7 @@ import com.expositds.sjc.servicestation.business.repository.entity.MechanicProfi
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationProfileEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelObjectConverter;
+import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Comment;
 import com.expositds.sjc.servicestation.domain.model.Mark;
 import com.expositds.sjc.servicestation.domain.model.Person;
@@ -44,7 +44,7 @@ public abstract class SiteUserImpl implements UserSite {
 	private ServiceStation serviceStationService;
 	
 	@Autowired
-	private BasicEntityModelObjectConverter entityModelObjectConverter;
+	private BasicEntityModelConverter entityModelObjectConverter;
 	
 	@Override
 	public Set<Comment> getMechanicComments(Person mechanic) {

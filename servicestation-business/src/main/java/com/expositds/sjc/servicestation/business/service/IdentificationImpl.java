@@ -5,12 +5,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
+import com.expositds.sjc.servicestation.business.repository.dao.ClientNotificationDao;
 import com.expositds.sjc.servicestation.business.repository.dao.CommentDao;
 import com.expositds.sjc.servicestation.business.repository.dao.LogginerDao;
 import com.expositds.sjc.servicestation.business.repository.dao.MarkDao;
 import com.expositds.sjc.servicestation.business.repository.dao.MechanicProfileDao;
 import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PartDao;
+import com.expositds.sjc.servicestation.business.repository.dao.PartOrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PersonDao;
 import com.expositds.sjc.servicestation.business.repository.dao.SiteAggregatorDao;
 import com.expositds.sjc.servicestation.business.repository.dao.SiteUserDao;
@@ -20,7 +22,7 @@ import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntit
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.SiteAggregatorEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelObjectConverter;
+import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.AffilateProfile;
 import com.expositds.sjc.servicestation.domain.model.ClientNotification;
@@ -83,7 +85,13 @@ public class IdentificationImpl implements Identification {
 	private MechanicProfileDao mechanicProfileDao;
 	
 	@Autowired
-	private BasicEntityModelObjectConverter basicEntityModelObjectConverter;
+	private PartOrderDao partOrderDao;
+	
+	@Autowired
+	private ClientNotificationDao clientNotificationDao;
+	
+	@Autowired
+	private BasicEntityModelConverter basicEntityModelObjectConverter;
 		
 	@Override
 	public Affilate getAffilateById(String id) {
@@ -98,8 +106,7 @@ public class IdentificationImpl implements Identification {
 
 	@Override
 	public ClientNotification getClientNotificationById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (ClientNotification) basicEntityModelObjectConverter.convert(clientNotificationDao.findById(new Long(id)), ClientNotification.class);
 	}
 
 	@Override
@@ -129,8 +136,7 @@ public class IdentificationImpl implements Identification {
 
 	@Override
 	public PartOrder getPartOrderById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (PartOrder) basicEntityModelObjectConverter.convert(partOrderDao.findById(new Long(id)), PartOrder.class);
 	}
 
 	@Override

@@ -23,7 +23,7 @@ import com.expositds.sjc.servicestation.business.repository.entity.SiteAggregato
 import com.expositds.sjc.servicestation.business.repository.entity.SiteUserEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationProfileEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelObjectConverter;
+import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Comment;
 import com.expositds.sjc.servicestation.domain.model.Mark;
 import com.expositds.sjc.servicestation.domain.model.Order;
@@ -68,7 +68,7 @@ public class SiteImpl implements Site {
 	private MechanicProfileDao mechanicProfileDao;
 	
 	@Autowired
-	private BasicEntityModelObjectConverter basicEntityModelObjectConverter;
+	private BasicEntityModelConverter basicEntityModelObjectConverter;
 
 	@Override
 	public Order createOrder(String problemDescription, Station serviceStation) {

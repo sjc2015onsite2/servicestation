@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
+import com.expositds.sjc.servicestation.business.repository.dao.ClientNotificationDao;
 import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
+import com.expositds.sjc.servicestation.business.repository.entity.ClientNotificationEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
@@ -28,6 +30,9 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 	
 	@Autowired
 	private OrderDao orderDao;
+	
+	@Autowired
+	private ClientNotificationDao clientNotificationDao;
 	
 	@Autowired
 	private WorkShop workShopService;
@@ -68,14 +73,18 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 
 	@Override
 	public void createClientNotification(Order order, String notification) {
-		// TODO Auto-generated method stub
-
+		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		ClientNotificationEntity clientNotificationEntity = new ClientNotificationEntity(notification);
+		orderEntity.setNotification(clientNotificationEntity);
+		
+		clientNotificationDao.save(clientNotificationEntity);
+		orderDao.update(orderEntity);
 	}
 
 	@Override
 	public void addPartsToOrder(Order order, Map<Part, Integer> parts) {
-		// TODO Auto-generated method stub
-
+		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		
 	}
 
 	@Override

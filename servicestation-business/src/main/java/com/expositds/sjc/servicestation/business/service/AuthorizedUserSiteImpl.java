@@ -12,7 +12,7 @@ import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.SiteUserEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelObjectConverter;
+import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Comment;
 import com.expositds.sjc.servicestation.domain.model.Mark;
 import com.expositds.sjc.servicestation.domain.model.Order;
@@ -46,7 +46,7 @@ public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUs
 	private Site siteService;
 	
 	@Autowired
-	private BasicEntityModelObjectConverter basicEntityModelObjectConverterTool;
+	private BasicEntityModelConverter basicEntityModelObjectConverterTool;
 	
 	@Override
 	public Map<Order, Station> getOrders(SiteUser user) {

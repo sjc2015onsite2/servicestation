@@ -13,7 +13,7 @@ import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntit
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelObjectConverter;
+import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.LogginerRole;
 import com.expositds.sjc.servicestation.domain.model.Order;
@@ -40,7 +40,7 @@ public class ServiceStationImpl implements ServiceStation{
 	private StationAffilate stationAffilateService;
 	
 	@Autowired
-	private BasicEntityModelObjectConverter basicEntityModelObjectConverter;
+	private BasicEntityModelConverter basicEntityModelObjectConverter;
 	
 	@Override
 	public Order createOrder(Station serviceStation, PreOrder preOrder) {

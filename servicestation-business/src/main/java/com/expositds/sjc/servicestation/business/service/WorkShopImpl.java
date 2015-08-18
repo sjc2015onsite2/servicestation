@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PartDao;
+import com.expositds.sjc.servicestation.business.repository.dao.PartOrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PersonDao;
 import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
@@ -19,9 +20,8 @@ import com.expositds.sjc.servicestation.business.repository.entity.PartOrderEnti
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.ServiceEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelObjectConverter;
+import com.expositds.sjc.servicestation.business.repository.tools.BasicEntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
-import com.expositds.sjc.servicestation.domain.model.ClientNotification;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.model.Person;
@@ -49,10 +49,13 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 	private PartDao partDao;
 	
 	@Autowired
+	private PartOrderDao partOrderDao;
+	
+	@Autowired
 	private Identification identificationService;
 	
 	@Autowired
-	private BasicEntityModelObjectConverter basicEntityModelObjectConverter;
+	private BasicEntityModelConverter basicEntityModelObjectConverter;
 
 	@Override
 	public Set<Order> getMechanicOrders(Affilate affilate, Person mechanic) {
@@ -114,12 +117,6 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 	}
 
 	@Override
-	public void createClientNotification(Order order, ClientNotification notification) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void createPartOrder(Person mechanic, Map<Part, Integer> parts) {
 		Affilate affilate = identificationService.getAffilateByMechanic(mechanic);
 		AffilateEntity affilateEntity = affilateDao.findById(affilate.getAffilateId());
@@ -127,12 +124,14 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 		PartOrderEntity partOrderEntity = new PartOrderEntity();
 		
 		for (Part currentPart : parts.keySet()) {
-			PartEntity currentPartEntuty = partDao.findById(currentPart.getPartId());
-			partOrderEntity.getParts().put(currentPartEntuty, parts.get(currentPart));
+			PartEntity currentPartEntity = partDao.findById(currentPart.getPartId());
+			partOrderEntity.getParts().put(currentPartEntity, parts.get(currentPart));
 		}
 		
 		affilateEntity.getPartOrders().put(partOrderEntity, mechanicEntity);
 		
+		partOrderDao.save(partOrderEntity);
+		affilateDao.update(affilateEntity);
 	}
 
 }
