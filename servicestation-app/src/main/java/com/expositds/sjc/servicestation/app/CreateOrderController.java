@@ -67,17 +67,21 @@ public class CreateOrderController {
 	}
 	
 	@RequestMapping(value = "/createorder/user", method = RequestMethod.POST)
-	public String createOrder(
+	public ModelAndView createOrder(
 			@RequestParam(value = "stationId", required = true) Station station,
 			@RequestParam(required = true) String problem,
 			Authentication auth){
 		
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
 		SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
-		
+
 		authorizedUserSite.createOrder(user, problem, station);
+		Map<Order, Station> orders = authorizedUserSite.getOrders(user);
 		
-		return "redirect:/createorder";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("orders", orders);
+		mav.setViewName("myOrders");
+		return mav;
 	}
 	
 	

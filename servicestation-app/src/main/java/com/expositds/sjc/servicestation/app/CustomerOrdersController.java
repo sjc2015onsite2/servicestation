@@ -80,7 +80,8 @@ public class CustomerOrdersController {
 			   authorizedUserSiteService.changeServiceStation(user, order, station);
 			   
 			   ModelAndView mav = new ModelAndView();
-				mav.setViewName("myOrders");
+			   Long id = order.getOrderId();
+				mav.setViewName("redirect:/user/myorders/"+id);
 			
 			return mav;
 		}
