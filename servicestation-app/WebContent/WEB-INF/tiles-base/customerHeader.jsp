@@ -25,9 +25,9 @@
        	    		<li data-toggle ="modal" data-target="#authorization-modal" class="dropdown">
    	        	    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Create comment <b class="caret"></b></a>
                    		<ul class="dropdown-menu">
-                   			<li><a href="<c:url value="/createstationcomment" />" >Create comment about Station</a></li>
+                   			<li><a href="<c:url value="/user/createstationcomment" />" >Create comment about Station</a></li>
                         	<li class="divider"></li>
-                	    	<li><a href="<c:url value="/createmechaniccomment" />" >Create comment about Mechanic</a></li>
+                	    	<li><a href="<c:url value="/user/createmechaniccomment" />" >Create comment about Mechanic</a></li>
                    		</ul>
                 	</li>
            		</security:authorize>
@@ -36,23 +36,23 @@
  		       		<li class="dropdown">
                	    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Create comment <b class="caret"></b></a>
                    		<ul class="dropdown-menu">
-            	        	<li><a href="<c:url value="/createstationcomment" />" >Create comment about Station</a></li>
+            	        	<li><a href="<c:url value="/user/createstationcomment" />" >Create comment about Station</a></li>
                         	<li class="divider"></li>
-              	        	<li><a href="<c:url value="/createmechaniccomment" />" >Create comment about Mechanic</a></li>
+              	        	<li><a href="<c:url value="/user/createmechaniccomment" />" >Create comment about Mechanic</a></li>
                     	</ul>
                 	</li>
            		</security:authorize>
            
            		<security:authorize access="isAnonymous()">
-           			<li data-toggle ="modal" data-target="#authorization-modal"><a href="<c:url value="/createmark" />" >Create mark</a></li>
+           			<li data-toggle ="modal" data-target="#authorization-modal"><a href="<c:url value="/user/createmark" />" >Create mark</a></li>
            		</security:authorize>
           	
      	  		<security:authorize access="hasRole('ROLE_USER')">
-          			<li><a href="<c:url value="/createmark" />" >Create mark</a></li>
+          			<li><a href="<c:url value="/user/createmark" />" >Create mark</a></li>
            		</security:authorize>
             	
            		<security:authorize access="hasRole('ROLE_USER')">
-           			<li><a href="<c:url value="/myorders" />" >My orders</a></li>
+           			<li><a href="<c:url value="/user/myorders" />" >My orders</a></li>
            		</security:authorize>
           	</ul>
               
@@ -65,7 +65,6 @@
 				<security:authorize access="isAnonymous()">
             		<form class="navbar-form navbar-right"> 
               			<button name="submit" type="submit" class="btn btn-success" data-toggle ="modal" data-target="#authorization-modal">Sign in</button>
-              			<button name="submit" type="submit" class="btn btn-warning" data-toggle ="modal" data-target="#registration-modal">Sign up</button>
               		</form>
            		</security:authorize>
            
@@ -91,41 +90,6 @@
           </div>
           <div class="col-sm-offset-8 col-sm-10">
               <button type="submit" class="btn btn-success" >Sing in</button>
-          </div>
-        </form>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="registration-modal">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content col-sm-offset-4 col-sm-6">
-      <div class="modal-header">
-        <button class="close" type="button" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Registration</h4>
-      </div>
-
-      <div class="modal-body">
-        <form class="form-horizontal" role="form">
-          <div class="form-group has-feedback  ">
-                <input type="email" type="text" class="form-control" placeholder="Enter yuor email">
-          </div>
-          <div class="form-group has-feedback  ">
-                <input type="text" class="form-control" placeholder="Enter your phone namber">
-          </div>
-          <div class="form-group has-feedback">
-                <input type="password" class="form-control" name="password" placeholder="Enter new password">
-          </div>
-          <div class="form-group has-feedback">
-                <input type="password" class="form-control" name="password" placeholder="Repeat password">
-          </div>
-          <div class="col-sm-offset-8 col-sm-10">
-              <button type="submit" class="btn btn-success" >Sing up</button>
           </div>
         </form>
       </div>

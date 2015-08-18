@@ -35,21 +35,35 @@ public class CustomerOrdersController {
 	@Autowired
 	private Identification identificationService;
 	
-		@RequestMapping(value = "/myorders", method = { RequestMethod.GET })
+		@RequestMapping(value = "/user/myorders", method = { RequestMethod.GET })
 		public ModelAndView myorders(Authentication auth) {
 			
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
 			SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
 			
-			Map<Order, Station> orders = authorizedUserSiteService.getOrders(user);
-			Set<Order> order = orders.keySet();
+			Map<Order, Station> orders = authorizedUserSiteService.getOrders(user);			
 			
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("orders", order);
+			mav.addObject("orders", orders);
 			mav.setViewName("myOrders");
 			return mav;
 		}
 	
-	
+		@RequestMapping(value = "user/myorders/{orderId}", method = RequestMethod.GET)
+		public ModelAndView myorder(
+				
+				@PathVariable("orderId") Order order) {
+			
+			Set<Station> stations = authorizedUserSiteService.getServiceStations();
+			
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("order", order);
+			mav.addObject("stations", stations);
+			mav.setViewName("customer.order.data");
+			
+			return mav;
+		}
+		
+		//@RequestMapping(value = "user/myorders.{oredrId}", method = RequestMethod.POST)
 	
 }
