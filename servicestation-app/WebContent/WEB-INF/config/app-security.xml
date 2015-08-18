@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<global-method-security pre-post-annotations="enabled" />
+
+	<http use-expressions="true">
+	
+	<intercept-url pattern="/mechanic/**" access="hasRole('MECHANIC')"/>
+
+
+		<form-login default-target-url="/myorders"
+					authentication-failure-url="/login/failure" 
+					username-parameter="username"
+					password-parameter="password" />
+
+		<logout invalidate-session="true" 
+				logout-success-url="/"
+				logout-url="/j_spring_security_logout" 
+				/>
+				
+
+		<access-denied-handler error-page="/access-denied" />
+		
+		<session-management invalid-session-url="/">
+			<concurrency-control max-sessions="1"
+								 expired-url="/" />
+		</session-management>
+		
+	</http>
+
+	<beans:bean id="userDetailsService" class="com.expositds.sjc.servicestation.app.security.LogginerDetailsProvider"></beans:bean>
+
+	<authentication-manager>
+		
+		<authentication-provider user-service-ref="userDetailsService">
+			<!-- password-encoder hash="bcrypt" / -->
+		</authentication-provider>
+	
+	</authentication-manager>
+
+	<!-- authentication-manager id="in-memory-auth">
+		<authentication-provider>
+			<user-service>
+				<user name="admin" password="tooweak" authorities="ADMIN" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager-->
+
+</beans:beans>
