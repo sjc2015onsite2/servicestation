@@ -78,8 +78,16 @@ public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUs
 	}
 
 	@Override
-	public void changeServiceStation(Order order, Station newServiceStation) {
+	public void changeServiceStation(SiteUser user, Order order, Station newServiceStation) {
 		siteService.changeServiceStation(order, newServiceStation);
+		
+		SiteUserEntity siteUserEntity = siteUserDao.findById(user.getId());
+		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		StationEntity newStationEntity = stationDao.findById(newServiceStation.getStationId());
+		
+		siteUserEntity.getOrders().put(orderEntity, newStationEntity);
+		
+		siteUserDao.update(siteUserEntity);
 	}
 
 	@Override

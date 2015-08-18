@@ -6,7 +6,10 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
+import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
+import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
@@ -14,6 +17,7 @@ import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.HeadOffice;
+import com.expositds.sjc.servicestation.domain.service.Identification;
 
 /**
  * @author Alexey Suslov
@@ -26,11 +30,28 @@ public class HeadOfficeImpl implements HeadOffice {
 	private StationDao stationDao;
 	
 	@Autowired
+	private AffilateDao affilateDao;
+	
+	@Autowired
+	private OrderDao orderDao;
+	
+	@Autowired
 	private EntityModelConverter entityModelConverterTool;
+	
+	@Autowired
+	private Identification identificationService;
 
 	@Override
-	public void giveOrder(Station serviceStation, Affilate affilate, Order order) {
-		// TODO Auto-generated method stub
+	public void giveOrder(Affilate affilate, Order order) {
+		Station station = identificationService.getStationByAffilate(affilate);
+		
+		StationEntity stationEntity = stationDao.findById(station.getStationId());
+		AffilateEntity affilateEntity = affilateDao.findById(affilate.getAffilateId());
+		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		
+		stationEntity.getOrders().put(orderEntity, affilateEntity);
+		
+		stationDao.update(stationEntity);
 
 	}
 

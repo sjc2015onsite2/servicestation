@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
+import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PartOrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PersonDao;
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
@@ -45,6 +46,9 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 	private PartOrderDao partOrderDao;
 	
 	@Autowired
+	private OrderDao orderDao;
+	
+	@Autowired
 	private Identification identificationService;
 	
 	@Autowired
@@ -57,7 +61,8 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 	private ModelEntityConverter modelEntityConverter;
 
 	@Override
-	public Set<Order> getMechanicOrders(Affilate affilate, Person mechanic) {
+	public Set<Order> getMechanicOrders(Person mechanic) {
+		Affilate affilate = identificationService.getAffilateByMechanic(mechanic);
 		AffilateEntity affilateEntity = affilateDao.findById(affilate.getAffilateId());
 		PersonEntity mechanicEntity = personDao.findById(mechanic.getId());
 		
@@ -107,7 +112,17 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 
 	@Override
 	public void giveOrder(Person mechanic, Order order) {
-		// TODO Auto-generated method stub
+		Affilate affilate = identificationService.getAffilateByMechanic(mechanic);
+		
+		AffilateEntity affilateEntity = affilateDao.findById(affilate.getAffilateId());
+		PersonEntity mechanicEntity = personDao.findById(mechanic.getId());
+		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		
+		affilateEntity.getOrders().put(orderEntity, mechanicEntity);
+		
+		headOfficeService.giveOrder(affilate, order);
+		
+		affilateDao.update(affilateEntity);
 
 	}
 

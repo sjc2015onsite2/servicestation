@@ -14,12 +14,11 @@ import com.expositds.sjc.servicestation.domain.model.Station;
 public interface HeadOffice {
 	
 	/**
-	 * Метод передаёт заданную заявку заданной СТО заданному филиалу
-	 * @param serviceStation СТО
+	 * Метод передаёт заданную заявку заданному филиалу
 	 * @param affilate филиал
 	 * @param order заявка
 	 */
-	public void giveOrder(Station serviceStation, Affilate affilate, Order order);
+	public void giveOrder(Affilate affilate, Order order);
 
 	/**
 	 * Метод возвращает список новых (не распределённых между филиалами) заявок заданной СТО
