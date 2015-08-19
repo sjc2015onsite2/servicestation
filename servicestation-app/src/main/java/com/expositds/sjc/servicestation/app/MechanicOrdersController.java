@@ -10,27 +10,23 @@ import com.expositds.sjc.servicestation.domain.model.Station;
 
 /**
 * <b>MechanicOrdersController</b>
-* Shows list of orders that belongs to mechanic. Also displays list of free orders.
 * 
-* @author Sergey Rybakov, Oleg Ryzhko
+* @author Sergey Rybakov
 * 
-* @see <a href="https://bitbucket.org/sjc2015onsite2/service-station-domain/wiki/RU/Пользовательский%20интерфейс/Механик/Все%20заявки">Mechanic / Free orders</a>
-* @see <a href="https://bitbucket.org/sjc2015onsite2/service-station-domain/wiki/RU/Пользовательский%20интерфейс/Механик/Мои%20заявки">Mechanic / My orders</a>
 * */
 
-// FIXME: Mechanic service not implemented!!! Change mapping in header!
 @Controller
-@RequestMapping("/{stationId}/mechanic")
+@RequestMapping("/mechanic")
 public class MechanicOrdersController {
 	
-	@RequestMapping(value = "/myorders", method = { RequestMethod.GET })
-	public String showOrdersOfMechanic(@PathVariable("stationId") Station station) {
+	@RequestMapping(value = "/myorders", method = RequestMethod.GET)
+	public String showOrdersOfMechanic() {
 		
 	return "mechanic.orders";
 	}
 	
-	@RequestMapping(value = "/freeorders", method = { RequestMethod.GET})
-	public String showFreeOrders(@PathVariable("stationId") Station station){
+	@RequestMapping(value = "/freeorders", method = RequestMethod.GET)
+	public String showFreeOrders(){
 		
 	return "free.orders";
 	}

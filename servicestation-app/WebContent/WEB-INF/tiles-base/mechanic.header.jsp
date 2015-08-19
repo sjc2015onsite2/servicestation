@@ -16,16 +16,14 @@
 
     	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       		<ul class="nav navbar-nav">
-                <li><a href="<c:url value="/stationId/mechanic/freeorders" />" >Free orders</a></li>
-                <li><a href="<c:url value="/stationId/mechanic/myorders" />" >My orders</a></li>
+                <li><a href="<c:url value="/mechanic/freeorders" />" >Free orders</a></li>
+                <li><a href="<c:url value="/mechanic/myorders" />" >My orders</a></li>
                 <li><a href="<c:url value="/stationId/mechanic/sparepartslist" />" >Spare parts list</a></li>
                 <li><a href="<c:url value="/stationId/mechanic/notificationslog" />" >Notification log</a></li>
       		</ul>
-      		<ul class="nav navbar-nav navbar-right">
                 <form class="navbar-form navbar-right">
-                	<li><button type="button" class="btn btn-default">Logout</button></li>
+                	<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default">Logout</button></a>
                 </form>
-            </ul>
     	</div>
 
   	</div>
