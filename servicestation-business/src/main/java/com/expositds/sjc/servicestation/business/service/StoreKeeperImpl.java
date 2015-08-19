@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.expositds.sjc.servicestation.business.repository.dao.PartOrderDao;
 import com.expositds.sjc.servicestation.business.repository.entity.PartOrderEntity;
@@ -17,6 +18,7 @@ import com.expositds.sjc.servicestation.domain.service.StoreKeeper;
  * @author Alexey Suslov
  *
  */
+@Transactional
 public abstract class StoreKeeperImpl implements StoreKeeper {
 
 	@Autowired
