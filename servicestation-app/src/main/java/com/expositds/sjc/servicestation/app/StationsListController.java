@@ -1,9 +1,13 @@
 package com.expositds.sjc.servicestation.app;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,7 +58,16 @@ public class StationsListController {
 		
 		Set<Comment> stationsComments = nonAuthorizedUserSite.getServiceStationComments(station);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("stationsComments", stationsComments);
+		
+		Map<Comment,String> comments = new HashMap<>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		for(Comment currentcomment : stationsComments){
+			
+			comments.put(currentcomment, dateFormat.format(currentcomment.getDate().getTime()));
+		}
+		
+		mav.addObject("comments", comments);
 		mav.setViewName("stationsComments");
 		return mav;
 	}

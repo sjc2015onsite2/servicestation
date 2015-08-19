@@ -66,7 +66,8 @@ public class CreateCommentsController {
 		Set<Comment> stationsComments = authorizedUserSite.getServiceStationComments(station);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("stationsComments", stationsComments);
-		mav.setViewName("stationsComments");
+		Long id = station.getStationId();
+		mav.setViewName("redirect:/stationscomments/" + id);
 		return mav;
 	}
 	
@@ -107,7 +108,8 @@ public class CreateCommentsController {
 		Set<Comment> mechanicsComments = authorizedUserSite.getMechanicComments(mechanic);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("mechanicsComments", mechanicsComments);
-		mav.setViewName("mechanicsComments");
+		Long id = mechanic.getId();
+		mav.setViewName("redirect:/mechanicscomments/" + id);
 		return mav;
 	}
 }
