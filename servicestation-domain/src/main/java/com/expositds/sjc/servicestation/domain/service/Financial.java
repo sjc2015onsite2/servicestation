@@ -1,6 +1,7 @@
 package com.expositds.sjc.servicestation.domain.service;
 
 import java.util.Calendar;
+import java.util.Map;
 
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Person;
@@ -15,17 +16,15 @@ public interface Financial extends Reportable {
 	/**
 	 * Устанавливает арендную плату заданому филиалу в заданую дату. Устанавливается дневная арендная плата.
 	 * @param affilate филиал
-	 * @param date интервал
 	 * @param rentValue величина арендной платы в день
 	 */
-	public void setAffilateRent(Affilate affilate, Calendar date, int rentValue);
+	public void setAffilateRent(Affilate affilate, Map<Calendar, Integer> rentValue);
 
 	/**
 	 * Устанавливает заработную плату заданому сотруднику в заданную дату. Устанавливается дневная заработная плата.
 	 * @param employee сотрудник
-	 * @param date интервал
 	 * @param salaryValue величина зароботной платы в день
 	 */
-	public void setSalary(Person employee, Calendar date, int salaryValue);
+	public void setSalary(Person employee, Map<Calendar, Integer> salaryValue);
 
 }

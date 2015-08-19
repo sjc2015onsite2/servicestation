@@ -71,8 +71,10 @@ public interface Reportable {
 	/**
 	 * Метод возвращает все заявки заданного СТО.
 	 * @param serviceStation СТО
-	 * @return список заявок
+	 * @param startDate начальная дата
+	 * @param endDate конечная дата
+   	 * @return список заявок
 	 */
-	public Set<Order> getServiceStationOrders(Station serviceStation);
+	public Set<Order> getServiceStationOrders(Station serviceStation, Calendar startDate, Calendar endDate);
 
 }
