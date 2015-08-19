@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
+import com.expositds.sjc.servicestation.business.repository.dao.AffilateProfileDao;
 import com.expositds.sjc.servicestation.business.repository.dao.ClientNotificationDao;
 import com.expositds.sjc.servicestation.business.repository.dao.CommentDao;
 import com.expositds.sjc.servicestation.business.repository.dao.LogginerDao;
@@ -100,6 +101,9 @@ public class IdentificationImpl implements Identification, Serializable {
 	private ServiceDao serviceDao;
 	
 	@Autowired
+	private AffilateProfileDao affilateProfileDao;
+	
+	@Autowired
 	private EntityModelConverter entityModelConverterTool;
 		
 	@Override
@@ -109,8 +113,7 @@ public class IdentificationImpl implements Identification, Serializable {
 
 	@Override
 	public AffilateProfile getAffilateProfileById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (AffilateProfile) entityModelConverterTool.convert(affilateProfileDao.findById(new Long(id)), AffilateProfile.class);
 	}
 
 	@Override

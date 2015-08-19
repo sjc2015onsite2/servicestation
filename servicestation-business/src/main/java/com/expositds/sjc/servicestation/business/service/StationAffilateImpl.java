@@ -1,5 +1,6 @@
 package com.expositds.sjc.servicestation.business.service;
 
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
+import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.service.StationAffilate;
 
@@ -31,7 +33,7 @@ public class StationAffilateImpl implements StationAffilate {
 	private OrderDao orderDao;
 	
 	@Autowired
-	private EntityModelConverter entityModelConverterTool;
+	private EntityModelConverter entityModelConverter;
 
 	@Override
 	public void deleteOrder(Affilate affilate, Order order) {
@@ -51,10 +53,39 @@ public class StationAffilateImpl implements StationAffilate {
 		
 		Set<Person> mechanics = new HashSet<>();
 		for (PersonEntity currentMechanicEntity : mechanicsEntity) {
-			mechanics.add((Person) entityModelConverterTool.convert(currentMechanicEntity, Person.class));
+			mechanics.add((Person) entityModelConverter.convert(currentMechanicEntity, Person.class));
 		}
 		
 		return mechanics;
+	}
+
+	@Override
+	public Set<Order> getAffiliateOrders(Affilate affiliate, Calendar startDate, Calendar endDate) {
+		AffilateEntity affilateEntity = affilateDao.findById(affiliate.getAffilateId());
+		
+		Set<Order> orders = new HashSet<>();
+		
+		for (OrderEntity currentOrderEntity : affilateEntity.getOrders().keySet())
+			if (currentOrderEntity.getCompleteDate().compareTo(startDate) >= 0 &&
+					currentOrderEntity.getCompleteDate().compareTo(endDate) <= 0)
+				orders.add((Order) entityModelConverter.convert(currentOrderEntity, Order.class));
+		
+		return orders;
+	}
+
+	@Override
+	public Set<Order> getAffiliateReadyOrders(Affilate affiliate, Calendar startDate, Calendar endDate) {
+		AffilateEntity affilateEntity = affilateDao.findById(affiliate.getAffilateId());
+		
+		Set<Order> orders = new HashSet<>();
+		
+		for (OrderEntity currentOrderEntity : affilateEntity.getOrders().keySet())
+			if (currentOrderEntity.getStatus().equals(OrderStatus.READY) &&
+					currentOrderEntity.getCompleteDate().compareTo(startDate) >= 0 &&
+					currentOrderEntity.getCompleteDate().compareTo(endDate) <= 0)
+				orders.add((Order) entityModelConverter.convert(currentOrderEntity, Order.class));
+		
+		return orders;
 	}
 
 }
