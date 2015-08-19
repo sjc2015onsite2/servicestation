@@ -80,7 +80,7 @@ public class CreateOrderController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("orders", orders);
-		mav.setViewName("myOrders");
+		mav.setViewName("redirect:/user/myorders/");
 		return mav;
 	}
 	
