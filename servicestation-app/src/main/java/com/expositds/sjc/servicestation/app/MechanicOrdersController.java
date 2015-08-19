@@ -11,10 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;
+import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
@@ -53,6 +55,15 @@ public class MechanicOrdersController {
 	return mav;
 	}
 	
+	@RequestMapping(value = "/myorders", method = RequestMethod.POST)
+	public ModelAndView pickUp(@RequestParam Order order) {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("order", order);
+		mav.setViewName("change.order.data");
+	return mav;
+	}
+	
 	@RequestMapping(value = "/freeorders", method = RequestMethod.GET)
 	public ModelAndView showFreeOrders(Authentication auth){
 		
@@ -72,5 +83,15 @@ public class MechanicOrdersController {
 		mav.addObject("orders", orders);
 		mav.setViewName("free.orders");
 	return mav;
+	}
+	
+	@RequestMapping(value = "/freeorders/{orderId}", method = RequestMethod.GET)
+	public ModelAndView freeOrder(@PathVariable("orderId") Order order){
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("order", order);
+		mav.setViewName("change.order.data");
+		return mav;
 	}
 }

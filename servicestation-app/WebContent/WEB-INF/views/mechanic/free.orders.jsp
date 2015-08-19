@@ -11,9 +11,10 @@
     	<th width="20%">Date</th>
     	</tr>
     	<c:forEach var="order" items="${orders}" >
+    	<c:url value="/mechanic/freeorders/${order.key.orderId}" var="freeorders" />
         <tr class="warning">
         <td>${order.key.orderId}</td>
-        <td><a href="#">${order.key.problemDescription}</a></td>
+        <td><a href="${freeorders}">${order.key.problemDescription}</a></td>
         <td>${order.key.status}</td>
         <td>${order.value}</td>
         </tr>
