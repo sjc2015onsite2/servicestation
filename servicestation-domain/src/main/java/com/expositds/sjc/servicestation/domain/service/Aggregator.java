@@ -24,10 +24,10 @@ public interface Aggregator {
 
 	/**
 	 * Метод возвращает список механиков заданного СТО с персональным списком всех коментариев механиков.
-	 * @param seviceStation СТО
+	 * @param serviceStation СТО
 	 * @return список механиков заданного СТО с персональным списком всех коментариев механиков
 	 */
-	public Map<Person, Set<Comment>> getMechanicsAllComments(Station seviceStation);
+	public Map<Person, Set<Comment>> getMechanicsAllComments(Station serviceStation);
 
 	/**
 	 * Метод возвращает список оценок заданного СТО.

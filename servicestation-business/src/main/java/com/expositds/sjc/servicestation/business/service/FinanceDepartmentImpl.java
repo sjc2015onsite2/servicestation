@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
+import com.expositds.sjc.servicestation.business.repository.dao.PersonDao;
 import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateProfileEntity;
@@ -38,6 +39,9 @@ public class FinanceDepartmentImpl implements FinanceDepartment {
 	
 	@Autowired
 	private AffilateDao affilateDao;
+	
+	@Autowired
+	private PersonDao personDao;
 	
 	@Autowired
 	private StationAffilate stationAffilate;
@@ -122,8 +126,16 @@ public class FinanceDepartmentImpl implements FinanceDepartment {
 
 	@Override
 	public Map<Calendar, Integer> getEmployeeSalary(Person employee, Calendar startDate, Calendar endDate) {
-		// TODO Auto-generated method stub
-		return null;
+		PersonEntity employeeEntity = personDao.findById(employee.getId());
+		
+		Map<Calendar, Integer> salary = new TreeMap<>();
+		
+		for (Calendar currentDate : employeeEntity.getSalary().keySet())
+			if (currentDate.compareTo(startDate) >= 0 &&
+					currentDate.compareTo(endDate) <= 0)
+				salary.put(currentDate, employeeEntity.getSalary().get(currentDate));
+		
+		return salary;
 	}
 
 }
