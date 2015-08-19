@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.24, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.24, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: servicestation
+-- Host: localhost    Database: servicestation
 -- ------------------------------------------------------
--- Server version	5.6.25-log
+-- Server version	5.6.26-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -87,7 +87,7 @@ CREATE TABLE `affilate_has_persons` (
 
 LOCK TABLES `affilate_has_persons` WRITE;
 /*!40000 ALTER TABLE `affilate_has_persons` DISABLE KEYS */;
-INSERT INTO `affilate_has_persons` VALUES (2,1);
+INSERT INTO `affilate_has_persons` VALUES (2,1),(3,4);
 /*!40000 ALTER TABLE `affilate_has_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,7 +177,7 @@ CREATE TABLE `affilate_profiles` (
   `affilate_profile_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`affilate_profile_id`),
   UNIQUE KEY `affilate_profile_id_UNIQUE` (`affilate_profile_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +186,7 @@ CREATE TABLE `affilate_profiles` (
 
 LOCK TABLES `affilate_profiles` WRITE;
 /*!40000 ALTER TABLE `affilate_profiles` DISABLE KEYS */;
-INSERT INTO `affilate_profiles` VALUES (2);
+INSERT INTO `affilate_profiles` VALUES (2),(3);
 /*!40000 ALTER TABLE `affilate_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,7 +202,7 @@ CREATE TABLE `affilates` (
   `person_affilate_id` varchar(45) NOT NULL,
   PRIMARY KEY (`affilate_id`),
   UNIQUE KEY `affilate_id_UNIQUE` (`affilate_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +211,7 @@ CREATE TABLE `affilates` (
 
 LOCK TABLES `affilates` WRITE;
 /*!40000 ALTER TABLE `affilates` DISABLE KEYS */;
-INSERT INTO `affilates` VALUES (1,'NULL'),(2,'altufievo');
+INSERT INTO `affilates` VALUES (1,'NULL'),(2,'altufievo'),(3,'anino');
 /*!40000 ALTER TABLE `affilates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,7 +255,7 @@ CREATE TABLE `comments` (
   `visible` bit(1) NOT NULL,
   PRIMARY KEY (`comment_id`),
   UNIQUE KEY `comment_id_UNIQUE` (`comment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -264,7 +264,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (1,'Удобная станция. Советую.','2015-08-02',2,''),(2,'Грамотный специалист. Рекомендую.','2015-08-02',3,'');
+INSERT INTO `comments` VALUES (1,'Удобная станция. Советую.','2015-08-02',2,''),(2,'Грамотный специалист. Рекомендую.','2015-08-02',3,''),(3,'}{орошая Станция!','2015-08-19',2,''),(4,'}{орошая Станция!','2015-08-19',2,''),(5,'}{орошая Станция!','2015-08-19',2,''),(6,'Да','2015-08-19',2,''),(7,'Иваныыыч!','2015-08-19',2,'');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -345,7 +345,7 @@ CREATE TABLE `mechanic_profile_has_comments` (
 
 LOCK TABLES `mechanic_profile_has_comments` WRITE;
 /*!40000 ALTER TABLE `mechanic_profile_has_comments` DISABLE KEYS */;
-INSERT INTO `mechanic_profile_has_comments` VALUES (1,2);
+INSERT INTO `mechanic_profile_has_comments` VALUES (1,2),(2,7);
 /*!40000 ALTER TABLE `mechanic_profile_has_comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -462,7 +462,7 @@ CREATE TABLE `orders` (
   `order_contact_data` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   UNIQUE KEY `order_id_UNIQUE` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -471,7 +471,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'NEW','2015-08-18',NULL,'Сильная вибрация при скорости больше 80 км//ч',NULL,NULL,NULL),(38,'NEW','2015-08-18',NULL,'Всё время открывается капот. Невозможно ехать.',NULL,NULL,NULL),(39,'NEW','2015-08-18',NULL,'Муравьи в салоне',NULL,NULL,NULL),(40,'NEW','2015-08-19',NULL,'Бора плохо тянет',NULL,NULL,NULL);
+INSERT INTO `orders` VALUES (1,'NEW','2015-08-18',NULL,'Сильная вибрация при скорости больше 80 км//ч',NULL,NULL,NULL),(38,'NEW','2015-08-18',NULL,'Всё время открывается капот. Невозможно ехать.',NULL,NULL,NULL),(39,'NEW','2015-08-18',NULL,'Муравьи в салоне',NULL,NULL,NULL),(40,'NEW','2015-08-19',NULL,'Бора плохо тянет',NULL,NULL,NULL),(41,'NEW','2015-08-19',NULL,'Сломалась труба',NULL,NULL,NULL),(42,'NEW','2015-08-19',NULL,'поломка тачки',NULL,NULL,NULL),(43,'NEW','2015-08-19',NULL,'Коробка предач заедает. колёса отваливаются. крыша сетает. стёклы дребезжат. вонает в салоне. фары отвалились. поцарапанная и не ездит.',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -672,7 +672,7 @@ CREATE TABLE `site_aggregator_has_orders_stations` (
 
 LOCK TABLES `site_aggregator_has_orders_stations` WRITE;
 /*!40000 ALTER TABLE `site_aggregator_has_orders_stations` DISABLE KEYS */;
-INSERT INTO `site_aggregator_has_orders_stations` VALUES (1,1,3),(1,38,4),(1,39,2),(1,40,1);
+INSERT INTO `site_aggregator_has_orders_stations` VALUES (1,1,3),(1,38,4),(1,39,2),(1,40,1),(1,41,2),(1,42,4),(1,43,2);
 /*!40000 ALTER TABLE `site_aggregator_has_orders_stations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -795,7 +795,7 @@ CREATE TABLE `site_user_has_orders_stations` (
 
 LOCK TABLES `site_user_has_orders_stations` WRITE;
 /*!40000 ALTER TABLE `site_user_has_orders_stations` DISABLE KEYS */;
-INSERT INTO `site_user_has_orders_stations` VALUES (2,1,3),(2,38,4),(2,39,2),(3,40,1);
+INSERT INTO `site_user_has_orders_stations` VALUES (2,1,3),(2,38,4),(2,39,2),(3,40,1),(2,41,2),(2,42,4),(2,43,2);
 /*!40000 ALTER TABLE `site_user_has_orders_stations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -844,7 +844,7 @@ CREATE TABLE `station_has_affilates_affilate_profiles` (
 
 LOCK TABLES `station_has_affilates_affilate_profiles` WRITE;
 /*!40000 ALTER TABLE `station_has_affilates_affilate_profiles` DISABLE KEYS */;
-INSERT INTO `station_has_affilates_affilate_profiles` VALUES (1,2,2);
+INSERT INTO `station_has_affilates_affilate_profiles` VALUES (1,2,2),(2,3,3);
 /*!40000 ALTER TABLE `station_has_affilates_affilate_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -893,7 +893,7 @@ CREATE TABLE `station_has_orders_affilates` (
 
 LOCK TABLES `station_has_orders_affilates` WRITE;
 /*!40000 ALTER TABLE `station_has_orders_affilates` DISABLE KEYS */;
-INSERT INTO `station_has_orders_affilates` VALUES (3,1,1),(4,38,1),(2,39,1),(1,40,1);
+INSERT INTO `station_has_orders_affilates` VALUES (3,1,1),(4,38,1),(2,39,1),(1,40,1),(2,41,1),(4,42,1),(2,43,1);
 /*!40000 ALTER TABLE `station_has_orders_affilates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -941,7 +941,7 @@ CREATE TABLE `station_profile_has_comments` (
 
 LOCK TABLES `station_profile_has_comments` WRITE;
 /*!40000 ALTER TABLE `station_profile_has_comments` DISABLE KEYS */;
-INSERT INTO `station_profile_has_comments` VALUES (1,1);
+INSERT INTO `station_profile_has_comments` VALUES (1,1),(1,3),(1,4),(1,5),(2,6);
 /*!40000 ALTER TABLE `station_profile_has_comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1028,4 +1028,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-19  8:25:28
+-- Dump completed on 2015-08-19 14:19:47

@@ -18,7 +18,7 @@
       		<ul class="nav navbar-nav">
                 <li><a href="<c:url value="/mechanic/freeorders" />" >Free orders</a></li>
                 <li><a href="<c:url value="/mechanic/myorders" />" >My orders</a></li>
-                <li><a href="<c:url value="/stationId/mechanic/sparepartslist" />" >Spare parts list</a></li>
+                <li><a href="<c:url value="/mechanic/spareparts" />" >Spare parts list</a></li>
                 <li><a href="<c:url value="/stationId/mechanic/notificationslog" />" >Notification log</a></li>
       		</ul>
                 <form class="navbar-form navbar-right">

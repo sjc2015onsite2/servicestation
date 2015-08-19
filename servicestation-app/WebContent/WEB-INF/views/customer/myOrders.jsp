@@ -7,7 +7,7 @@
 <div class="col-sm-offset-1 col-sm-10">
 	<table class="table table-striped table-hover table-bordered">
   		<tr>
-  		<th>Problem</th>
+  		<th width="35%">Problem</th>
   		<th>Status</th>
   		<th>Station</th>
   		<th>Mechanic</th>
@@ -21,7 +21,7 @@
   			<td>Working</td>
   			<td>${order.value.name}</td>
   			<td>Mechanic</td>
-  			<td>price</td>
+  			<td>000000000</td>
   			<td>date of registration</td>
   			</tr>
   		</c:forEach>
