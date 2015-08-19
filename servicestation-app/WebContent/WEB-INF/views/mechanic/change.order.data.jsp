@@ -1,5 +1,10 @@
 <!-- Page for change data of order  -->
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
+<form:form action="../../mechanic/myorders" method='POST'>
 <h4 class="text-center">Order 3</h4>
 <br />
 
@@ -20,7 +25,7 @@
 </div>
         
 <div class="col-sm-offset-3 col-sm-6">
-	<p class="col-sm-5 text-right"><strong>Status: </strong></p>
+	<p class="col-sm-5 text-right"><strong>Status: </strong><em> ${order.status }</em></p>
     <div class=" col-sm-3">
     	<select class="form-control input-sm" >
         	<option>on the go</option>
@@ -29,7 +34,10 @@
         </select>
         <br />
     </div>
+    <button type="submit" class="btn btn-success">Pick up</button>
+    
 </div>
+
 
 <div class="col-sm-offset-4 col-sm-4">
 	<label class="control-label col-sm-1 text-right" for="id1">Works: </label>
@@ -66,3 +74,4 @@
     <button type="submit"  class="btn btn-success">Save changes</button>
 </div>
 <br />
+</form:form>
