@@ -75,10 +75,6 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 				orders.add((Order) entityModelConverterTool.convert(currentOrderEntity, Order.class));
 		}
 		
-		Station station = identificationService.getStationByAffilate(affilate);
-		
-		orders.addAll(headOfficeService.getNewOrders(station));
-		
 		return orders;
 	}
 
@@ -139,6 +135,14 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 		
 		partOrderDao.save(partOrderEntity);
 		affilateDao.update(affilateEntity);
+	}
+
+	@Override
+	public Set<Order> getMechanicFreeOrders(Person mechanic) {
+		Affilate affilate = identificationService.getAffilateByMechanic(mechanic);
+		Station station = identificationService.getStationByAffilate(affilate);
+		
+		return headOfficeService.getNewOrders(station);
 	}
 
 }

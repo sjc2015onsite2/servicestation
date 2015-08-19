@@ -132,4 +132,9 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 		
 	}
 
+	@Override
+	public Set<Order> getMechanicFreeOrders(Person mechanic) {
+		return workShopService.getMechanicFreeOrders(mechanic);
+	}
+
 }

@@ -25,6 +25,13 @@ public interface Mechanic extends StoreKeeper {
 	 * @return список заявок
 	 */
 	public Set<Order> getMechanicOrders(Person mechanic);
+	
+	/**
+	 * Метод возвращает список новых доступных для работы заданному механику заявок.
+	 * @param mechanic
+	 * @return
+	 */
+	public Set<Order> getMechanicFreeOrders(Person mechanic);
 
 	/**
 	 * Метод меняет в заданной заявке статус на заданный.

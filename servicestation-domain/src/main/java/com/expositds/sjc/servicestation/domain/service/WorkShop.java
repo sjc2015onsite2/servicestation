@@ -22,6 +22,13 @@ public interface WorkShop {
 	 * @return список заявок
 	 */
 	public Set<Order> getMechanicOrders(Person mechanic);
+	
+	/**
+	 * Метод возвращает список новых доступных для работы заданному механику заявок.
+	 * @param mechanic
+	 * @return
+	 */
+	public Set<Order> getMechanicFreeOrders(Person mechanic);
 
 	/**
 	 * Метод возвращает список запчастей с их количеством в заданном филиале.
