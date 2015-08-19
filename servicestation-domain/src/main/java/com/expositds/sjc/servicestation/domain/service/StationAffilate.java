@@ -1,5 +1,6 @@
 package com.expositds.sjc.servicestation.domain.service;
 
+import java.util.Calendar;
 import java.util.Set;
 
 import com.expositds.sjc.servicestation.domain.model.Affilate;
@@ -26,5 +27,23 @@ public interface StationAffilate {
 	 * @return список сотрудников
 	 */
 	public Set<Person> getAffiliateMechanics(Affilate affiliate);
+	
+	/**
+	 * Метод возвращает список всех заявок заданного филиала.
+	 * @param affiliate филиал
+	 * @param startDate начальная дата
+	 * @param endDate конечная дата
+	 * @return список заявок
+	 */
+	public Set<Order> getAffiliateOrders(Affilate affiliate, Calendar startDate, Calendar endDate);
+	
+	/**
+	 * Метод возвращает список готовых заявок заданного филиала.
+	 * @param affiliate филиал
+	 * @param startDate начальная дата
+	 * @param endDate конечная дата
+	 * @return список заявок
+	 */
+	public Set<Order> getAffiliateReadyOrders(Affilate affiliate, Calendar startDate, Calendar endDate);
 
 }
