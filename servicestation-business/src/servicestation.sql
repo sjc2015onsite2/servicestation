@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.24, for Win32 (x86)
 --
--- Host: localhost    Database: servicestation
+-- Host: 127.0.0.1    Database: servicestation
 -- ------------------------------------------------------
--- Server version	5.5.23
+-- Server version	5.6.25-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -186,7 +186,7 @@ CREATE TABLE `affilate_profiles` (
 
 LOCK TABLES `affilate_profiles` WRITE;
 /*!40000 ALTER TABLE `affilate_profiles` DISABLE KEYS */;
-INSERT INTO `affilate_profiles` VALUES (1);
+INSERT INTO `affilate_profiles` VALUES (2);
 /*!40000 ALTER TABLE `affilate_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -844,7 +844,7 @@ CREATE TABLE `station_has_affilates_affilate_profiles` (
 
 LOCK TABLES `station_has_affilates_affilate_profiles` WRITE;
 /*!40000 ALTER TABLE `station_has_affilates_affilate_profiles` DISABLE KEYS */;
-INSERT INTO `station_has_affilates_affilate_profiles` VALUES (1,1,1);
+INSERT INTO `station_has_affilates_affilate_profiles` VALUES (1,2,2);
 /*!40000 ALTER TABLE `station_has_affilates_affilate_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1028,4 +1028,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-19  0:11:45
+-- Dump completed on 2015-08-19  8:25:28
