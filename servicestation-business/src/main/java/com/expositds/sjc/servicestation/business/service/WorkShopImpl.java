@@ -22,6 +22,7 @@ import com.expositds.sjc.servicestation.business.repository.tools.EntityModelCon
 import com.expositds.sjc.servicestation.business.repository.tools.ModelEntityConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
+import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.Station;
@@ -113,6 +114,7 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 		AffilateEntity affilateEntity = affilateDao.findById(affilate.getAffilateId());
 		PersonEntity mechanicEntity = personDao.findById(mechanic.getId());
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		orderEntity.setStatus(OrderStatus.ACCEPTED);
 		
 		affilateEntity.getOrders().put(orderEntity, mechanicEntity);
 		
