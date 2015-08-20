@@ -1,5 +1,6 @@
 <!-- Orders of mechanic -->
 
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="table-responsive col-sm-offset-2 col-sm-8">
@@ -11,9 +12,10 @@
     	<th width="20%">Date</th>
     	</tr>
     	<c:forEach var="order" items="${myorders}">
+    	<c:url value="/mechanic/myorders/${order.orderId }" var="orderUrl" />
         <tr class="warning">
-        <td><a href="<c:url value="/stationId/mechanic/myorders/orderId" />" >Order 3</a></td>
-        <td>${order.problemDescription}</td>
+        <td>Order 3</td>
+        <td><a href="${orderUrl }" >${order.problemDescription}</a></td>
         <td>on the go</td>
         <td>07.08.2015</td>
         </tr>

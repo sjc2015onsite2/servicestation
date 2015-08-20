@@ -2,6 +2,7 @@ package com.expositds.sjc.servicestation.app;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
+import com.expositds.sjc.servicestation.domain.service.AuthorizedUserSite;
 import com.expositds.sjc.servicestation.domain.service.Identification;
 import com.expositds.sjc.servicestation.domain.service.Mechanic;
 import com.expositds.sjc.servicestation.domain.service.WorkShop;
@@ -40,6 +42,9 @@ public class MechanicOrdersController {
 	private Identification identificationService;
 	
 	@Autowired
+	private AuthorizedUserSite authorizedUserSiteService;
+	
+	@Autowired
 	private Mechanic mechanicService;
 	
 	@RequestMapping(value = "/myorders", method = RequestMethod.GET)
@@ -55,12 +60,40 @@ public class MechanicOrdersController {
 	return mav;
 	}
 	
-	@RequestMapping(value = "/myorders", method = RequestMethod.POST)
-	public ModelAndView pickUp(@RequestParam Order order) {
+	@RequestMapping(value = "/myorders/{orderId}", method = RequestMethod.GET)
+	public ModelAndView freeOrder(@PathVariable("orderId") Order order){
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("statuses", OrderStatus.values());
+		mav.addObject("station", identificationService.getStationByOrder(order));
+		mav.addObject("stations", authorizedUserSiteService.getServiceStations());
 		mav.addObject("order", order);
-		mav.setViewName("change.order.data");
+		mav.setViewName("customer.order.data");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/freeorders", method = RequestMethod.POST)
+	public ModelAndView pickUp(
+			@RequestParam(value = "orderId") Order order,
+			Authentication auth) {
+		
+		Logginer logginer = identificationService.getLogginerByName(auth.getName());
+		Person mechanic = identificationService.getPersonId(logginer.getId().toString());
+		
+		mechanicService.giveOrder(mechanic, order);
+		ModelAndView mav = new ModelAndView();
+		Long id = order.getOrderId();
+		mav.setViewName("redirect:/mechanic/myorders/"+id);
+	return mav;
+	}
+	
+	@RequestMapping(value = "/myorders", method = RequestMethod.POST)
+	public ModelAndView cangeOrderData() {
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("");
 	return mav;
 	}
 	
@@ -85,13 +118,5 @@ public class MechanicOrdersController {
 	return mav;
 	}
 	
-	@RequestMapping(value = "/freeorders/{orderId}", method = RequestMethod.GET)
-	public ModelAndView freeOrder(@PathVariable("orderId") Order order){
-		
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("order", order);
-		mav.setViewName("change.order.data");
-		return mav;
-	}
+	
 }
