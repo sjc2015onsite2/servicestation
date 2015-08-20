@@ -3,6 +3,7 @@ package com.expositds.sjc.servicestation.business.service;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,6 +47,9 @@ public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUs
 	private Site siteService;
 	
 	@Autowired
+	private ConversionService conversionService;
+	
+	@Autowired
 	private EntityModelConverter entityModelConverterTool;
 	
 	@Override
@@ -57,7 +61,7 @@ public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUs
 		for (OrderEntity currentOrderEntity : ordersEntity.keySet()) {
 			Order currentOrder = (Order) entityModelConverterTool.convert(currentOrderEntity, Order.class);
 			StationEntity currentStationEntity = ordersEntity.get(currentOrderEntity);
-			Station currentStation = (Station) entityModelConverterTool.convert(currentStationEntity, Station.class);
+			Station currentStation = conversionService.convert(currentStationEntity, Station.class);
 			ordersModel.put(currentOrder, currentStation);
 		}
 		

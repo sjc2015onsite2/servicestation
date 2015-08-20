@@ -39,7 +39,7 @@ public class AggregatorImpl implements Aggregator {
 	
 	@Autowired
 	private EntityModelConverter entityModelConverter;
-
+	
 	@Override
 	public Set<Comment> getServiceStationAllComments(Station seviceStation) {
 		Map<StationEntity, StationProfileEntity> stationsEntity = siteAggregatorDao.findById(1L).getStationProfiles();
