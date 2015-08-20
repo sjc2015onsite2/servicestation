@@ -36,6 +36,7 @@
 				<bean class="com.expositds.sjc.servicestation.app.converters.StringToSiteUserConverter" />
 				<bean class="com.expositds.sjc.servicestation.app.converters.StringToOrderConverter" />
 				<bean class="com.expositds.sjc.servicestation.app.converters.StringToAffiliateConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.StationEntityModelConverter"/>
 			</list>
 		</property>
 	</bean>
