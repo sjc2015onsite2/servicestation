@@ -65,7 +65,7 @@ public class MechanicOrdersController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("statuses", OrderStatus.values());
-		mav.addObject("station", identificationService.gerStationByOrder(order));
+		mav.addObject("station", identificationService.getStationByOrder(order));
 		mav.addObject("stations", authorizedUserSiteService.getServiceStations());
 		mav.addObject("order", order);
 		mav.setViewName("customer.order.data");
