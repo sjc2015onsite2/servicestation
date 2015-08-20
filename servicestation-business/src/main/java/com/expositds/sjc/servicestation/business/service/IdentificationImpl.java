@@ -212,13 +212,27 @@ public class IdentificationImpl implements Identification, Serializable {
 	}
 
 	@Override
-	public Station gerStationByOrder(Order order) {
+	public Station getStationByOrder(Order order) {
 		SiteAggregatorEntity siteAggregatorEntity = siteAggregatorDao.findById(1L);
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
 		
 		StationEntity stationEntity = siteAggregatorEntity.getOrders().get(orderEntity);
 		
 		return (Station) entityModelConverterTool.convert(stationEntity, Station.class);
+	}
+
+	@Override
+	public Person getMechanicByOrder(Order order) {
+		Station station = getStationByOrder(order);
+		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		StationEntity stationEntity = stationDao.findById(station.getStationId());
+		
+		for (AffilateEntity currentAffilateEntity : stationEntity.getAffilates().keySet())
+			if (currentAffilateEntity.getOrders().containsKey(orderEntity))
+				return (Person) entityModelConverterTool.convert(
+						currentAffilateEntity.getOrders().get(orderEntity), Person.class);
+		
+		return null;
 	}
 
 	

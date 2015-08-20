@@ -59,7 +59,7 @@ public class CustomerOrdersController {
 			
 			Set<Station> stations = authorizedUserSiteService.getServiceStations();
 			
-			Station station = identificationService.gerStationByOrder(order);
+			Station station = identificationService.getStationByOrder(order);
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("station", station);
 			mav.addObject("order", order);

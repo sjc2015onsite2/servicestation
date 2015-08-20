@@ -59,8 +59,10 @@ public interface Identification {
 	
 	public Station getStationByAffilate(Affilate affilate);
 	
-	public Station gerStationByOrder(Order order);
+	public Station getStationByOrder(Order order);
 	
 	public Affilate getAffilateByMechanic(Person mechanic);
+	
+	public Person getMechanicByOrder(Order order);
 
 }
