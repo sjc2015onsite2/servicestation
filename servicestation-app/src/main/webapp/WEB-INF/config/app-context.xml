@@ -35,6 +35,7 @@
 				<bean class="com.expositds.sjc.servicestation.app.converters.StringToPersonConverter" />
 				<bean class="com.expositds.sjc.servicestation.app.converters.StringToSiteUserConverter" />
 				<bean class="com.expositds.sjc.servicestation.app.converters.StringToOrderConverter" />
+				<bean class="com.expositds.sjc.servicestation.app.converters.StringToPartConverter" />
 				<bean class="com.expositds.sjc.servicestation.app.converters.StringToAffiliateConverter" />
 			</list>
 		</property>

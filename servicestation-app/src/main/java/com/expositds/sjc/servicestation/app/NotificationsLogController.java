@@ -17,15 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("/{stationId}/mechanic")
-
 public class NotificationsLogController {
 	
-	@RequestMapping(value = "/notificationslog", method = { RequestMethod.GET })
+	@RequestMapping(value = "/mechanic/notificationslog", method = RequestMethod.GET)
 	public ModelAndView showNotificationsLog() {
 		
 		
-		/* FIXME: No methods to get notifications from mechanic or station!*/
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("notifications.log");
 		

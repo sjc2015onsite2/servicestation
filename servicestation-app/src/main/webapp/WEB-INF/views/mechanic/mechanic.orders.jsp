@@ -1,4 +1,4 @@
-<!-- Free orders on station -->
+<!-- Orders of mechanic -->
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -10,13 +10,13 @@
     	<th width="20%">Status</th>
     	<th width="20%">Date</th>
     	</tr>
-    	<c:forEach var="order" items="${orders}" >
-    	<c:url value="/mechanic/freeorders/${order.key.orderId}" var="freeorders" />
+    	<c:forEach var="order" items="${myorders}">
+    	<c:url value="/mechanic/myorders/${order.orderId }" var="orderUrl" />
         <tr class="warning">
-        <td>${order.key.orderId}</td>
-        <td><a href="${freeorders}">${order.key.problemDescription}</a></td>
-        <td>${order.key.status}</td>
-        <td>${order.value}</td>
+        <td>Order 3</td>
+        <td><a href="${orderUrl }" >${order.problemDescription}</a></td>
+        <td>on the go</td>
+        <td>07.08.2015</td>
         </tr>
         </c:forEach>
     </table>

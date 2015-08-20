@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;
+import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.AuthorizedUserSite;
@@ -60,6 +61,7 @@ public class CustomerOrdersController {
 			Set<Station> stations = authorizedUserSiteService.getServiceStations();
 			
 			Station station = identificationService.gerStationByOrder(order);
+			//Person mechanic = identificationService.
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("station", station);
 			mav.addObject("order", order);
@@ -70,7 +72,7 @@ public class CustomerOrdersController {
 		}
 		
 		@RequestMapping(value = "/user/myorders", method = RequestMethod.POST)
-		public ModelAndView myorder(
+		public ModelAndView changeServiceStation(
 				@RequestParam(value = "orderId") Order order,
 				@RequestParam(value = "stationId") Station station,
 				Authentication auth){

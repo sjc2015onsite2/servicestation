@@ -1,15 +1,20 @@
 <!-- Page for data about order of customer -->
 
+
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+<form:form action="mechanic/myorders" method='POST'>
 <div class="col-sm-12">
 	<div class="col-sm-6">
 		<h4 class="text-center">Order ${order.orderId}</h4>
 	</div>
-	<div>
-		<button data-toggle ="modal" data-target="#change-modal" type="button" class="btn btn-warning col-sm-offset-3">Change station</button>
-	</div>
+	<security:authorize access="hasRole('ROLE_USER')">
+		<div>
+			<button data-toggle ="modal" data-target="#change-modal" type="button" class="btn btn-warning col-sm-offset-3">Change station</button>
+		</div>
+	</security:authorize>
 </div>
     <div class="col-sm-offset-1 col-sm-10">
     <br /> 
@@ -21,15 +26,16 @@
     		<p class="text-left"><em>${station.name}</em></p>
     	</div>
 	</div>
-
-<div class="col-sm-offset-1 col-sm-10">
-	<div class="col-sm-3">
-    	<p class="text-left"><strong>Mechanic: </strong></p>
-    </div>
-	<div class="col-sm-9">
-    	<p class="text-left"><em>Mechanic 1</em></p>
-    </div>    
-</div>
+<security:authorize access="hasRole('ROLE_USER')">
+	<div class="col-sm-offset-1 col-sm-10">
+		<div class="col-sm-3">
+    		<p class="text-left"><strong>Mechanic: </strong></p>
+    	</div>
+		<div class="col-sm-9">
+    		<p class="text-left"><em>Mechanic 1</em></p>
+    	</div>    
+	</div>
+</security:authorize>
 
 
 <div class="col-sm-offset-1 col-sm-10">
@@ -47,9 +53,24 @@
 	<div class="col-sm-3">
 		<p class="text-left"><strong>Status: </strong></p>
 	</div>
+	<security:authorize access="hasRole('ROLE_USER')">
     <div class="col-sm-9">
         <p class="text-left"><em>...</em></p>
     </div>
+    </security:authorize>
+    
+	<security:authorize access="hasRole('ROLE_MECHANIC')">
+   	 	<div class="col-sm-2">
+    		<select name="status" class="form-control" >
+        		<c:forEach var="status" items="${statuses}" >
+        			<option>${status }</option>
+  	    	  	</c:forEach>
+    	    </select>
+    	</div>
+    	
+    	<div class="col-sm-7">
+    	</div>
+    </security:authorize>
 </div>
       
 <div class="col-sm-offset-1 col-sm-10">
@@ -89,6 +110,7 @@
         <p class="text-left"><em>...</em></p>
     </div>
 </div>
+</form:form>
 
 <div class="modal fade" id="change-modal">
   <div class="modal-dialog modal-sm">

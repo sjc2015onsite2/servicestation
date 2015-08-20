@@ -18,9 +18,21 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         	<ul class="nav navbar-nav">
-  	        	<li><a href="<c:url value="/createorder" />" >Creating order</a></li>
+        		<security:authorize access="isAnonymous()">
+  	        		<li><a href="<c:url value="/createorder" />" >Creating order</a></li>
+  	        	</security:authorize>
+  	        	
+  	        	<security:authorize access="isAnonymous()">
             	<li><a href="<c:url value="/stationslist" />" >Stations list</a></li>
+            </security:authorize>
             
+            <security:authorize access="hasRole('ROLE_USER')">
+  	        		<li><a href="<c:url value="/createorder" />" >Creating order</a></li>
+  	        	</security:authorize>
+  	        	
+  	        	<security:authorize access="hasRole('ROLE_USER')">
+            	<li><a href="<c:url value="/stationslist" />" >Stations list</a></li>
+            </security:authorize>
             	<security:authorize access="isAnonymous()">
        	    		<li data-toggle ="modal" data-target="#authorization-modal" class="dropdown">
    	        	    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Create comment <b class="caret"></b></a>
@@ -54,9 +66,23 @@
            		<security:authorize access="hasRole('ROLE_USER')">
            			<li><a href="<c:url value="/user/myorders" />" >My orders</a></li>
            		</security:authorize>
+           		
+           		<security:authorize access="hasRole('ROLE_MECHANIC')">
+           			<li><a href="<c:url value="/mechanic/freeorders" />" >Free orders</a></li>
+                	<li><a href="<c:url value="/mechanic/myorders" />" >My orders</a></li>
+                	<li><a href="<c:url value="/mechanic/spareparts" />" >Spare parts list</a></li>
+                	<li><a href="<c:url value="/mechanic/ordersparts" />" >My orders of parts</a></li>
+                	<li><a href="<c:url value="/mechanic/notificationslog" />" >Notification log</a></li>
+                </security:authorize>
           	</ul>
               
               	<security:authorize access="hasRole('ROLE_USER')">
+                		<form class="navbar-form navbar-right">
+                  			<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default">Logout</button></a>
+                		</form>
+             	</security:authorize>
+             	
+             	<security:authorize access="hasRole('ROLE_MECHANIC')">
                 		<form class="navbar-form navbar-right">
                   			<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default">Logout</button></a>
                 		</form>
@@ -67,6 +93,8 @@
               			<button name="submit" type="submit" class="btn btn-success" data-toggle ="modal" data-target="#authorization-modal">Sign in</button>
               		</form>
            		</security:authorize>
+           		
+           		
            
         </div>
     </div>
