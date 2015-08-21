@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.expositds.sjc.servicestation.business.repository.dao.PersonDao;
@@ -16,7 +17,6 @@ import com.expositds.sjc.servicestation.business.repository.entity.MechanicProfi
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationProfileEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Comment;
 import com.expositds.sjc.servicestation.domain.model.Mark;
 import com.expositds.sjc.servicestation.domain.model.Person;
@@ -44,7 +44,7 @@ public abstract class SiteUserImpl implements UserSite {
 	private ServiceStation serviceStationService;
 	
 	@Autowired
-	private EntityModelConverter entityModelObjectConverter;
+	private ConversionService conversionService;
 	
 	@Override
 	public Set<Comment> getMechanicComments(Person mechanic) {
@@ -57,7 +57,7 @@ public abstract class SiteUserImpl implements UserSite {
 		
 		for (CommentEntity currentCommentEntity : commentsEntity) {
 			if (currentCommentEntity.isVisible())
-				commentsModel.add((Comment) entityModelObjectConverter.convert(currentCommentEntity, Comment.class));
+				commentsModel.add(conversionService.convert(currentCommentEntity, Comment.class));
 		}
 		
 		return commentsModel;
@@ -74,7 +74,7 @@ public abstract class SiteUserImpl implements UserSite {
 		Set<Mark> marksModel = new HashSet<>();
 		
 		for (MarkEntity currentMarkEntity : marksEntity) {
-			marksModel.add((Mark) entityModelObjectConverter.convert(currentMarkEntity, Mark.class));
+			marksModel.add(conversionService.convert(currentMarkEntity, Mark.class));
 		}
 		
 		return marksModel;
@@ -87,7 +87,7 @@ public abstract class SiteUserImpl implements UserSite {
 		Set<StationEntity> stationsEntity = siteAggregatorDao.findById(1L).getStationProfiles().keySet();
 		
 		for (StationEntity currentStationEntity : stationsEntity) {
-			stationsModel.add((Station) entityModelObjectConverter.convert(currentStationEntity, Station.class));
+			stationsModel.add(conversionService.convert(currentStationEntity, Station.class));
 		}
 				
 		return stationsModel;
@@ -110,7 +110,7 @@ public abstract class SiteUserImpl implements UserSite {
 		
 		for (CommentEntity currentCommentEntity : commentsEntity) {
 			if (currentCommentEntity.isVisible())
-				commentsModel.add((Comment) entityModelObjectConverter.convert(currentCommentEntity, Comment.class));
+				commentsModel.add(conversionService.convert(currentCommentEntity, Comment.class));
 		}
 		
 		return commentsModel;

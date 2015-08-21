@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
 import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
@@ -12,7 +13,6 @@ import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
@@ -33,7 +33,7 @@ public class StationAffilateImpl implements StationAffilate {
 	private OrderDao orderDao;
 	
 	@Autowired
-	private EntityModelConverter entityModelConverter;
+	private ConversionService conversionService;
 
 	@Override
 	public void deleteOrder(Affilate affilate, Order order) {
@@ -53,7 +53,7 @@ public class StationAffilateImpl implements StationAffilate {
 		
 		Set<Person> mechanics = new HashSet<>();
 		for (PersonEntity currentMechanicEntity : mechanicsEntity) {
-			mechanics.add((Person) entityModelConverter.convert(currentMechanicEntity, Person.class));
+			mechanics.add(conversionService.convert(currentMechanicEntity, Person.class));
 		}
 		
 		return mechanics;
@@ -68,7 +68,7 @@ public class StationAffilateImpl implements StationAffilate {
 		for (OrderEntity currentOrderEntity : affilateEntity.getOrders().keySet())
 			if (currentOrderEntity.getCompleteDate().compareTo(startDate) >= 0 &&
 					currentOrderEntity.getCompleteDate().compareTo(endDate) <= 0)
-				orders.add((Order) entityModelConverter.convert(currentOrderEntity, Order.class));
+				orders.add(conversionService.convert(currentOrderEntity, Order.class));
 		
 		return orders;
 	}
@@ -83,7 +83,7 @@ public class StationAffilateImpl implements StationAffilate {
 			if (currentOrderEntity.getStatus().equals(OrderStatus.READY) &&
 					currentOrderEntity.getCompleteDate().compareTo(startDate) >= 0 &&
 					currentOrderEntity.getCompleteDate().compareTo(endDate) <= 0)
-				orders.add((Order) entityModelConverter.convert(currentOrderEntity, Order.class));
+				orders.add(conversionService.convert(currentOrderEntity, Order.class));
 		
 		return orders;
 	}

@@ -5,13 +5,13 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.LogginerRole;
 import com.expositds.sjc.servicestation.domain.model.Order;
@@ -35,7 +35,7 @@ public abstract class ReportableImpl implements Reportable {
 	private StationDao stationDao;
 	
 	@Autowired
-	private EntityModelConverter entityModelConverter;
+	private ConversionService conversionService;
 
 	@Override
 	public Integer getServiceStationProfit(Station seviceStation, Calendar startDate, Calendar endDate) {
@@ -83,7 +83,7 @@ public abstract class ReportableImpl implements Reportable {
 		
 		for (AffilateEntity currentAffilateEntity : stationEntity.getAffilates().keySet())
 			rent += getAffilateRent(
-					(Affilate) entityModelConverter.convert(currentAffilateEntity, Affilate.class), 
+					conversionService.convert(currentAffilateEntity, Affilate.class), 
 					startDate, 
 					endDate);
 		
@@ -100,7 +100,7 @@ public abstract class ReportableImpl implements Reportable {
 			if (currentEmployeeEntity.getRole().equals(LogginerRole.MECHANIC)) {
 				Map<Calendar, Integer> mechanicSalary = 
 						financeDepartment.getEmployeeSalary(
-								(Person) entityModelConverter.convert(currentEmployeeEntity, Person.class), 
+								conversionService.convert(currentEmployeeEntity, Person.class), 
 								startDate, 
 								endDate);
 				for (Calendar currentDate : mechanicSalary.keySet())
@@ -121,7 +121,7 @@ public abstract class ReportableImpl implements Reportable {
 		for (PersonEntity currentEmployeeEntity : stationEntity.getPersons()) {
 			Map<Calendar, Integer> employeeSalary = 
 					financeDepartment.getEmployeeSalary(
-							(Person) entityModelConverter.convert(currentEmployeeEntity, Person.class), 
+							conversionService.convert(currentEmployeeEntity, Person.class), 
 							startDate, 
 							endDate);
 			for (Calendar currentDate : employeeSalary.keySet())

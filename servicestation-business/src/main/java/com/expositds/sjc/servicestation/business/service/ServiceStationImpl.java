@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
 import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
@@ -13,7 +14,6 @@ import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntit
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.LogginerRole;
 import com.expositds.sjc.servicestation.domain.model.Order;
@@ -40,7 +40,7 @@ public class ServiceStationImpl implements ServiceStation{
 	private StationAffilate stationAffilateService;
 	
 	@Autowired
-	private EntityModelConverter entityModelConverterTool;
+	private ConversionService conversionService;
 	
 	@Override
 	public Order createOrder(Station serviceStation, PreOrder preOrder) {
@@ -53,7 +53,7 @@ public class ServiceStationImpl implements ServiceStation{
 		StationEntity stationEntity = stationDao.findById(serviceStation.getStationId());
 		AffilateEntity nullAffilateEntity = affilateDao.findById(1L);
 		stationEntity.getOrders().put(orderEntity, nullAffilateEntity);
-		Order order = (Order) entityModelConverterTool.convert(orderEntity, Order.class);
+		Order order = (Order) conversionService.convert(orderEntity, Order.class);
 		stationDao.update(stationEntity);
 		return order;
 	}
@@ -65,7 +65,7 @@ public class ServiceStationImpl implements ServiceStation{
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
 		
 		AffilateEntity affilateEntity = stationEntity.getOrders().get(orderEntity);	
-		Affilate affilate = (Affilate) entityModelConverterTool.convert(affilateEntity, Affilate.class);
+		Affilate affilate = (Affilate) conversionService.convert(affilateEntity, Affilate.class);
 		stationAffilateService.deleteOrder(affilate, order);
 		
 		orderEntity.setCompleteDate(null);
@@ -99,7 +99,7 @@ public class ServiceStationImpl implements ServiceStation{
 		Set<Person> mechanics = new HashSet<>();
 		for (PersonEntity currentPersonEntity : personsEntiry) {
 			if (currentPersonEntity.getRole().equals(LogginerRole.MECHANIC)) 
-				mechanics.add((Person) entityModelConverterTool.convert(currentPersonEntity, Person.class));
+				mechanics.add((Person) conversionService.convert(currentPersonEntity, Person.class));
 		}
 		return mechanics;
 	}

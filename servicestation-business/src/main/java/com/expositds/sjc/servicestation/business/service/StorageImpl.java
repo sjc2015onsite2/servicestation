@@ -4,11 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 
 import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PartOrderEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.PartOrder;
 import com.expositds.sjc.servicestation.domain.service.Storage;
@@ -23,7 +23,7 @@ public abstract class StorageImpl implements Storage {
 	private AffilateDao affilateDao;
 	
 	@Autowired
-	private EntityModelConverter entityModelConverter;
+	private ConversionService entityModelConverter;
 
 	@Override
 	public Set<PartOrder> getPartOrders(Affilate affilate) {
@@ -34,7 +34,7 @@ public abstract class StorageImpl implements Storage {
 		partOrdersEntity = affilateEntity.getPartOrders().keySet();
 		
 		for (PartOrderEntity currentPartOrderEntity : partOrdersEntity)
-			partOrders.add((PartOrder) entityModelConverter.convert(currentPartOrderEntity, PartOrder.class));
+			partOrders.add(entityModelConverter.convert(currentPartOrderEntity, PartOrder.class));
 		
 		return partOrders;
 	}

@@ -5,12 +5,13 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.expositds.sjc.servicestation.business.repository.dao.ClientNotificationDao;
 import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
+import com.expositds.sjc.servicestation.business.repository.dao.PartDao;
+import com.expositds.sjc.servicestation.business.repository.dao.ServiceDao;
 import com.expositds.sjc.servicestation.business.repository.entity.ClientNotificationEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
@@ -33,13 +34,16 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 	private OrderDao orderDao;
 	
 	@Autowired
+	private ServiceDao serviceDao;
+	
+	@Autowired
+	private PartDao partDao;
+	
+	@Autowired
 	private ClientNotificationDao clientNotificationDao;
 	
 	@Autowired
 	private WorkShop workShopService;
-	
-	@Autowired
-	private ConversionService conversionService;
 	
 	@Override
 	public Set<Order> getMechanicOrders(Person mechanic) {
@@ -96,7 +100,8 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 		
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
 		
-		orderEntity.setParts(conversionService.mapPartIntegerConvert(parts));
+		for (Part currentPart : parts.keySet()) 
+			orderEntity.getParts().put(partDao.findById(currentPart.getPartId()), parts.get(currentPart));
 		
 		orderDao.update(orderEntity);
 		
@@ -106,8 +111,8 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 	public void addServicesPriceListToOrder(Order order, Map<com.expositds.sjc.servicestation.domain.model.Service, Integer> servicesPriceList) {
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
 		
-		orderEntity.getOrderServicesPriceList().
-			putAll(conversionService.mapServiceIntegerConverter(servicesPriceList));
+		for (com.expositds.sjc.servicestation.domain.model.Service currentService : servicesPriceList.keySet())
+			orderEntity.getOrderServicesPriceList().put(serviceDao.findById(currentService.getServiceId()), servicesPriceList.get(currentService));
 		
 		orderDao.update(orderEntity);
 	}
@@ -121,7 +126,7 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 		
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
 		
-		orderEntity.setServices(conversionService.listServiceConverter(order.getServices()));
+		// TODO orderEntity.setServices(conversionService.listServiceConverter(order.getServices()));
 		
 		orderDao.update(orderEntity);
 	}
