@@ -3,7 +3,6 @@ package com.expositds.sjc.servicestation.business.service;
 import java.io.Serializable;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +27,22 @@ import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.SiteAggregatorEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.AffilateEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.AffilateProfileEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.ClientNotificationEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.CommentEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.LogginerEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.MarkEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.MechanicProfileEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.OrderEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.PartEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.PartOrderEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.PersonEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.ServiceEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.SiteAggregatorEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.SiteUserEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.StationEntityModelConverter;
+import com.expositds.sjc.servicestation.business.service.converters.StationProfileEntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.AffilateProfile;
 import com.expositds.sjc.servicestation.domain.model.ClientNotification;
@@ -104,87 +118,101 @@ public class IdentificationImpl implements Identification, Serializable {
 	@Autowired
 	private AffilateProfileDao affilateProfileDao;
 	
-	@Autowired
-	private EntityModelConverter entityModelConverterTool;
-		
+	private AffilateEntityModelConverter affilateEntityModelConverter = new AffilateEntityModelConverter();
+	private AffilateProfileEntityModelConverter affilateProfileEntityModelConverter = new AffilateProfileEntityModelConverter();
+	private ClientNotificationEntityModelConverter clientNotificationEntityModelConverter = new ClientNotificationEntityModelConverter();
+	private CommentEntityModelConverter commentEntityModelConverter = new CommentEntityModelConverter();
+	private MarkEntityModelConverter markEntityModelConverter = new MarkEntityModelConverter();
+	private MechanicProfileEntityModelConverter mechanicProfileEntityModelConverter = new MechanicProfileEntityModelConverter();
+	private OrderEntityModelConverter orderEntityModelConverter = new OrderEntityModelConverter();
+	private PartEntityModelConverter partEntityModelConverter = new PartEntityModelConverter();
+	private PartOrderEntityModelConverter partOrderEntityModelConverter = new PartOrderEntityModelConverter();
+	private PersonEntityModelConverter personEntityModelConverter = new PersonEntityModelConverter();
+	private ServiceEntityModelConverter serviceEntityModelConverter = new ServiceEntityModelConverter();
+	private SiteAggregatorEntityModelConverter siteAggregatorEntityModelConverter = new SiteAggregatorEntityModelConverter();
+	private SiteUserEntityModelConverter siteUserEntityModelConverter = new SiteUserEntityModelConverter();
+	private StationEntityModelConverter stationEntityModelConverter = new StationEntityModelConverter(); 
+	private StationProfileEntityModelConverter stationProfileEntityModelConverter = new StationProfileEntityModelConverter();
+	private LogginerEntityModelConverter logginerEntityModelConverter = new LogginerEntityModelConverter();
+	
 	@Override
 	public Affilate getAffilateById(String id) {
-		return (Affilate) entityModelConverterTool.convert(affilateDao.findById(new Long(id)), Affilate.class);
+		return affilateEntityModelConverter.convert(affilateDao.findById(new Long(id)));
 	}
 
 	@Override
 	public AffilateProfile getAffilateProfileById(String id) {
-		return (AffilateProfile) entityModelConverterTool.convert(affilateProfileDao.findById(new Long(id)), AffilateProfile.class);
+		return affilateProfileEntityModelConverter.convert(affilateProfileDao.findById(new Long(id)));
 	}
 
 	@Override
 	public ClientNotification getClientNotificationById(String id) {
-		return (ClientNotification) entityModelConverterTool.convert(clientNotificationDao.findById(new Long(id)), ClientNotification.class);
+		return clientNotificationEntityModelConverter.convert(clientNotificationDao.findById(new Long(id)));
 	}
 
 	@Override
 	public Comment getCommentById(String id) {
-		return (Comment) entityModelConverterTool.convert(commentDao.findById(new Long(id)), Comment.class);
+		return commentEntityModelConverter.convert(commentDao.findById(new Long(id)));
 	}
 
 	@Override
 	public Mark getMarkById(String id) {
-		return (Mark) entityModelConverterTool.convert(markDao.findById(new Long(id)), Mark.class);
+		return markEntityModelConverter.convert(markDao.findById(new Long(id)));
 	}
 
 	@Override
 	public MechanicProfile getMechanicProfileById(String id) {
-		return (MechanicProfile) entityModelConverterTool.convert(mechanicProfileDao.findById(new Long(id)), MechanicProfile.class);
+		return mechanicProfileEntityModelConverter.convert(mechanicProfileDao.findById(new Long(id)));
 	}
 
 	@Override
 	public Order getOrderId(String id) {
-		return (Order) entityModelConverterTool.convert(orderDao.findById(new Long(id)), Order.class);
+		return orderEntityModelConverter.convert(orderDao.findById(new Long(id)));
 	}
 
 	@Override
-	public Part getPartId(String id) {
-		return (Part) entityModelConverterTool.convert(partDao.findById(new Long(id)), Part.class);
+	public Part getPartById(String id) {
+		return partEntityModelConverter.convert(partDao.findById(new Long(id)));
 	}
 
 	@Override
 	public PartOrder getPartOrderById(String id) {
-		return (PartOrder) entityModelConverterTool.convert(partOrderDao.findById(new Long(id)), PartOrder.class);
+		return partOrderEntityModelConverter.convert(partOrderDao.findById(new Long(id)));
 	}
 
 	@Override
-	public Person getPersonId(String id) {
-		return (Person) entityModelConverterTool.convert(personDao.findById(new Long(id)), Person.class);
+	public Person getPersonById(String id) {
+		return personEntityModelConverter.convert(personDao.findById(new Long(id)));
 	}
 
 	@Override
-	public com.expositds.sjc.servicestation.domain.model.Service getServiceId(String id) {
-		return (com.expositds.sjc.servicestation.domain.model.Service) entityModelConverterTool.convert(serviceDao.findById(new Long(id)), com.expositds.sjc.servicestation.domain.model.Service.class);
+	public com.expositds.sjc.servicestation.domain.model.Service getServiceById(String id) {
+		return serviceEntityModelConverter.convert(serviceDao.findById(new Long(id)));
 	}
 
 	@Override
 	public SiteAggregator getSiteAggregatorById(String id) {
-		return (SiteAggregator) entityModelConverterTool.convert(siteAggregatorDao.findById(new Long(id)), SiteAggregator.class);
+		return siteAggregatorEntityModelConverter.convert(siteAggregatorDao.findById(new Long(id)));
 	}
 
 	@Override
 	public SiteUser getSiteUserById(String id) {
-		return (SiteUser) entityModelConverterTool.convert(siteUserDao.findById(new Long(id)), SiteUser.class);
+		return siteUserEntityModelConverter.convert(siteUserDao.findById(new Long(id)));
 	}
 
 	@Override
 	public Station getStationById(String id) {
-		return (Station) entityModelConverterTool.convert(stationDao.findById(new Long(id)), Station.class);
+		return stationEntityModelConverter.convert(stationDao.findById(new Long(id)));
 	}
 
 	@Override
 	public StationProfile getStationProfileById(String id) {
-		return (StationProfile) entityModelConverterTool.convert(stationProfileDao.findById(new Long(id)), StationProfile.class);
-		}
+		return stationProfileEntityModelConverter.convert(stationProfileDao.findById(new Long(id)));
+	}
 
 	@Override
 	public Logginer getLogginerByName(String name) {
-		return (Logginer) entityModelConverterTool.convert(logginerDao.findByName(name), Logginer.class);
+		return logginerEntityModelConverter.convert(logginerDao.findByName(name));
 	}
 
 	@Override
@@ -194,7 +222,7 @@ public class IdentificationImpl implements Identification, Serializable {
 		
 		for (StationEntity currentStationEntity : siteAggregatorEntity.getStationProfiles().keySet()) 
 			if (currentStationEntity.getAffilates().keySet().contains(affilateEntity)) 
-				return (Station) entityModelConverterTool.convert(currentStationEntity, Station.class);
+				return stationEntityModelConverter.convert(currentStationEntity);
 		
 		return null;
 	}
@@ -207,7 +235,7 @@ public class IdentificationImpl implements Identification, Serializable {
 		for (StationEntity currentStationEntity : siteAggregatorEntity.getStationProfiles().keySet()) 
 			for (AffilateEntity currentAffilateEntity : currentStationEntity.getAffilates().keySet())
 				if (currentAffilateEntity.getPersons().contains(mechanicEntity)) 
-					return (Affilate) entityModelConverterTool.convert(currentAffilateEntity, Affilate.class);
+					return affilateEntityModelConverter.convert(currentAffilateEntity);
 		
 		return null;
 	}
@@ -219,7 +247,7 @@ public class IdentificationImpl implements Identification, Serializable {
 		
 		StationEntity stationEntity = siteAggregatorEntity.getOrders().get(orderEntity);
 		
-		return (Station) entityModelConverterTool.convert(stationEntity, Station.class);
+		return stationEntityModelConverter.convert(stationEntity);
 	}
 
 	@Override
@@ -230,11 +258,10 @@ public class IdentificationImpl implements Identification, Serializable {
 		
 		for (AffilateEntity currentAffilateEntity : stationEntity.getAffilates().keySet())
 			if (currentAffilateEntity.getOrders().containsKey(orderEntity))
-				return (Person) entityModelConverterTool.convert(
-						currentAffilateEntity.getOrders().get(orderEntity), Person.class);
+				return personEntityModelConverter.convert(
+						currentAffilateEntity.getOrders().get(orderEntity));
 		
 		return null;
 	}
-
 	
 }

@@ -1,4 +1,4 @@
-package com.expositds.sjc.servicestation.app.converters;
+package com.expositds.sjc.servicestation.business.service.converters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
@@ -15,11 +15,11 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
 public class StringToStationConverter implements Converter<String, Station> {
 
 	@Autowired
-	private Identification identificationService;
+	private Identification identification;
 	
 	@Override
-	public Station convert(String arg0) {
-		return identificationService.getStationById(arg0);
+	public Station convert(String id) {
+		return identification.getStationById(id);
 	}
 
 }

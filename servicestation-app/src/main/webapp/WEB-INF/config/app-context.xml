@@ -31,15 +31,32 @@
 		class="org.springframework.context.support.ConversionServiceFactoryBean">
 		<property name="converters">
 			<list>
-				<bean class="com.expositds.sjc.servicestation.app.converters.StringToStationConverter" />
-				<bean class="com.expositds.sjc.servicestation.app.converters.StringToPersonConverter" />
-				<bean class="com.expositds.sjc.servicestation.app.converters.StringToSiteUserConverter" />
-				<bean class="com.expositds.sjc.servicestation.app.converters.StringToOrderConverter" />
-				<bean class="com.expositds.sjc.servicestation.app.converters.StringToPartConverter" />
-				<bean class="com.expositds.sjc.servicestation.app.converters.StringToAffiliateConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.StringToServiceConverter"/>
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.StringToStationConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.StringToPersonConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.StringToSiteUserConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.StringToOrderConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.StringToPartConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.StringToAffiliateConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.AffilateEntityModelConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.AffilateProfileEntityModelConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.ClientNotificationEntityModelConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.CommentEntityModelConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.LogginerEntityModelConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.MarkEntityModelConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.MechanicProfileEntityModelConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.OrderEntityModelConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.PartEntityModelConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.PartOrderEntityModelConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.PersonEntityModelConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.ServiceEntityModelConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.SiteAggregatorEntityModelConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.SiteUserEntityModelConverter" />
 				<bean class="com.expositds.sjc.servicestation.business.service.converters.StationEntityModelConverter" />
+				<bean class="com.expositds.sjc.servicestation.business.service.converters.StationProfileEntityModelConverter" />
 			</list>
 		</property>
+		
 	</bean>
 
 

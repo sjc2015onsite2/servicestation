@@ -9,17 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 
-import com.expositds.sjc.servicestation.business.repository.dao.SiteUserDao;
-import com.expositds.sjc.servicestation.business.repository.entity.SiteUserEntity;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
-import com.expositds.sjc.servicestation.domain.model.Mark;
 import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.AuthorizedUserSite;
 import com.expositds.sjc.servicestation.domain.service.Identification;
-import com.expositds.sjc.servicestation.domain.service.NonAuthorizedUserSite;
-import com.expositds.sjc.servicestation.domain.service.Site;
 
 /**
  * <b>CreateMarkController</b>
@@ -35,9 +31,6 @@ public class CreateMarkController {
 
 	@Autowired
 	private AuthorizedUserSite authorizedUserSite;
-	
-	@Autowired
-	private SiteUserDao siteUserDao;
 	
 	@Autowired
 	private Identification identificationService;

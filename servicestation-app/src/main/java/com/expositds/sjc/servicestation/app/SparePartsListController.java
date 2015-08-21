@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,7 +42,7 @@ public class SparePartsListController {
 	public ModelAndView showListOfSpareParts(Authentication auth) {
 		
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
-		Person mechanic = identificationService.getPersonId(logginer.getId().toString());
+		Person mechanic = identificationService.getPersonById(logginer.getId().toString());
 		Affilate affilate = identificationService.getAffilateByMechanic(mechanic);
 		
 		Map<Part,Integer> parts = new HashMap<>();
@@ -60,7 +61,7 @@ public class SparePartsListController {
 			@RequestParam(value = "quantity") Integer quantity) {
 
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
-		Person mechanic = identificationService.getPersonId(logginer.getId().toString());
+		Person mechanic = identificationService.getPersonById(logginer.getId().toString());
 		
 		Map<Part, Integer> order = new HashMap<>();
 		order.put(part, quantity);

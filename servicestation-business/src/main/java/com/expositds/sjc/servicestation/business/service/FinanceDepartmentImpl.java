@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
 import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
@@ -17,7 +18,6 @@ import com.expositds.sjc.servicestation.business.repository.entity.AffilateProfi
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
@@ -47,7 +47,7 @@ public class FinanceDepartmentImpl implements FinanceDepartment {
 	private StationAffilate stationAffilate;
 	
 	@Autowired
-	private EntityModelConverter entityModelConverter;
+	private ConversionService conversionService;
 	
 	@Autowired
 	private Identification identification;
@@ -58,7 +58,7 @@ public class FinanceDepartmentImpl implements FinanceDepartment {
 		Set<Person> employees = new HashSet<>();
 		
 		for (PersonEntity currentEmployeeEntity : stationEntity.getPersons())
-			employees.add((Person) entityModelConverter.convert(currentEmployeeEntity, Person.class));
+			employees.add(conversionService.convert(currentEmployeeEntity, Person.class));
 		
 		return employees;
 	}
@@ -78,7 +78,7 @@ public class FinanceDepartmentImpl implements FinanceDepartment {
 			if (currentOrderEntity.getStatus().equals(OrderStatus.READY) &&
 					currentOrderEntity.getCompleteDate().compareTo(startDate) >= 0 &&
 					currentOrderEntity.getCompleteDate().compareTo(endDate) <= 0)
-				readyOrders.add((Order) entityModelConverter.convert(currentOrderEntity, Order.class));
+				readyOrders.add(conversionService.convert(currentOrderEntity, Order.class));
 		
 		return readyOrders;
 	}
@@ -92,7 +92,7 @@ public class FinanceDepartmentImpl implements FinanceDepartment {
 		for (OrderEntity currentOrderEntity : stationEntity.getOrders().keySet())
 			if (currentOrderEntity.getCompleteDate().compareTo(startDate) >= 0 &&
 					currentOrderEntity.getCompleteDate().compareTo(endDate) <= 0)
-				orders.add((Order) entityModelConverter.convert(currentOrderEntity, Order.class));
+				orders.add(conversionService.convert(currentOrderEntity, Order.class));
 		
 		return orders;
 	}

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
 import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
@@ -12,7 +13,6 @@ import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
 import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Station;
@@ -36,7 +36,7 @@ public class HeadOfficeImpl implements HeadOffice {
 	private OrderDao orderDao;
 	
 	@Autowired
-	private EntityModelConverter entityModelConverterTool;
+	private ConversionService conversionService;
 	
 	@Autowired
 	private Identification identificationService;
@@ -62,7 +62,7 @@ public class HeadOfficeImpl implements HeadOffice {
 		
 		for (OrderEntity currentOrderEntity : stationEntity.getOrders().keySet())
 			if (stationEntity.getOrders().get(currentOrderEntity).getAffilateId() == 1)
-				orders.add((Order) entityModelConverterTool.convert(currentOrderEntity, Order.class));
+				orders.add(conversionService.convert(currentOrderEntity, Order.class));
 		
 		return orders;
 	}

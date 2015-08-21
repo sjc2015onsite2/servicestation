@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
 import com.expositds.sjc.servicestation.business.repository.dao.SiteAggregatorDao;
@@ -16,7 +17,6 @@ import com.expositds.sjc.servicestation.business.repository.entity.MechanicProfi
 import com.expositds.sjc.servicestation.business.repository.entity.PersonEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationProfileEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Comment;
 import com.expositds.sjc.servicestation.domain.model.LogginerRole;
 import com.expositds.sjc.servicestation.domain.model.Mark;
@@ -38,7 +38,7 @@ public class AggregatorImpl implements Aggregator {
 	private StationDao stationDao;
 	
 	@Autowired
-	private EntityModelConverter entityModelConverter;
+	private ConversionService conversionService;
 	
 	@Override
 	public Set<Comment> getServiceStationAllComments(Station seviceStation) {
@@ -50,7 +50,7 @@ public class AggregatorImpl implements Aggregator {
 		Set<Comment> commentsModel = new HashSet<>();
 		
 		for (CommentEntity currentCommentEntity : commentsEntity) 
-			commentsModel.add((Comment) entityModelConverter.convert(currentCommentEntity, Comment.class));
+			commentsModel.add(conversionService.convert(currentCommentEntity, Comment.class));
 		
 		return commentsModel;
 	}
@@ -63,7 +63,7 @@ public class AggregatorImpl implements Aggregator {
 		
 		for (PersonEntity currentPersonEntity : stationEntity.getPersons())
 			if (currentPersonEntity.getRole().equals(LogginerRole.MECHANIC))
-				comments.put((Person) entityModelConverter.convert(currentPersonEntity, Person.class), 
+				comments.put(conversionService.convert(currentPersonEntity, Person.class), 
 						getMechanicComments(currentPersonEntity));
 		
 		return comments;
@@ -78,7 +78,7 @@ public class AggregatorImpl implements Aggregator {
 		Set<Mark> marks = new HashSet<>();
 		
 		for (MarkEntity currentMark : stationProfileEntity.getMarks())
-			marks.add((Mark) entityModelConverter.convert(currentMark, Mark.class));
+			marks.add(conversionService.convert(currentMark, Mark.class));
 		
 		return marks;
 	}
@@ -91,7 +91,7 @@ public class AggregatorImpl implements Aggregator {
 		Set<Comment> commentsModel = new HashSet<>();
 		
 		for (CommentEntity currentCommentEntity : commentsEntity) 
-			commentsModel.add((Comment) entityModelConverter.convert(currentCommentEntity, Comment.class));
+			commentsModel.add(conversionService.convert(currentCommentEntity, Comment.class));
 		
 		return commentsModel;
 	}

@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,6 @@ import com.expositds.sjc.servicestation.business.repository.dao.ClientNotificati
 import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.entity.ClientNotificationEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.ModelEntityConverter;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
@@ -39,7 +39,7 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 	private WorkShop workShopService;
 	
 	@Autowired
-	private ModelEntityConverter modelEntityConverterTool;
+	private ConversionService conversionService;
 	
 	@Override
 	public Set<Order> getMechanicOrders(Person mechanic) {
@@ -96,7 +96,7 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 		
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
 		
-		orderEntity.setParts(modelEntityConverterTool.mapPartIntegerConvert(parts));
+		orderEntity.setParts(conversionService.mapPartIntegerConvert(parts));
 		
 		orderDao.update(orderEntity);
 		
@@ -107,7 +107,7 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
 		
 		orderEntity.getOrderServicesPriceList().
-			putAll(modelEntityConverterTool.mapServiceIntegerConverter(servicesPriceList));
+			putAll(conversionService.mapServiceIntegerConverter(servicesPriceList));
 		
 		orderDao.update(orderEntity);
 	}
@@ -121,7 +121,7 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 		
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
 		
-		orderEntity.setServices(modelEntityConverterTool.listServiceConverter(order.getServices()));
+		orderEntity.setServices(conversionService.listServiceConverter(order.getServices()));
 		
 		orderDao.update(orderEntity);
 	}

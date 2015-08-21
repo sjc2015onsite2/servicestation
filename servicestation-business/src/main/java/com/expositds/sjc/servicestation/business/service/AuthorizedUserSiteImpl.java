@@ -13,7 +13,6 @@ import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.SiteUserEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
-import com.expositds.sjc.servicestation.business.repository.tools.EntityModelConverter;
 import com.expositds.sjc.servicestation.domain.model.Comment;
 import com.expositds.sjc.servicestation.domain.model.Mark;
 import com.expositds.sjc.servicestation.domain.model.Order;
@@ -49,9 +48,6 @@ public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUs
 	@Autowired
 	private ConversionService conversionService;
 	
-	@Autowired
-	private EntityModelConverter entityModelConverterTool;
-	
 	@Override
 	public Map<Order, Station> getOrders(SiteUser user) {
 		Map<OrderEntity, StationEntity> ordersEntity = siteUserDao.findById(user.getId()).getOrders();
@@ -59,7 +55,7 @@ public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUs
 		Map<Order, Station> ordersModel = new HashMap<>();
 		
 		for (OrderEntity currentOrderEntity : ordersEntity.keySet()) {
-			Order currentOrder = (Order) entityModelConverterTool.convert(currentOrderEntity, Order.class);
+			Order currentOrder = (Order) conversionService.convert(currentOrderEntity, Order.class);
 			StationEntity currentStationEntity = ordersEntity.get(currentOrderEntity);
 			Station currentStation = conversionService.convert(currentStationEntity, Station.class);
 			ordersModel.put(currentOrder, currentStation);

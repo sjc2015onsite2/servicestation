@@ -1,5 +1,4 @@
-package com.expositds.sjc.servicestation.app.converters;
-
+package com.expositds.sjc.servicestation.business.service.converters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
@@ -9,19 +8,18 @@ import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.service.Identification;
 
 /**
- * @author Oleg Ryzhko
+ * @author Alexey Suslov
  *
  */
-
 @Component
 public class StringToSiteUserConverter implements Converter<String, SiteUser> {
 
 	@Autowired
-	private Identification identificationService;
+	private Identification identification;
 	
 	@Override
-	public SiteUser convert(String arg0) {
-		return identificationService.getSiteUserById(arg0);
+	public SiteUser convert(String id) {
+		return identification.getSiteUserById(id);
 	}
 
 }

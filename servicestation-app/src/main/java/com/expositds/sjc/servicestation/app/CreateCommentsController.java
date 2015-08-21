@@ -2,9 +2,8 @@ package com.expositds.sjc.servicestation.app;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,15 +18,13 @@ import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.AuthorizedUserSite;
 import com.expositds.sjc.servicestation.domain.service.Identification;
-import com.expositds.sjc.servicestation.domain.service.NonAuthorizedUserSite;
 
 /**
- * <b>CreateCommentsController</b>
+ * CreateCommentsController
  * 
 
  * @author Sergey Rybakov
 */
-
 @Controller
 public class CreateCommentsController {
 

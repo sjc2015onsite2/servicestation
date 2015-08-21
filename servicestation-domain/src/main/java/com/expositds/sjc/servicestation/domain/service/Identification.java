@@ -39,13 +39,13 @@ public interface Identification {
 	
 	public Order getOrderId(String id);
 	
-	public Part getPartId(String id);
+	public Part getPartById(String id);
 	
 	public PartOrder getPartOrderById(String id);
 	
-	public Person getPersonId(String id);
+	public Person getPersonById(String id);
 	
-	public Service getServiceId(String id);
+	public Service getServiceById(String id);
 	
 	public SiteAggregator getSiteAggregatorById(String id);
 	

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,7 +52,7 @@ public class MechanicOrdersController {
 	public ModelAndView showOrdersOfMechanic(Authentication auth) {
 		
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
-		Person mechanic = identificationService.getPersonId(logginer.getId().toString());
+		Person mechanic = identificationService.getPersonById(logginer.getId().toString());
 		Set<Order> myorders = mechanicService.getMechanicOrders(mechanic);
 		
 		ModelAndView mav = new ModelAndView();
@@ -78,7 +79,7 @@ public class MechanicOrdersController {
 			Authentication auth) {
 		
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
-		Person mechanic = identificationService.getPersonId(logginer.getId().toString());
+		Person mechanic = identificationService.getPersonById(logginer.getId().toString());
 		
 		mechanicService.giveOrder(mechanic, order);
 		ModelAndView mav = new ModelAndView();
@@ -101,7 +102,7 @@ public class MechanicOrdersController {
 	public ModelAndView showFreeOrders(Authentication auth){
 		
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
-		Person mechanic = identificationService.getPersonId(logginer.getId().toString());
+		Person mechanic = identificationService.getPersonById(logginer.getId().toString());
 		
 		Set<Order> freeorders = mechanicService.getMechanicFreeOrders(mechanic);
 		

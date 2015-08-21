@@ -1,4 +1,4 @@
-package com.expositds.sjc.servicestation.app.converters;
+package com.expositds.sjc.servicestation.business.service.converters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
@@ -8,17 +8,17 @@ import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.service.Identification;
 
 /**
- * @author Rybakov Sergey
+ * @author Alexey Suslov
  *
  */
 @Component
 public class StringToPartConverter implements Converter<String, Part> {
 
 	@Autowired
-	private Identification identificationService;
+	private Identification identification;
 	
 	@Override
-	public Part convert(String arg0) {
-		return identificationService.getPartId(arg0);
+	public Part convert(String id) {
+		return identification.getPartById(id);
 	}
 }
