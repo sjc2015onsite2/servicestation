@@ -1,6 +1,8 @@
 
 package com.expositds.sjc.servicestation.app;
 
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -55,13 +57,18 @@ public class CustomerOrdersController {
 	
 		@RequestMapping(value = "/user/myorders/{orderId}", method = RequestMethod.GET)
 		public ModelAndView myorder(
-				
 				@PathVariable("orderId") Order order) {
+			
+			Map<Order,String> ordermap = new HashMap<>();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+			ordermap.put(order, dateFormat.format(order.getCompleteDate().getTime()));
 			
 			Set<Station> stations = authorizedUserSiteService.getServiceStations();
 			
 			Station station = identificationService.getStationByOrder(order);
+			Person mechanic = identificationService.getMechanicByOrder(order);
 			ModelAndView mav = new ModelAndView();
+			mav.addObject("mechanic", mechanic);
 			mav.addObject("station", station);
 			mav.addObject("order", order);
 			mav.addObject("stations", stations);

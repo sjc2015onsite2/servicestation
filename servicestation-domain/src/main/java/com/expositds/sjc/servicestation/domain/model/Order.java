@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Класс представляет собой заяву на ремонт.
@@ -145,6 +146,8 @@ public class Order {
 	public void setParts(HashMap<Part, Integer> parts) {
 		this.parts = parts;
 	}
+	
+	
 
 	public ArrayList<Service> getServices() {
 		return services;

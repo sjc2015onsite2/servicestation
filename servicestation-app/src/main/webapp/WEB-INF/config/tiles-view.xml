@@ -80,6 +80,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/mechanic/spare.parts.list.jsp" />
 	</definition>
 	
+	<definition name="parts.orders.list" extends="base.definition">
+		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/mechanic/parts.orders.list.jsp" />
+	</definition>
+	
+	
 	<definition name="notifications.log" extends="base.definition">
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/mechanic/notifications.log.jsp" />

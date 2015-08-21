@@ -11,13 +11,13 @@
     	<th width="20%">Status</th>
     	<th width="20%">Date</th>
     	</tr>
-    	<c:forEach var="order" items="${myorders}">
-    	<c:url value="/mechanic/myorders/${order.orderId }" var="orderUrl" />
+    	<c:forEach var="order" items="${ordersanddate}">
+    	<c:url value="/mechanic/myorders/${order.key.orderId }" var="orderUrl" />
         <tr class="warning">
-        <td>Order 3</td>
-        <td><a href="${orderUrl }" >${order.problemDescription}</a></td>
-        <td>on the go</td>
-        <td>07.08.2015</td>
+        <td>${order.key.orderId }</td>
+        <td><a href="${orderUrl }" >${order.key.problemDescription}</a></td>
+        <td>${order.key.status }</td>
+        <td>${order.value }</td>
         </tr>
         </c:forEach>
     </table>
