@@ -145,6 +145,8 @@ public class Order {
 	public void setParts(HashMap<Part, Integer> parts) {
 		this.parts = parts;
 	}
+	
+	
 
 	public Map<Service, Integer> getServices() {
 		return services;
