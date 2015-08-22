@@ -44,8 +44,9 @@ public abstract class ReportableImpl implements Reportable {
 		Integer profit = 0;
 		
 		for (Order currentOrder : readyOrders) 
-			for (Service currentService : currentOrder.getServices()) 
-				profit += currentOrder.getOrderServicesPriceList().get(currentService);
+			for (Service currentService : currentOrder.getServices().keySet()) 
+				profit += (currentOrder.getOrderServicesPriceList().get(currentService) * 
+						currentOrder.getServices().get(currentService));
 		
 		return profit;
 	}
@@ -57,8 +58,9 @@ public abstract class ReportableImpl implements Reportable {
 		Integer profit = 0;
 		
 		for (Order currentOrder : readyOrders) 
-			for (Service currentService : currentOrder.getServices()) 
-				profit += currentOrder.getOrderServicesPriceList().get(currentService);
+			for (Service currentService : currentOrder.getServices().keySet()) 
+				profit += (currentOrder.getOrderServicesPriceList().get(currentService) * 
+						currentOrder.getServices().get(currentService));
 		
 		return profit;
 	}

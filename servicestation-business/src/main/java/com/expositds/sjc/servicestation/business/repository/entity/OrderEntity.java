@@ -1,9 +1,7 @@
 package com.expositds.sjc.servicestation.business.repository.entity;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.persistence.CollectionTable;
@@ -16,9 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.MapKeyJoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -57,14 +53,15 @@ public class OrderEntity {
 	private Map<PartEntity, Integer> parts;
 	
 	/**
-	 * Список работ, услуг в заказе.
+	 * Список работ, услуг и их количество в заказе.
 	 */
-	@OneToMany
-	@JoinTable(
-			name = "order_has_services",
-			joinColumns = @JoinColumn(name = "order_id"),
-			inverseJoinColumns = @JoinColumn(name = "service_id"))
-	private List<ServiceEntity> services;
+	@ElementCollection
+	@CollectionTable(
+			name = "orders_services_count",
+			joinColumns = @JoinColumn(name = "order_id"))
+	@MapKeyJoinColumn(name = "service_id")
+	@Column(name = "count")
+	private Map<ServiceEntity, Integer> services;
 	
 	/**
 	 * Зафиксированный для данной заявки список цен на услуги, работы
@@ -136,7 +133,7 @@ public class OrderEntity {
 		this.createDate = createDate;
 		this.status = OrderStatus.NEW;
 		this.parts = new HashMap<>();
-		this.services = new ArrayList<>();
+		this.services = new HashMap<>();
 		this.orderServicesPriceList = new HashMap<>();
 	}
 	
@@ -194,11 +191,11 @@ public class OrderEntity {
 		this.parts = parts;
 	}
 
-	public List<ServiceEntity> getServices() {
+	public Map<ServiceEntity, Integer> getServices() {
 		return services;
 	}
 
-	public void setServices(List<ServiceEntity> services) {
+	public void setServices(Map<ServiceEntity, Integer> services) {
 		this.services = services;
 	}
 

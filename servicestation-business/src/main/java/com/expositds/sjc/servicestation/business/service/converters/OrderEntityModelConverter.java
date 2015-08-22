@@ -1,6 +1,5 @@
 package com.expositds.sjc.servicestation.business.service.converters;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.core.convert.converter.Converter;
@@ -63,10 +62,10 @@ public class OrderEntityModelConverter implements Converter<OrderEntity, Order> 
 			order.getParts().put(currentPart, currentCount);
 		}
 		
-		order.setServices(new ArrayList<Service>());
-		for (ServiceEntity currentServiceEntity : source.getServices()) {
+		order.setServices(new HashMap<Service, Integer>());
+		for (ServiceEntity currentServiceEntity : source.getServices().keySet()) {
 			Service currentService = serviceEntityModelConverter.convert(currentServiceEntity);
-			order.getServices().add(currentService);
+			order.getServices().put(currentService, source.getServices().get(currentServiceEntity));
 		}
 		
 		return order;

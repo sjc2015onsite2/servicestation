@@ -1,9 +1,9 @@
 package com.expositds.sjc.servicestation.domain.model;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Класс представляет собой заяву на ремонт.
@@ -23,9 +23,9 @@ public class Order {
 	private HashMap<Part, Integer> parts = new HashMap<>();
 	
 	/**
-	 * Список работ, услуг в заказе.
+	 * Список работ, услуг и их количество в заказе.
 	 */
-	private ArrayList<Service> services = new ArrayList<Service>();
+	private Map<Service, Integer> services = new HashMap<>();
 	
 	/**
 	 * Зафиксированный для данной заявки список цен на услуги, работы
@@ -146,11 +146,11 @@ public class Order {
 		this.parts = parts;
 	}
 
-	public ArrayList<Service> getServices() {
+	public Map<Service, Integer> getServices() {
 		return services;
 	}
 
-	public void setServices(ArrayList<Service> services) {
+	public void setServices(Map<Service, Integer> services) {
 		this.services = services;
 	}
 

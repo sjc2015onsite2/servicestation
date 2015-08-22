@@ -8,17 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
+import com.expositds.sjc.servicestation.business.repository.dao.AffilateDao;
 import com.expositds.sjc.servicestation.business.repository.dao.ClientNotificationDao;
 import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.PartDao;
 import com.expositds.sjc.servicestation.business.repository.dao.ServiceDao;
+import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.ClientNotificationEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
+import com.expositds.sjc.servicestation.business.repository.entity.PartEntity;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.model.Person;
+import com.expositds.sjc.servicestation.domain.service.Identification;
 import com.expositds.sjc.servicestation.domain.service.Mechanic;
 import com.expositds.sjc.servicestation.domain.service.WorkShop;
 
@@ -40,10 +44,16 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 	private PartDao partDao;
 	
 	@Autowired
+	private AffilateDao affilateDao;
+	
+	@Autowired
 	private ClientNotificationDao clientNotificationDao;
 	
 	@Autowired
 	private WorkShop workShopService;
+	
+	@Autowired
+	private Identification identification;
 	
 	@Override
 	public Set<Order> getMechanicOrders(Person mechanic) {
@@ -92,18 +102,22 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 	@Override
 	public void addPartsToOrder(Order order, Map<Part, Integer> parts) {
 		
-		for (Part currentPart : parts.keySet()) {
-			if (order.getParts().containsKey(currentPart)) 
-				order.getParts().put(currentPart, order.getParts().get(currentPart) + parts.get(currentPart));
-			else order.getParts().put(currentPart, parts.get(currentPart));
-		}
-		
+		Affilate affilate = identification.getAffilateByOrder(order);
+		AffilateEntity affilateEntity = affilateDao.findById(affilate.getAffilateId());
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
 		
-		for (Part currentPart : parts.keySet()) 
-			orderEntity.getParts().put(partDao.findById(currentPart.getPartId()), parts.get(currentPart));
+		
+		for (Part currentPart : parts.keySet()) {
+			PartEntity currentPartEntity = partDao.findById(currentPart.getPartId());
+			
+			if (orderEntity.getParts().containsKey(currentPartEntity)) 
+				orderEntity.getParts().put(currentPartEntity, orderEntity.getParts().get(currentPartEntity) + parts.get(currentPart));
+			else orderEntity.getParts().put(currentPartEntity, parts.get(currentPart));
+			affilateEntity.getParts().put(currentPartEntity, affilateEntity.getParts().get(currentPartEntity) - parts.get(currentPart));
+		}
 		
 		orderDao.update(orderEntity);
+		affilateDao.update(affilateEntity);
 		
 	}
 
@@ -120,13 +134,12 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 	@Override
 	public void addServicesToOrder(Order order, Map<com.expositds.sjc.servicestation.domain.model.Service, Integer> services) {
 		
-		for (com.expositds.sjc.servicestation.domain.model.Service currentService : services.keySet()) 
-			for (int i = 0; i < services.get(currentService); i++) 
-				order.getServices().add(currentService);
-		
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
 		
-		// TODO orderEntity.setServices(conversionService.listServiceConverter(order.getServices()));
+		for (com.expositds.sjc.servicestation.domain.model.Service currentService : services.keySet()) 
+			if (orderEntity.getServices().containsKey(serviceDao.findById(currentService.getServiceId())))
+				orderEntity.getServices().put(serviceDao.findById(currentService.getServiceId()), order.getServices().get(currentService) + services.get(currentService));
+			else orderEntity.getServices().put(serviceDao.findById(currentService.getServiceId()), services.get(currentService));
 		
 		orderDao.update(orderEntity);
 	}

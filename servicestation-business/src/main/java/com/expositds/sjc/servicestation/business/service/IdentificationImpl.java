@@ -263,5 +263,15 @@ public class IdentificationImpl implements Identification, Serializable {
 		
 		return null;
 	}
+
+	@Override
+	public Affilate getAffilateByOrder(Order order) {
+		Station station = getStationByOrder(order);
+		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
+		StationEntity stationEntity = stationDao.findById(station.getStationId());
+		AffilateEntity affilateEntity = stationEntity.getOrders().get(orderEntity);
+		
+		return affilateEntityModelConverter.convert(affilateEntity);
+	}
 	
 }
