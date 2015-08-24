@@ -75,11 +75,19 @@ public class CustomerOrdersController {
 				i++;
 			}
 			
+			boolean change = false;
+			if(order.getCompleteDate() != null){
+				if(order.getCompleteDate().compareTo(order.getCreateDate()) < 0){
+					change = true;
+				}
+			}
+			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("mechanic", identificationService.getMechanicByOrder(order));
 			mav.addObject("station", identificationService.getStationByOrder(order));
 			mav.addObject("stations", authorizedUserSiteService.getServiceStations());
 			mav.addObject("partstoorder", order.getParts());
+			mav.addObject("change", change); 
 			mav.addObject("cost", cost); 
 			mav.addObject("serviceRows", serviceRows); 
 			mav.addObject("completedate", completedate);

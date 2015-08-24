@@ -9,12 +9,14 @@
 		<div class="col-sm-6">
 			<h4 class="text-center">Order ${order.orderId}</h4>
 		</div>
-		<security:authorize access="hasRole('ROLE_USER')">
-			<div>
-				<button data-toggle="modal" data-target="#change-modal"
-					type="button" class="btn btn-warning col-sm-offset-3">Change station</button>
-			</div>
-		</security:authorize>
+		<c:if test="${change eq true }">
+			<security:authorize access="hasRole('ROLE_USER')">
+				<div>
+					<button data-toggle="modal" data-target="#change-modal"
+						type="button" class="btn btn-warning col-sm-offset-3">Change station</button>
+				</div>
+			</security:authorize>
+		</c:if>
 	</div>
 
 	<security:authorize access="hasRole('ROLE_USER')">

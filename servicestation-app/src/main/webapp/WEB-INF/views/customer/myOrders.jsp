@@ -13,6 +13,7 @@
   		<th>Mechanic</th>
   		<th>price</th>
   		<th>Date</th>
+  		<th>Notification</th>
   		</tr>
   		<c:forEach var="order" items="${orders}" >
   			<c:url value="/user/myorders/${order.key.orderId}" var="myorder" />
@@ -23,6 +24,11 @@
   			<td>Mechanic</td>
   			<td>000000000</td>
   			<td>date of registration</td>
+  			<td>
+  				<c:if test="${not empty order.key.notification }">
+  					<span class="glyphicon glyphicon-envelope"></span>
+  				</c:if>
+  			</td>
   			</tr>
   		</c:forEach>
   	</table>
