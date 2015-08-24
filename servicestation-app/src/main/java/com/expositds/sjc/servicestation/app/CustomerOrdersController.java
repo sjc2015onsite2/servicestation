@@ -3,12 +3,9 @@ package com.expositds.sjc.servicestation.app;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;
-import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.AuthorizedUserSite;
@@ -33,6 +29,7 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
 
 
 @Controller
+@RequestMapping("/user")
 public class CustomerOrdersController {
 
 	@Autowired
@@ -41,43 +38,43 @@ public class CustomerOrdersController {
 	@Autowired
 	private Identification identificationService;
 	
-		@RequestMapping(value = "/user/myorders", method = { RequestMethod.GET })
+		@RequestMapping(value = "/myorders", method = RequestMethod.GET)
 		public ModelAndView myorders(Authentication auth) {
 			
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
 			SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
 			
-			Map<Order, Station> orders = authorizedUserSiteService.getOrders(user);			
-			
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("orders", orders);
+			mav.addObject("orders", authorizedUserSiteService.getOrders(user));
 			mav.setViewName("myOrders");
 			return mav;
 		}
 	
-		@RequestMapping(value = "/user/myorders/{orderId}", method = RequestMethod.GET)
+		@RequestMapping(value = "/myorders/{orderId}", method = RequestMethod.GET)
 		public ModelAndView myorder(
 				@PathVariable("orderId") Order order) {
 			
-			Map<Order,String> ordermap = new HashMap<>();
+			String completedate = new String();
+			String createdate = new String();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-			ordermap.put(order, dateFormat.format(order.getCompleteDate().getTime()));
+			if(order.getCompleteDate() != null)
+				completedate = dateFormat.format(order.getCompleteDate().getTime());
+			createdate = dateFormat.format(order.getCreateDate().getTime());
 			
-			Set<Station> stations = authorizedUserSiteService.getServiceStations();
-			
-			Station station = identificationService.getStationByOrder(order);
-			Person mechanic = identificationService.getMechanicByOrder(order);
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("mechanic", mechanic);
-			mav.addObject("station", station);
+			mav.addObject("mechanic", identificationService.getMechanicByOrder(order));
+			mav.addObject("station", identificationService.getStationByOrder(order));
+			mav.addObject("stations", authorizedUserSiteService.getServiceStations());
+			mav.addObject("partstoorder", order.getParts());
+			mav.addObject("completedate", completedate);
+			mav.addObject("createdate", createdate);
 			mav.addObject("order", order);
-			mav.addObject("stations", stations);
 			mav.setViewName("customer.order.data");
 			
 			return mav;
 		}
 		
-		@RequestMapping(value = "/user/myorders", method = RequestMethod.POST)
+		@RequestMapping(value = "/myorders/changestation", method = RequestMethod.POST)
 		public ModelAndView changeServiceStation(
 				@RequestParam(value = "orderId") Order order,
 				@RequestParam(value = "stationId") Station station,
@@ -90,7 +87,7 @@ public class CustomerOrdersController {
 			   
 			   ModelAndView mav = new ModelAndView();
 			   Long id = order.getOrderId();
-				mav.setViewName("redirect:/user/myorders/"+id);
+			   mav.setViewName("redirect:/user/myorders/"+id);
 			
 			return mav;
 		}

@@ -84,7 +84,8 @@ public class MechanicOrdersController {
 		String completedate = new String();
 		String createdate = new String();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-		completedate = dateFormat.format(order.getCompleteDate().getTime());
+		if(order.getCompleteDate() != null)
+			completedate = dateFormat.format(order.getCompleteDate().getTime());
 		createdate = dateFormat.format(order.getCreateDate().getTime());
 		
 		Person mechanic = identificationService.getMechanicByOrder(order);
@@ -159,6 +160,19 @@ public class MechanicOrdersController {
 		cal.setTime(sdf.parse(completedate));
 		
 		mechanicService.setOrderCompletionDate(order, cal);
+		
+		ModelAndView mav = new ModelAndView();
+		Long id = order.getOrderId();
+		mav.setViewName("redirect:/mechanic/myorders/"+id);
+	return mav;
+	}
+	
+	@RequestMapping(value = "/myorders/nitification", method = RequestMethod.POST)
+	public ModelAndView createNotification(
+			@RequestParam(value = "orderId") Order order,
+			@RequestParam String notification) {	
+		
+		mechanicService.createClientNotification(order, notification);
 		
 		ModelAndView mav = new ModelAndView();
 		Long id = order.getOrderId();

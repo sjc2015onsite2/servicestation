@@ -51,7 +51,7 @@ public class CreateCommentsController {
 			@RequestParam String notvisible){
 		
 		boolean visible = true;
-		if(notvisible == "yes"){
+		if(notvisible.equals("yes")){
 			visible = false;
 		}
 		
@@ -93,7 +93,7 @@ public class CreateCommentsController {
 			@RequestParam String notvisible){
 		
 		boolean visible = true;
-		if(notvisible == "yes"){
+		if(notvisible.equals("yes")){
 			visible = false;
 		}
 		
