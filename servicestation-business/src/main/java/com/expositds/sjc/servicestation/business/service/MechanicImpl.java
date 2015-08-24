@@ -17,6 +17,7 @@ import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntit
 import com.expositds.sjc.servicestation.business.repository.entity.ClientNotificationEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PartEntity;
+import com.expositds.sjc.servicestation.business.repository.entity.ServiceEntity;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
@@ -129,8 +130,8 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 		AffilateEntity affilateEntity = affilateDao.findById(affilate.getAffilateId());
 		
 		for (com.expositds.sjc.servicestation.domain.model.Service currentService : servicesPriceList) {
-			OrderEntity currentOrderEntity = orderDao.findById(currentService.getServiceId());
-			orderEntity.getOrderServicesPriceList().put(serviceDao.findById(currentService.getServiceId()), affilateEntity.getServices().get(currentOrderEntity));
+			ServiceEntity currentServiceEntity = serviceDao.findById(currentService.getServiceId());
+			orderEntity.getOrderServicesPriceList().put(serviceDao.findById(currentService.getServiceId()), affilateEntity.getServices().get(currentServiceEntity));
 		}	
 		orderDao.update(orderEntity);
 	}
