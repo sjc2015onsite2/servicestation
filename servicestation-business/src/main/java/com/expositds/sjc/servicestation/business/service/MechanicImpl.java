@@ -122,19 +122,23 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 	}
 
 	@Override
-	public void addServicesPriceListToOrder(Order order, Map<com.expositds.sjc.servicestation.domain.model.Service, Integer> servicesPriceList) {
+	public void addServicesPriceListToOrder(Order order, Set<com.expositds.sjc.servicestation.domain.model.Service> servicesPriceList) {
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
 		
-		for (com.expositds.sjc.servicestation.domain.model.Service currentService : servicesPriceList.keySet())
-			orderEntity.getOrderServicesPriceList().put(serviceDao.findById(currentService.getServiceId()), servicesPriceList.get(currentService));
+		Affilate affilate = identification.getAffilateByOrder(order);
+		AffilateEntity affilateEntity = affilateDao.findById(affilate.getAffilateId());
 		
+		for (com.expositds.sjc.servicestation.domain.model.Service currentService : servicesPriceList) {
+			OrderEntity currentOrderEntity = orderDao.findById(currentService.getServiceId());
+			orderEntity.getOrderServicesPriceList().put(serviceDao.findById(currentService.getServiceId()), affilateEntity.getServices().get(currentOrderEntity));
+		}	
 		orderDao.update(orderEntity);
 	}
 
 	@Override
 	public void addServicesToOrder(Order order, Map<com.expositds.sjc.servicestation.domain.model.Service, Integer> services) {
 		
-		addServicesPriceListToOrder(order, services);
+		addServicesPriceListToOrder(order, services.keySet());
 		
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
 		

@@ -83,11 +83,11 @@ public interface Mechanic extends StoreKeeper {
 	public void addPartsToOrder(Order order, Map<Part, Integer> parts);
 
 	/**
-	 * Метод добавляет в заданную заявку лист цен на услуги.
+	 * Метод добавляет в заданную заявку лист цен на услуги. Цены берутся из филиала.
 	 * @param order заявка
-	 * @param servicesPriceList список услуг с ценами 
+	 * @param servicesPriceList список услуг 
 	 */
-	public void addServicesPriceListToOrder(Order order, Map<Service, Integer> servicesPriceList);
+	public void addServicesPriceListToOrder(Order order, Set<Service> servicesPriceList);
 	
 	/**
 	 * Метод добавляет к заданной заявке заданный список услуг с указанием их количества.
