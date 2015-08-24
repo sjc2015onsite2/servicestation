@@ -116,4 +116,21 @@ public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUs
 		siteService.publicMechanicComment(mechanic, comment);
 	}
 
+	@Override
+	public Map<Order, Station> getOrdersByPage(SiteUser user, Integer page, Integer size) {
+		
+		Map<OrderEntity, StationEntity> ordersEntity = siteUserDao.findByCriteria(criterion)
+		
+		Map<Order, Station> ordersModel = new HashMap<>();
+		
+		for (OrderEntity currentOrderEntity : ordersEntity.keySet()) {
+			Order currentOrder = (Order) conversionService.convert(currentOrderEntity, Order.class);
+			StationEntity currentStationEntity = ordersEntity.get(currentOrderEntity);
+			Station currentStation = conversionService.convert(currentStationEntity, Station.class);
+			ordersModel.put(currentOrder, currentStation);
+		}
+		
+		return ordersModel;
+	}
+
 }
