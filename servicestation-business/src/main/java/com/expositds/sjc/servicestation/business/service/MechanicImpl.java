@@ -134,12 +134,16 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 	@Override
 	public void addServicesToOrder(Order order, Map<com.expositds.sjc.servicestation.domain.model.Service, Integer> services) {
 		
+		addServicesPriceListToOrder(order, services);
+		
 		OrderEntity orderEntity = orderDao.findById(order.getOrderId());
 		
 		for (com.expositds.sjc.servicestation.domain.model.Service currentService : services.keySet()) 
 			if (orderEntity.getServices().containsKey(serviceDao.findById(currentService.getServiceId())))
 				orderEntity.getServices().put(serviceDao.findById(currentService.getServiceId()), order.getServices().get(currentService) + services.get(currentService));
 			else orderEntity.getServices().put(serviceDao.findById(currentService.getServiceId()), services.get(currentService));
+		
+			
 		
 		orderDao.update(orderEntity);
 	}
