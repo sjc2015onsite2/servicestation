@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.24, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.24, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: servicestation
+-- Host: localhost    Database: servicestation
 -- ------------------------------------------------------
--- Server version	5.6.25-log
+-- Server version	5.6.26-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -37,7 +37,7 @@ CREATE TABLE `affilate_has_part_orders_persons` (
 
 LOCK TABLES `affilate_has_part_orders_persons` WRITE;
 /*!40000 ALTER TABLE `affilate_has_part_orders_persons` DISABLE KEYS */;
-INSERT INTO `affilate_has_part_orders_persons` VALUES (2,1,1);
+INSERT INTO `affilate_has_part_orders_persons` VALUES (2,1,1),(2,2,1);
 /*!40000 ALTER TABLE `affilate_has_part_orders_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `affilate_has_parts_counts` (
 
 LOCK TABLES `affilate_has_parts_counts` WRITE;
 /*!40000 ALTER TABLE `affilate_has_parts_counts` DISABLE KEYS */;
-INSERT INTO `affilate_has_parts_counts` VALUES (2,1,33);
+INSERT INTO `affilate_has_parts_counts` VALUES (2,1,-175),(2,2,13);
 /*!40000 ALTER TABLE `affilate_has_parts_counts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,7 +112,7 @@ CREATE TABLE `affilate_has_services_costs` (
 
 LOCK TABLES `affilate_has_services_costs` WRITE;
 /*!40000 ALTER TABLE `affilate_has_services_costs` DISABLE KEYS */;
-INSERT INTO `affilate_has_services_costs` VALUES (2,1,15);
+INSERT INTO `affilate_has_services_costs` VALUES (2,1,15),(2,2,10);
 /*!40000 ALTER TABLE `affilate_has_services_costs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +138,7 @@ CREATE TABLE `affilate_orders_persons` (
 
 LOCK TABLES `affilate_orders_persons` WRITE;
 /*!40000 ALTER TABLE `affilate_orders_persons` DISABLE KEYS */;
-INSERT INTO `affilate_orders_persons` VALUES (3,40,4),(2,43,1);
+INSERT INTO `affilate_orders_persons` VALUES (3,39,4),(3,40,4),(2,43,1);
 /*!40000 ALTER TABLE `affilate_orders_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +228,7 @@ CREATE TABLE `client_notifications` (
   `client_notification` varchar(1024) NOT NULL,
   PRIMARY KEY (`client_notification_id`),
   UNIQUE KEY `client_notification_id_UNIQUE` (`client_notification_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,7 +237,7 @@ CREATE TABLE `client_notifications` (
 
 LOCK TABLES `client_notifications` WRITE;
 /*!40000 ALTER TABLE `client_notifications` DISABLE KEYS */;
-INSERT INTO `client_notifications` VALUES (1,'Выполнение заказа переносится на неопределённый срок. Ожидаем запчастей.');
+INSERT INTO `client_notifications` VALUES (1,'Выполнение заказа переносится на неопределённый срок. Ожидаем запчастей.'),(2,'уведомление'),(3,'notification');
 /*!40000 ALTER TABLE `client_notifications` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,7 +256,7 @@ CREATE TABLE `comments` (
   `visible` bit(1) NOT NULL,
   PRIMARY KEY (`comment_id`),
   UNIQUE KEY `comment_id_UNIQUE` (`comment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -265,7 +265,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (1,'Удобная станция. Советую.','2015-08-02',2,''),(2,'Грамотный специалист. Рекомендую.','2015-08-02',3,''),(3,'}{орошая Станция!','2015-08-19',2,''),(4,'}{орошая Станция!','2015-08-19',2,''),(5,'}{орошая Станция!','2015-08-19',2,''),(6,'Да','2015-08-19',2,''),(7,'Иваныыыч!','2015-08-19',2,'');
+INSERT INTO `comments` VALUES (1,'Удобная станция. Советую.','2015-08-02',2,''),(2,'Грамотный специалист. Рекомендую.','2015-08-02',3,''),(3,'}{орошая Станция!','2015-08-19',2,''),(4,'}{орошая Станция!','2015-08-19',2,''),(5,'}{орошая Станция!','2015-08-19',2,''),(6,'Да','2015-08-19',2,''),(7,'Иваныыыч!','2015-08-19',2,''),(8,'Бесит манера общаться','2015-08-24',2,''),(9,'Сволочи, одним словом','2015-08-24',2,''),(10,'То director','2015-08-24',2,''),(11,'dirrrrr','2015-08-24',2,'\0');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,7 +312,7 @@ CREATE TABLE `marks` (
   `site_user_id` int(11) NOT NULL,
   PRIMARY KEY (`mark_id`),
   UNIQUE KEY `mark_id_UNIQUE` (`mark_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -321,7 +321,7 @@ CREATE TABLE `marks` (
 
 LOCK TABLES `marks` WRITE;
 /*!40000 ALTER TABLE `marks` DISABLE KEYS */;
-INSERT INTO `marks` VALUES (1,4,'2015-08-02',2),(2,3,'2015-08-17',2);
+INSERT INTO `marks` VALUES (1,4,'2015-08-02',2),(2,3,'2015-08-17',2),(3,5,'2015-08-24',2);
 /*!40000 ALTER TABLE `marks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -346,7 +346,7 @@ CREATE TABLE `mechanic_profile_has_comments` (
 
 LOCK TABLES `mechanic_profile_has_comments` WRITE;
 /*!40000 ALTER TABLE `mechanic_profile_has_comments` DISABLE KEYS */;
-INSERT INTO `mechanic_profile_has_comments` VALUES (1,2),(2,7);
+INSERT INTO `mechanic_profile_has_comments` VALUES (1,2),(2,7),(2,8);
 /*!40000 ALTER TABLE `mechanic_profile_has_comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -385,7 +385,7 @@ CREATE TABLE `order_has_parts_counts` (
   `order_id` int(11) NOT NULL,
   `part_id` int(11) NOT NULL,
   `count` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`order_id`)
+  PRIMARY KEY (`order_id`,`part_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -395,6 +395,7 @@ CREATE TABLE `order_has_parts_counts` (
 
 LOCK TABLES `order_has_parts_counts` WRITE;
 /*!40000 ALTER TABLE `order_has_parts_counts` DISABLE KEYS */;
+INSERT INTO `order_has_parts_counts` VALUES (43,1,208),(43,2,2);
 /*!40000 ALTER TABLE `order_has_parts_counts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -419,6 +420,7 @@ CREATE TABLE `order_has_services_costs` (
 
 LOCK TABLES `order_has_services_costs` WRITE;
 /*!40000 ALTER TABLE `order_has_services_costs` DISABLE KEYS */;
+INSERT INTO `order_has_services_costs` VALUES (43,1,10);
 /*!40000 ALTER TABLE `order_has_services_costs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -449,7 +451,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'NEW','2015-08-18',NULL,'Сильная вибрация при скорости больше 80 км//ч',NULL,NULL,NULL),(38,'NEW','2015-08-18',NULL,'Всё время открывается капот. Невозможно ехать.',NULL,NULL,NULL),(39,'NEW','2015-08-18',NULL,'Муравьи в салоне',NULL,NULL,NULL),(40,'ACCEPTED','2015-08-22',NULL,'Бора плохо тянет',NULL,NULL,NULL),(41,'NEW','2015-08-19',NULL,'Сломалась труба',NULL,NULL,NULL),(42,'NEW','2015-08-19',NULL,'поломка тачки',NULL,NULL,NULL),(43,'ACCEPTED','2015-08-19',NULL,'Коробка предач заедает. колёса отваливаются. крыша сетает. стёклы дребезжат. вонает в салоне. фары отвалились. поцарапанная и не ездит.',NULL,NULL,NULL);
+INSERT INTO `orders` VALUES (1,'NEW','2015-08-18',NULL,'Сильная вибрация при скорости больше 80 км//ч',NULL,NULL,NULL),(38,'NEW','2015-08-18',NULL,'Всё время открывается капот. Невозможно ехать.',NULL,NULL,NULL),(39,'ACCEPTED','2015-08-18','2015-08-25','Муравьи в салоне',3,NULL,NULL),(40,'ACCEPTED','2015-08-22','2015-08-25','Бора плохо тянет',NULL,NULL,NULL),(41,'NEW','2015-08-19',NULL,'Сломалась труба',NULL,NULL,NULL),(42,'NEW','2015-08-19',NULL,'поломка тачки',NULL,NULL,NULL),(43,'PENDING','2015-08-19','2015-08-25','Коробка предач заедает. колёса отваливаются. крыша сетает. стёклы дребезжат. вонает в салоне. фары отвалились. поцарапанная и не ездит.',2,NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -474,6 +476,7 @@ CREATE TABLE `orders_services_count` (
 
 LOCK TABLES `orders_services_count` WRITE;
 /*!40000 ALTER TABLE `orders_services_count` DISABLE KEYS */;
+INSERT INTO `orders_services_count` VALUES (43,1,2);
 /*!40000 ALTER TABLE `orders_services_count` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -498,7 +501,7 @@ CREATE TABLE `part_order_has_parts_counts` (
 
 LOCK TABLES `part_order_has_parts_counts` WRITE;
 /*!40000 ALTER TABLE `part_order_has_parts_counts` DISABLE KEYS */;
-INSERT INTO `part_order_has_parts_counts` VALUES (1,1,2);
+INSERT INTO `part_order_has_parts_counts` VALUES (1,1,2),(2,1,12);
 /*!40000 ALTER TABLE `part_order_has_parts_counts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -515,7 +518,7 @@ CREATE TABLE `part_orders` (
   `status` varchar(45) NOT NULL,
   `client_part_order_id` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`part_order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -524,7 +527,7 @@ CREATE TABLE `part_orders` (
 
 LOCK TABLES `part_orders` WRITE;
 /*!40000 ALTER TABLE `part_orders` DISABLE KEYS */;
-INSERT INTO `part_orders` VALUES (1,'2015-08-01','PENDING',NULL);
+INSERT INTO `part_orders` VALUES (1,'2015-08-01','PENDING',NULL),(2,'2015-08-24','PENDING',NULL);
 /*!40000 ALTER TABLE `part_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -616,7 +619,7 @@ CREATE TABLE `services` (
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`service_id`),
   UNIQUE KEY `service_id_UNIQUE` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -625,7 +628,7 @@ CREATE TABLE `services` (
 
 LOCK TABLES `services` WRITE;
 /*!40000 ALTER TABLE `services` DISABLE KEYS */;
-INSERT INTO `services` VALUES (1,'ТС-3','Замена передних тормозных колодок');
+INSERT INTO `services` VALUES (1,'ТС-3','Замена передних тормозных колодок'),(2,'TC-5','Замена задних тормозных колодок');
 /*!40000 ALTER TABLE `services` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -895,7 +898,7 @@ CREATE TABLE `station_has_orders_affilates` (
 
 LOCK TABLES `station_has_orders_affilates` WRITE;
 /*!40000 ALTER TABLE `station_has_orders_affilates` DISABLE KEYS */;
-INSERT INTO `station_has_orders_affilates` VALUES (3,1,1),(4,38,1),(2,39,1),(2,40,3),(2,41,1),(4,42,1),(1,43,2);
+INSERT INTO `station_has_orders_affilates` VALUES (3,1,1),(4,38,1),(2,39,3),(2,40,3),(2,41,1),(4,42,1),(1,43,2);
 /*!40000 ALTER TABLE `station_has_orders_affilates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -943,7 +946,7 @@ CREATE TABLE `station_profile_has_comments` (
 
 LOCK TABLES `station_profile_has_comments` WRITE;
 /*!40000 ALTER TABLE `station_profile_has_comments` DISABLE KEYS */;
-INSERT INTO `station_profile_has_comments` VALUES (1,1),(1,3),(1,4),(1,5),(2,6);
+INSERT INTO `station_profile_has_comments` VALUES (1,1),(1,3),(1,4),(1,5),(2,6),(3,9),(4,10),(4,11);
 /*!40000 ALTER TABLE `station_profile_has_comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -967,7 +970,7 @@ CREATE TABLE `station_profile_has_marks` (
 
 LOCK TABLES `station_profile_has_marks` WRITE;
 /*!40000 ALTER TABLE `station_profile_has_marks` DISABLE KEYS */;
-INSERT INTO `station_profile_has_marks` VALUES (1,1),(4,2);
+INSERT INTO `station_profile_has_marks` VALUES (1,1),(4,2),(3,3);
 /*!40000 ALTER TABLE `station_profile_has_marks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1030,4 +1033,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-24  8:59:39
+-- Dump completed on 2015-08-24 15:14:12

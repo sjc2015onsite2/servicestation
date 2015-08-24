@@ -117,8 +117,8 @@
 		</div>
 		<div class="col-sm-4">
 			<ol>
-				<c:forEach var="work" items="${addedworks }">
-					<li>${work.name }</li>
+				<c:forEach var="i" items="${serviceRows}">
+					<li>${i[0] } ${i[1] } ${i[3] }</li>
 				</c:forEach>
 			</ol>
 		</div>

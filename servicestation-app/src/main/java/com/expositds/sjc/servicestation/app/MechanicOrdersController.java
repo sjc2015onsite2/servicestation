@@ -91,21 +91,18 @@ public class MechanicOrdersController {
 		Person mechanic = identificationService.getMechanicByOrder(order);
 		Affilate affilate = identificationService.getAffilateByMechanic(mechanic);
 		
-		ArrayList<Service> addedworks = new ArrayList<>();
-		//addedworks = order.getServices();
+		Integer cost = new Integer(0);
 		
-		//Integer cost = new Integer(0);
-		
-		/*String[][] serviceRows = new String[4][order.getServices().size()];
+		String[][] serviceRows = new String[order.getServices().size()][4]; 
 		int i = 0;
-		for (Service currentService : order.getServices()) {
-			serviceRows[0][i] = currentService.getName();
-			serviceRows[1][i] = order.getServices().get(currentService);
-			serviceRows[2][i] = order.getOrderServicesPriceList().get(currentService).toString();
-			serviceRows[3][i] = Integer.toString((Integer.parseInt(serviceRows[1][i]) * Integer.parseInt(serviceRows[2][i])));
-			cost += Integer.parseInt(serviceRows[3][i]);
+		for (Service currentService : order.getServices().keySet()) {
+			serviceRows[i][0] = currentService.getName();
+			serviceRows[i][1] = order.getServices().get(currentService).toString();
+			serviceRows[i][2] = order.getOrderServicesPriceList().get(currentService).toString();
+			serviceRows[i][3] = Integer.toString((Integer.parseInt(serviceRows[i][1]) * Integer.parseInt(serviceRows[i][2])));
+			cost += Integer.parseInt(serviceRows[i][3]);
 			i++;
-		}*/
+		}
 		
 		
 		ModelAndView mav = new ModelAndView();
@@ -114,7 +111,7 @@ public class MechanicOrdersController {
 		mav.addObject("completedate", completedate);
 		mav.addObject("createdate", createdate);
 		mav.addObject("order", order);
-		mav.addObject("addedworks", addedworks);
+		mav.addObject("serviceRows", serviceRows); 
 		mav.addObject("partstoorder", order.getParts());
 		mav.addObject("parts", mechanicService.getPartsQuantity(affilate));
 		mav.addObject("works", mechanicService.getServicesCost(affilate));
