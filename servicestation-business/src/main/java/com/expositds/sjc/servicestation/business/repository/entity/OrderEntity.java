@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyJoinColumn;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -30,6 +32,13 @@ import com.expositds.sjc.servicestation.domain.model.OrderStatus;
  */
 @Entity
 @Table(name = "orders")
+@NamedNativeQueries({
+	@NamedNativeQuery(
+	name = "callGetSiteUserOrdersProc",
+	query = "call get_site_user_orders(:siteUserId, :first, :size)",
+	resultClass = OrderEntity.class
+	)
+})
 public class OrderEntity {
 	
 	/**

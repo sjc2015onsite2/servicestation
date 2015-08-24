@@ -117,7 +117,7 @@ public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUs
 	}
 
 	@Override
-	public Map<Order, Station> getOrdersByPage(SiteUser user, Integer page, Integer size) {
+	public Map<Order, Station> getOrdersLimit(SiteUser user, Integer first, Integer size) {
 		
 		Map<OrderEntity, StationEntity> ordersEntity = siteUserDao.findByCriteria(criterion)
 		
