@@ -48,20 +48,22 @@
 	</security:authorize>
 	
 	<security:authorize access="hasRole('ROLE_MECHANIC')">
-		<div class="col-sm-offset-1 col-sm-10">
-			<br /> 
-			<br />
-			<div class="col-sm-3">
-				<p class="text-left">
-					<strong>Phone number of customer: </strong>
-				</p>
+		<c:if test="${not empty order.contactData }">
+			<div class="col-sm-offset-1 col-sm-10">
+				<br /> 
+				<br />
+				<div class="col-sm-3">
+					<p class="text-left">
+						<strong>Phone number of customer: </strong>
+					</p>
+				</div>
+				<div class="col-sm-9">
+					<p class="text-left">
+						<em>${order.contactData }</em>
+					</p>
+				</div>
 			</div>
-			<div class="col-sm-9">
-				<p class="text-left">
-					<em>...</em>
-				</p>
-			</div>
-		</div>
+		</c:if>
 	</security:authorize>
 
 
@@ -157,20 +159,11 @@
 				<strong>Cost: </strong>
 			</p>
 		</div>
-		<security:authorize access="hasRole('ROLE_USER')">
 			<div class="col-sm-9">
 				<p class="text-left">
-					<em>...</em> BYR
+					<em>${cost }</em> BYR
 				</p>
 			</div>
-		</security:authorize>
-		<security:authorize access="hasRole('ROLE_MECHANIC')">
-			<div class="col-sm-9">
-				<p class="text-left">
-					<em>...</em> BYR
-				</p>
-			</div>
-		</security:authorize>
 	</div>
 
 	<div class="col-sm-offset-1 col-sm-10">
@@ -226,6 +219,7 @@
 		</div>
 	</div>
 
+<c:if test="${empty order.contactData }">
 	<div class="col-sm-offset-1 col-sm-10">
 		<br /> <br />
 		<div class="col-sm-3">
@@ -260,6 +254,7 @@
 			</c:if>
 		</security:authorize>
 	</div>
+</c:if>
 
 
 

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;
+import com.expositds.sjc.servicestation.domain.model.Service;
 import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.AuthorizedUserSite;
@@ -61,11 +62,26 @@ public class CustomerOrdersController {
 				completedate = dateFormat.format(order.getCompleteDate().getTime());
 			createdate = dateFormat.format(order.getCreateDate().getTime());
 			
+			Integer cost = new Integer(0);
+			
+			String[][] serviceRows = new String[order.getServices().size()][4]; 
+			int i = 0;
+			for (Service currentService : order.getServices().keySet()) {
+				serviceRows[i][0] = currentService.getName();
+				serviceRows[i][1] = order.getServices().get(currentService).toString();
+				serviceRows[i][2] = order.getOrderServicesPriceList().get(currentService).toString();
+				serviceRows[i][3] = Integer.toString((Integer.parseInt(serviceRows[i][1]) * Integer.parseInt(serviceRows[i][2])));
+				cost += Integer.parseInt(serviceRows[i][3]);
+				i++;
+			}
+			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("mechanic", identificationService.getMechanicByOrder(order));
 			mav.addObject("station", identificationService.getStationByOrder(order));
 			mav.addObject("stations", authorizedUserSiteService.getServiceStations());
 			mav.addObject("partstoorder", order.getParts());
+			mav.addObject("cost", cost); 
+			mav.addObject("serviceRows", serviceRows); 
 			mav.addObject("completedate", completedate);
 			mav.addObject("createdate", createdate);
 			mav.addObject("order", order);

@@ -111,6 +111,7 @@ public class MechanicOrdersController {
 		mav.addObject("completedate", completedate);
 		mav.addObject("createdate", createdate);
 		mav.addObject("order", order);
+		mav.addObject("cost", cost); 
 		mav.addObject("serviceRows", serviceRows); 
 		mav.addObject("partstoorder", order.getParts());
 		mav.addObject("parts", mechanicService.getPartsQuantity(affilate));
