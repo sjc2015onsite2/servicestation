@@ -25,7 +25,7 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
 /**
  * <b>CustomerOrdersController</b>
  * 
- * @author Sergey Rybakov
+ * @author Sergey Rybakov, Oleg Ryzhko
  * */
 
 
@@ -40,17 +40,27 @@ public class CustomerOrdersController {
 	private Identification identificationService;
 	
 		@RequestMapping(value = "/myorders", method = RequestMethod.GET)
-		public ModelAndView myorders(Authentication auth) {
+		public ModelAndView myorders(@RequestParam(value = "page", required = false) Long page,
+									 Authentication auth) {
 			
+			if(page==null) page = 1L;
+			Long pageSize = 3L;
+			
+			Long startPage = page;
+			Long endPage = page + 9;
+		
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
 			SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
 			
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("orders", authorizedUserSiteService.getOrders(user));
+			mav.addObject("orders", authorizedUserSiteService.getOrdersLimit(user, (page-1)*pageSize+1, pageSize));
+			mav.addObject("page", page);
+			mav.addObject("startpage", startPage);
+			mav.addObject("endpage", endPage);
 			mav.setViewName("myOrders");
 			return mav;
 		}
-	
+		
 		@RequestMapping(value = "/myorders/{orderId}", method = RequestMethod.GET)
 		public ModelAndView myorder(
 				@PathVariable("orderId") Order order) {
