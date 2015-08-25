@@ -11,4 +11,6 @@ import com.expositds.sjc.servicestation.business.repository.entity.StationEntity
  */
 public interface StationDao extends GenericDao<StationEntity, Long> {
 
+	public StationEntity getStationByOrderId(Long Id);
+	
 }

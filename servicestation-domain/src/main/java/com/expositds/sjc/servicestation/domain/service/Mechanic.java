@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Map;
 import java.util.Set;
 
+import com.expositds.sjc.servicestation.domain.exception.PartLimitException;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
@@ -88,8 +89,9 @@ public interface Mechanic extends StoreKeeper {
 	 * Метод добавляет к заданной заявке заданный список запчастей с указанием их количества.
 	 * @param order заявка
 	 * @param parts список запчастей с их количеством
+	 * @throws PartLimitException 
 	 */
-	public void addPartsToOrder(Order order, Map<Part, Integer> parts);
+	public void addPartsToOrder(Order order, Map<Part, Integer> parts) throws PartLimitException;
 
 	/**
 	 * Метод добавляет в заданную заявку лист цен на услуги. Цены берутся из филиала.

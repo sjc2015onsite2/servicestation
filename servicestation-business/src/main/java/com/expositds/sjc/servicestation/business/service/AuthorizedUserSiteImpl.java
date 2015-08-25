@@ -1,6 +1,7 @@
 package com.expositds.sjc.servicestation.business.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -114,6 +115,26 @@ public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUs
 	@Override
 	public void publicMechanicComment(Person mechanic, Comment comment) {
 		siteService.publicMechanicComment(mechanic, comment);
+	}
+
+	@Override
+	public Map<Order, Station> getOrdersLimit(SiteUser user, Long first, Long size) {
+		
+		Map<Order, Station> result = new HashMap<>();
+		StationEntity currentStationEntity;
+		
+		List<OrderEntity> ordersEntity = orderDao.getOrdersStationLimit(user.getId(), first, size);
+		
+		for (OrderEntity currentOrderEntity : ordersEntity) {
+			currentStationEntity = stationDao.getStationByOrderId(currentOrderEntity.getOrderId());
+			
+			result.put(
+					conversionService.convert(currentOrderEntity, Order.class),
+					conversionService.convert(currentStationEntity, Station.class)
+			);
+		}
+				
+		return result;
 	}
 
 }

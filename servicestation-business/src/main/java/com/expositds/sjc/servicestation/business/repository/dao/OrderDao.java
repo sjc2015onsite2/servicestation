@@ -1,5 +1,7 @@
 package com.expositds.sjc.servicestation.business.repository.dao;
 
+import java.util.List;
+
 import com.expositds.sjc.servicestation.business.repository.base.GenericDao;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 
@@ -10,5 +12,7 @@ import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
  *
  */
 public interface OrderDao extends GenericDao<OrderEntity, Long> {
+	
+	public List<OrderEntity> getOrdersStationLimit(Long Id, Long first, Long size);
 
 }

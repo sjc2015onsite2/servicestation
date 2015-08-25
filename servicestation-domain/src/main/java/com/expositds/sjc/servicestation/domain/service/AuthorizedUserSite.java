@@ -22,6 +22,15 @@ public interface AuthorizedUserSite extends UserSite {
 	 * @return список заявок
 	 */
 	public Map<Order, Station> getOrders(SiteUser user);
+	
+	/**
+	 * Метод возвращает список заявок  с указанной позиции указанное количество в соответствии с станцией заданного пользователя.
+	 * @param user пользователь сайта
+	 * @param first c какой позиции показывать
+	 * @param size количество показываемых заявок
+	 * @return список заявок
+	 */
+	public Map<Order, Station> getOrdersLimit(SiteUser user, Long first, Long size);
 
 	/**
 	 * Метод создаёт заказ для указанного пользователя с указанной проблемой с указанным СТО.
