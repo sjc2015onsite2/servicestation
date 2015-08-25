@@ -30,7 +30,7 @@ public interface AuthorizedUserSite extends UserSite {
 	 * @param size количество показываемых заявок
 	 * @return список заявок
 	 */
-	public Map<Order, Station> getOrdersLimit(SiteUser user, Integer first, Integer size);
+	public Map<Order, Station> getOrdersLimit(SiteUser user, Long first, Long size);
 
 	/**
 	 * Метод создаёт заказ для указанного пользователя с указанной проблемой с указанным СТО.

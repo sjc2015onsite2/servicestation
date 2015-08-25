@@ -118,12 +118,12 @@ public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUs
 	}
 
 	@Override
-	public Map<Order, Station> getOrdersLimit(SiteUser user, Integer first, Integer size) {
+	public Map<Order, Station> getOrdersLimit(SiteUser user, Long first, Long size) {
 		
 		Map<Order, Station> result = new HashMap<>();
 		StationEntity currentStationEntity;
 		
-		List<OrderEntity> ordersEntity = orderDao.getOrdersStationLimit(user.getId(), new Long(first), new Long(size));
+		List<OrderEntity> ordersEntity = orderDao.getOrdersStationLimit(user.getId(), first, size);
 		
 		for (OrderEntity currentOrderEntity : ordersEntity) {
 			currentStationEntity = stationDao.getStationByOrderId(currentOrderEntity.getOrderId());
