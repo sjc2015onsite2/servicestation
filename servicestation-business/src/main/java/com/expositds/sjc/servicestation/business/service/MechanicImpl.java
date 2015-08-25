@@ -18,6 +18,7 @@ import com.expositds.sjc.servicestation.business.repository.entity.ClientNotific
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.PartEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.ServiceEntity;
+import com.expositds.sjc.servicestation.domain.exception.PartLimitException;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
@@ -101,7 +102,7 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 	}
 
 	@Override
-	public void addPartsToOrder(Order order, Map<Part, Integer> parts) {
+	public void addPartsToOrder(Order order, Map<Part, Integer> parts) throws PartLimitException {
 		
 		Affilate affilate = identification.getAffilateByOrder(order);
 		AffilateEntity affilateEntity = affilateDao.findById(affilate.getAffilateId());
@@ -114,6 +115,9 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 			if (orderEntity.getParts().containsKey(currentPartEntity)) 
 				orderEntity.getParts().put(currentPartEntity, orderEntity.getParts().get(currentPartEntity) + parts.get(currentPart));
 			else orderEntity.getParts().put(currentPartEntity, parts.get(currentPart));
+			
+			if (affilateEntity.getParts().get(currentPartEntity) - parts.get(currentPart) < 0)
+				throw new PartLimitException();
 			affilateEntity.getParts().put(currentPartEntity, affilateEntity.getParts().get(currentPartEntity) - parts.get(currentPart));
 		}
 		

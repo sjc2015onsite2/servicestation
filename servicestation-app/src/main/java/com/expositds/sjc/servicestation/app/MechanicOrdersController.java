@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.expositds.sjc.servicestation.domain.exception.PartLimitException;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Comment;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
@@ -197,7 +198,7 @@ public class MechanicOrdersController {
 	public ModelAndView addParts(
 			@RequestParam Integer quantity,
 			@RequestParam(value = "partId") Part part,
-			@RequestParam(value = "orderId") Order order) {	
+			@RequestParam(value = "orderId") Order order) throws PartLimitException {	
 		
 		Map <Part, Integer> partandquantity = new HashMap<>();
 		partandquantity.put(part, quantity);
