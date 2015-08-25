@@ -128,8 +128,10 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 	public PartOrder createPartOrder(Person mechanic) {
 		Affilate affilate = identificationService.getAffilateByMechanic(mechanic);
 		AffilateEntity affilateEntity = affilateDao.findById(affilate.getAffilateId());
+		PersonEntity mechanicEnity = personDao.findById(mechanic.getId());
 		
 		PartOrderEntity partOrderEntity = new PartOrderEntity();
+		affilateEntity.getPartOrders().put(partOrderEntity, mechanicEnity);
 		
 		partOrderEntity.setPartOrderId(partOrderDao.save(partOrderEntity));
 		affilateDao.update(affilateEntity);
