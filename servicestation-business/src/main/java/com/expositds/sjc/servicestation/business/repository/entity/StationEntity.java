@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.MapKeyJoinColumn;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -26,6 +28,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "stations")
+@NamedNativeQueries({
+	@NamedNativeQuery(
+		name = "callGetStationByUserIdProc",
+		query = "call get_station_by_order_id(:orderId)",
+		resultClass = StationEntity.class
+	)
+})
 public class StationEntity  {
 	
 	/**

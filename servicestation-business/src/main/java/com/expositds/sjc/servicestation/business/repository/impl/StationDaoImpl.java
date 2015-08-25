@@ -13,6 +13,12 @@ import com.expositds.sjc.servicestation.business.repository.hibernate.AbstractHi
 @Repository
 public class StationDaoImpl extends AbstractHibernateDao<StationEntity, Long> implements StationDao {
 
-
+	@Override
+	public StationEntity getStationByOrderId(Long Id) {
+		
+		return (StationEntity) getSession().getNamedQuery("callGetStationByUserIdProc")
+										   .setParameter("orderId", Id)
+									       .uniqueResult();
+	}
 
 }
