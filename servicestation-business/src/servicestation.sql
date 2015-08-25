@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.24, for Win32 (x86)
 --
--- Host: localhost    Database: servicestation
+-- Host: 127.0.0.1    Database: servicestation
 -- ------------------------------------------------------
--- Server version	5.5.23
+-- Server version	5.6.25-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,6 +32,16 @@ CREATE TABLE `affilate_has_part_orders_persons` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `affilate_has_part_orders_persons`
+--
+
+LOCK TABLES `affilate_has_part_orders_persons` WRITE;
+/*!40000 ALTER TABLE `affilate_has_part_orders_persons` DISABLE KEYS */;
+INSERT INTO `affilate_has_part_orders_persons` VALUES (2,1,1),(2,2,1);
+/*!40000 ALTER TABLE `affilate_has_part_orders_persons` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `affilate_has_parts_counts`
 --
 
@@ -45,6 +55,16 @@ CREATE TABLE `affilate_has_parts_counts` (
   PRIMARY KEY (`affilate_id`,`part_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `affilate_has_parts_counts`
+--
+
+LOCK TABLES `affilate_has_parts_counts` WRITE;
+/*!40000 ALTER TABLE `affilate_has_parts_counts` DISABLE KEYS */;
+INSERT INTO `affilate_has_parts_counts` VALUES (2,1,-187),(2,2,-10);
+/*!40000 ALTER TABLE `affilate_has_parts_counts` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `affilate_has_persons`
@@ -62,6 +82,16 @@ CREATE TABLE `affilate_has_persons` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `affilate_has_persons`
+--
+
+LOCK TABLES `affilate_has_persons` WRITE;
+/*!40000 ALTER TABLE `affilate_has_persons` DISABLE KEYS */;
+INSERT INTO `affilate_has_persons` VALUES (2,1),(3,4);
+/*!40000 ALTER TABLE `affilate_has_persons` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `affilate_has_services_costs`
 --
 
@@ -75,6 +105,16 @@ CREATE TABLE `affilate_has_services_costs` (
   PRIMARY KEY (`affilate_id`,`sevice_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `affilate_has_services_costs`
+--
+
+LOCK TABLES `affilate_has_services_costs` WRITE;
+/*!40000 ALTER TABLE `affilate_has_services_costs` DISABLE KEYS */;
+INSERT INTO `affilate_has_services_costs` VALUES (2,1,10),(2,2,11);
+/*!40000 ALTER TABLE `affilate_has_services_costs` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `affilate_orders_persons`
@@ -93,6 +133,16 @@ CREATE TABLE `affilate_orders_persons` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `affilate_orders_persons`
+--
+
+LOCK TABLES `affilate_orders_persons` WRITE;
+/*!40000 ALTER TABLE `affilate_orders_persons` DISABLE KEYS */;
+INSERT INTO `affilate_orders_persons` VALUES (3,39,4),(3,40,4),(3,41,4),(2,43,1),(2,45,1),(2,46,1);
+/*!40000 ALTER TABLE `affilate_orders_persons` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `affilate_profile_has_dates_rent`
 --
 
@@ -108,6 +158,16 @@ CREATE TABLE `affilate_profile_has_dates_rent` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `affilate_profile_has_dates_rent`
+--
+
+LOCK TABLES `affilate_profile_has_dates_rent` WRITE;
+/*!40000 ALTER TABLE `affilate_profile_has_dates_rent` DISABLE KEYS */;
+INSERT INTO `affilate_profile_has_dates_rent` VALUES (2,'2015-02-01',100),(2,'2015-12-01',100);
+/*!40000 ALTER TABLE `affilate_profile_has_dates_rent` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `affilate_profiles`
 --
 
@@ -120,6 +180,16 @@ CREATE TABLE `affilate_profiles` (
   UNIQUE KEY `affilate_profile_id_UNIQUE` (`affilate_profile_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `affilate_profiles`
+--
+
+LOCK TABLES `affilate_profiles` WRITE;
+/*!40000 ALTER TABLE `affilate_profiles` DISABLE KEYS */;
+INSERT INTO `affilate_profiles` VALUES (2),(3);
+/*!40000 ALTER TABLE `affilate_profiles` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `affilates`
@@ -137,6 +207,16 @@ CREATE TABLE `affilates` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `affilates`
+--
+
+LOCK TABLES `affilates` WRITE;
+/*!40000 ALTER TABLE `affilates` DISABLE KEYS */;
+INSERT INTO `affilates` VALUES (1,'NULL'),(2,'altufievo'),(3,'anino');
+/*!40000 ALTER TABLE `affilates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `client_notifications`
 --
 
@@ -150,6 +230,16 @@ CREATE TABLE `client_notifications` (
   UNIQUE KEY `client_notification_id_UNIQUE` (`client_notification_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `client_notifications`
+--
+
+LOCK TABLES `client_notifications` WRITE;
+/*!40000 ALTER TABLE `client_notifications` DISABLE KEYS */;
+INSERT INTO `client_notifications` VALUES (1,'Выполнение заказа переносится на неопределённый срок. Ожидаем запчастей.'),(2,'уведомление'),(3,'notification'),(4,'уккуцаца');
+/*!40000 ALTER TABLE `client_notifications` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `comments`
@@ -168,6 +258,16 @@ CREATE TABLE `comments` (
   UNIQUE KEY `comment_id_UNIQUE` (`comment_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comments`
+--
+
+LOCK TABLES `comments` WRITE;
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+INSERT INTO `comments` VALUES (1,'Удобная станция. Советую.','2015-08-02',2,''),(2,'Грамотный специалист. Рекомендую.','2015-08-02',3,''),(3,'}{орошая Станция!','2015-08-19',2,''),(4,'}{орошая Станция!','2015-08-19',2,''),(5,'}{орошая Станция!','2015-08-19',2,''),(6,'Да','2015-08-19',2,''),(7,'Иваныыыч!','2015-08-19',2,''),(8,'Бесит манера общаться','2015-08-24',2,''),(9,'Сволочи, одним словом','2015-08-24',2,''),(10,'То director','2015-08-24',2,''),(11,'dirrrrr','2015-08-24',2,'\0');
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `logginers`
@@ -189,6 +289,16 @@ CREATE TABLE `logginers` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `logginers`
+--
+
+LOCK TABLES `logginers` WRITE;
+/*!40000 ALTER TABLE `logginers` DISABLE KEYS */;
+INSERT INTO `logginers` VALUES (0,'NULL','NULL',';lsdfmsl;admflsamdclsakmfwasc klmwefmwlkm','MECHANIC'),(1,'Петрович','petrovich','petrovich','MECHANIC'),(2,'Петя','pit','pit','USER'),(3,'Боря','boris','boris','USER'),(4,'Иваныч','ivanych','ivanych','MECHANIC');
+/*!40000 ALTER TABLE `logginers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `marks`
 --
 
@@ -206,6 +316,16 @@ CREATE TABLE `marks` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `marks`
+--
+
+LOCK TABLES `marks` WRITE;
+/*!40000 ALTER TABLE `marks` DISABLE KEYS */;
+INSERT INTO `marks` VALUES (1,4,'2015-08-02',2),(2,3,'2015-08-17',2),(3,5,'2015-08-24',2);
+/*!40000 ALTER TABLE `marks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `mechanic_profile_has_comments`
 --
 
@@ -221,6 +341,16 @@ CREATE TABLE `mechanic_profile_has_comments` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `mechanic_profile_has_comments`
+--
+
+LOCK TABLES `mechanic_profile_has_comments` WRITE;
+/*!40000 ALTER TABLE `mechanic_profile_has_comments` DISABLE KEYS */;
+INSERT INTO `mechanic_profile_has_comments` VALUES (1,2),(2,7),(2,8);
+/*!40000 ALTER TABLE `mechanic_profile_has_comments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `mechanic_profiles`
 --
 
@@ -233,6 +363,16 @@ CREATE TABLE `mechanic_profiles` (
   UNIQUE KEY `mechanic_profile_id_UNIQUE` (`mechanic_profile_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mechanic_profiles`
+--
+
+LOCK TABLES `mechanic_profiles` WRITE;
+/*!40000 ALTER TABLE `mechanic_profiles` DISABLE KEYS */;
+INSERT INTO `mechanic_profiles` VALUES (1),(2);
+/*!40000 ALTER TABLE `mechanic_profiles` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `order_has_parts_counts`
@@ -250,6 +390,16 @@ CREATE TABLE `order_has_parts_counts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `order_has_parts_counts`
+--
+
+LOCK TABLES `order_has_parts_counts` WRITE;
+/*!40000 ALTER TABLE `order_has_parts_counts` DISABLE KEYS */;
+INSERT INTO `order_has_parts_counts` VALUES (43,1,208),(43,2,2),(45,1,12),(45,2,23);
+/*!40000 ALTER TABLE `order_has_parts_counts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `order_has_services_costs`
 --
 
@@ -263,6 +413,16 @@ CREATE TABLE `order_has_services_costs` (
   PRIMARY KEY (`order_id`,`service_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_has_services_costs`
+--
+
+LOCK TABLES `order_has_services_costs` WRITE;
+/*!40000 ALTER TABLE `order_has_services_costs` DISABLE KEYS */;
+INSERT INTO `order_has_services_costs` VALUES (43,1,10),(43,2,11),(45,1,10),(45,2,11);
+/*!40000 ALTER TABLE `order_has_services_costs` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `orders`
@@ -286,6 +446,16 @@ CREATE TABLE `orders` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (1,'NEW','2015-08-18',NULL,'Сильная вибрация при скорости больше 80 км//ч',NULL,NULL,NULL),(38,'NEW','2015-08-18',NULL,'Всё время открывается капот. Невозможно ехать.',NULL,NULL,NULL),(39,'ACCEPTED','2015-08-18','2015-08-25','Муравьи в салоне',3,NULL,NULL),(40,'ACCEPTED','2015-08-22','2015-08-25','Бора плохо тянет',NULL,NULL,NULL),(41,'ACCEPTED','2015-08-19',NULL,'Сломалась труба',NULL,NULL,NULL),(42,'NEW','2015-08-19',NULL,'поломка тачки',NULL,NULL,NULL),(43,'PENDING','2015-08-19','2015-08-25','Коробка предач заедает. колёса отваливаются. крыша сетает. стёклы дребезжат. вонает в салоне. фары отвалились. поцарапанная и не ездит.',2,NULL,NULL),(44,'NEW','2015-08-24',NULL,'Проблема с колесом',NULL,NULL,'(29) 884 21 43'),(45,'ACCEPTED','2015-08-24','2015-08-25','Проблема',4,NULL,'435435435'),(46,'ACCEPTED','2015-08-24',NULL,'северная проблема',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `orders_services_count`
 --
 
@@ -301,6 +471,16 @@ CREATE TABLE `orders_services_count` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `orders_services_count`
+--
+
+LOCK TABLES `orders_services_count` WRITE;
+/*!40000 ALTER TABLE `orders_services_count` DISABLE KEYS */;
+INSERT INTO `orders_services_count` VALUES (43,1,2),(43,2,1),(45,1,1),(45,2,1),(46,1,1);
+/*!40000 ALTER TABLE `orders_services_count` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `part_order_has_parts_counts`
 --
 
@@ -314,6 +494,16 @@ CREATE TABLE `part_order_has_parts_counts` (
   PRIMARY KEY (`part_order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `part_order_has_parts_counts`
+--
+
+LOCK TABLES `part_order_has_parts_counts` WRITE;
+/*!40000 ALTER TABLE `part_order_has_parts_counts` DISABLE KEYS */;
+INSERT INTO `part_order_has_parts_counts` VALUES (1,1,2),(2,1,12);
+/*!40000 ALTER TABLE `part_order_has_parts_counts` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `part_orders`
@@ -332,6 +522,16 @@ CREATE TABLE `part_orders` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `part_orders`
+--
+
+LOCK TABLES `part_orders` WRITE;
+/*!40000 ALTER TABLE `part_orders` DISABLE KEYS */;
+INSERT INTO `part_orders` VALUES (1,'2015-08-01','PENDING',NULL),(2,'2015-08-24','PENDING',NULL);
+/*!40000 ALTER TABLE `part_orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `parts`
 --
 
@@ -346,6 +546,16 @@ CREATE TABLE `parts` (
   UNIQUE KEY `part_id_UNIQUE` (`part_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `parts`
+--
+
+LOCK TABLES `parts` WRITE;
+/*!40000 ALTER TABLE `parts` DISABLE KEYS */;
+INSERT INTO `parts` VALUES (1,'TRW-76568','Тормозные колодки передние'),(2,'TRW-67904','Тормозные колодки задние');
+/*!40000 ALTER TABLE `parts` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `person_has_dates_salarys`
@@ -363,6 +573,16 @@ CREATE TABLE `person_has_dates_salarys` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `person_has_dates_salarys`
+--
+
+LOCK TABLES `person_has_dates_salarys` WRITE;
+/*!40000 ALTER TABLE `person_has_dates_salarys` DISABLE KEYS */;
+INSERT INTO `person_has_dates_salarys` VALUES (1,'2015-01-22',120);
+/*!40000 ALTER TABLE `person_has_dates_salarys` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `persons`
 --
 
@@ -375,6 +595,16 @@ CREATE TABLE `persons` (
   UNIQUE KEY `person_id_UNIQUE` (`person_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `persons`
+--
+
+LOCK TABLES `persons` WRITE;
+/*!40000 ALTER TABLE `persons` DISABLE KEYS */;
+INSERT INTO `persons` VALUES (1),(4),(5);
+/*!40000 ALTER TABLE `persons` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `services`
@@ -393,6 +623,16 @@ CREATE TABLE `services` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `services`
+--
+
+LOCK TABLES `services` WRITE;
+/*!40000 ALTER TABLE `services` DISABLE KEYS */;
+INSERT INTO `services` VALUES (1,'ТС-3','Замена передних тормозных колодок'),(2,'TC-5','Замена задних тормозных колодок');
+/*!40000 ALTER TABLE `services` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `site_aggregator_has_logins`
 --
 
@@ -405,6 +645,16 @@ CREATE TABLE `site_aggregator_has_logins` (
   PRIMARY KEY (`site_aggregator_id`,`login`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `site_aggregator_has_logins`
+--
+
+LOCK TABLES `site_aggregator_has_logins` WRITE;
+/*!40000 ALTER TABLE `site_aggregator_has_logins` DISABLE KEYS */;
+INSERT INTO `site_aggregator_has_logins` VALUES (1,'boris'),(1,'pit');
+/*!40000 ALTER TABLE `site_aggregator_has_logins` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `site_aggregator_has_orders_stations`
@@ -422,6 +672,16 @@ CREATE TABLE `site_aggregator_has_orders_stations` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `site_aggregator_has_orders_stations`
+--
+
+LOCK TABLES `site_aggregator_has_orders_stations` WRITE;
+/*!40000 ALTER TABLE `site_aggregator_has_orders_stations` DISABLE KEYS */;
+INSERT INTO `site_aggregator_has_orders_stations` VALUES (1,1,3),(1,38,4),(1,39,2),(1,40,2),(1,41,2),(1,42,4),(1,43,1),(1,44,2),(1,45,1),(1,46,1);
+/*!40000 ALTER TABLE `site_aggregator_has_orders_stations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `site_aggregator_has_persons_mechanic_profiles`
 --
 
@@ -435,6 +695,16 @@ CREATE TABLE `site_aggregator_has_persons_mechanic_profiles` (
   PRIMARY KEY (`person_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `site_aggregator_has_persons_mechanic_profiles`
+--
+
+LOCK TABLES `site_aggregator_has_persons_mechanic_profiles` WRITE;
+/*!40000 ALTER TABLE `site_aggregator_has_persons_mechanic_profiles` DISABLE KEYS */;
+INSERT INTO `site_aggregator_has_persons_mechanic_profiles` VALUES (1,1,1),(1,4,2);
+/*!40000 ALTER TABLE `site_aggregator_has_persons_mechanic_profiles` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `site_aggregator_has_stations_station_profiles`
@@ -452,6 +722,16 @@ CREATE TABLE `site_aggregator_has_stations_station_profiles` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `site_aggregator_has_stations_station_profiles`
+--
+
+LOCK TABLES `site_aggregator_has_stations_station_profiles` WRITE;
+/*!40000 ALTER TABLE `site_aggregator_has_stations_station_profiles` DISABLE KEYS */;
+INSERT INTO `site_aggregator_has_stations_station_profiles` VALUES (1,1,1),(1,2,2),(1,3,3),(1,4,4);
+/*!40000 ALTER TABLE `site_aggregator_has_stations_station_profiles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `site_aggregator_site_users`
 --
 
@@ -466,6 +746,16 @@ CREATE TABLE `site_aggregator_site_users` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `site_aggregator_site_users`
+--
+
+LOCK TABLES `site_aggregator_site_users` WRITE;
+/*!40000 ALTER TABLE `site_aggregator_site_users` DISABLE KEYS */;
+INSERT INTO `site_aggregator_site_users` VALUES (1,2),(1,3);
+/*!40000 ALTER TABLE `site_aggregator_site_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `site_aggregators`
 --
 
@@ -478,6 +768,16 @@ CREATE TABLE `site_aggregators` (
   UNIQUE KEY `site_aggregator_id_UNIQUE` (`site_aggregator_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `site_aggregators`
+--
+
+LOCK TABLES `site_aggregators` WRITE;
+/*!40000 ALTER TABLE `site_aggregators` DISABLE KEYS */;
+INSERT INTO `site_aggregators` VALUES (1);
+/*!40000 ALTER TABLE `site_aggregators` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `site_user_has_orders_stations`
@@ -495,6 +795,16 @@ CREATE TABLE `site_user_has_orders_stations` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `site_user_has_orders_stations`
+--
+
+LOCK TABLES `site_user_has_orders_stations` WRITE;
+/*!40000 ALTER TABLE `site_user_has_orders_stations` DISABLE KEYS */;
+INSERT INTO `site_user_has_orders_stations` VALUES (2,1,3),(2,38,4),(2,39,2),(3,40,2),(2,41,2),(2,42,4),(2,43,1),(2,46,1);
+/*!40000 ALTER TABLE `site_user_has_orders_stations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `site_users`
 --
 
@@ -507,6 +817,16 @@ CREATE TABLE `site_users` (
   UNIQUE KEY `site_user_id_UNIQUE` (`site_user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `site_users`
+--
+
+LOCK TABLES `site_users` WRITE;
+/*!40000 ALTER TABLE `site_users` DISABLE KEYS */;
+INSERT INTO `site_users` VALUES (2),(3);
+/*!40000 ALTER TABLE `site_users` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `station_has_affilates_affilate_profiles`
@@ -524,6 +844,16 @@ CREATE TABLE `station_has_affilates_affilate_profiles` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `station_has_affilates_affilate_profiles`
+--
+
+LOCK TABLES `station_has_affilates_affilate_profiles` WRITE;
+/*!40000 ALTER TABLE `station_has_affilates_affilate_profiles` DISABLE KEYS */;
+INSERT INTO `station_has_affilates_affilate_profiles` VALUES (1,2,2),(2,3,3);
+/*!40000 ALTER TABLE `station_has_affilates_affilate_profiles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `station_has_logins`
 --
 
@@ -536,6 +866,16 @@ CREATE TABLE `station_has_logins` (
   PRIMARY KEY (`login`,`station_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `station_has_logins`
+--
+
+LOCK TABLES `station_has_logins` WRITE;
+/*!40000 ALTER TABLE `station_has_logins` DISABLE KEYS */;
+INSERT INTO `station_has_logins` VALUES (2,'ivanych'),(1,'petrovich');
+/*!40000 ALTER TABLE `station_has_logins` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `station_has_orders_affilates`
@@ -553,6 +893,16 @@ CREATE TABLE `station_has_orders_affilates` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `station_has_orders_affilates`
+--
+
+LOCK TABLES `station_has_orders_affilates` WRITE;
+/*!40000 ALTER TABLE `station_has_orders_affilates` DISABLE KEYS */;
+INSERT INTO `station_has_orders_affilates` VALUES (3,1,1),(4,38,1),(2,39,3),(2,40,3),(2,41,3),(4,42,1),(1,43,2),(2,44,1),(1,45,2),(1,46,2);
+/*!40000 ALTER TABLE `station_has_orders_affilates` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `station_persons`
 --
 
@@ -565,6 +915,16 @@ CREATE TABLE `station_persons` (
   PRIMARY KEY (`person_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `station_persons`
+--
+
+LOCK TABLES `station_persons` WRITE;
+/*!40000 ALTER TABLE `station_persons` DISABLE KEYS */;
+INSERT INTO `station_persons` VALUES (1,1),(2,4);
+/*!40000 ALTER TABLE `station_persons` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `station_profile_has_comments`
@@ -581,6 +941,16 @@ CREATE TABLE `station_profile_has_comments` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `station_profile_has_comments`
+--
+
+LOCK TABLES `station_profile_has_comments` WRITE;
+/*!40000 ALTER TABLE `station_profile_has_comments` DISABLE KEYS */;
+INSERT INTO `station_profile_has_comments` VALUES (1,1),(1,3),(1,4),(1,5),(2,6),(3,9),(4,10),(4,11);
+/*!40000 ALTER TABLE `station_profile_has_comments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `station_profile_has_marks`
 --
 
@@ -593,6 +963,16 @@ CREATE TABLE `station_profile_has_marks` (
   PRIMARY KEY (`mark_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `station_profile_has_marks`
+--
+
+LOCK TABLES `station_profile_has_marks` WRITE;
+/*!40000 ALTER TABLE `station_profile_has_marks` DISABLE KEYS */;
+INSERT INTO `station_profile_has_marks` VALUES (1,1),(4,2),(3,3);
+/*!40000 ALTER TABLE `station_profile_has_marks` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `station_profiles`
@@ -609,6 +989,16 @@ CREATE TABLE `station_profiles` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `station_profiles`
+--
+
+LOCK TABLES `station_profiles` WRITE;
+/*!40000 ALTER TABLE `station_profiles` DISABLE KEYS */;
+INSERT INTO `station_profiles` VALUES (1),(2),(3),(4);
+/*!40000 ALTER TABLE `station_profiles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `stations`
 --
 
@@ -623,6 +1013,16 @@ CREATE TABLE `stations` (
   UNIQUE KEY `station_id_UNIQUE` (`station_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `stations`
+--
+
+LOCK TABLES `stations` WRITE;
+/*!40000 ALTER TABLE `stations` DISABLE KEYS */;
+INSERT INTO `stations` VALUES (1,'Северная автосервисная станция','nord'),(2,'Южная автосервисная станция','south'),(3,'Западная автосервисная станция','west'),(4,'Восточная автосервисная станция','east');
+/*!40000 ALTER TABLE `stations` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'servicestation'
@@ -680,4 +1080,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-25  0:19:29
+-- Dump completed on 2015-08-25  9:18:09

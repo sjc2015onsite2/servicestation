@@ -34,9 +34,9 @@ import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 @Table(name = "orders")
 @NamedNativeQueries({
 	@NamedNativeQuery(
-	name = "callGetSiteUserOrdersProc",
-	query = "call get_site_user_orders(:siteUserId, :first, :size)",
-	resultClass = OrderEntity.class
+		name = "callGetSiteUserOrdersProc",
+		query = "call get_site_user_orders(:siteUserId, :first, :size)",
+		resultClass = OrderEntity.class
 	)
 })
 public class OrderEntity {

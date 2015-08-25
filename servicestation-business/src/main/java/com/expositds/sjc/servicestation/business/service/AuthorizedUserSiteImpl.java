@@ -1,6 +1,7 @@
 package com.expositds.sjc.servicestation.business.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -119,18 +120,21 @@ public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUs
 	@Override
 	public Map<Order, Station> getOrdersLimit(SiteUser user, Integer first, Integer size) {
 		
-		Map<OrderEntity, StationEntity> ordersEntity = siteUserDao.findByCriteria(criterion)
+		Map<Order, Station> result = new HashMap<>();
+		StationEntity currentStationEntity;
 		
-		Map<Order, Station> ordersModel = new HashMap<>();
+		List<OrderEntity> ordersEntity = orderDao.getOrdersStationLimit(user.getId(), new Long(first), new Long(size));
 		
-		for (OrderEntity currentOrderEntity : ordersEntity.keySet()) {
-			Order currentOrder = (Order) conversionService.convert(currentOrderEntity, Order.class);
-			StationEntity currentStationEntity = ordersEntity.get(currentOrderEntity);
-			Station currentStation = conversionService.convert(currentStationEntity, Station.class);
-			ordersModel.put(currentOrder, currentStation);
+		for (OrderEntity currentOrderEntity : ordersEntity) {
+			currentStationEntity = stationDao.getStationByOrderId(currentOrderEntity.getOrderId());
+			
+			result.put(
+					conversionService.convert(currentOrderEntity, Order.class),
+					conversionService.convert(currentStationEntity, Station.class)
+			);
 		}
-		
-		return ordersModel;
+				
+		return result;
 	}
 
 }
