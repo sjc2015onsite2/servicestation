@@ -6,6 +6,7 @@ import java.util.Set;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Part;
+import com.expositds.sjc.servicestation.domain.model.PartOrder;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.Service;
 
@@ -52,10 +53,18 @@ public interface WorkShop {
 	public void giveOrder(Person mechanic, Order order);
 
 	/**
-	 * Метод создаёт заявку на запчати с указанным списком запчастей, у указанным механиком.
+	 * Метод создаёт заявку на запчати  у указанным механиком.
 	 * @param mechanic механик
 	 * @param parts список запчастей с их количеством
+	 * @return внось сщзданную заявку
 	 */
-	public void createPartOrder(Person mechanic, Map<Part, Integer> parts);
+	public PartOrder createPartOrder(Person mechanic);
+	
+	/**
+	 * Метод добавляетв указанную заявку на запчасти запчасти.
+	 * @param partOrder заявка на запчасти
+	 * @param parts запчасти
+	 */
+	public void addPartsToPartOrder(PartOrder partOrder, Map<Part, Integer> parts);
 
 }
