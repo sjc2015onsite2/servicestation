@@ -59,7 +59,7 @@ public class AffiliatesController {
 				affilData[i][0] = currentaffiliat.getAffilateId().toString();
 				affilData[i][1] = accountantService.getAffilateRent(currentaffiliat, firstMonthDay, now).toString();
 				affilData[i][2] = accountantService.getAffilateProfit(currentaffiliat, firstMonthDay, now).toString();
-				
+				i++;
 			}
 			
 			ModelAndView mav = new ModelAndView();

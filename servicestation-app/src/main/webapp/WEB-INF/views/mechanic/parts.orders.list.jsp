@@ -7,20 +7,24 @@
 <div class="table-responsive col-sm-offset-1 col-sm-10">
     <table class="table table-striped table-hover table-bordered">
         <tr>
-        <th width="10%">Order ID</th>
-        <th>Name of spare part</th>
-        <th width="20%">Quantity</th>
-        <th>Status</th>
-        <th>Date</th>
+	        <th width="5%">ID</th>
+	        <th width="50%">Order</th>
+	        <th width="23%">Status</th>
+	        <th width="22%">Created date</th>
         </tr>
-        <c:forEach var="order" items="${partsorders }">
-        <tr class="warning">
-        <td>${order.partOrderId }</td>
-        <td></td>
-        <td>${order.parts. }</td>
-        <td></td>
-        <td></td>
-        </tr>
+        <c:forEach var="order" items="${partOrdersDto}">
+	        <tr class="warning">				
+		        <td>${order.id }</td>
+		        <td>
+		        	<ol>
+		        		<c:forEach var="part" items="${order.parts }">
+				    		<li>${part.key } (x)${part.value}</li>
+				    	</c:forEach>
+					</ol>
+		        </td>
+		        <td>${order.status }</td>
+		        <td>${order.date }</td>
+	        </tr>
         </c:forEach>
     </table>
 </div>

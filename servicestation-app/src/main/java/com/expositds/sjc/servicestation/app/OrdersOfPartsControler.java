@@ -1,5 +1,6 @@
 package com.expositds.sjc.servicestation.app;
 
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.expositds.sjc.servicestation.app.dto.PartOrderDto;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
+import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.model.PartOrder;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.Affilate; 
@@ -39,14 +42,19 @@ public class OrdersOfPartsControler {
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
 		Person mechanic = identificationService.getPersonById(logginer.getId().toString());
 		Affilate affiliate = identificationService.getAffilateByMechanic(mechanic);
+		
 		Set<PartOrder> partsorders = new HashSet<>();
-		
-		
 		partsorders = mechanicService.getPartOrders(affiliate);
+		
+		Set<PartOrderDto> partOrdersDto = new HashSet<>();
+		
+		for (PartOrder currentorder : partsorders){
+			partOrdersDto.add(new PartOrderDto(currentorder));
+		}
 		
 	
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("partsorders", mechanicService.getPartOrders(affiliate));
+		mav.addObject("partOrdersDto", partOrdersDto);
 		mav.setViewName("parts.orders.list");
 	return mav;
 	}

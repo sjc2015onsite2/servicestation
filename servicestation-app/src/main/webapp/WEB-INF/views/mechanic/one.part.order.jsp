@@ -1,14 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="col-sm-4">
+<div class="col-sm-offset-4 col-sm-4">
 	<ol>
 		<c:forEach var="partoforder" items="${partsoforder }">
 	  		<li>${partoforder.key.name } (x)${partoforder.value }</li>
 	  	</c:forEach>
 	</ol>
 </div>
-<div class="col-sm-8">
+<div class="col-sm-4">
 	<button data-toggle ="modal" data-target="#addpart-modal" type="button" class="btn btn-warning btn-sm">Add part</button>
+</div>
+<div class="col-sm-offset-5 col-sm-1">
+	<br />
+	<a href="<c:url value="/mechanic/partsorders" />" ><button type="submit" class="btn btn-warning btn-sm">Save</button></a>
 </div>
 
 
