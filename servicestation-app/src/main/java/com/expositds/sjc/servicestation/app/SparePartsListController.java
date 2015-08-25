@@ -66,7 +66,7 @@ public class SparePartsListController {
 		Map<Part, Integer> order = new HashMap<>();
 		order.put(part, quantity);
 		
-		mechanicService.createPartOrder(mechanic, order);
+		mechanicService.createPartOrder(mechanic);
 	
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/mechanic/spareparts");

@@ -13,12 +13,14 @@
 	  		<th>Profit for the last month</th>
 	  		<th>Profit for the current month</th>
   		</tr>
+  		<c:forEach var="i" items="${affilData }">
   			<tr class="warning">
+	  			<td>${i[0] }</td>
 	  			<td></td>
+	  			<td>${i[1] }</td>
 	  			<td></td>
-	  			<td></td>
-	  			<td></td>
-	  			<td></td>
+	  			<td>${i[2] }</td>
   			</tr>
+  		</c:forEach>
   	</table>
 </div>
