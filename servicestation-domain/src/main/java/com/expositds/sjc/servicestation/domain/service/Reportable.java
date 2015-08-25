@@ -84,5 +84,12 @@ public interface Reportable {
 	 * @return список сотрудников
 	 */
 	public Set<Person> getServiceStationEmloyees(Station station);
+	
+	/**
+	 * Метод возвращает список филлиалов СТО.
+	 * @param station СТО
+	 * @return список филиалов
+	 */
+	public Set<Affilate> getServiceStationAffilate(Station station);
 
 }
