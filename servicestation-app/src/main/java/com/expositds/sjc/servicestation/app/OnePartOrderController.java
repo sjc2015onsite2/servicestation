@@ -25,7 +25,7 @@ import com.expositds.sjc.servicestation.domain.service.Mechanic;
 * */
 
 @Controller
-public class OrdersOfPartsControler {
+public class OnePartOrderController {
 	
 	@Autowired
 	private Identification identificationService;
@@ -33,21 +33,14 @@ public class OrdersOfPartsControler {
 	@Autowired
 	private Mechanic mechanicService;
 	
-	@RequestMapping(value = "/mechanic/partsorders", method = RequestMethod.GET)
+	@RequestMapping(value = "/mechanic/partsorders/{partorderId}", method = RequestMethod.GET)
 	public ModelAndView showListOfSpareParts(Authentication auth) {
 		
-		Logginer logginer = identificationService.getLogginerByName(auth.getName());
-		Person mechanic = identificationService.getPersonById(logginer.getId().toString());
-		Affilate affiliate = identificationService.getAffilateByMechanic(mechanic);
-		Set<PartOrder> partsorders = new HashSet<>();
 		
-		
-		partsorders = mechanicService.getPartOrders(affiliate);
 		
 	
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("partsorders", mechanicService.getPartOrders(affiliate));
-		mav.setViewName("parts.orders.list");
+		mav.setViewName("one.part.order");
 	return mav;
 	}
 }

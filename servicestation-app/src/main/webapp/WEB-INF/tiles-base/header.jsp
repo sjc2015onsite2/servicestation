@@ -82,6 +82,7 @@
            	
            	<security:authorize access="hasRole('ROLE_MECHANIC')">
            		<form class="navbar-form navbar-right">
+           			<button type="submit" class="btn btn-warning">Create partorder</button>
               		<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default">Logout</button></a>
                	</form>
            	</security:authorize>

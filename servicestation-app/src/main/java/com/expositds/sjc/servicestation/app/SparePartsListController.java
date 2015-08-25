@@ -73,15 +73,5 @@ public class SparePartsListController {
 	return mav;
 	}
 	
-	@RequestMapping(value = "/mechanic/ordersparts", method = RequestMethod.GET)
-	public ModelAndView showOrdersParts() {
-		
-		
-	
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("parts.orders.list");
-	return mav;
-	}
-	
 	
 }

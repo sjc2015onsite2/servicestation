@@ -4,29 +4,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="col-sm-10">
-<div class="table-responsive col-sm-offset-1 col-sm-10">
-    <table class="table table-striped table-hover table-bordered">
-        <tr>
-        <th width="20%">Number of spare part</th>
-        <th>Name of spare part</th>
-        <th width="20%">Quantity on stock</th>
-        </tr>
-        <c:forEach var="part" items="${parts}" >
-        <tr class="warning">
-        <td>${part.key.partId}</td>
-        <td>${part.key.name}</td>
-        <td>${part.value}</td>
-        </tr>
-        </c:forEach>
-    </table>
-</div>
-</div>
-<div> 
-	<button data-toggle ="modal" data-target="#partsorder-modal" type="submit" class="btn btn-warning">Create order</button>
+	<div class="table-responsive col-sm-offset-1 col-sm-10">
+	    <table class="table table-striped table-hover table-bordered">
+	        <tr>
+		        <th width="20%">Number of spare part</th>
+		        <th>Name of spare part</th>
+		        <th width="20%">Quantity on stock</th>
+	        </tr>
+	        <c:forEach var="part" items="${parts}" >
+		        <tr class="warning">
+			        <td>${part.key.partId}</td>
+			        <td>${part.key.name}</td>
+			        <td>${part.value}</td>
+		        </tr>
+	        </c:forEach>
+	    </table>
+	</div>
 </div>
 
 
-<div class="modal fade" id="partsorder-modal">
+<!-- div class="modal fade" id="addpart-modal">
   <div class="modal-dialog modal-sm">
     <div class="modal-content col-sm-offset-1 col-sm-10">
       <div class="modal-header">
@@ -50,7 +47,7 @@
               </div>
           <div>
           		<br />
-              <button type="submit" class="btn btn-warning btn-sm" >Change</button>
+              <button type="submit" class="btn btn-warning btn-sm" >Add</button>
           </div>
         </form>
       </div>
@@ -61,4 +58,4 @@
     </div>
   </div>
 </div>
-</div>
+</div-->

@@ -96,4 +96,14 @@
 		<put-attribute name="body" value="/WEB-INF/views/mechanic/change.order.data.jsp" />
 	</definition>
 	
+	<definition name="station" extends="base.definition">
+		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/accountant/station.jsp" />
+	</definition>
+	
+	<definition name="affiliates" extends="base.definition">
+		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/accountant/affiliates.jsp" />
+	</definition>
+	
 </tiles-definitions> 
