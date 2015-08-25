@@ -150,5 +150,17 @@ public abstract class ReportableImpl implements Reportable {
 		
 		return result;
 	}
+	
+	@Override
+	public Set<Affilate> getServiceStationAffilate(Station station) {
+		StationEntity stationEntity = stationDao.findById(station.getStationId());
+		
+		Set<Affilate> result = new HashSet<>();
+		
+		for (AffilateEntity currentAffilateEntity : stationEntity.getAffilates().keySet())
+			result.add(conversionService.convert(currentAffilateEntity, Affilate.class));
+		
+		return result;
+	}
 
 }

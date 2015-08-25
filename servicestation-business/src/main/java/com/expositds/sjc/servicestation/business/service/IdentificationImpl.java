@@ -273,5 +273,17 @@ public class IdentificationImpl implements Identification, Serializable {
 		
 		return affilateEntityModelConverter.convert(affilateEntity);
 	}
+
+	@Override
+	public Station getStationByPerson(Person person) {
+		SiteAggregatorEntity siteAggregatorEntity = siteAggregatorDao.findById(1L);
+		PersonEntity personEntity = personDao.findById(person.getId());
+		
+		for (StationEntity currentStationEntity : siteAggregatorEntity.getStationProfiles().keySet()) 
+			if (currentStationEntity.getPersons().contains(personEntity)) 
+				return stationEntityModelConverter.convert(currentStationEntity);
+		
+		return null;
+	}
 	
 }
