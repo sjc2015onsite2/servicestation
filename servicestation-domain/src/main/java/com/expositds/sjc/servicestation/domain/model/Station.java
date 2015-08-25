@@ -2,6 +2,7 @@ package com.expositds.sjc.servicestation.domain.model;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -19,22 +20,22 @@ public class Station  {
 	/**
 	 * Список филиалов и их профилей в СТО.
 	 */
-	private HashMap<Affilate, AffilateProfile> affilates = new HashMap<>();
+	private Map<Affilate, AffilateProfile> affilates;
 	
 	/**
 	 * Список заявок на СТО и их принадлежность филиалам.
 	 */
-	private HashMap<Order, Affilate> orders = new HashMap<>();
+	private Map<Order, Affilate> orders;
 	
 	/**
 	 * Список сотрудников СТО.
 	 */
-	private Set<Person> employees = new HashSet<>();
+	private Set<Person> employees;
 	
 	/**
 	 * Список логинов на СТО
 	 */
-	private HashSet<String> logins = new HashSet<>();
+	private Set<String> logins;
 	
 	/**
 	 * Название СТО.
@@ -55,33 +56,37 @@ public class Station  {
 	public Station(String name, String personStationId) {
 		this.name = name;
 		this.personStationId = personStationId;
+		this.affilates = new HashMap<>();
+		this.orders = new HashMap<>();
+		this.employees = new HashSet<>();
+		this.logins = new HashSet<>();
 	}
 	
 	public Station() {
 		this(null, null);
 	}
 
-	public HashMap<Affilate, AffilateProfile> getAffilates() {
+	public Map<Affilate, AffilateProfile> getAffilates() {
 		return affilates;
 	}
 
-	public void setAffilates(HashMap<Affilate, AffilateProfile> affilates) {
+	public void setAffilates(Map<Affilate, AffilateProfile> affilates) {
 		this.affilates = affilates;
 	}
 
-	public HashMap<Order, Affilate> getOrders() {
+	public Map<Order, Affilate> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(HashMap<Order, Affilate> orders) {
+	public void setOrders(Map<Order, Affilate> orders) {
 		this.orders = orders;
 	}
 
-	public HashSet<String> getLogins() {
+	public Set<String> getLogins() {
 		return logins;
 	}
 
-	public void setLogins(HashSet<String> logins) {
+	public void setLogins(Set<String> logins) {
 		this.logins = logins;
 	}
 

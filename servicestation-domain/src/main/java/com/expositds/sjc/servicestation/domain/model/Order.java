@@ -20,17 +20,17 @@ public class Order {
 	/**
 	 * Список запчастей их количство, необходимый, для выполнения заявки.
 	 */
-	private HashMap<Part, Integer> parts = new HashMap<>();
+	private Map<Part, Integer> parts;
 	
 	/**
 	 * Список работ, услуг и их количество в заказе.
 	 */
-	private Map<Service, Integer> services = new HashMap<>();
+	private Map<Service, Integer> services;
 	
 	/**
 	 * Зафиксированный для данной заявки список цен на услуги, работы
 	 */
-	private HashMap<Service, Integer> orderServicesPriceList = new HashMap<>();
+	private Map<Service, Integer> orderServicesPriceList;
 	
 	/**
 	 * Статус выполнения зааза.
@@ -80,6 +80,9 @@ public class Order {
 		this.contactData = contactData;
 		this.status = OrderStatus.NEW;
 		this.createDate = new GregorianCalendar();
+		this.parts = new HashMap<>();
+		this.services = new HashMap<>();
+		this.orderServicesPriceList = new HashMap<>();
 	}
 	
 	/**
@@ -138,11 +141,11 @@ public class Order {
 		this.orderId = orderId;
 	}
 
-	public HashMap<Part, Integer> getParts() {
+	public Map<Part, Integer> getParts() {
 		return parts;
 	}
 
-	public void setParts(HashMap<Part, Integer> parts) {
+	public void setParts(Map<Part, Integer> parts) {
 		this.parts = parts;
 	}
 	
@@ -156,11 +159,11 @@ public class Order {
 		this.services = services;
 	}
 
-	public HashMap<Service, Integer> getOrderServicesPriceList() {
+	public Map<Service, Integer> getOrderServicesPriceList() {
 		return orderServicesPriceList;
 	}
 
-	public void setOrderServicesPriceList(HashMap<Service, Integer> orderServicesPriceList) {
+	public void setOrderServicesPriceList(Map<Service, Integer> orderServicesPriceList) {
 		this.orderServicesPriceList = orderServicesPriceList;
 	}
 

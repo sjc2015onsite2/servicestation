@@ -20,32 +20,35 @@ public class SiteAggregator {
 	/**
 	 * Список пользователей, зарегистрированных на сайте.
 	 */
-	private Set<SiteUser> siteUsers = new HashSet<>();
+	private Set<SiteUser> siteUsers;
 	
 	/**
 	 * Список логинов на сайте
 	 */
-	private Set<String> logins = new HashSet<>();
+	private Set<String> logins;
 
 	/**
 	 * Список механиков (Person) и их профилей на сайте.
 	 */
-	private Map<Person, MechanicProfile> mechanicPofiles = new HashMap<>();
+	private Map<Person, MechanicProfile> mechanicPofiles;
 
 	/**
 	 * Список СТО и их профилей, зарегистрированных на сайте.
 	 */
-	private Map<Station, StationProfile> stationProfiles = new HashMap<>();
+	private Map<Station, StationProfile> stationProfiles;
 
 	/**
 	 * Список заявок клиентов и СТО, которым они (заявки) были переданы на исполнение.
 	 */
 	private Map<Order, Station> orders = new HashMap<>();
-	
-		public Map<Person, MechanicProfile> getMechanicPofiles() {
-		return mechanicPofiles;
-	}
 		
+	public SiteAggregator() {
+		this.siteUsers = new HashSet<>();
+		this.logins = new HashSet<>();
+		this.mechanicPofiles = new HashMap<>();
+		this.stationProfiles = new HashMap<>();
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,13 +73,9 @@ public class SiteAggregator {
 			return false;
 		return true;
 	}
-
-	public void setMechanicPofiles(HashMap<Person, MechanicProfile> mechanicPofiles) {
-		this.mechanicPofiles = mechanicPofiles;
-	}
-
-	public void setLogins(HashSet<String> logins) {
-		this.logins = logins;
+	
+	public Map<Person, MechanicProfile> getMechanicPofiles() {
+		return mechanicPofiles;
 	}
 
 	public Long getSiteAggregatorId() {
