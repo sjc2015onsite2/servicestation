@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
+import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.Station;
 
 /**
@@ -76,5 +77,12 @@ public interface Reportable {
    	 * @return список заявок
 	 */
 	public Set<Order> getServiceStationOrders(Station serviceStation, Calendar startDate, Calendar endDate);
+	
+	/**
+	 * Метод возвращает список всех сотрудников заданного СТО.
+	 * @param station СТО
+	 * @return список сотрудников
+	 */
+	public Set<Person> getServiceStationEmloyees(Station station);
 
 }
