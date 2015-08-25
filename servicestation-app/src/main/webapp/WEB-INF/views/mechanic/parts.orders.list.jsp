@@ -13,15 +13,13 @@
         <th>Status</th>
         <th>Date</th>
         </tr>
-        <c:forEach var="order" items="${partsorders }">
         <tr class="warning">
-        <td>${order.partOrderId }</td>
         <td></td>
-        <td>${order.parts. }</td>
+        <td></td>
+        <td></td>
         <td></td>
         <td></td>
         </tr>
-        </c:forEach>
     </table>
 </div>
 </div>

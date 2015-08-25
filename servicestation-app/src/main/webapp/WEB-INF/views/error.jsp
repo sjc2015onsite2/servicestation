@@ -1,8 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 
 
-<div class="col-sm-offset-4 col-sm-4">
-	<div class="alert alert-danger">
-    	<p>Error page</p>
-    </div>
+	<div class="panel panel-danger">
+  <div class="panel-body">
+    Произошла ошибка!
+  </div>
+  <div class="panel-footer">Что-то пошло не так...</div>
 </div>
