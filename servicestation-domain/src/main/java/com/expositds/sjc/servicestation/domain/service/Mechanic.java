@@ -8,6 +8,7 @@ import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Part;
+import com.expositds.sjc.servicestation.domain.model.PartOrder;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.Service;
 
@@ -62,11 +63,19 @@ public interface Mechanic extends StoreKeeper {
 	public Map<Service, Integer> getServicesCost(Affilate affilate);
 
 	/**
-	 * Метод создаёт заявку на запчати с указанным списком запчастей, у указанным механиком.
+	 * Метод создаёт заявку на запчати указанным механиком.
 	 * @param mechanic механик
 	 * @param parts список запчастей с их количеством
+	 * @return вновь созданную заявку
 	 */
-	public void createPartOrder(Person mechanic, Map<Part, Integer> parts);
+	public PartOrder createPartOrder(Person mechanic);
+	
+	/**
+	 * Метод добавляетв указанную заявку на запчасти запчасти.
+	 * @param partOrder заявка на запчасти
+	 * @param parts запчасти
+	 */
+	public void addPartsToPartOrder(PartOrder partOrder, Map<Part, Integer> parts);
 
 	/**
 	 * Метод в заданной завяке создаёт сообщение.

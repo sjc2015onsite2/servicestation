@@ -22,6 +22,7 @@ import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Part;
+import com.expositds.sjc.servicestation.domain.model.PartOrder;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.service.Identification;
 import com.expositds.sjc.servicestation.domain.service.Mechanic;
@@ -86,8 +87,8 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 	}
 
 	@Override
-	public void createPartOrder(Person mechanic, Map<Part, Integer> parts) {
-		workShopService.createPartOrder(mechanic, parts);
+	public PartOrder createPartOrder(Person mechanic) {
+		return workShopService.createPartOrder(mechanic);
 	}
 
 	@Override
@@ -162,6 +163,12 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 	@Override
 	public Set<Order> getMechanicFreeOrders(Person mechanic) {
 		return workShopService.getMechanicFreeOrders(mechanic);
+	}
+
+	@Override
+	public void addPartsToPartOrder(PartOrder partOrder, Map<Part, Integer> parts) {
+		workShopService.addPartsToPartOrder(partOrder, parts);
+		
 	}
 
 }

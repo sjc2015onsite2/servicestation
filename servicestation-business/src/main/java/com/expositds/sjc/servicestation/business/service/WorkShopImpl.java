@@ -24,6 +24,7 @@ import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Part;
+import com.expositds.sjc.servicestation.domain.model.PartOrder;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.HeadOffice;
@@ -124,19 +125,16 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 	}
 
 	@Override
-	public void createPartOrder(Person mechanic, Map<Part, Integer> parts) {
+	public PartOrder createPartOrder(Person mechanic) {
 		Affilate affilate = identificationService.getAffilateByMechanic(mechanic);
 		AffilateEntity affilateEntity = affilateDao.findById(affilate.getAffilateId());
-		PersonEntity mechanicEntity = personDao.findById(mechanic.getId());
+		
 		PartOrderEntity partOrderEntity = new PartOrderEntity();
 		
-		for (Part currentPart : parts.keySet()) 
-			partOrderEntity.getParts().put(partDao.findById(currentPart.getPartId()), parts.get(currentPart));
-		
-		affilateEntity.getPartOrders().put(partOrderEntity, mechanicEntity);
-		
-		partOrderDao.save(partOrderEntity);
+		partOrderEntity.setPartOrderId(partOrderDao.save(partOrderEntity));
 		affilateDao.update(affilateEntity);
+		return conversionService.convert(partOrderEntity, PartOrder.class);
+		
 	}
 
 	@Override
@@ -145,6 +143,17 @@ public class WorkShopImpl extends StorageImpl implements WorkShop {
 		Station station = identificationService.getStationByAffilate(affilate);
 		
 		return headOfficeService.getNewOrders(station);
+	}
+
+	@Override
+	public void addPartsToPartOrder(PartOrder partOrder, Map<Part, Integer> parts) {
+		PartOrderEntity partOrderEntity = partOrderDao.findById(partOrder.getPartOrderId());
+		
+		for (Part currentPart : parts.keySet()) 
+			partOrderEntity.getParts().put(partDao.findById(currentPart.getPartId()), parts.get(currentPart));
+		
+		partOrderDao.save(partOrderEntity);
+		
 	}
 
 }
