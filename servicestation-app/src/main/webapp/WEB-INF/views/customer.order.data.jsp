@@ -119,15 +119,15 @@
 				<strong>Works: </strong>
 			</p>
 		</div>
-		<div class="col-sm-4">
+		<div class="col-sm-5">
 			<ol>
 				<c:forEach var="i" items="${serviceRows}">
-					<li>${i[0] } ${i[1] } ${i[3] }</li>
+					<li>${i[0] } x${i[1] } (${i[3] } BYR)</li>
 				</c:forEach>
 			</ol>
 		</div>
 		<security:authorize access="hasRole('ROLE_MECHANIC')">
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<button data-toggle="modal" data-target="#addwork-modal" type="submit" class="btn btn-warning btn-sm">Add work</button>
 			</div>
 		</security:authorize>
@@ -140,10 +140,10 @@
 				<strong>Parts: </strong>
 			</p>
 		</div>
-		<div class="col-sm-4">
+		<div class="col-sm-5">
 			<ol>
 				<c:forEach var="part" items="${partstoorder}">
-					<li>${part.key.name }(x${part.value })</li>
+					<li>${part.key.name } x${part.value }</li>
 				</c:forEach>
 			</ol>
 		</div>
