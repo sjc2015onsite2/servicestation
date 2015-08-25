@@ -1,6 +1,7 @@
 package com.expositds.sjc.servicestation.domain.model;
 
 import java.util.Calendar;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -18,8 +19,12 @@ public class AffilateProfile {
 	/**
 	 * Список дат и величина арендной платы по дням.
 	 */
-	private TreeMap<Calendar, Integer> rent = new TreeMap<>();
+	private Map<Calendar, Integer> rent;
 	
+	public AffilateProfile() {
+		this.rent = new TreeMap<>();
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -45,11 +50,11 @@ public class AffilateProfile {
 		return true;
 	}
 
-	public TreeMap<Calendar, Integer> getRent() {
+	public Map<Calendar, Integer> getRent() {
 		return rent;
 	}
 
-	public void setRent(TreeMap<Calendar, Integer> rent) {
+	public void setRent(Map<Calendar, Integer> rent) {
 		this.rent = rent;
 	}
 

@@ -1,6 +1,7 @@
 package com.expositds.sjc.servicestation.domain.model;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Профиль СТО на сайте-агрегаторе.
@@ -17,12 +18,17 @@ public class StationProfile {
 	/**
 	 * Список комментариев о СТО.
 	 */
-	private HashSet<Comment> comments = new HashSet<>();
+	private Set<Comment> comments;
 	
 	/**
 	 * Список оценок о СТО.
 	 */
-	private HashSet<Mark> marks = new HashSet<>();
+	private Set<Mark> marks;
+	
+	public StationProfile() {
+		this.comments = new HashSet<>();
+		this.marks = new HashSet<>();
+	}
 
 	@Override
 	public int hashCode() {
@@ -49,19 +55,19 @@ public class StationProfile {
 		return true;
 	}
 
-	public HashSet<Comment> getComments() {
+	public Set<Comment> getComments() {
 		return comments;
 	}
 
-	public void setComments(HashSet<Comment> comments) {
+	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
 
-	public HashSet<Mark> getMarks() {
+	public Set<Mark> getMarks() {
 		return marks;
 	}
 
-	public void setMarks(HashSet<Mark> marks) {
+	public void setMarks(Set<Mark> marks) {
 		this.marks = marks;
 	}
 

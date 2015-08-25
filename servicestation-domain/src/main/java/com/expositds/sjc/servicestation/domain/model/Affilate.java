@@ -3,6 +3,7 @@ package com.expositds.sjc.servicestation.domain.model;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Класс Affilate содержит иформацию о Person, Part, Service, PartOrder, Order.
@@ -19,27 +20,27 @@ public class Affilate {
 	/**
 	 * Список запасных частей в филиале с указанием их количества.
 	 */
-	private HashMap<Part, Integer> parts = new HashMap<>();
+	private Map<Part, Integer> parts;
 
 	/**
 	 * Список заявок и принадлежность к механику у филиала.
 	 */
-	private Map<Order, Person> orders = new HashMap<>();
+	private Map<Order, Person> orders;
 
 	/**
 	 * Список заявок на запчасти с указанием механика, который создал завку на запчасть.
 	 */
-	private HashMap<PartOrder, Person> partOrders = new HashMap<>();
+	private Map<PartOrder, Person> partOrders;
 
 	/**
 	 * Список сотрудников (механиков) работающих в филиале.
 	 */
-	private HashSet<Person> persons = new HashSet<>();
+	private Set<Person> persons;
 
 	/**
 	 * Список оказываемых филиалом услуг и их стоимость.
 	 */
-	private HashMap<Service, Integer> services = new HashMap<>();
+	private Map<Service, Integer> services;
 
 	/**
 	 * Код филиала.
@@ -53,6 +54,11 @@ public class Affilate {
 	 */
 	public Affilate(String affilateCode) {
 		this.affilateCode = affilateCode;
+		this.parts = new HashMap<>();
+		this.orders = new HashMap<>();
+		this.partOrders = new HashMap<>();
+		this.persons = new HashSet<>();
+		this.services = new HashMap<>();
 	}
 	
 		public Affilate() {
@@ -92,11 +98,11 @@ public class Affilate {
 		this.affilateId = affilateId;
 	}
 
-	public HashMap<Part, Integer> getParts() {
+	public Map<Part, Integer> getParts() {
 		return parts;
 	}
 
-	public void setParts(HashMap<Part, Integer> parts) {
+	public void setParts(Map<Part, Integer> parts) {
 		this.parts = parts;
 	}
 
@@ -108,27 +114,27 @@ public class Affilate {
 		this.orders = orders;
 	}
 
-	public HashMap<PartOrder, Person> getPartOrders() {
+	public Map<PartOrder, Person> getPartOrders() {
 		return partOrders;
 	}
 
-	public void setPartOrders(HashMap<PartOrder, Person> partOrders) {
+	public void setPartOrders(Map<PartOrder, Person> partOrders) {
 		this.partOrders = partOrders;
 	}
 
-	public HashSet<Person> getPersons() {
+	public Set<Person> getPersons() {
 		return persons;
 	}
 
-	public void setPersons(HashSet<Person> persons) {
+	public void setPersons(Set<Person> persons) {
 		this.persons = persons;
 	}
 
-	public HashMap<Service, Integer> getServices() {
+	public Map<Service, Integer> getServices() {
 		return services;
 	}
 
-	public void setServices(HashMap<Service, Integer> services) {
+	public void setServices(Map<Service, Integer> services) {
 		this.services = services;
 	}
 

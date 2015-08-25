@@ -1,6 +1,7 @@
 package com.expositds.sjc.servicestation.domain.model;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Класс содержит информацию об отзывах лиентов о механиках.
@@ -17,7 +18,11 @@ public class MechanicProfile {
 	/**
 	 * Список комментариев о механике.
 	 */
-	private HashSet<Comment> comments = new HashSet<>();
+	private Set<Comment> comments;
+	
+	public MechanicProfile() {
+		this.comments = new HashSet<>();
+	}
 
 	@Override
 	public int hashCode() {
@@ -44,11 +49,11 @@ public class MechanicProfile {
 		return true;
 	}
 
-	public HashSet<Comment> getComments() {
+	public Set<Comment> getComments() {
 		return comments;
 	}
 
-	public void setComments(HashSet<Comment> comments) {
+	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
 

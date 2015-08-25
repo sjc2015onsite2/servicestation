@@ -3,6 +3,7 @@ package com.expositds.sjc.servicestation.domain.model;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Класс, содержащий заявку на поставку запчастей.
@@ -19,7 +20,7 @@ public class PartOrder {
 	/**
 	 * Список и количество запчастей в заказе.
 	 */
-	private HashMap<Part, Integer> parts = new HashMap<>();
+	private Map<Part, Integer> parts;
 
 	/**
 	 * Предпологаемая дата поставки запчастей.
@@ -44,6 +45,7 @@ public class PartOrder {
 	public PartOrder(String clientPartOrderId) {
 		this.clientPartOrderId = clientPartOrderId;
 		this.date = new GregorianCalendar();
+		this.parts = new HashMap<>();
 	}
 	
 	/**
@@ -79,11 +81,11 @@ public class PartOrder {
 		return true;
 	}
 
-	public HashMap<Part, Integer> getParts() {
+	public Map<Part, Integer> getParts() {
 		return parts;
 	}
 
-	public void setParts(HashMap<Part, Integer> parts) {
+	public void setParts(Map<Part, Integer> parts) {
 		this.parts = parts;
 	}
 

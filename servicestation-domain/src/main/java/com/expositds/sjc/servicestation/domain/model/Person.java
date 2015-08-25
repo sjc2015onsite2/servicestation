@@ -1,6 +1,7 @@
 package com.expositds.sjc.servicestation.domain.model;
 
 import java.util.Calendar;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -13,7 +14,7 @@ public class Person extends Logginer {
 	/**
 	 * Список дат и величина заработной платы по дням.
 	 */
-	private TreeMap<Calendar, Integer> salary = new TreeMap<>();
+	private Map<Calendar, Integer> salary;
 	
 	/**
 	 * Создаёт нового сотрудника.
@@ -23,17 +24,18 @@ public class Person extends Logginer {
 	public Person(String name, LogginerRole role) {
 		setName(name);
 		setRole(role);
+		this.salary = new TreeMap<>();
 	}
 	
 	public Person() {
 		this(null, null);
 	}
 
-	public TreeMap<Calendar, Integer> getSalary() {
+	public Map<Calendar, Integer> getSalary() {
 		return salary;
 	}
 
-	public void setSalary(TreeMap<Calendar, Integer> salary) {
+	public void setSalary(Map<Calendar, Integer> salary) {
 		this.salary = salary;
 	}
 	
