@@ -52,15 +52,13 @@ public class AffiliatesController {
 			String[][] affilData = new String [affiliates.size()][3];
 			int i = 0;
 			Calendar now = new GregorianCalendar();
-			Calendar firstMonthDay = new GregorianCalendar();
-			
-			//Calendar firstMonthDay = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 1);  
+			  
 			for(Affilate currentaffiliat : affiliates){
-				affilData[i][0] = currentaffiliat.getAffilateId().toString();
-				affilData[i][1] = accountantService.getAffilateRent(currentaffiliat, firstMonthDay, now).toString();
-				affilData[i][2] = accountantService.getAffilateProfit(currentaffiliat, firstMonthDay, now).toString();
+				affilData[i][0] = currentaffiliat.getAffilateCode().toString();
+				affilData[i][1] = accountantService.getAffilateRent(currentaffiliat, now, now).toString();
 				i++;
 			}
+			
 			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("affilData", affilData);

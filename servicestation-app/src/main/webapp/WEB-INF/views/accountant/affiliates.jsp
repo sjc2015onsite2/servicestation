@@ -4,22 +4,16 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="col-sm-offset-2 col-sm-7">
+<div class="col-sm-offset-3 col-sm-6">
 	<table class="table table-striped table-hover table-bordered">
   		<tr>
-	  		<th width="5%">ID</th>
-	  		<th>Rent for the last month</th>
-	  		<th>Rent for the current month</th>
-	  		<th>Profit for the last month</th>
-	  		<th>Profit for the current month</th>
+	  		<th width="20%">Affiliate</th>
+	  		<th>Rent </th>
   		</tr>
   		<c:forEach var="i" items="${affilData }">
   			<tr class="warning">
 	  			<td>${i[0] }</td>
-	  			<td></td>
 	  			<td>${i[1] }</td>
-	  			<td></td>
-	  			<td>${i[2] }</td>
   			</tr>
   		</c:forEach>
   	</table>
