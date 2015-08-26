@@ -4,7 +4,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="col-sm-offset-3 col-sm-6">
+<div class="col-sm-offset-3 col-sm-4">
 	<table class="table table-striped table-hover table-bordered">
   		<tr>
 	  		<th width="20%">Affiliate</th>
