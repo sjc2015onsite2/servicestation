@@ -2,7 +2,9 @@ package com.expositds.sjc.servicestation.app;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -37,9 +39,15 @@ public class EmployeesController {
 	
 		@RequestMapping(value = "/employees", method = RequestMethod.GET)
 		public ModelAndView showEmployeesData(Authentication auth) {
+			Logginer logginer = identificationService.getLogginerByName(auth.getName());
+			Person accountant = identificationService.getPersonById(logginer.getId().toString());
+			
+			Set<Person> employees = new HashSet<>();
+			employees.addAll(accountantService.getServiceStationEmloyees(identificationService.getStationByPerson(accountant)));
 			
 			
 			ModelAndView mav = new ModelAndView();
+			mav.addObject("employees", employees);
 			mav.setViewName("employees");
 			return mav;
 		}
