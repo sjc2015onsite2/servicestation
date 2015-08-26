@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.24, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.24, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: servicestation
+-- Host: localhost    Database: servicestation
 -- ------------------------------------------------------
--- Server version	5.6.25-log
+-- Server version	5.6.26-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -37,7 +37,7 @@ CREATE TABLE `affilate_has_part_orders_persons` (
 
 LOCK TABLES `affilate_has_part_orders_persons` WRITE;
 /*!40000 ALTER TABLE `affilate_has_part_orders_persons` DISABLE KEYS */;
-INSERT INTO `affilate_has_part_orders_persons` VALUES (2,1,1),(2,2,1),(2,3,1),(2,4,1);
+INSERT INTO `affilate_has_part_orders_persons` VALUES (2,1,1),(2,2,1),(2,3,1),(2,4,1),(2,5,1);
 /*!40000 ALTER TABLE `affilate_has_part_orders_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `affilate_has_parts_counts` (
 
 LOCK TABLES `affilate_has_parts_counts` WRITE;
 /*!40000 ALTER TABLE `affilate_has_parts_counts` DISABLE KEYS */;
-INSERT INTO `affilate_has_parts_counts` VALUES (2,1,200),(2,2,300);
+INSERT INTO `affilate_has_parts_counts` VALUES (2,1,437),(2,2,600);
 /*!40000 ALTER TABLE `affilate_has_parts_counts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,7 +285,7 @@ CREATE TABLE `logginers` (
   PRIMARY KEY (`id`,`name`,`login`,`role`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +294,7 @@ CREATE TABLE `logginers` (
 
 LOCK TABLES `logginers` WRITE;
 /*!40000 ALTER TABLE `logginers` DISABLE KEYS */;
-INSERT INTO `logginers` VALUES (0,'NULL','NULL',';lsdfmsl;admflsamdclsakmfwasc klmwefmwlkm','MECHANIC'),(1,'Петрович','petrovich','petrovich','MECHANIC'),(2,'Петя','pit','pit','USER'),(3,'Боря','boris','boris','USER'),(4,'Иваныч','ivanych','ivanych','MECHANIC');
+INSERT INTO `logginers` VALUES (0,'NULL','NULL',';lsdfmsl;admflsamdclsakmfwasc klmwefmwlkm','MECHANIC'),(1,'Петрович','petrovich','petrovich','MECHANIC'),(2,'Петя','pit','pit','USER'),(3,'Боря','boris','boris','USER'),(4,'Иваныч','ivanych','ivanych','MECHANIC'),(5,'Зина','zina','zina','ACCOUNTANT');
 /*!40000 ALTER TABLE `logginers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -451,7 +451,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'NEW','2015-08-18',NULL,'Сильная вибрация при скорости больше 80 км//ч',NULL,NULL,NULL),(38,'NEW','2015-08-18',NULL,'Всё время открывается капот. Невозможно ехать.',NULL,NULL,NULL),(39,'ACCEPTED','2015-08-18','2015-08-25','Муравьи в салоне',3,NULL,NULL),(40,'ACCEPTED','2015-08-22','2015-08-25','Бора плохо тянет',NULL,NULL,NULL),(41,'ACCEPTED','2015-08-19',NULL,'Сломалась труба',NULL,NULL,NULL),(42,'NEW','2015-08-19',NULL,'поломка тачки',NULL,NULL,NULL),(43,'PENDING','2015-08-19','2015-08-25','Коробка предач заедает. колёса отваливаются. крыша сетает. стёклы дребезжат. вонает в салоне. фары отвалились. поцарапанная и не ездит.',2,NULL,NULL),(44,'NEW','2015-08-24',NULL,'Проблема с колесом',NULL,NULL,'(29) 884 21 43'),(45,'ACCEPTED','2015-08-24','2015-08-25','Проблема',4,NULL,'435435435'),(46,'ACCEPTED','2015-08-24',NULL,'северная проблема',NULL,NULL,NULL);
+INSERT INTO `orders` VALUES (1,'NEW','2015-08-18',NULL,'Сильная вибрация при скорости больше 80 км//ч',NULL,NULL,NULL),(38,'NEW','2015-08-18',NULL,'Всё время открывается капот. Невозможно ехать.',NULL,NULL,NULL),(39,'ACCEPTED','2015-08-18','2015-08-25','Муравьи в салоне',3,NULL,NULL),(40,'ACCEPTED','2015-08-22','2015-08-25','Бора плохо тянет',NULL,NULL,NULL),(41,'ACCEPTED','2015-08-19',NULL,'Сломалась труба',NULL,NULL,NULL),(42,'NEW','2015-08-19',NULL,'поломка тачки',NULL,NULL,NULL),(43,'READY','2015-08-19','2015-08-25','Коробка предач заедает. колёса отваливаются. крыша сетает. стёклы дребезжат. вонает в салоне. фары отвалились. поцарапанная и не ездит.',2,NULL,NULL),(44,'NEW','2015-08-24',NULL,'Проблема с колесом',NULL,NULL,'(29) 884 21 43'),(45,'ACCEPTED','2015-08-24','2015-08-25','Проблема',4,NULL,'435435435'),(46,'ACCEPTED','2015-08-24',NULL,'северная проблема',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -501,7 +501,7 @@ CREATE TABLE `part_order_has_parts_counts` (
 
 LOCK TABLES `part_order_has_parts_counts` WRITE;
 /*!40000 ALTER TABLE `part_order_has_parts_counts` DISABLE KEYS */;
-INSERT INTO `part_order_has_parts_counts` VALUES (1,1,2),(2,1,12),(3,1,200),(3,2,300),(4,1,22);
+INSERT INTO `part_order_has_parts_counts` VALUES (1,1,2),(2,1,12),(3,1,200),(3,2,300),(4,1,22),(5,1,1);
 /*!40000 ALTER TABLE `part_order_has_parts_counts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -518,7 +518,7 @@ CREATE TABLE `part_orders` (
   `status` varchar(45) NOT NULL,
   `client_part_order_id` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`part_order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -527,7 +527,7 @@ CREATE TABLE `part_orders` (
 
 LOCK TABLES `part_orders` WRITE;
 /*!40000 ALTER TABLE `part_orders` DISABLE KEYS */;
-INSERT INTO `part_orders` VALUES (1,'2015-08-01','PENDING',NULL),(2,'2015-08-24','PENDING',NULL),(3,'2015-08-25','PENDING',NULL),(4,'2015-08-26','PENDING',NULL);
+INSERT INTO `part_orders` VALUES (1,'2015-08-01','READY',NULL),(2,'2015-08-24','READY',NULL),(3,'2015-08-25','READY',NULL),(4,'2015-08-26','READY',NULL),(5,'2015-08-26','READY',NULL);
 /*!40000 ALTER TABLE `part_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -922,7 +922,7 @@ CREATE TABLE `station_persons` (
 
 LOCK TABLES `station_persons` WRITE;
 /*!40000 ALTER TABLE `station_persons` DISABLE KEYS */;
-INSERT INTO `station_persons` VALUES (1,1),(2,4);
+INSERT INTO `station_persons` VALUES (1,1),(2,4),(1,5);
 /*!40000 ALTER TABLE `station_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1023,72 +1023,6 @@ LOCK TABLES `stations` WRITE;
 INSERT INTO `stations` VALUES (1,'Северная автосервисная станция','nord'),(2,'Южная автосервисная станция','south'),(3,'Западная автосервисная станция','west'),(4,'Восточная автосервисная станция','east');
 /*!40000 ALTER TABLE `stations` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping routines for database 'servicestation'
---
-/*!50003 DROP PROCEDURE IF EXISTS `get_affilate_by_part_order_id` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_affilate_by_part_order_id`(in partorderid int)
-BEGIN
-	select * from affilates where affilate_id IN (select affilate_id from affilate_has_part_orders_persons where part_order_id = partorderid);
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `get_site_user_orders` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_site_user_orders`(in siteuserid int, in startorder int, in countorder int)
-BEGIN
-
-   	select * from orders where order_id IN (select order_id from site_user_has_orders_stations where site_user_id = siteuserid) limit startorder, countorder;
-    
-    
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `get_station_by_order_id` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_station_by_order_id`(in orderid int)
-BEGIN
-
-	select * from stations where station_id IN (select station_id from site_aggregator_has_orders_stations where order_id = orderid);
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1099,4 +1033,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-26 10:23:31
+-- Dump completed on 2015-08-26 15:29:03
