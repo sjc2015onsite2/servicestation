@@ -93,7 +93,7 @@
 	    <property name="defaultErrorView" value="base.error" /> 
 	    <property name="exceptionMappings">
         <props>
-            <prop key="com.expositds.sjc.servicestation.domain.exception.PartLimitException">errors/part.limit.error</prop>
+            <prop key="com.expositds.sjc.servicestation.domain.exception.PartLimitException">part.limit.error</prop>
            </props>
     </property>  
 	</bean>
