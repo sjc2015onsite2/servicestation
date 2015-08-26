@@ -110,8 +110,6 @@ public class FinanceDepartmentImpl implements FinanceDepartment {
 	@Override
 	public Map<Calendar, Integer> getAffilateRent(Affilate affilate, Calendar startDate, Calendar endDate) {
 		
-		final int MILIS_IN_DAY = 86400000;
-		
 		Station station = identification.getStationByAffilate(affilate);
 		StationEntity stationEntity = stationDao.findById(station.getStationId());
 		AffilateEntity affilateEntity = affilateDao.findById(affilate.getAffilateId());
@@ -120,8 +118,8 @@ public class FinanceDepartmentImpl implements FinanceDepartment {
 		Map<Calendar, Integer> rent = new TreeMap<>();
 		
 		for (Calendar currentDate : affilateProfileEntity.getRent().keySet())
-			if (currentDate.getTimeInMillis() > startDate.getTimeInMillis()  &&
-					currentDate.getTimeInMillis() +  MILIS_IN_DAY > endDate.getTimeInMillis())
+			if (currentDate.compareTo(startDate) >= 0  &&
+					currentDate.compareTo(endDate) <= 0)
 				rent.put(currentDate, affilateProfileEntity.getRent().get(currentDate));
 		
 		return rent;
