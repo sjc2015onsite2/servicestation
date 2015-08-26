@@ -60,7 +60,7 @@
             	
             	<security:authorize access="hasRole('ROLE_ACCOUNTANT')">
            			<li><a href="<c:url value="/accountant/station" />" >My station</a></li>
-                	<li><a href="<c:url value="/accountant/dynamic" />" >Dynamic</a></li>
+                	<li><a href="<c:url value="/accountant/affiliatesdata" />" >Dynamic</a></li>
                 	<li><a href="<c:url value="/accountant/affiliates" />" >Affiliate list</a></li>
                 	<li><a href="<c:url value="/accountant/employees" />" >Employees list</a></li>
                 	<li><a href="<c:url value="/accountant/orders" />" >Orders</a></li>
