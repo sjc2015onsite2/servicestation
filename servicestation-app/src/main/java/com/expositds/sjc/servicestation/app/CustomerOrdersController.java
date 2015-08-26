@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.expositds.sjc.servicestation.app.dto.CustomerOrderDto;
+import com.expositds.sjc.servicestation.business.service.dto.CustomerOrderDto;
+import com.expositds.sjc.servicestation.business.service.dto.builders.CustomerOrderDtoBuilder;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Service;
@@ -39,6 +40,9 @@ public class CustomerOrdersController {
 	
 	@Autowired
 	private Identification identificationService;
+	
+	@Autowired
+	private CustomerOrderDtoBuilder customerOrderDtoBuilder;
 	
 		@RequestMapping(value = "/myorders", method = RequestMethod.GET)
 		public ModelAndView myorders(@RequestParam(value = "page", required = false) Long page,
@@ -72,7 +76,8 @@ public class CustomerOrdersController {
 				}
 			}
 			
-			CustomerOrderDto customerOrderDto = new CustomerOrderDto.Builder(order).build();
+			customerOrderDtoBuilder.setOrder(order);
+			CustomerOrderDto customerOrderDto = customerOrderDtoBuilder.build();
 			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("customerOrderDto", customerOrderDto);
