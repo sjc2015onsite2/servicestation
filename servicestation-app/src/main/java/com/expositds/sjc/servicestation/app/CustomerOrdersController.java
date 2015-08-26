@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.expositds.sjc.servicestation.app.dto.CustomerOrderDto;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Service;
@@ -62,28 +63,7 @@ public class CustomerOrdersController {
 		}
 		
 		@RequestMapping(value = "/myorders/{orderId}", method = RequestMethod.GET)
-		public ModelAndView myorder(
-				@PathVariable("orderId") Order order) {
-			
-			String completedate = new String();
-			String createdate = new String();
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-			if(order.getCompleteDate() != null)
-				completedate = dateFormat.format(order.getCompleteDate().getTime());
-			createdate = dateFormat.format(order.getCreateDate().getTime());
-			
-			Integer cost = new Integer(0);
-			
-			String[][] serviceRows = new String[order.getServices().size()][4]; 
-			int i = 0;
-			for (Service currentService : order.getServices().keySet()) {
-				serviceRows[i][0] = currentService.getName();
-				serviceRows[i][1] = order.getServices().get(currentService).toString();
-				serviceRows[i][2] = order.getOrderServicesPriceList().get(currentService).toString();
-				serviceRows[i][3] = Integer.toString((Integer.parseInt(serviceRows[i][1]) * Integer.parseInt(serviceRows[i][2])));
-				cost += Integer.parseInt(serviceRows[i][3]);
-				i++;
-			}
+		public ModelAndView myorder(@PathVariable("orderId") Order order) {
 			
 			boolean change = false;
 			if(order.getCompleteDate() != null){
@@ -92,17 +72,11 @@ public class CustomerOrdersController {
 				}
 			}
 			
+			CustomerOrderDto customerOrderDto = new CustomerOrderDto(order);
+			
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("mechanic", identificationService.getMechanicByOrder(order));
-			mav.addObject("station", identificationService.getStationByOrder(order));
-			mav.addObject("stations", authorizedUserSiteService.getServiceStations());
-			mav.addObject("partstoorder", order.getParts());
-			mav.addObject("change", change); 
-			mav.addObject("cost", cost); 
-			mav.addObject("serviceRows", serviceRows); 
-			mav.addObject("completedate", completedate);
-			mav.addObject("createdate", createdate);
-			mav.addObject("order", order);
+			mav.addObject("customerOrderDto", customerOrderDto);
+			mav.addObject("change", change); ;
 			mav.setViewName("customer.order.data");
 			
 			return mav;

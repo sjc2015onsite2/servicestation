@@ -7,7 +7,7 @@
 
 	<div class="col-sm-12">
 		<div class="col-sm-6">
-			<h4 class="text-center">Order ${order.orderId}</h4>
+			<h4 class="text-center">Order ${customerOrderDto.orderId}</h4>
 		</div>
 		<c:if test="${change eq true }">
 			<security:authorize access="hasRole('ROLE_USER')">
@@ -30,7 +30,7 @@
 			</div>
 			<div class="col-sm-9">
 				<p class="text-left">
-					<em>${station.name}</em>
+					<em>${customerOrderDto.stationName}</em>
 				</p>
 			</div>
 		</div>
@@ -43,7 +43,7 @@
 			</div>
 			<div class="col-sm-9">
 				<p class="text-left">
-					<em>${mechanic.name }</em>
+					<em>${customerOrderDto.mechanicName }</em>
 				</p>
 			</div>
 		</div>
@@ -78,7 +78,7 @@
 		</div>
 		<div class="col-sm-9">
 			<p class="text-left">
-				<em>${order.problemDescription}</em>
+				<em>${customerOrderDto.problemDescription}</em>
 			</p>
 		</div>
 	</div>
@@ -93,7 +93,7 @@
 		<security:authorize access="hasRole('ROLE_USER')">
 			<div class="col-sm-9">
 				<p class="text-left">
-					<em>${order.status }</em>
+					<em>${customerOrderDto.orderStatus}</em>
 				</p>
 			</div>
 		</security:authorize>
@@ -121,8 +121,8 @@
 		</div>
 		<div class="col-sm-5">
 			<ol>
-				<c:forEach var="i" items="${serviceRows}">
-					<li>${i[0] } x${i[1] } (${i[3] } BYR)</li>
+				<c:forEach var="service" items="${customerOrderDto.serviceRows}">
+					<li>${service[0] } x${service[1] } (${service[3] } BYR)</li>
 				</c:forEach>
 			</ol>
 		</div>
@@ -142,8 +142,8 @@
 		</div>
 		<div class="col-sm-5">
 			<ol>
-				<c:forEach var="part" items="${partstoorder}">
-					<li>${part.key.name } x${part.value }</li>
+				<c:forEach var="part" items="${customerOrderDto.partsNamesAndQuantity}">
+					<li>${part.key} x${part.value}</li>
 				</c:forEach>
 			</ol>
 		</div>
@@ -163,7 +163,7 @@
 		</div>
 			<div class="col-sm-9">
 				<p class="text-left">
-					<em>${cost }</em> BYR
+					<em>${customerOrderDto.orderCost}</em> BYR
 				</p>
 			</div>
 	</div>
@@ -178,7 +178,7 @@
 		<security:authorize access="hasRole('ROLE_USER')">
 			<div class="col-sm-9">
 				<p class="text-left">
-					<em>${completedate }</em>
+					<em>${customerOrderDto.completedDate }</em>
 				</p>
 			</div>
 		</security:authorize>
@@ -216,7 +216,7 @@
 		</div>
 		<div class="col-sm-9">
 			<p class="text-left">
-				<em>${createdate}</em>
+				<em>${customerOrderDto.createdDate}</em>
 			</p>
 		</div>
 	</div>
@@ -232,7 +232,7 @@
 		<security:authorize access="hasRole('ROLE_USER')">
 			<div class="col-sm-9">
 				<p class="text-left">
-					<em>${order.notification.message }</em>
+					<em>${customerOrderDto.notificationMessage}</em>
 				</p>
 			</div>
 		</security:authorize>
@@ -392,8 +392,8 @@
 					</div>
 					<div class="col-sm-10">
 						<select name="stationId" multiple class="form-control">
-							<c:forEach var="station" items="${stations}">
-								<option value="${station.stationId }">${station.name}</option>
+							<c:forEach var="station" items="${customerOrderDto.stationsIdAndNames}">
+								<option value="${station.key }">${station.value}</option>
 							</c:forEach>
 						</select> <input name="orderId" value="${order.orderId }" hidden="true">
 					</div>
