@@ -3,6 +3,7 @@ package com.expositds.sjc.servicestation.app;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -41,6 +42,11 @@ public class StationDataController {
 	
 		@RequestMapping(value = "/station", method = RequestMethod.GET)
 		public ModelAndView showStationData() {
+			
+			Calendar now = new GregorianCalendar();
+			Calendar firstDayOfCurrentMonth = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 1);
+			Calendar nowDate = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+		
 			
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("station");
