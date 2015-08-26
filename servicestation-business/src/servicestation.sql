@@ -37,7 +37,7 @@ CREATE TABLE `affilate_has_part_orders_persons` (
 
 LOCK TABLES `affilate_has_part_orders_persons` WRITE;
 /*!40000 ALTER TABLE `affilate_has_part_orders_persons` DISABLE KEYS */;
-INSERT INTO `affilate_has_part_orders_persons` VALUES (2,1,1),(2,2,1);
+INSERT INTO `affilate_has_part_orders_persons` VALUES (2,1,1),(2,2,1),(2,3,1),(2,4,1);
 /*!40000 ALTER TABLE `affilate_has_part_orders_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `affilate_has_parts_counts` (
 
 LOCK TABLES `affilate_has_parts_counts` WRITE;
 /*!40000 ALTER TABLE `affilate_has_parts_counts` DISABLE KEYS */;
-INSERT INTO `affilate_has_parts_counts` VALUES (2,1,-187),(2,2,-10);
+INSERT INTO `affilate_has_parts_counts` VALUES (2,1,200),(2,2,300);
 /*!40000 ALTER TABLE `affilate_has_parts_counts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -395,7 +395,7 @@ CREATE TABLE `order_has_parts_counts` (
 
 LOCK TABLES `order_has_parts_counts` WRITE;
 /*!40000 ALTER TABLE `order_has_parts_counts` DISABLE KEYS */;
-INSERT INTO `order_has_parts_counts` VALUES (43,1,208),(43,2,2),(45,1,12),(45,2,23);
+INSERT INTO `order_has_parts_counts` VALUES (43,1,208),(43,2,2),(45,1,78),(45,2,245),(46,1,2);
 /*!40000 ALTER TABLE `order_has_parts_counts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -476,7 +476,7 @@ CREATE TABLE `orders_services_count` (
 
 LOCK TABLES `orders_services_count` WRITE;
 /*!40000 ALTER TABLE `orders_services_count` DISABLE KEYS */;
-INSERT INTO `orders_services_count` VALUES (43,1,2),(43,2,1),(45,1,1),(45,2,1),(46,1,1);
+INSERT INTO `orders_services_count` VALUES (43,1,2),(43,2,1),(45,1,1),(45,2,1);
 /*!40000 ALTER TABLE `orders_services_count` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -491,7 +491,7 @@ CREATE TABLE `part_order_has_parts_counts` (
   `part_order_id` int(11) NOT NULL,
   `part_id` int(11) NOT NULL,
   `count` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`part_order_id`)
+  PRIMARY KEY (`part_order_id`,`part_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -501,7 +501,7 @@ CREATE TABLE `part_order_has_parts_counts` (
 
 LOCK TABLES `part_order_has_parts_counts` WRITE;
 /*!40000 ALTER TABLE `part_order_has_parts_counts` DISABLE KEYS */;
-INSERT INTO `part_order_has_parts_counts` VALUES (1,1,2),(2,1,12);
+INSERT INTO `part_order_has_parts_counts` VALUES (1,1,2),(2,1,12),(3,1,200),(3,2,300),(4,1,22);
 /*!40000 ALTER TABLE `part_order_has_parts_counts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -518,7 +518,7 @@ CREATE TABLE `part_orders` (
   `status` varchar(45) NOT NULL,
   `client_part_order_id` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`part_order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -527,7 +527,7 @@ CREATE TABLE `part_orders` (
 
 LOCK TABLES `part_orders` WRITE;
 /*!40000 ALTER TABLE `part_orders` DISABLE KEYS */;
-INSERT INTO `part_orders` VALUES (1,'2015-08-01','PENDING',NULL),(2,'2015-08-24','PENDING',NULL);
+INSERT INTO `part_orders` VALUES (1,'2015-08-01','PENDING',NULL),(2,'2015-08-24','PENDING',NULL),(3,'2015-08-25','PENDING',NULL),(4,'2015-08-26','PENDING',NULL);
 /*!40000 ALTER TABLE `part_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1027,6 +1027,25 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'servicestation'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `get_affilate_by_part_order_id` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_affilate_by_part_order_id`(in partorderid int)
+BEGIN
+	select * from affilates where affilate_id IN (select affilate_id from affilate_has_part_orders_persons where part_order_id = partorderid);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `get_site_user_orders` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1080,4 +1099,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-25  9:18:09
+-- Dump completed on 2015-08-26 10:23:31

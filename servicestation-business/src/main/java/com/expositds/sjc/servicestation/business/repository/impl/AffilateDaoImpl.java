@@ -13,5 +13,12 @@ import com.expositds.sjc.servicestation.business.repository.hibernate.AbstractHi
 @Repository
 public class AffilateDaoImpl extends AbstractHibernateDao<AffilateEntity, Long> implements AffilateDao {
 
+	@Override
+	public AffilateEntity getAffilateByPartOrderId(Long Id) {
+		return (AffilateEntity) getSession().getNamedQuery("callGetAffilateByPartOrderIdProc")
+				   .setParameter("partOrderId", Id)
+			       .uniqueResult();
+	}
+
 	
 }

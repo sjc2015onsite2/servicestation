@@ -67,6 +67,8 @@ public interface Identification {
 	
 	public Affilate getAffilateByOrder(Order order);
 	
+	public Affilate getAffilateByPartOrder(PartOrder partOrder);
+	
 	public Person getMechanicByOrder(Order order);
 
 }

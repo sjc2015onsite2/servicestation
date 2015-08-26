@@ -6,8 +6,9 @@ import java.util.Map;
 
 import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.model.PartOrder;
+import com.expositds.sjc.servicestation.domain.model.PartOrderStatus;
 
-public class PartOrderDto {
+public class PartOrderDto implements Comparable<PartOrderDto>{
 	
 	private String id;
 	
@@ -16,6 +17,8 @@ public class PartOrderDto {
 	private String status;
 	
 	private String date;
+	
+	private boolean changeStatus;
 	
 
 	public PartOrderDto(PartOrder partOrder) {
@@ -32,8 +35,15 @@ public class PartOrderDto {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 		date = dateFormat.format(partOrder.getDate().getTime());
 		this.date = date;
+		
+		this.changeStatus = false;
+		if(partOrder.getStatus() == PartOrderStatus.PENDING){
+			changeStatus = true;
+		}
 	}
 
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -50,5 +60,16 @@ public class PartOrderDto {
 		return date;
 	}
 	
+	public boolean getChangeStatus() {
+		return changeStatus;
+	}
+
+
+
+	@Override
+	public int compareTo(PartOrderDto o) {
+		
+		return (-1) * id.compareTo(o.getId());
+	}
 
 }
