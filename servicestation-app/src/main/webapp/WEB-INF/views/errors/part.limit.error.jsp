@@ -5,11 +5,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 
-
+<div class="row" style="padding-left: 10%; padding-right: 10%;">
 	<div class="panel panel-danger">
   <div class="panel-body">
     Произошла ошибка!
   </div>
   <div class="panel-footer">Нет необходимого количества запчастей на складе.</div>
+</div>
 </div>
 
