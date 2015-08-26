@@ -72,7 +72,7 @@ public class CustomerOrdersController {
 				}
 			}
 			
-			CustomerOrderDto customerOrderDto = new CustomerOrderDto(order);
+			CustomerOrderDto customerOrderDto = new CustomerOrderDto.Builder(order).build();
 			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("customerOrderDto", customerOrderDto);
