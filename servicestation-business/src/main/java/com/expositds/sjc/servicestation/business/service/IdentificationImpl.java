@@ -285,5 +285,10 @@ public class IdentificationImpl implements Identification, Serializable {
 		
 		return null;
 	}
+
+	@Override
+	public Affilate getAffilateByPartOrder(PartOrder partOrder) {
+		return affilateEntityModelConverter.convert(affilateDao.getAffilateByPartOrderId(partOrder.getPartOrderId()));
+	}
 	
 }

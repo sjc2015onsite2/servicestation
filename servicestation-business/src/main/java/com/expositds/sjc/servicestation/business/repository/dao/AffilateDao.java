@@ -10,5 +10,7 @@ import com.expositds.sjc.servicestation.business.repository.entity.AffilateEntit
  *
  */
 public interface AffilateDao extends GenericDao<AffilateEntity, Long> {
+	
+	public AffilateEntity getAffilateByPartOrderId(Long Id);
 
 }
