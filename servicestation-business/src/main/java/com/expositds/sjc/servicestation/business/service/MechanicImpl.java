@@ -113,12 +113,14 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 		for (Part currentPart : parts.keySet()) {
 			PartEntity currentPartEntity = partDao.findById(currentPart.getPartId());
 			
+			if (affilateEntity.getParts().get(currentPartEntity) - parts.get(currentPart) < 0)
+				throw new PartLimitException();
+			
 			if (orderEntity.getParts().containsKey(currentPartEntity)) 
 				orderEntity.getParts().put(currentPartEntity, orderEntity.getParts().get(currentPartEntity) + parts.get(currentPart));
 			else orderEntity.getParts().put(currentPartEntity, parts.get(currentPart));
 			
-			if (affilateEntity.getParts().get(currentPartEntity) - parts.get(currentPart) < 0)
-				throw new PartLimitException();
+			
 			affilateEntity.getParts().put(currentPartEntity, affilateEntity.getParts().get(currentPartEntity) - parts.get(currentPart));
 		}
 		

@@ -1,14 +1,14 @@
-package com.expositds.sjc.servicestation.app.dto;
+package com.expositds.sjc.servicestation.business.service.dto.builders.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Scope;
 
-import com.expositds.sjc.servicestation.business.service.AuthorizedUserSiteImpl;
-import com.expositds.sjc.servicestation.business.service.IdentificationImpl;
+import com.expositds.sjc.servicestation.business.service.dto.CustomerOrderDto;
+import com.expositds.sjc.servicestation.business.service.dto.builders.CustomerOrderDtoBuilder;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.model.Service;
@@ -18,101 +18,11 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
 
 /**
  * @author Alexey Suslov
- * @author Sergey Rybakov
  *
  */
-public class CustomerOrderDto {
-	
-	private String orderId;
-	
-	private String stationName;
-	
-	private String mechanicName;
-	
-	private String problemDescription;
-	
-	private String orderStatus;
-	
-	private String[][] serviceRows;
-	
-	private Map<String, String> partsNamesAndQuantity;
-	
-	private String orderCost;
-	
-	private String completedDate;
-	
-	private String createdDate;
-	
-	private String notificationMessage;
-	
-	private Map<String, String> stationsIdAndNames;
-	
-	
-	
-	public CustomerOrderDto(Builder builder) {
-		orderId = builder.getOrderId();
-		stationName = builder.getStationName();
-		mechanicName = builder.getMechanicName();
-		problemDescription = builder.getProblemDescription();
-		orderStatus = builder.getOrderStatus();	
-		serviceRows = builder.getServiceRows();
-		orderCost = builder.getOrderCost();
-		partsNamesAndQuantity = builder.getPartsNamesAndQuantity();
-		completedDate = builder.getCompletedDate();
-		createdDate = builder.getCreatedDate();
-		notificationMessage = builder.getNotificationMessage();
-		stationsIdAndNames = builder.getStationsIdAndNames();
-	}
-
-	public String getOrderId() {
-		return orderId;
-	}
-
-	public String getStationName() {
-		return stationName;
-	}
-
-	public String getMechanicName() {
-		return mechanicName;
-	}
-
-	public String getProblemDescription() {
-		return problemDescription;
-	}
-
-	public String getOrderStatus() {
-		return orderStatus;
-	}
-
-	public Map<String, String> getPartsNamesAndQuantity() {
-		return partsNamesAndQuantity;
-	}
-
-	public String getOrderCost() {
-		return orderCost;
-	}
-
-	public String getCompletedDate() {
-		return completedDate;
-	}
-
-	public String getCreatedDate() {
-		return createdDate;
-	}
-
-	public String getNotificationMessage() {
-		return notificationMessage;
-	}
-
-	public Map<String, String> getStationsIdAndNames() {
-		return stationsIdAndNames;
-	}
-	
-	public String[][] getServiceRows() {
-		return serviceRows;
-	}
-
-	public static class Builder {
+@org.springframework.stereotype.Service
+@Scope("prototype")
+public class CustomerOrderDtoBuilderImpl implements CustomerOrderDtoBuilder {
 		
 		private Order order;
 		
@@ -120,40 +30,48 @@ public class CustomerOrderDto {
 		
 		private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 		
-		//@Autowired
-		private Identification identification = new IdentificationImpl();
+		@Autowired
+		private Identification identification;
 		
-		//@Autowired
-		private AuthorizedUserSite authorizedUserSite = new AuthorizedUserSiteImpl();
+		@Autowired
+		private AuthorizedUserSite authorizedUserSite;
 		
-		public Builder(Order order) {
+		@Override
+		public void setOrder(Order order) {
 			this.order = order;
 		}
 		
+		@Override
 		public String getOrderId() {
 			return order.getOrderId().toString();
 		}
 		
+		@Override
 		public String getStationName() {
 			return identification.getStationByOrder(order).getName().toString();
 		}
 		
+		@Override
 		public String getMechanicName() {
 			return identification.getMechanicByOrder(order).getName().toString();
 		}
 		
+		@Override
 		public String getProblemDescription() {
 			return order.getProblemDescription().toString();
 		}
 		
+		@Override
 		public String getOrderStatus() {
 			return order.getStatus().toString();
 		}
 		
+		@Override
 		public String[][] getServiceRows() {
 			
 			String [][] serviceRows = new String[order.getServices().size()][4];
 			int i = 0;
+			orderCost = 0;
 			for(Service currentService : order.getServices().keySet()){
 				serviceRows[i][0] = currentService.getName();
 				serviceRows[i][1] = order.getServices().get(currentService).toString();
@@ -166,6 +84,7 @@ public class CustomerOrderDto {
 			return serviceRows;
 		}
 		
+		@Override
 		public Map<String, String> getPartsNamesAndQuantity() {
 			Map<String, String> result = new HashMap<>();
 			for(Part currentPart : order.getParts().keySet()){
@@ -174,28 +93,33 @@ public class CustomerOrderDto {
 			return result;
 		}
 		
+		@Override
 		public String getOrderCost() {
 			return orderCost.toString();
 		}
 		
+		@Override
 		public String getCompletedDate() {
 			if(order.getCompleteDate() != null)
 				return dateFormat.format(order.getCompleteDate().getTime());
 			return new String();
 		}
 		
+		@Override
 		public String getCreatedDate() {
 			if(order.getCreateDate() != null)
 				return dateFormat.format(order.getCreateDate().getTime());
 			return new String();
 		}
 		
+		@Override
 		public String getNotificationMessage() {
 			if(order.getNotification() != null)
 				return order.getNotification().getMessage().toString();
 			return new String();
 		}
 		
+		@Override
 		public Map<String, String> getStationsIdAndNames() {
 			Map<String, String> result = new HashMap<>();
 			for(Station currentStation : authorizedUserSite.getServiceStations()){
@@ -205,8 +129,8 @@ public class CustomerOrderDto {
 			return result;
 		}
 		
+		@Override
 		public CustomerOrderDto build() {
 			return new CustomerOrderDto(this);
 		}
-	}
 }

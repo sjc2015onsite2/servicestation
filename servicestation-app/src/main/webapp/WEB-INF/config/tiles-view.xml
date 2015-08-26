@@ -13,6 +13,13 @@
 	
 	<definition name="base.error" template="/WEB-INF/views/error.jsp">
 		<put-attribute name="layout" value="/WEB-INF/tiles-base/layout.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/error.jsp" />
+	</definition>
+	
+	<definition name="part.limit.error" extends="base.definition">
+		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/errors/part.limit.error.jsp" />
 	</definition>
 	
 	<definition name="createOrder" extends="base.definition">

@@ -1,4 +1,4 @@
-package com.expositds.sjc.servicestation.app.dto;
+package com.expositds.sjc.servicestation.business.service.dto;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
