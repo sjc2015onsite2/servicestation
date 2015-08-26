@@ -3,8 +3,12 @@ package com.expositds.sjc.servicestation.app.dto;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.expositds.sjc.servicestation.business.service.AuthorizedUserSiteImpl;
+import com.expositds.sjc.servicestation.business.service.IdentificationImpl;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.model.Service;
@@ -42,6 +46,8 @@ public class CustomerOrderDto {
 	private String notificationMessage;
 	
 	private Map<String, String> stationsIdAndNames;
+	
+	
 	
 	public CustomerOrderDto(Builder builder) {
 		orderId = builder.getOrderId();
@@ -106,7 +112,6 @@ public class CustomerOrderDto {
 		return serviceRows;
 	}
 
-
 	public static class Builder {
 		
 		private Order order;
@@ -115,11 +120,11 @@ public class CustomerOrderDto {
 		
 		private SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 		
-		@Autowired
-		private Identification identification;
+		//@Autowired
+		private Identification identification = new IdentificationImpl();
 		
-		@Autowired
-		AuthorizedUserSite authorizedUserSite;
+		//@Autowired
+		private AuthorizedUserSite authorizedUserSite = new AuthorizedUserSiteImpl();
 		
 		public Builder(Order order) {
 			this.order = order;
