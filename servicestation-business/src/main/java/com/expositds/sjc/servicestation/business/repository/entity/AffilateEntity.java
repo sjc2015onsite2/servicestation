@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.MapKeyJoinColumn;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -26,6 +28,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "affilates")
+@NamedNativeQueries({
+	@NamedNativeQuery(
+		name = "callGetAffilateByPartOrderIdProc",
+		query = "call get_affilate_by_part_order_id(:partOrderId)",
+		resultClass = AffilateEntity.class
+	)
+})
 public class AffilateEntity {
 	
 	/**
