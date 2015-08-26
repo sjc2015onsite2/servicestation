@@ -36,14 +36,11 @@ public class EmployeesController {
 	private Identification identificationService;
 	
 		@RequestMapping(value = "/employees", method = RequestMethod.GET)
-		public ModelAndView myorders(Authentication auth) {
+		public ModelAndView showEmployeesData(Authentication auth) {
 			
-			Logginer logginer = identificationService.getLogginerByName(auth.getName());
-			Person accountant = identificationService.getPersonById(logginer.getId().toString());
 			
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("employees", accountantService.getServiceStationAffilate(identificationService.getStationByPerson(accountant)));
-			mav.setViewName("affiliates");
+			mav.setViewName("employees");
 			return mav;
 		}
 }

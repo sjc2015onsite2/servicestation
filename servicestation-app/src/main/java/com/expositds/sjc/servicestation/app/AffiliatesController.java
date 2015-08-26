@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Person;
+import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.Accountant;
 import com.expositds.sjc.servicestation.domain.service.Identification;
 
@@ -41,7 +42,7 @@ public class AffiliatesController {
 	private Identification identificationService;
 	
 		@RequestMapping(value = "/affiliates", method = RequestMethod.GET)
-		public ModelAndView myorders(Authentication auth) {
+		public ModelAndView affiliatesRent(Authentication auth) {
 			
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
 			Person accountant = identificationService.getPersonById(logginer.getId().toString());
@@ -52,10 +53,13 @@ public class AffiliatesController {
 			String[][] affilData = new String [affiliates.size()][3];
 			int i = 0;
 			Calendar now = new GregorianCalendar();
+			
+			
 			  
 			for(Affilate currentaffiliat : affiliates){
 				affilData[i][0] = currentaffiliat.getAffilateCode().toString();
 				affilData[i][1] = accountantService.getAffilateRent(currentaffiliat, now, now).toString();
+				affilData[i][2] = currentaffiliat.getAffilateId().toString();
 				i++;
 			}
 			
@@ -63,6 +67,21 @@ public class AffiliatesController {
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("affilData", affilData);
 			mav.setViewName("affiliates");
+			return mav;
+		}
+		
+		@RequestMapping(value = "/affiliates", method = RequestMethod.POST)
+		public ModelAndView changeRent(Authentication auth,
+				@RequestParam(value="affiliateId") Affilate affiliate,
+				@RequestParam Integer newrent) {
+			
+			Calendar now = new GregorianCalendar();
+			Map<Calendar, Integer> dateAndRent = new HashMap<>();
+			dateAndRent.put(now, newrent);
+			accountantService.setAffilateRent(affiliate, dateAndRent);
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("redirect:/accountant/affiliates");
 			return mav;
 		}
 }
