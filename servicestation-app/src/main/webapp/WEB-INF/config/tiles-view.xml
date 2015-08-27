@@ -110,22 +110,27 @@
 	
 	<definition name="station" extends="base.definition">
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/accountant/station.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/station.jsp" />
 	</definition>
 	
 	<definition name="affiliates" extends="base.definition">
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/accountant/affiliates.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/affiliates.jsp" />
 	</definition>
 	
 	<definition name="affiliates.data" extends="base.definition">
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/accountant/affiliates.data.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/affiliates.data.jsp" />
 	</definition>
 	
 	<definition name="employees" extends="base.definition">
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/accountant/employees.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/employees.jsp" />
+	</definition>
+	
+	<definition name="station.orders.list" extends="base.definition">
+		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/station.orders.list.jsp" />
 	</definition>
 	
 </tiles-definitions> 

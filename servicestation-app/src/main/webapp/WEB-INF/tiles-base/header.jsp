@@ -66,6 +66,23 @@
                 	<li><a href="<c:url value="/accountant/orders" />" >Orders</a></li>
             	</security:authorize>
             	
+            	<security:authorize access="hasRole('ROLE_CEO')">
+           			<li><a href="<c:url value="/ceo/station" />" >My station</a></li>
+                	<li><a href="<c:url value="/ceo/affiliatesdata" />" >Dynamic</a></li>
+                	<li><a href="<c:url value="/ceo/affiliates" />" >Affiliate list</a></li>
+                	<li><a href="<c:url value="/ceo/employees" />" >Employees list</a></li>
+                	<li><a href="<c:url value="/ceo/orders" />" >Orders</a></li>
+                	<li class="dropdown">
+               	    	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Comments <b class="caret"></b></a>
+                   		<ul class="dropdown-menu">
+            	        	<li><a href="<c:url value="/ceo/stationcomments" />" >Comments about Station</a></li>
+                        	<li class="divider"></li>
+              	        	<li><a href="<c:url value="/ceo/mechanicscomments" />" >Comments about Mechanics</a></li>
+                    	</ul>
+                	</li>
+                	<li><a href="<c:url value="/ceo/notificationslog" />" >Notification log</a></li>
+            	</security:authorize>
+            	
           	</ul>  
           	
           	<security:authorize access="isAnonymous()">
@@ -87,6 +104,12 @@
            	</security:authorize>
             	
             <security:authorize access="hasRole('ROLE_ACCOUNTANT')">
+            	<form class="navbar-form navbar-right">
+                  	<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default">Logout</button></a>
+                </form>
+           	</security:authorize>
+           	
+           	<security:authorize access="hasRole('ROLE_CEO')">
             	<form class="navbar-form navbar-right">
                   	<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default">Logout</button></a>
                 </form>
