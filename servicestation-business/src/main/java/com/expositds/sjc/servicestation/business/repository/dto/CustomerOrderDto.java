@@ -1,17 +1,12 @@
 package com.expositds.sjc.servicestation.business.repository.dto;
 
 import java.util.List;
-import java.util.Map;
-
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapKey;
-import javax.persistence.MapKeyColumn;
-import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import org.hibernate.annotations.LazyCollection;
@@ -27,7 +22,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 		name = "callCustomerOrderDtoProc", 
 		query = "call customer_order_dto(:orderId)",
 		resultClass = CustomerOrderDto.class)})
-public class CustomerOrderDto {
+	public class CustomerOrderDto {
 	
 	@Id
 	@Column(name = "orders.order_id")
@@ -93,7 +88,8 @@ public class CustomerOrderDto {
 	@Column(name = "count")
 	private List<Integer> partCounts;
 	
-	//private String orderCost;
+	@Column(name = "ordersum")
+	private Integer orderCost;
 	
 	@Column(name = "orders.order_compleate_date")
 	private String completedDate;
@@ -104,19 +100,6 @@ public class CustomerOrderDto {
 	@Column(name = "client_notifications.client_notification")
 	private String notificationMessage;
 	
-//	@LazyCollection(LazyCollectionOption.FALSE)
-//	@ElementCollection
-//	@CollectionTable(name = "stations")
-//	@MapKeyColumn(name = "station_id")
-//	@Column(name = "station_name")
-//	private Map<Integer, String> stationsIdAndNames;
-	
-//	@LazyCollection(LazyCollectionOption.FALSE)
-//	@ElementCollection
-//	@CollectionTable(name = "services")
-//	@Column(name = "station_d")
-//	private List<Integer> stationIds;
-
 	public Integer getOrderId() {
 		return orderId;
 	}
@@ -155,6 +138,38 @@ public class CustomerOrderDto {
 
 	public void setOrderStatus(String orderStatus) {
 		this.orderStatus = orderStatus;
+	}
+
+	public List<String> getServiceNames() {
+		return serviceNames;
+	}
+
+	public void setServiceNames(List<String> serviceNames) {
+		this.serviceNames = serviceNames;
+	}
+
+	public List<Integer> getServiceCounts() {
+		return serviceCounts;
+	}
+
+	public void setServiceCounts(List<Integer> serviceCounts) {
+		this.serviceCounts = serviceCounts;
+	}
+
+	public List<Integer> getServiceCosts() {
+		return serviceCosts;
+	}
+
+	public void setServiceCosts(List<Integer> serviceCosts) {
+		this.serviceCosts = serviceCosts;
+	}
+
+	public List<Integer> getServiceSums() {
+		return serviceSums;
+	}
+
+	public void setServiceSums(List<Integer> serviceSums) {
+		this.serviceSums = serviceSums;
 	}
 
 	public List<String> getPartNames() {
@@ -196,7 +211,5 @@ public class CustomerOrderDto {
 	public void setNotificationMessage(String notificationMessage) {
 		this.notificationMessage = notificationMessage;
 	}
-	
-	
 	
 }

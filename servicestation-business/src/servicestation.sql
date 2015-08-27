@@ -816,6 +816,21 @@ INSERT INTO `site_aggregator_has_stations_station_profiles` VALUES (1,1,1),(1,2,
 UNLOCK TABLES;
 
 --
+-- Temporary table structure for view `site_aggregator_services_ids_names`
+--
+
+DROP TABLE IF EXISTS `site_aggregator_services_ids_names`;
+/*!50001 DROP VIEW IF EXISTS `site_aggregator_services_ids_names`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE TABLE `site_aggregator_services_ids_names` (
+  `site_aggregator_id` tinyint NOT NULL,
+  `station_id` tinyint NOT NULL,
+  `station_name` tinyint NOT NULL
+) ENGINE=MyISAM */;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `site_aggregator_site_users`
 --
 
@@ -1173,21 +1188,34 @@ UNLOCK TABLES;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `customer_order_dto`(in orderid int)
 BEGIN
-	declare stationid, mechanicid int;
+	declare stationid, mechanicid, ordersum int;
+    
     
     select 
 		person_id into mechanicid 
 	from 
 		affilate_orders_persons
-	where order_id = orderid;
+	where 
+		order_id = orderid;
+    
+    
+    select 
+		sum(sum) into ordersum
+	from
+		order_services_costs_counts
+	where 
+		order_id = orderid;
+    
     
     select 
 		station_id into stationid 
 	from 
 		site_aggregator_has_orders_stations
-	where order_id = orderid;
+	where 
+		order_id = orderid;
     
-	select 
+	
+    select 
 		orders.order_id,
 		orders.order_problem_description,
 		orders.order_status,
@@ -1195,7 +1223,8 @@ BEGIN
 		orders.order_compleate_date,
 		stations.station_name,
         client_notifications.client_notification,
-        logginers.name
+        logginers.name,
+        ordersum
 	from
 		orders
 			left join 
@@ -1318,6 +1347,25 @@ DELIMITER ;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `site_aggregator_services_ids_names`
+--
+
+/*!50001 DROP TABLE IF EXISTS `site_aggregator_services_ids_names`*/;
+/*!50001 DROP VIEW IF EXISTS `site_aggregator_services_ids_names`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `site_aggregator_services_ids_names` AS select `site_aggregator_has_stations_station_profiles`.`site_aggregator_id` AS `site_aggregator_id`,`site_aggregator_has_stations_station_profiles`.`station_id` AS `station_id`,`stations`.`station_name` AS `station_name` from (`site_aggregator_has_stations_station_profiles` left join `stations` on((`site_aggregator_has_stations_station_profiles`.`station_id` = `stations`.`station_id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1328,4 +1376,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-27 22:04:53
+-- Dump completed on 2015-08-28  0:08:48
