@@ -2,7 +2,7 @@ package com.expositds.sjc.servicestation.business.service.dto.builders;
 
 import java.util.Map;
 
-import com.expositds.sjc.servicestation.business.service.dto.CustomerOrderDto;
+import com.expositds.sjc.servicestation.business.repository.dto.CustomerOrderDto;
 import com.expositds.sjc.servicestation.domain.model.Order;
 
 /**

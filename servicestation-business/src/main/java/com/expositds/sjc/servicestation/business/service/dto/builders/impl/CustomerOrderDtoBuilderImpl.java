@@ -7,7 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 
-import com.expositds.sjc.servicestation.business.service.dto.CustomerOrderDto;
+import com.expositds.sjc.servicestation.business.repository.dao.dto.CustomerOrderDtoDao;
+import com.expositds.sjc.servicestation.business.repository.dto.CustomerOrderDto;
 import com.expositds.sjc.servicestation.business.service.dto.builders.CustomerOrderDtoBuilder;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Part;
@@ -35,6 +36,9 @@ public class CustomerOrderDtoBuilderImpl implements CustomerOrderDtoBuilder {
 		
 		@Autowired
 		private AuthorizedUserSite authorizedUserSite;
+		
+		@Autowired
+		private CustomerOrderDtoDao customerOrderDtoDao;
 		
 		@Override
 		public void setOrder(Order order) {
@@ -131,6 +135,7 @@ public class CustomerOrderDtoBuilderImpl implements CustomerOrderDtoBuilder {
 		
 		@Override
 		public CustomerOrderDto build() {
-			return new CustomerOrderDto(this);
+			CustomerOrderDto result = customerOrderDtoDao.getCustomerOrderDtoByOrderId(order.getOrderId());
+			return result;
 		}
 }

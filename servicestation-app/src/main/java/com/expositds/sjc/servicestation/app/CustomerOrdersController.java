@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.expositds.sjc.servicestation.business.service.dto.CustomerOrderDto;
+import com.expositds.sjc.servicestation.business.repository.dto.CustomerOrderDto;
 import com.expositds.sjc.servicestation.business.service.dto.builders.CustomerOrderDtoBuilder;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;

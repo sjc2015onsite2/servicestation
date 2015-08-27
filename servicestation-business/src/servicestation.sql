@@ -163,7 +163,7 @@ CREATE TABLE `affilate_profile_has_dates_rent` (
 
 LOCK TABLES `affilate_profile_has_dates_rent` WRITE;
 /*!40000 ALTER TABLE `affilate_profile_has_dates_rent` DISABLE KEYS */;
-INSERT INTO `affilate_profile_has_dates_rent` VALUES (2,'2015-02-01',100),(2,'2015-08-26',345),(2,'2015-12-01',100);
+INSERT INTO `affilate_profile_has_dates_rent` VALUES (2,'2015-02-01',100),(2,'2015-12-01',100);
 /*!40000 ALTER TABLE `affilate_profile_has_dates_rent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,7 +285,7 @@ CREATE TABLE `logginers` (
   PRIMARY KEY (`id`,`name`,`login`,`role`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +294,7 @@ CREATE TABLE `logginers` (
 
 LOCK TABLES `logginers` WRITE;
 /*!40000 ALTER TABLE `logginers` DISABLE KEYS */;
-INSERT INTO `logginers` VALUES (0,'NULL','NULL',';lsdfmsl;admflsamdclsakmfwasc klmwefmwlkm','MECHANIC'),(1,'Петрович','petrovich','petrovich','MECHANIC'),(2,'Петя','pit','pit','USER'),(3,'Боря','boris','boris','USER'),(4,'Иваныч','ivanych','ivanych','MECHANIC'),(5,'Зина','zina','zina','ACCOUNTANT'),(6,'Босс','boss','boss','CEO');
+INSERT INTO `logginers` VALUES (0,'NULL','NULL',';lsdfmsl;admflsamdclsakmfwasc klmwefmwlkm','MECHANIC'),(1,'Петрович','petrovich','petrovich','MECHANIC'),(2,'Петя','pit','pit','USER'),(3,'Боря','boris','boris','USER'),(4,'Иваныч','ivanych','ivanych','MECHANIC'),(5,'Зина','zina','zina','ACCOUNTANT');
 /*!40000 ALTER TABLE `logginers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -593,7 +593,7 @@ CREATE TABLE `persons` (
   `person_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`person_id`),
   UNIQUE KEY `person_id_UNIQUE` (`person_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -602,7 +602,7 @@ CREATE TABLE `persons` (
 
 LOCK TABLES `persons` WRITE;
 /*!40000 ALTER TABLE `persons` DISABLE KEYS */;
-INSERT INTO `persons` VALUES (1),(4),(5),(6);
+INSERT INTO `persons` VALUES (1),(4),(5);
 /*!40000 ALTER TABLE `persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -922,7 +922,7 @@ CREATE TABLE `station_persons` (
 
 LOCK TABLES `station_persons` WRITE;
 /*!40000 ALTER TABLE `station_persons` DISABLE KEYS */;
-INSERT INTO `station_persons` VALUES (1,1),(2,4),(1,5),(1,6);
+INSERT INTO `station_persons` VALUES (1,1),(2,4),(1,5);
 /*!40000 ALTER TABLE `station_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1027,6 +1027,63 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'servicestation'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `customer_order_dto` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `customer_order_dto`(in orderid int)
+BEGIN
+	declare stationid, mechanicid int;
+    
+    select 
+		person_id into mechanicid 
+	from 
+		affilate_orders_persons
+	where order_id = orderid;
+    
+    select 
+		station_id into stationid 
+	from 
+		site_aggregator_has_orders_stations
+	where order_id = orderid;
+    
+	select 
+		orders.order_id,
+		orders.order_problem_description,
+		orders.order_status,
+		orders.order_create_date,
+		orders.order_compleate_date,
+		stations.station_name,
+        client_notifications.client_notification,
+        logginers.name
+	from
+		orders
+			left join 
+				stations
+			on
+				stations.station_id = stationid
+			left join
+				client_notifications
+			using (client_notification_id)
+            left join
+				logginers
+			on
+				logginers.id = mechanicid
+	where 
+		orders.order_id = orderid;
+					
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `get_affilate_by_part_order_id` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1099,8 +1156,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-<<<<<<< HEAD
--- Dump completed on 2015-08-27  8:55:59
-=======
--- Dump completed on 2015-08-27 11:52:44
->>>>>>> refs/remotes/origin/zina
+-- Dump completed on 2015-08-27 18:30:33
