@@ -3,7 +3,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <form action="stationdata" method='POST'>
+	<div>
+		<div class="col-sm-offset-2 col-sm-4">		
+			<strong>Profit for the current month: ${currentMonthProfit}</strong>
+		</div>
+		<div class="col-sm-offset-6 col-sm-6"></div>
+	</div>
+	<div>
+		<div class="col-sm-offset-2 col-sm-4">
+			<br />
+			<strong>Expenses for the current month: ${currentMonthExpenses}</strong>
+		</div>
+	</div>
 	<div class="col-sm-offset-2 col-sm-8">
+		<br />
+		<br />
 		<div class="col-sm-2">
 			<strong class="text-right">Enter startDate: </strong>
 		</div>

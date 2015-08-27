@@ -40,14 +40,21 @@ public class StationDataController {
 	private Identification identificationService;
 	
 		@RequestMapping(value = {"/accountant/station", "/ceo/station"}, method = RequestMethod.GET)
-		public ModelAndView showStationData() {
+		public ModelAndView showStationData(Authentication auth) {
+			
+			Logginer logginer = identificationService.getLogginerByName(auth.getName());
+			Person person = identificationService.getPersonById(logginer.getId().toString());
+			
+			Station station = identificationService.getStationByPerson(person);
 			
 			Calendar now = new GregorianCalendar();
 			Calendar firstDayOfCurrentMonth = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 1);
 			Calendar nowDate = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
-		
+			
 			
 			ModelAndView mav = new ModelAndView();
+			mav.addObject("currentMonthProfit", accountantService.getServiceStationProfit(station, firstDayOfCurrentMonth, nowDate));
+			mav.addObject("currentMonthExpenses", accountantService.getServiceStationCharges(station, firstDayOfCurrentMonth, nowDate));
 			mav.setViewName("station");
 			return mav;
 		}
@@ -57,6 +64,10 @@ public class StationDataController {
 				Authentication auth,
 				@RequestParam String startdate,
 				@RequestParam String finishdate) throws ParseException {
+			
+			Calendar now = new GregorianCalendar();
+			Calendar firstDayOfCurrentMonth = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 1);
+			Calendar nowDate = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
 			
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
 			Person person = identificationService.getPersonById(logginer.getId().toString());
@@ -72,6 +83,8 @@ public class StationDataController {
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("profit", accountantService.getServiceStationProfit(station, sDate, fDate));
 			mav.addObject("expenses", accountantService.getServiceStationCharges(station, sDate, fDate));
+			mav.addObject("currentMonthProfit", accountantService.getServiceStationProfit(station, firstDayOfCurrentMonth, nowDate));
+			mav.addObject("currentMonthExpenses", accountantService.getServiceStationCharges(station, firstDayOfCurrentMonth, nowDate));
 			mav.setViewName("station");
 			return mav;
 		}

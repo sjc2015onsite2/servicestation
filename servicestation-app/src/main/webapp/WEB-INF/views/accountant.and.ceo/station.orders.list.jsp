@@ -20,11 +20,11 @@
 			<input name="finishdate" type="text" class="form-control input-sm" placeholder="dd.MM.yyyy">
 		</div>
 	</div>
-	<div>
-		<div class="col-sm-offset-5 col-sm-3">
+	<div class="col-sm-offset-3 col-sm-6">
+		<div class="col-sm-offset-5 col-sm-2">
 			<br />
 			<br />
-			<button type="submit" class="btn btn-warning btn-sm">Show profit and expenses</button>
+			<button type="submit" class="btn btn-warning btn-sm">Show</button>
 		</div>
 		<div class="col-sm-4"></div>
 	</div>
@@ -38,7 +38,7 @@
 		    	<th width="10%">ID</th>
 	    		<th>Problem</th>
 	    		<th width="15%">Status</th>
-	    		<th width="15%">Cost</th>
+	    		<th width="15%">Cost (BYR)</th>
 		    	<th width="20%">Date</th>
     		</tr>
     		<c:forEach var="order" items="${ordersData}">
@@ -46,8 +46,8 @@
 			    	<td>${order[0]}</td>
 			        <td>${order[1]}</td>
 	    		    <td>${order[2]}</td>
-			       	<td></td>
-		        	<td>${order[3]}</td>
+			       	<td>${order[3]}</td>
+		        	<td>${order[4]}</td>
 	        	</tr>
         	</c:forEach>
 	    </table>

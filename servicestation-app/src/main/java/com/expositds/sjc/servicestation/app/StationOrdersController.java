@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Person;
+import com.expositds.sjc.servicestation.domain.model.Service;
 import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.Accountant;
 import com.expositds.sjc.servicestation.domain.service.Identification;
@@ -57,8 +58,8 @@ public class StationOrdersController {
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
 			Person accountant = identificationService.getPersonById(logginer.getId().toString());
 			
-			Calendar sDate = new GregorianCalendar();//Calendar.getInstance();
-			Calendar fDate = new GregorianCalendar();//.getInstance();
+			Calendar sDate = new GregorianCalendar();
+			Calendar fDate = new GregorianCalendar();
 			SimpleDateFormat sdf = (SimpleDateFormat) new SimpleDateFormat("dd.MM.yyyy", Locale.US);
 			sDate.setTime(sdf.parse(startdate));
 			fDate.setTime(sdf.parse(finishdate));
@@ -68,17 +69,27 @@ public class StationOrdersController {
 			Set<Order> allOrders = new HashSet<>();
 			allOrders.addAll(accountantService.getServiceStationOrders(station, sDate, fDate));
 			
-			String[][] ordersData = new String[allOrders.size()][4];
+			String[][] ordersData = new String[allOrders.size()][5];
 			int i = 0;
-			//int cost = 0;
 			for(Order currentOrder : allOrders){
 				ordersData[i][0] = currentOrder.getOrderId().toString();
 				ordersData[i][1] = currentOrder.getProblemDescription();
 				ordersData[i][2] = currentOrder.getStatus().toString();
+				Integer cost = new Integer(0);
+				String[][] serviceRows = new String[currentOrder.getServices().size()][3];
+				int j = 0;
+				for(Service currentService : currentOrder.getServices().keySet()){
+					serviceRows[j][0] = currentOrder.getServices().get(currentService).toString();
+					serviceRows[j][1] = currentOrder.getOrderServicesPriceList().get(currentService).toString();
+					serviceRows[j][2] = Integer.toString((Integer.parseInt(serviceRows[j][0]) * Integer.parseInt(serviceRows[j][1])));
+					cost += Integer.parseInt(serviceRows[j][2]);
+					j++;
+				}
+				ordersData[i][3] = cost.toString();
 				String createdate = new String();
 				SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 				createdate = dateFormat.format(currentOrder.getCreateDate().getTime());
-				ordersData[i][3] = createdate;
+				ordersData[i][4] = createdate;
 				i++;
  			}
 			
