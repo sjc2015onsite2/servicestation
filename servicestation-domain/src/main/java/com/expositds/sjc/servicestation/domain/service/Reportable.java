@@ -12,6 +12,7 @@ import com.expositds.sjc.servicestation.domain.model.Station;
  * Интерфейс предоставляет набор методов для взаимодействия с моделью данных в области построения отчётов.
  * 
  * @author Alexey Suslov
+ * @author Rybakov Sergey
  */
 public interface Reportable {
 
@@ -42,6 +43,15 @@ public interface Reportable {
 	 */
 	public Integer getAffilateRent(Affilate affilate, Calendar startDate, Calendar endDate);
 
+	/**
+	 * Метод расчитывает и возвращает заработную плату заданного сотрудника за указанный интервал дат.
+	 * @param person сотрудник
+	 * @param startDate начальная дата
+	 * @param endDate конечная дата
+	 * @return заработная плата за этот интервал
+	 */
+	public Integer getEmployeeSalary(Person person, Calendar startDate, Calendar endDate);
+	
 	/**
 	 * Метод расчитывает и возвращает затраты на аренду заданного СТО за указанный интервал дат.
 	 * @param serviceStation СТО

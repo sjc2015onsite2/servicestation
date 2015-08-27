@@ -29,7 +29,7 @@ import com.expositds.sjc.servicestation.domain.service.StationAffilate;
 
 /**
  * @author Alexey Suslov
- *
+ * @author Rybakov Sergey
  */
 @Service
 public class FinanceDepartmentImpl implements FinanceDepartment {

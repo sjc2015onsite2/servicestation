@@ -11,7 +11,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Person;
-import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.Accountant;
 import com.expositds.sjc.servicestation.domain.service.Identification;
 

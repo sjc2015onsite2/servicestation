@@ -13,6 +13,7 @@ import com.expositds.sjc.servicestation.domain.model.Station;
  * Интерфейс предоставляет набор методов для работы с СТО в области финансов.
  * 
  * @author Alexey Suslov
+ * @author Rybakov Sergey
  */
 public interface FinanceDepartment {
 	

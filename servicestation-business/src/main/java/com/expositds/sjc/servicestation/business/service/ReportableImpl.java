@@ -24,6 +24,7 @@ import com.expositds.sjc.servicestation.domain.service.Reportable;
 
 /**
  * @author Alexey Suslov
+ * @author Rybakov Sergey
  *
  */
 @Transactional
@@ -76,6 +77,18 @@ public abstract class ReportableImpl implements Reportable {
 			rent += dateRent.get(currentDate);
 		
 		return rent;
+	}
+	
+	@Override
+	public Integer getEmployeeSalary(Person person, Calendar startDate, Calendar endDate){
+		Map<Calendar, Integer> dateSalary = financeDepartment.getEmployeeSalary(person, startDate, endDate);
+		
+		Integer salary = 0;
+		
+		for(Calendar currentDate : dateSalary.keySet())
+			salary += dateSalary.get(currentDate);
+		
+		return salary; 
 	}
 
 	@Override
