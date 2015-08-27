@@ -1,29 +1,37 @@
 package com.expositds.sjc.servicestation.business.repository.dto;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapKey;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.MapKeyJoinColumn;
+import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
-import com.expositds.sjc.servicestation.business.service.dto.builders.CustomerOrderDtoBuilder;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * @author Alexey Suslov
- * @author Sergey Rybakov
  *
  */
 @Entity
-@NamedNativeQuery(
+@NamedNativeQueries({
+	@NamedNativeQuery(
 		name = "callCustomerOrderDtoProc", 
-		query = "call customer_order_dto(:orderId)")
+		query = "call customer_order_dto(:orderId)",
+		resultClass = CustomerOrderDto.class)})
 public class CustomerOrderDto {
 	
+	@Id
 	@Column(name = "orders.order_id")
-	private String orderId;
+	private Integer orderId;
 	
 	@Column(name = "stations.station_name")
 	private String stationName;
@@ -37,17 +45,55 @@ public class CustomerOrderDto {
 	@Column(name = "orders.order_status")
 	private String orderStatus;
 	
-	private String[][] serviceRows;
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ElementCollection
+	@CollectionTable(
+			name = "order_services_costs_counts",
+			joinColumns = @JoinColumn(name = "order_id"))
+	@Column(name = "name")
+	private List<String> serviceNames;
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ElementCollection
+	@CollectionTable(
+			name = "order_services_costs_counts",
+			joinColumns = @JoinColumn(name = "order_id"))
+	@Column(name = "count")
+	private List<Integer> serviceCounts;
+	
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ElementCollection
+	@CollectionTable(
+			name = "order_services_costs_counts",
+			joinColumns = @JoinColumn(name = "order_id"))
+	@Column(name = "cost")
+	private List<Integer> serviceCosts;
+	
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ElementCollection
+	@CollectionTable(
+			name = "order_services_costs_counts",
+			joinColumns = @JoinColumn(name = "order_id"))
+	@Column(name = "sum")
+	private List<Integer> serviceSums;
+		
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ElementCollection
+	@CollectionTable(
+			name = "order_parts_counts",
+			joinColumns = @JoinColumn(name = "order_id"))
+	@Column(name = "part_name")
+	private List<String> partNames;
+	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ElementCollection
 	@CollectionTable(
 			name = "order_has_parts_counts",
-			joinColumns = @JoinColumn(name = "part_name"))
-	@MapKeyJoinColumn(name = "part_name")
+			joinColumns = @JoinColumn(name = "order_id"))
 	@Column(name = "count")
-	private Map<String, String> partsNamesAndQuantity;
+	private List<Integer> partCounts;
 	
-	private String orderCost;
+	//private String orderCost;
 	
 	@Column(name = "orders.order_compleate_date")
 	private String completedDate;
@@ -58,69 +104,99 @@ public class CustomerOrderDto {
 	@Column(name = "client_notifications.client_notification")
 	private String notificationMessage;
 	
-	private Map<String, String> stationsIdAndNames;
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	@ElementCollection
+//	@CollectionTable(name = "stations")
+//	@MapKeyColumn(name = "station_id")
+//	@Column(name = "station_name")
+//	private Map<Integer, String> stationsIdAndNames;
 	
-	public CustomerOrderDto(CustomerOrderDtoBuilder builder) {
-		orderId = builder.getOrderId();
-		stationName = builder.getStationName();
-		mechanicName = builder.getMechanicName();
-		problemDescription = builder.getProblemDescription();
-		orderStatus = builder.getOrderStatus();	
-		serviceRows = builder.getServiceRows();
-		orderCost = builder.getOrderCost();
-		partsNamesAndQuantity = builder.getPartsNamesAndQuantity();
-		completedDate = builder.getCompletedDate();
-		createdDate = builder.getCreatedDate();
-		notificationMessage = builder.getNotificationMessage();
-		stationsIdAndNames = builder.getStationsIdAndNames();
+//	@LazyCollection(LazyCollectionOption.FALSE)
+//	@ElementCollection
+//	@CollectionTable(name = "services")
+//	@Column(name = "station_d")
+//	private List<Integer> stationIds;
+
+	public Integer getOrderId() {
+		return orderId;
 	}
 
-	public String getOrderId() {
-		return orderId;
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
 	}
 
 	public String getStationName() {
 		return stationName;
 	}
 
+	public void setStationName(String stationName) {
+		this.stationName = stationName;
+	}
+
 	public String getMechanicName() {
 		return mechanicName;
+	}
+
+	public void setMechanicName(String mechanicName) {
+		this.mechanicName = mechanicName;
 	}
 
 	public String getProblemDescription() {
 		return problemDescription;
 	}
 
+	public void setProblemDescription(String problemDescription) {
+		this.problemDescription = problemDescription;
+	}
+
 	public String getOrderStatus() {
 		return orderStatus;
 	}
 
-	public Map<String, String> getPartsNamesAndQuantity() {
-		return partsNamesAndQuantity;
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
 	}
 
-	public String getOrderCost() {
-		return orderCost;
+	public List<String> getPartNames() {
+		return partNames;
+	}
+
+	public void setPartNames(List<String> partNames) {
+		this.partNames = partNames;
+	}
+
+	public List<Integer> getPartCounts() {
+		return partCounts;
+	}
+
+	public void setPartCounts(List<Integer> partCounts) {
+		this.partCounts = partCounts;
 	}
 
 	public String getCompletedDate() {
 		return completedDate;
 	}
 
+	public void setCompletedDate(String completedDate) {
+		this.completedDate = completedDate;
+	}
+
 	public String getCreatedDate() {
 		return createdDate;
+	}
+
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
 	}
 
 	public String getNotificationMessage() {
 		return notificationMessage;
 	}
 
-	public Map<String, String> getStationsIdAndNames() {
-		return stationsIdAndNames;
+	public void setNotificationMessage(String notificationMessage) {
+		this.notificationMessage = notificationMessage;
 	}
 	
-	public String[][] getServiceRows() {
-		return serviceRows;
-	}
-
+	
+	
 }

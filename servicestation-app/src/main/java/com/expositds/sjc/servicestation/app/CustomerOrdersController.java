@@ -76,8 +76,7 @@ public class CustomerOrdersController {
 				}
 			}
 			
-			customerOrderDtoBuilder.setOrder(order);
-			CustomerOrderDto customerOrderDto = customerOrderDtoBuilder.build();
+			CustomerOrderDto customerOrderDto = customerOrderDtoBuilder.build(order);
 			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("customerOrderDto", customerOrderDto);
