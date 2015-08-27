@@ -73,7 +73,7 @@ public class DynamicController {
 			mav.addObject("currentStationCharges", accountantService.getServiceStationCharges(station, firstDayOfMonth, nowDate));
 			mav.addObject("currentStationProfit", accountantService.getServiceStationProfit(station, firstDayOfMonth, nowDate));
 			mav.addObject("affiliates", accountantService.getServiceStationAffilate(station));
-			mav.setViewName("affiliates.data");
+			mav.setViewName("dynamic");
 			return mav;
 		}
 		
@@ -126,7 +126,7 @@ public class DynamicController {
 			mav.addObject("currentStationProfit", accountantService.getServiceStationProfit(station, firstDayOfMonth, nowDate));
 			mav.addObject("currentAffiliateCharges", accountantService.getAffilateRent(affilate, firstDayOfMonth, nowDate));
 			mav.addObject("currentAffiliateProfit", accountantService.getAffilateProfit(affilate, firstDayOfMonth, nowDate));
-			mav.setViewName("affiliates.data");
+			mav.setViewName("dynamic");
 			return mav;
 		}
 }

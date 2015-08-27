@@ -32,7 +32,6 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
 
 
 @Controller
-@RequestMapping("/accountant")
 public class StationOrdersController {
 	
 	@Autowired 
@@ -41,7 +40,7 @@ public class StationOrdersController {
 	@Autowired
 	private Identification identificationService;
 	
-		@RequestMapping(value = "/orders", method = RequestMethod.GET)
+		@RequestMapping(value = {"/accountant/orders", "/ceo/orders"}, method = RequestMethod.GET)
 		public ModelAndView showStationOrders() {
 			
 			ModelAndView mav = new ModelAndView();
@@ -49,7 +48,7 @@ public class StationOrdersController {
 			return mav;
 		}
 		
-		@RequestMapping(value = "/orders", method = RequestMethod.POST)
+		@RequestMapping(value = {"/accountant/orders", "/ceo/orders"}, method = RequestMethod.POST)
 		public ModelAndView selectDateForOrders(
 				Authentication auth,
 				@RequestParam String startdate,

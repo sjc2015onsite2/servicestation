@@ -2,6 +2,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="col-sm-offset-2 col-sm-6">
@@ -20,10 +21,11 @@
   		</c:forEach>
   	</table>
 </div>
-
-<div class="col-sm-4">
-	<button data-toggle="modal" data-target="#salary-modal" type="button" class="btn btn-warning btn-sm">Change salary</button>
-</div>
+<security:authorize access="hasRole('ROLE_ACCOUNTANT')">
+	<div class="col-sm-4">
+		<button data-toggle="modal" data-target="#salary-modal" type="button" class="btn btn-warning btn-sm">Change salary</button>
+	</div>
+</security:authorize>
 
 <div class="modal fade" id="salary-modal">
 	<div class="modal-dialog modal-sm">
@@ -34,7 +36,7 @@
 			</div>
 
 			<div class="modal-body">
-				<form action="../accountant/employees" method="POST" class="form-horizontal" role="form">
+				<form action="employees" method="POST" class="form-horizontal" role="form">
 					<div class="col-sm-2">
 						<label class="text-left">Select employee:</label>
 					</div>

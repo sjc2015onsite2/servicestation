@@ -118,9 +118,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/affiliates.jsp" />
 	</definition>
 	
-	<definition name="affiliates.data" extends="base.definition">
+	<definition name="dynamic" extends="base.definition">
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/affiliates.data.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/dynamic.jsp" />
 	</definition>
 	
 	<definition name="employees" extends="base.definition">
@@ -131,6 +131,16 @@
 	<definition name="station.orders.list" extends="base.definition">
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/station.orders.list.jsp" />
+	</definition>
+	
+	<definition name="station.comments" extends="base.definition">
+		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/station.comments.jsp" />
+	</definition>
+	
+	<definition name="mechanics.comments" extends="base.definition">
+		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/mechanics.comments.jsp" />
 	</definition>
 	
 </tiles-definitions> 

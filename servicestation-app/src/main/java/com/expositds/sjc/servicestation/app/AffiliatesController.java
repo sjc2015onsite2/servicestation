@@ -31,7 +31,6 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
 
 
 @Controller
-@RequestMapping("/accountant")
 public class AffiliatesController {
 	
 	@Autowired 
@@ -40,7 +39,7 @@ public class AffiliatesController {
 	@Autowired
 	private Identification identificationService;
 	
-		@RequestMapping(value = "/affiliates", method = RequestMethod.GET)
+		@RequestMapping(value = {"/accountant/affiliates", "/ceo/affiliates"}, method = RequestMethod.GET)
 		public ModelAndView affiliatesRent(Authentication auth) {
 			
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
@@ -69,7 +68,7 @@ public class AffiliatesController {
 			return mav;
 		}
 		
-		@RequestMapping(value = "/affiliates", method = RequestMethod.POST)
+		@RequestMapping(value = {"/accountant/affiliates", "/ceo/affiliates"}, method = RequestMethod.POST)
 		public ModelAndView changeRent(Authentication auth,
 				@RequestParam(value="affiliateId") Affilate affiliate,
 				@RequestParam Integer newrent) {

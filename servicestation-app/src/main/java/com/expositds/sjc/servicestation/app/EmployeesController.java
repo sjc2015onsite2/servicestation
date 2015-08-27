@@ -31,7 +31,6 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
 
 
 @Controller
-@RequestMapping("/accountant")
 public class EmployeesController {
 	
 	@Autowired 
@@ -40,7 +39,7 @@ public class EmployeesController {
 	@Autowired
 	private Identification identificationService;
 	
-		@RequestMapping(value = "/employees", method = RequestMethod.GET)
+		@RequestMapping(value = {"/accountant/employees", "/ceo/employees"}, method = RequestMethod.GET)
 		public ModelAndView showEmployeesData(Authentication auth) {
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
 			Person accountant = identificationService.getPersonById(logginer.getId().toString());
@@ -66,7 +65,7 @@ public class EmployeesController {
 			return mav;
 		}
 		
-		@RequestMapping(value = "/employees", method = RequestMethod.POST)
+		@RequestMapping(value = {"/accountant/employees", "/ceo/employees"}, method = RequestMethod.POST)
 		public ModelAndView changeSalary(Authentication auth,
 				@RequestParam(value="personId") Person person,
 				@RequestParam Integer newsalary) {

@@ -6,14 +6,14 @@
 
 
       
-      <div class="col-sm-offset-1" >
-      <c:forEach var="comment" items="${comments}" >
+<div class="col-sm-offset-1" >
+	<c:forEach var="comment" items="${comments}" >
         <br />
         <br />
-  	     <blockquote>
-          <footer><strong>Station: </strong>"Station 1"</footer>
+  	    <blockquote>
+        	<footer><strong>Station: </strong>"Station 1"</footer>
             <p class="text-primary">${comment.key.comment}</p>
             <footer>${comment.key.author.name}<em> ${comment.value}</em></footer>
-          </blockquote>
-          </c:forEach>
-      </div>
+        </blockquote>
+	</c:forEach>
+</div>

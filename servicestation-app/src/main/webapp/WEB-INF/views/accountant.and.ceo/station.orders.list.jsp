@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<form action="../accountant/orders" method="POST">
+<form action="orders" method="POST">
 	<div class="col-sm-offset-2 col-sm-8">
 		<div class="col-sm-2">
 			<strong class="text-right">Enter startDate: </strong>

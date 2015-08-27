@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div class="col-sm-offset-3 col-sm-4">
 	<table class="table table-striped table-hover table-bordered">
@@ -13,16 +14,18 @@
   		</tr>
   		<c:forEach var="i" items="${affilData }">
   			<tr class="warning">
-	  			<td>${i[0] }</td>
-	  			<td>${i[1] }</td>
-	  			<td>${i[2] }</td>
+	  			<td>${i[0]}</td>
+	  			<td>${i[1]}</td>
+	  			<td>${i[2]}</td>
   			</tr>
   		</c:forEach>
   	</table>
 </div>
-<div class="col-sm-4">
-	<button data-toggle="modal" data-target="#rent-modal" type="button" class="btn btn-warning btn-sm">Change rent</button>
-</div>
+<security:authorize access="hasRole('ROLE_ACCOUNTANT')">
+	<div class="col-sm-4">
+		<button data-toggle="modal" data-target="#rent-modal" type="button" class="btn btn-warning btn-sm">Change rent</button>
+	</div>
+</security:authorize>
 
 <div class="modal fade" id="rent-modal">
 	<div class="modal-dialog modal-sm">
@@ -33,7 +36,7 @@
 			</div>
 
 			<div class="modal-body">
-				<form action="../accountant/affiliates" method="POST" class="form-horizontal" role="form">
+				<form action="affiliates" method="POST" class="form-horizontal" role="form">
 					<div class="col-sm-2">
 						<label class="text-left">Select affiliate:</label>
 					</div>
