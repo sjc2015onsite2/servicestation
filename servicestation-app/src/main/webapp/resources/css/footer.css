@@ -11,3 +11,10 @@
   	text-align: left;
 	color: #444444;
 }
+
+#footer a {
+	padding: 15px 15px 5px 15px;
+  	text-align: right;
+	color: #444444;
+	
+}
