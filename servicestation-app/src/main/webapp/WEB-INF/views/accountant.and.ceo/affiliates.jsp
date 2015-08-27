@@ -8,12 +8,14 @@
 	<table class="table table-striped table-hover table-bordered">
   		<tr>
 	  		<th width="20%">Affiliate</th>
-	  		<th>Rent </th>
+	  		<th>Rent for currentMonth </th>
+	  		<th>Rent for today </th>
   		</tr>
   		<c:forEach var="i" items="${affilData }">
   			<tr class="warning">
 	  			<td>${i[0] }</td>
 	  			<td>${i[1] }</td>
+	  			<td>${i[2] }</td>
   			</tr>
   		</c:forEach>
   	</table>
@@ -38,7 +40,7 @@
 					<div class="col-sm-10">
 						<select name="affiliateId" class="form-control">
 							<c:forEach var="i" items="${affilData }">
-								<option value="${i[2]}">${i[0]}</option>
+								<option value="${i[3]}">${i[0]}</option>
 							</c:forEach>
 						</select>
 						<input name="newrent" type="text" class="form-control"

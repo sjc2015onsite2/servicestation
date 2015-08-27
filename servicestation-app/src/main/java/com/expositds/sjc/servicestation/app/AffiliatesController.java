@@ -51,17 +51,16 @@ public class AffiliatesController {
 			Set <Affilate> affiliates = new HashSet<>();
 			affiliates = accountantService.getServiceStationAffilate(identificationService.getStationByPerson(accountant));
 			
-			String[][] affilData = new String [affiliates.size()][3];
+			String[][] affilData = new String [affiliates.size()][4];
 			int i = 0;
 			Calendar now = new GregorianCalendar();
+			Calendar nowDate = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
 			Calendar firstDayOfMonth = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 1);
-			
-			
-			  
 			for(Affilate currentaffiliat : affiliates){
 				affilData[i][0] = currentaffiliat.getAffilateCode().toString();
-				affilData[i][1] = accountantService.getAffilateRent(currentaffiliat, firstDayOfMonth, now).toString();
-				affilData[i][2] = currentaffiliat.getAffilateId().toString();
+				affilData[i][1] = accountantService.getAffilateRent(currentaffiliat, firstDayOfMonth, nowDate).toString();
+				affilData[i][2] = accountantService.getAffilateRent(currentaffiliat, nowDate, nowDate).toString();
+				affilData[i][3] = currentaffiliat.getAffilateId().toString();
 				i++;
 			}
 			
@@ -78,8 +77,9 @@ public class AffiliatesController {
 				@RequestParam Integer newrent) {
 			
 			Calendar now = new GregorianCalendar();
+			Calendar nowDate = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
 			Map<Calendar, Integer> dateAndRent = new HashMap<>();
-			dateAndRent.put(now, newrent);
+			dateAndRent.put(nowDate, newrent);
 			accountantService.setAffilateRent(affiliate, dateAndRent);
 			
 			ModelAndView mav = new ModelAndView();
