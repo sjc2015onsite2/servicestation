@@ -13,6 +13,8 @@
 	
 	<intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
 	<intercept-url pattern="/mechanic/**" access="hasRole('ROLE_MECHANIC')"/>
+	<intercept-url pattern="/accountant/**" access="hasRole('ROLE_ACCOUNTANT')"/>
+	<intercept-url pattern="/ceo/**" access="hasRole('ROLE_CEO')"/>
 	
 
 

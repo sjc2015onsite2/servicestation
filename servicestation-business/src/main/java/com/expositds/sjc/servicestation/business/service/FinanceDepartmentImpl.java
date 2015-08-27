@@ -90,8 +90,8 @@ public class FinanceDepartmentImpl implements FinanceDepartment {
 		Set<Order> orders = new HashSet<>();
 		
 		for (OrderEntity currentOrderEntity : stationEntity.getOrders().keySet())
-			if (currentOrderEntity.getCompleteDate().compareTo(startDate) >= 0 &&
-					currentOrderEntity.getCompleteDate().compareTo(endDate) <= 0)
+			if (currentOrderEntity.getCreateDate().compareTo(startDate) >= 0 &&
+					currentOrderEntity.getCreateDate().compareTo(endDate) <= 0)
 				orders.add(conversionService.convert(currentOrderEntity, Order.class));
 		
 		return orders;

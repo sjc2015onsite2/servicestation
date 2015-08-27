@@ -31,7 +31,6 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
 
 
 @Controller
-@RequestMapping("/accountant")
 public class AffilatesProfitDataController {
 	
 	@Autowired 
@@ -40,13 +39,13 @@ public class AffilatesProfitDataController {
 	@Autowired
 	private Identification identificationService;
 	
-		@RequestMapping(value = "/affiliatesdata", method = RequestMethod.GET)
+		@RequestMapping(value = {"/accountant/affiliatesdata", "/ceo/affiliatesdata"}, method = RequestMethod.GET)
 		public ModelAndView showAffilatesData(Authentication auth) {
 			
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
-			Person accountant = identificationService.getPersonById(logginer.getId().toString());
+			Person person = identificationService.getPersonById(logginer.getId().toString());
 			
-			Station station = identificationService.getStationByPerson(accountant);
+			Station station = identificationService.getStationByPerson(person);
 			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("affiliates", accountantService.getServiceStationAffilate(station));
@@ -54,12 +53,17 @@ public class AffilatesProfitDataController {
 			return mav;
 		}
 		
-		@RequestMapping(value = "/affiliatesdata", method = RequestMethod.POST)
+		@RequestMapping(value = {"/accountant/affiliatesdata", "/ceo/affiliatesdata"}, method = RequestMethod.POST)
 		public ModelAndView selectAffilatesDate(
 				Authentication auth,
 				@RequestParam(value="affilateId") Affilate affilate,
 				@RequestParam String startdate,
 				@RequestParam String finishdate) throws ParseException {
+			
+			Logginer logginer = identificationService.getLogginerByName(auth.getName());
+			Person person = identificationService.getPersonById(logginer.getId().toString());
+			
+			Station station = identificationService.getStationByPerson(person);
 			
 			Calendar sDate = Calendar.getInstance();
 			Calendar fDate = Calendar.getInstance();
@@ -68,6 +72,7 @@ public class AffilatesProfitDataController {
 			fDate.setTime(sdf.parse(finishdate));
 			
 			ModelAndView mav = new ModelAndView();
+			mav.addObject("affiliates", accountantService.getServiceStationAffilate(station));
 			mav.addObject("profit", accountantService.getAffilateProfit(affilate, sDate, fDate));
 			mav.addObject("expenses", accountantService.getAffilateRent(affilate, sDate, fDate));
 			mav.setViewName("affiliates.data");

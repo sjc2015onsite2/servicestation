@@ -28,6 +28,7 @@ public class RedirectController {
 		if (logginer.getRole().equals(LogginerRole.USER)) return "redirect:/user/myorders";
 		else if (logginer.getRole().equals(LogginerRole.MECHANIC)) return "redirect:/mechanic/myorders";
 		else if (logginer.getRole().equals(LogginerRole.ACCOUNTANT)) return "redirect:/accountant/station";
+		else if (logginer.getRole().equals(LogginerRole.CEO)) return "redirect:/ceo/station";
 		return "redirect:/user/myordersyyy";
 	}
 	

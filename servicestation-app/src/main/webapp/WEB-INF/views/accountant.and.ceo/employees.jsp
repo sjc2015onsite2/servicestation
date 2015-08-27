@@ -11,10 +11,12 @@
 	  		<th>Position</th>
 	  		<th>Salary</th>
   		</tr>
-  		<tr class="warning">
-  			<td></td>
-  			<td></td>
-  			<td></td>
-  		</tr>
+  		<c:forEach var="person" items="${employees}">
+  			<tr class="warning">
+	  			<td>${person.name}</td>
+	  			<td>${person.role}</td>
+	  			<td>${person.salary.value}</td>
+  			</tr>
+  		</c:forEach>
   	</table>
 </div>
