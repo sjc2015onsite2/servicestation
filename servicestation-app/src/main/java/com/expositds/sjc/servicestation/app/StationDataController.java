@@ -48,11 +48,17 @@ public class StationDataController {
 			Station station = identificationService.getStationByPerson(person);
 			
 			Calendar now = new GregorianCalendar();
+			Calendar firstDayOfLastMonth = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 1);
+			firstDayOfLastMonth.add(Calendar.MONTH, -1);
+			Calendar lastDayOfLastMonth = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 1);
+			lastDayOfLastMonth.add(Calendar.DAY_OF_MONTH, -1);
 			Calendar firstDayOfCurrentMonth = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 1);
 			Calendar nowDate = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
 			
 			
 			ModelAndView mav = new ModelAndView();
+			mav.addObject("lustMonthProfit", accountantService.getServiceStationProfit(station, firstDayOfLastMonth, lastDayOfLastMonth));
+			mav.addObject("lustMonthExpenses", accountantService.getServiceStationCharges(station, firstDayOfLastMonth, lastDayOfLastMonth));
 			mav.addObject("currentMonthProfit", accountantService.getServiceStationProfit(station, firstDayOfCurrentMonth, nowDate));
 			mav.addObject("currentMonthExpenses", accountantService.getServiceStationCharges(station, firstDayOfCurrentMonth, nowDate));
 			mav.setViewName("station");

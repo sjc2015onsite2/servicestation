@@ -61,7 +61,7 @@
 
 				<security:authorize access="hasRole('ROLE_ACCOUNTANT')">
 					<li><a href="<c:url value="/accountant/station" />"><spring:message code="accountant.header.mystation"/></a></li>
-					<li><a href="<c:url value="/accountant/affiliatesdata" />"><spring:message code="accountant.header.dynamics"/></a></li>
+					<li><a href="<c:url value="/accountant/dynamic" />"><spring:message code="accountant.header.dynamics"/></a></li>
 					<li><a href="<c:url value="/accountant/affiliates" />"><spring:message code="accountant.header.affiliates"/></a></li>
 					<li><a href="<c:url value="/accountant/employees" />"><spring:message code="accountant.header.employees"/></a></li>
 					<li><a href="<c:url value="/accountant/orders" />"><spring:message code="accountant.header.orders"/></a></li>
@@ -69,7 +69,7 @@
 
             	<security:authorize access="hasRole('ROLE_CEO')">
            			<li><a href="<c:url value="/ceo/station" />" ><spring:message code="ceo.header.mystation"/></a></li>
-                	<li><a href="<c:url value="/ceo/affiliatesdata" />" ><spring:message code="ceo.header.dynamics"/></a></li>
+                	<li><a href="<c:url value="/ceo/dynamic" />" ><spring:message code="ceo.header.dynamics"/></a></li>
                 	<li><a href="<c:url value="/ceo/affiliates" />" ><spring:message code="ceo.header.affiliates"/></a></li>
                 	<li><a href="<c:url value="/ceo/employees" />" ><spring:message code="ceo.header.employees"/></a></li>
                 	<li><a href="<c:url value="/ceo/orders" />" ><spring:message code="ceo.header.orders"/></a></li>

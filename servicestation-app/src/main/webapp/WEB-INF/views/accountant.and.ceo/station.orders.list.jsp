@@ -39,7 +39,7 @@
 	    		<th>Problem</th>
 	    		<th width="15%">Status</th>
 	    		<th width="15%">Cost (BYR)</th>
-		    	<th width="20%">Date</th>
+		    	<th width="20%">createdDate</th>
     		</tr>
     		<c:forEach var="order" items="${ordersData}">
 		    	<tr class="warning">
