@@ -68,7 +68,7 @@ public class CustomerOrdersController {
 			Long lastPage = ordersCount / pageSize;
 			
 			if(endPage >= lastPage) endPage = lastPage;
-			if((endPage - startPage) < 5 && endPage >= 5) startPage = endPage -5;
+			if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;
 			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("orders", authorizedUserSiteService.getOrdersLimit(user, (page-1)*pageSize+1, pageSize));
