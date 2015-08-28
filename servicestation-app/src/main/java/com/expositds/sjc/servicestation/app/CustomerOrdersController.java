@@ -57,10 +57,18 @@ public class CustomerOrdersController {
 			Long pageSize = 3L;
 			
 			Long startPage = page;
-			Long endPage = page + 9;
-		
+			
+			Long endPage = page + 5;
+			
+			
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
 			SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
+			
+			Long ordersCount = authorizedUserSiteService.getSiteUserOrdersCount(user);
+			Long lastPage = ordersCount / pageSize;
+			
+			if(endPage >= lastPage) endPage = lastPage;
+			if((endPage - startPage) < 5) startPage = endPage -5;
 			
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("orders", authorizedUserSiteService.getOrdersLimit(user, (page-1)*pageSize+1, pageSize));

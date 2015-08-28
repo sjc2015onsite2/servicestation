@@ -25,13 +25,13 @@ public class OrderDaoImpl extends AbstractHibernateDao<OrderEntity, Long> implem
 	}
 
 	@Override
-	public Integer getSiteUserOrdersCount(Long id) {
+	public Long getSiteUserOrdersCount(Long id) {
 		
 		String query = "set @count = 0;"
 				+ "call get_site_user_orders_count(:id, @count);"
 				+ "select @count;";
 		
-		return (Integer) getSession().
+		return (Long) getSession().
 							createSQLQuery(query).
 							setParameter("id", id).
 							uniqueResult();

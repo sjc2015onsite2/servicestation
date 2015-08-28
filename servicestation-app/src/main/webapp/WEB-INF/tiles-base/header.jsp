@@ -81,38 +81,38 @@
               	        	<li><a href="<c:url value="/ceo/mechanicscomments" />" ><spring:message code="ceo.header.mechaniccomments"/></a></li>
                     	</ul>
                 	</li>
-                	<li><a href="<c:url value="/ceo/notificationslog" />" >Notification log</a></li>
+                	<li><a href="<c:url value="/ceo/notificationslog" />" ><spring:message code="ceo.header.notifications"/></a></li>
             	</security:authorize>
             	
           	</ul>  
           	
           	<security:authorize access="isAnonymous()">
             	<form class="navbar-form navbar-right"> 
-            		<button name="submit" type="submit" class="btn btn-success" data-toggle ="modal" data-target="#authorization-modal">Sign in</button>
+            		<button name="submit" type="submit" class="btn btn-success" data-toggle ="modal" data-target="#authorization-modal"><spring:message code="header.signin"/></button>
             	</form>
             </security:authorize>   
             
             <security:authorize access="hasRole('ROLE_USER')">
             	<form class="navbar-form navbar-right">
-               		<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default">Logout</button></a>
+               		<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default"><spring:message code="header.logout"/></button></a>
                	</form>
            	</security:authorize>
            	
            	<security:authorize access="hasRole('ROLE_MECHANIC')">
            		<form class="navbar-form navbar-right">
-              		<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default">Logout</button></a>
+              		<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default"><spring:message code="header.logout"/></button></a>
                	</form>
            	</security:authorize>
             	
             <security:authorize access="hasRole('ROLE_ACCOUNTANT')">
             	<form class="navbar-form navbar-right">
-                  	<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default">Logout</button></a>
+                  	<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default"><spring:message code="header.logout"/></button></a>
                 </form>
            	</security:authorize>
            	
            	<security:authorize access="hasRole('ROLE_CEO')">
             	<form class="navbar-form navbar-right">
-                  	<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default">Logout</button></a>
+                  	<a href="<c:url value="/j_spring_security_logout"/>"><button type="button" class="btn btn-default"><spring:message code="header.logout"/></button></a>
                 </form>
            	</security:authorize>
            	
@@ -130,7 +130,7 @@
     	
         	<div class="modal-header">
         		<button class="close" type="button" data-dismiss="modal">&times;</button>
-        		<h4 class="modal-title">Authorization</h4>
+        		<h4 class="modal-title"><spring:message code="header.authorization"/></h4>
       		</div>
 
       		<div class="modal-body">
@@ -142,13 +142,13 @@
                 		<input type="password" class="form-control" name="password" id="exampleInputPassword2" placeholder="Enter password">
           			</div>
           			<div class="col-sm-offset-8 col-sm-10">
-              			<button type="submit" class="btn btn-success" >Sing in</button>
+              			<button type="submit" class="btn btn-success" ><spring:message code="header.signin"/></button>
           			</div>
         		</form>
       		</div>
 
       		<div class="modal-footer">
-        		<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        		<button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="header.cancel"/></button>
       		</div>
       		
     	</div>
