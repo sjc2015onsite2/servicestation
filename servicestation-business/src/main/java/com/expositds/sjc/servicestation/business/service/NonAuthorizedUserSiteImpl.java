@@ -6,12 +6,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.expositds.sjc.servicestation.business.repository.dao.OrderDao;
 import com.expositds.sjc.servicestation.business.repository.dao.SiteAggregatorDao;
+import com.expositds.sjc.servicestation.business.repository.dao.SiteUserDao;
 import com.expositds.sjc.servicestation.business.repository.dao.StationDao;
 import com.expositds.sjc.servicestation.business.repository.entity.OrderEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.SiteAggregatorEntity;
+import com.expositds.sjc.servicestation.business.repository.entity.SiteUserEntity;
 import com.expositds.sjc.servicestation.business.repository.entity.StationEntity;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.PreOrder;
+import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.NonAuthorizedUserSite;
 import com.expositds.sjc.servicestation.domain.service.ServiceStation;
@@ -34,6 +37,9 @@ public class NonAuthorizedUserSiteImpl extends SiteUserImpl implements NonAuthor
 	
 	@Autowired
 	private OrderDao orderDao;
+	
+	@Autowired
+	private SiteUserDao siteUserDao;
 	
 	@Autowired
 	private ServiceStation serviceStationService;
@@ -62,5 +68,13 @@ public class NonAuthorizedUserSiteImpl extends SiteUserImpl implements NonAuthor
 		// сохраняемся
 		siteAggregatorDao.update(siteAggregatorEntity);
 	}
-
+	
+	@Override
+	public void saveSiteUser(SiteUser siteUser) {
+		SiteUserEntity siteUserEntity = new SiteUserEntity(siteUser.getName(), siteUser.getRole());
+		siteUserEntity.setLogin(siteUser.getLogin());
+		siteUserEntity.setPassword(siteUser.getPassword());
+		siteUserDao.save(siteUserEntity);
+	}
+	
 }

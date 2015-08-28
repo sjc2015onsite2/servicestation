@@ -29,9 +29,6 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
 import com.expositds.sjc.servicestation.domain.service.NonAuthorizedUserSite;
 
 
-
-
-
 @Controller
 @RequestMapping(value = "")
 public class CreateOrderController {
@@ -84,8 +81,5 @@ public class CreateOrderController {
 		mav.setViewName("redirect:/user/myorders/");
 		return mav;
 	}
-	
-	
-	
 	
 }

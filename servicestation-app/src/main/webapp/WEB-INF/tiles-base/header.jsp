@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <nav class="navbar navbar-default" role="navigation">
 	<div class="container-fluid">
@@ -88,7 +89,8 @@
           	
           	<security:authorize access="isAnonymous()">
             	<form class="navbar-form navbar-right"> 
-            		<button name="submit" type="submit" class="btn btn-success" data-toggle ="modal" data-target="#authorization-modal"><spring:message code="header.signin"/></button>
+            		<button name="submit" type="submit" class="btn btn-success" data-toggle ="modal" data-target="#authorization-modal">Sign in</button>
+            		<button name="submit" type="submit" class="btn btn-info" data-toggle ="modal" data-target="#registration-modal">Sing up</button>
             	</form>
             </security:authorize>   
             
@@ -121,6 +123,39 @@
     </div>
 </nav>
 
+<!-- Registration-modal  -->
+
+<div class="modal fade" id="registration-modal">
+	<div class="modal-dialog modal-sm">
+    	<div class="modal-content col-sm-offset-4 col-sm-6">
+    	
+        	<div class="modal-header">
+        		<button class="close" type="button" data-dismiss="modal">&times;</button>
+        		<h4 class="modal-title">Registration</h4>
+      		</div>
+			<form:form class="form-horizontal" action="newcustomer" comandName="siteUser" method="POST" role="form">
+	      		<div class="modal-body">
+	          		<div class="form-group has-feedback">
+	                	<input type="text" class="form-control" name="name" placeholder="Enter user name">
+	          		</div>
+	          		<div class="form-group has-feedback">
+	               		<input type="text" class="form-control" name="login" id="" placeholder="Enter login">
+	          		</div>
+	          		<div class="form-group has-feedback">
+	               		<input type="password" class="form-control" name="password" id="" placeholder="Enter password">
+	          		</div>
+	          		<div class="form-group has-feedback">
+	                	<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Repeat password">
+	          		</div>
+	      		</div>
+      		<div class="modal-footer">
+        		<button type="submit" class="btn btn-info" >Sing up</button>
+      		</div>
+      		</form:form>
+      		
+    	</div>
+  	</div>
+</div>
 
 <!-- Authorization-modal  -->
 

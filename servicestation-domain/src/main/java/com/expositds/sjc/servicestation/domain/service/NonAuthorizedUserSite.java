@@ -1,5 +1,6 @@
 package com.expositds.sjc.servicestation.domain.service;
 
+import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
 
 /**
@@ -17,5 +18,11 @@ public interface NonAuthorizedUserSite extends UserSite {
 	 * @param serviceStation СТО
 	 */
 	public void createOrder(String contact, String problemDescription, Station serviceStation);
+	
+	/**
+	 * Метод сохраняет нового пользователя.
+	 * @param siteUser пользователь
+	 */
+	public void saveSiteUser(SiteUser siteUser);
 
 }
