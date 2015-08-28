@@ -30,10 +30,10 @@ public class OrderDaoImpl extends AbstractHibernateDao<OrderEntity, Long> implem
 		
 		String query = "call get_site_user_orders_count(:id);";
 		
-		return ((BigInteger) getSession().
-							createSQLQuery(query).
-							setParameter("id", id).
-							uniqueResult()).intValue();
+		return ((BigInteger) getSession()
+							.createSQLQuery(query)
+							.setParameter("id", id)
+							.uniqueResult()).intValue();
 	}
 
 }
