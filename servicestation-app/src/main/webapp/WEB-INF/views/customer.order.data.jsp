@@ -121,8 +121,8 @@
 		</div>
 		<div class="col-sm-5">
 			<ol>
-				<c:forEach var="service" items="${customerOrderDto.serviceRows}">
-					<li>${service[0] } x${service[1] } (${service[3] } BYR)</li>
+				<c:forEach var="service" items="${services}">
+					<li>${service[0] } x${service[1] } (${service[2] } BYR)</li>
 				</c:forEach>
 			</ol>
 		</div>
@@ -142,8 +142,8 @@
 		</div>
 		<div class="col-sm-5">
 			<ol>
-				<c:forEach var="part" items="${customerOrderDto.partsNamesAndQuantity}">
-					<li>${part.key} x${part.value}</li>
+				<c:forEach var="part" items="${parts}">
+					<li>${part[0]} x${part[1]}</li>
 				</c:forEach>
 			</ol>
 		</div>
@@ -277,7 +277,7 @@
 					<div class="col-sm-10">
 						<select name="partId" multiple class="form-control">
 							<c:forEach var="part" items="${parts}">
-								<option value="${part.key.partId }">${part.key.name }</option>
+								<option value="${part[0]}">${part[1]}</option>
 							</c:forEach>
 						</select> <input name="orderId" value="${order.orderId }" hidden="true">
 						<input name="quantity" type="text" class="form-control"
@@ -392,10 +392,10 @@
 					</div>
 					<div class="col-sm-10">
 						<select name="stationId" multiple class="form-control">
-							<c:forEach var="station" items="${customerOrderDto.stationsIdAndNames}">
+							<c:forEach var="station" items="${stationsDto.stationsIdAndNames}">
 								<option value="${station.key }">${station.value}</option>
 							</c:forEach>
-						</select> <input name="orderId" value="${order.orderId }" hidden="true">
+						</select> <input name="orderId" value="${customerOrderDto.orderId }" hidden="true">
 					</div>
 					<div>
 						<br />

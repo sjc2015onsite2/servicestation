@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.expositds.sjc.servicestation.business.service.dto.CustomerOrderDto;
+import com.expositds.sjc.servicestation.business.repository.dto.CustomerOrderDto;
+import com.expositds.sjc.servicestation.business.repository.dto.StationsDto;
 import com.expositds.sjc.servicestation.business.service.dto.builders.CustomerOrderDtoBuilder;
+import com.expositds.sjc.servicestation.business.service.dto.builders.StationsDtoBuilder;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Service;
@@ -43,6 +45,9 @@ public class CustomerOrdersController {
 	
 	@Autowired
 	private CustomerOrderDtoBuilder customerOrderDtoBuilder;
+	
+	@Autowired
+	private StationsDtoBuilder stationsDtoBuilder;
 	
 		@RequestMapping(value = "/myorders", method = RequestMethod.GET)
 		public ModelAndView myorders(@RequestParam(value = "page", required = false) Long page,
@@ -76,11 +81,25 @@ public class CustomerOrdersController {
 				}
 			}
 			
-			customerOrderDtoBuilder.setOrder(order);
-			CustomerOrderDto customerOrderDto = customerOrderDtoBuilder.build();
+			StationsDto stationsDto = stationsDtoBuilder.build();
+			CustomerOrderDto customerOrderDto = customerOrderDtoBuilder.build(order);
 			
+			String[][] services = new String[customerOrderDto.getServiceNames().size()][3];
+			for(int i = 0; i < customerOrderDto.getServiceNames().size(); i++){
+				services[i][0] = customerOrderDto.getPartNames().get(i);
+				services[i][1] = customerOrderDto.getServiceCounts().get(i).toString();
+				services[i][2] = customerOrderDto.getServiceSums().get(i).toString();
+			}
+			String[][] parts = new String[customerOrderDto.getPartNames().size()][2];
+			for(int i = 0; i < customerOrderDto.getPartNames().size(); i++){
+				parts[i][0] = customerOrderDto.getPartNames().get(i);
+				parts[i][1] = customerOrderDto.getPartCounts().get(i).toString();
+			}
 			ModelAndView mav = new ModelAndView();
+			mav.addObject("parts", parts);
+			mav.addObject("services", services);
 			mav.addObject("customerOrderDto", customerOrderDto);
+			mav.addObject("stationsDto", stationsDto);
 			mav.addObject("change", change); ;
 			mav.setViewName("customer.order.data");
 			

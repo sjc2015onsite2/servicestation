@@ -90,7 +90,7 @@
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	
-	<!-- Exception mapper -->
+	<!-- Exception mapper 
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
 	    <property name="defaultErrorView" value="base.error" /> 
 	    <property name="exceptionMappings">
@@ -98,7 +98,7 @@
             <prop key="com.expositds.sjc.servicestation.domain.exception.PartLimitException">part.limit.error</prop>
            </props>
     </property>  
-	</bean>
+	</bean>-->
 	
 
 	<!-- Tiles 3 integration -->
