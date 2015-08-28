@@ -34,5 +34,23 @@ public class StationsDto {
 	@MapKeyColumn(name = "station_id")
 	@Column(name = "station_name")
 	private Map<Integer, String> stationsIdAndNames;
+
+	public Long getSiteAggregatorId() {
+		return siteAggregatorId;
+	}
+
+	public void setSiteAggregatorId(Long siteAggregatorId) {
+		this.siteAggregatorId = siteAggregatorId;
+	}
+
+	public Map<Integer, String> getStationsIdAndNames() {
+		return stationsIdAndNames;
+	}
+
+	public void setStationsIdAndNames(Map<Integer, String> stationsIdAndNames) {
+		this.stationsIdAndNames = stationsIdAndNames;
+	}
+	
+	
 	
 }

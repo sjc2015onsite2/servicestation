@@ -84,8 +84,22 @@ public class CustomerOrdersController {
 			StationsDto stationsDto = stationsDtoBuilder.build();
 			CustomerOrderDto customerOrderDto = customerOrderDtoBuilder.build(order);
 			
+			String[][] services = new String[customerOrderDto.getServiceNames().size()][3];
+			for(int i = 0; i < customerOrderDto.getServiceNames().size(); i++){
+				services[i][0] = customerOrderDto.getPartNames().get(i);
+				services[i][1] = customerOrderDto.getServiceCounts().get(i).toString();
+				services[i][2] = customerOrderDto.getServiceSums().get(i).toString();
+			}
+			String[][] parts = new String[customerOrderDto.getPartNames().size()][2];
+			for(int i = 0; i < customerOrderDto.getPartNames().size(); i++){
+				parts[i][0] = customerOrderDto.getPartNames().get(i);
+				parts[i][1] = customerOrderDto.getPartCounts().get(i).toString();
+			}
 			ModelAndView mav = new ModelAndView();
+			mav.addObject("parts", parts);
+			mav.addObject("services", services);
 			mav.addObject("customerOrderDto", customerOrderDto);
+			mav.addObject("stationsDto", stationsDto);
 			mav.addObject("change", change); ;
 			mav.setViewName("customer.order.data");
 			

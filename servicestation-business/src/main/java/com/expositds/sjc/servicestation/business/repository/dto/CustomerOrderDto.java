@@ -211,5 +211,14 @@ import org.hibernate.annotations.LazyCollectionOption;
 	public void setNotificationMessage(String notificationMessage) {
 		this.notificationMessage = notificationMessage;
 	}
+
+	public Integer getOrderCost() {
+		return orderCost;
+	}
+
+	public void setOrderCost(Integer orderCost) {
+		this.orderCost = orderCost;
+	}
+	
 	
 }
