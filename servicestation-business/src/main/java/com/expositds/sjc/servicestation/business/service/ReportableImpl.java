@@ -154,14 +154,7 @@ public abstract class ReportableImpl implements Reportable {
 	
 	@Override
 	public Set<Person> getServiceStationEmloyees(Station station) {
-		StationEntity stationEntity = stationDao.findById(station.getStationId());
-		
-		Set<Person> result = new HashSet<>();
-		
-		for (PersonEntity currentPersonEntity : stationEntity.getPersons())
-			result.add(conversionService.convert(currentPersonEntity, Person.class));
-		
-		return result;
+		return financeDepartment.getServiceStationEmployees(station);
 	}
 	
 	@Override
