@@ -33,11 +33,6 @@ public class Station  {
 	private Set<Person> employees;
 	
 	/**
-	 * Список логинов на СТО
-	 */
-	private Set<String> logins;
-	
-	/**
 	 * Название СТО.
 	 */
 	private String name;
@@ -59,7 +54,6 @@ public class Station  {
 		this.affilates = new HashMap<>();
 		this.orders = new HashMap<>();
 		this.employees = new HashSet<>();
-		this.logins = new HashSet<>();
 	}
 	
 	public Station() {
@@ -80,14 +74,6 @@ public class Station  {
 
 	public void setOrders(Map<Order, Affilate> orders) {
 		this.orders = orders;
-	}
-
-	public Set<String> getLogins() {
-		return logins;
-	}
-
-	public void setLogins(Set<String> logins) {
-		this.logins = logins;
 	}
 
 	public String getName() {

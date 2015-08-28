@@ -5,9 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -46,16 +44,6 @@ public class SiteAggregatorEntity {
 			joinColumns = @JoinColumn(name = "site_aggregator_id"),
 			inverseJoinColumns = @JoinColumn(name = "site_user_id"))
 	private Set<SiteUserEntity> siteUsers;
-	
-	/**
-	 * Список логинов на сайте
-	 */
-	@ElementCollection
-	@CollectionTable(
-			name = "site_aggregator_has_logins",
-			joinColumns = @JoinColumn(name = "site_aggregator_id"))
-	@Column(name = "login")
-	private Set<String> logins;
 
 	/**
 	 * Список механиков (Person) и их профилей на сайте.
@@ -95,7 +83,6 @@ public class SiteAggregatorEntity {
 	 */
 	public SiteAggregatorEntity() {
 		this.siteUsers = new HashSet<>();
-		this.logins = new HashSet<>();
 		this.mechanicPofiles = new HashMap<>();
 		this.stationProfiles = new HashMap<>();
 		this.orders = new HashMap<>();
@@ -142,14 +129,6 @@ public class SiteAggregatorEntity {
 
 	public void setSiteUsers(Set<SiteUserEntity> siteUsers) {
 		this.siteUsers = siteUsers;
-	}
-
-	public Set<String> getLogins() {
-		return logins;
-	}
-
-	public void setLogins(Set<String> logins) {
-		this.logins = logins;
 	}
 
 	public Map<PersonEntity, MechanicProfileEntity> getMechanicPofiles() {

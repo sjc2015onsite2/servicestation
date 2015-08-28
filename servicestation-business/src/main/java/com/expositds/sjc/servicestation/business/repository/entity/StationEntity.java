@@ -5,9 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -79,16 +77,6 @@ public class StationEntity  {
 	private Set<PersonEntity> persons;
 	
 	/**
-	 * Список логинов на СТО.
-	 */
-	@ElementCollection
-	@CollectionTable(
-	        name="station_has_logins",
-	        joinColumns=@JoinColumn(name="station_id"))
-	@Column(name="login")
-	private Set<String> logins;
-	
-	/**
 	 * Название СТО.
 	 */
 	@Column(name = "station_name")
@@ -112,7 +100,6 @@ public class StationEntity  {
 		this.affilates = new HashMap<>();
 		this.orders = new HashMap<>();
 		this.persons = new HashSet<>();
-		this.logins = new HashSet<>();
 	}
 	
 	public StationEntity() {
@@ -174,14 +161,6 @@ public class StationEntity  {
 
 	public void setPersons(Set<PersonEntity> persons) {
 		this.persons = persons;
-	}
-
-	public Set<String> getLogins() {
-		return logins;
-	}
-
-	public void setLogins(Set<String> logins) {
-		this.logins = logins;
 	}
 
 	public String getName() {

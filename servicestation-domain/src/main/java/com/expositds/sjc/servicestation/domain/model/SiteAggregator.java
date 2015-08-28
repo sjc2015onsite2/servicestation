@@ -21,11 +21,6 @@ public class SiteAggregator {
 	 * Список пользователей, зарегистрированных на сайте.
 	 */
 	private Set<SiteUser> siteUsers;
-	
-	/**
-	 * Список логинов на сайте
-	 */
-	private Set<String> logins;
 
 	/**
 	 * Список механиков (Person) и их профилей на сайте.
@@ -44,7 +39,6 @@ public class SiteAggregator {
 		
 	public SiteAggregator() {
 		this.siteUsers = new HashSet<>();
-		this.logins = new HashSet<>();
 		this.mechanicPofiles = new HashMap<>();
 		this.stationProfiles = new HashMap<>();
 	}
@@ -92,14 +86,6 @@ public class SiteAggregator {
 
 	public void setSiteUsers(Set<SiteUser> siteUsers) {
 		this.siteUsers = siteUsers;
-	}
-
-	public Set<String> getLogins() {
-		return logins;
-	}
-
-	public void setLogins(Set<String> logins) {
-		this.logins = logins;
 	}
 
 	public Map<Station, StationProfile> getStationProfiles() {
