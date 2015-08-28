@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.24, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: servicestation
+-- Host: localhost    Database: servicestation
 -- ------------------------------------------------------
--- Server version	5.6.25-log
+-- Server version	5.5.23
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -477,33 +477,35 @@ INSERT INTO `order_has_services_costs` VALUES (43,1,10),(43,2,11),(45,1,10),(45,
 UNLOCK TABLES;
 
 --
--- Temporary view structure for view `order_parts_counts`
+-- Temporary table structure for view `order_parts_counts`
 --
 
 DROP TABLE IF EXISTS `order_parts_counts`;
 /*!50001 DROP VIEW IF EXISTS `order_parts_counts`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE VIEW `order_parts_counts` AS SELECT 
- 1 AS `order_id`,
- 1 AS `count`,
- 1 AS `part_name`*/;
+/*!50001 CREATE TABLE `order_parts_counts` (
+  `order_id` tinyint NOT NULL,
+  `count` tinyint NOT NULL,
+  `part_name` tinyint NOT NULL
+) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary view structure for view `order_services_costs_counts`
+-- Temporary table structure for view `order_services_costs_counts`
 --
 
 DROP TABLE IF EXISTS `order_services_costs_counts`;
 /*!50001 DROP VIEW IF EXISTS `order_services_costs_counts`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE VIEW `order_services_costs_counts` AS SELECT 
- 1 AS `order_id`,
- 1 AS `cost`,
- 1 AS `count`,
- 1 AS `name`,
- 1 AS `sum`*/;
+/*!50001 CREATE TABLE `order_services_costs_counts` (
+  `order_id` tinyint NOT NULL,
+  `cost` tinyint NOT NULL,
+  `count` tinyint NOT NULL,
+  `name` tinyint NOT NULL,
+  `sum` tinyint NOT NULL
+) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -864,17 +866,18 @@ INSERT INTO `site_aggregator_has_stations_station_profiles` VALUES (1,1,1),(1,2,
 UNLOCK TABLES;
 
 --
--- Temporary view structure for view `site_aggregator_services_ids_names`
+-- Temporary table structure for view `site_aggregator_services_ids_names`
 --
 
 DROP TABLE IF EXISTS `site_aggregator_services_ids_names`;
 /*!50001 DROP VIEW IF EXISTS `site_aggregator_services_ids_names`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE VIEW `site_aggregator_services_ids_names` AS SELECT 
- 1 AS `site_aggregator_id`,
- 1 AS `station_id`,
- 1 AS `station_name`*/;
+/*!50001 CREATE TABLE `site_aggregator_services_ids_names` (
+  `site_aggregator_id` tinyint NOT NULL,
+  `station_id` tinyint NOT NULL,
+  `station_name` tinyint NOT NULL
+) ENGINE=MyISAM */;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -1295,10 +1298,10 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_site_user_orders_count`(in siteuserid int, out count int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_site_user_orders_count`(in siteuserid int)
 BEGIN
 	select 
-		count(*) into count 
+		count(*) 
 	from 
 		site_user_has_orders_stations
 	where 
@@ -1335,6 +1338,7 @@ DELIMITER ;
 -- Final view structure for view `order_parts_counts`
 --
 
+/*!50001 DROP TABLE IF EXISTS `order_parts_counts`*/;
 /*!50001 DROP VIEW IF EXISTS `order_parts_counts`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -1353,6 +1357,7 @@ DELIMITER ;
 -- Final view structure for view `order_services_costs_counts`
 --
 
+/*!50001 DROP TABLE IF EXISTS `order_services_costs_counts`*/;
 /*!50001 DROP VIEW IF EXISTS `order_services_costs_counts`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -1371,6 +1376,7 @@ DELIMITER ;
 -- Final view structure for view `site_aggregator_services_ids_names`
 --
 
+/*!50001 DROP TABLE IF EXISTS `site_aggregator_services_ids_names`*/;
 /*!50001 DROP VIEW IF EXISTS `site_aggregator_services_ids_names`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -1394,4 +1400,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-28 12:16:08
+-- Dump completed on 2015-08-28 14:03:18
