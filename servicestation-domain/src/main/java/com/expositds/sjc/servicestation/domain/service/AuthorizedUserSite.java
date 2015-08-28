@@ -90,6 +90,6 @@ public interface AuthorizedUserSite extends UserSite {
 	 * @param sitUser пользователь сайта
 	 * @return количество заявок
 	 */
-	public Long getSiteUserOrdersCount(SiteUser siteUser);
+	public Integer getSiteUserOrdersCount(SiteUser siteUser);
 
 }

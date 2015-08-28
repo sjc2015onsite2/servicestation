@@ -15,6 +15,6 @@ public interface OrderDao extends GenericDao<OrderEntity, Long> {
 	
 	public List<OrderEntity> getOrdersStationLimit(Long id, Long first, Long size);
 	
-	public Long getSiteUserOrdersCount(Long id);
+	public Integer getSiteUserOrdersCount(Long id);
 
 }

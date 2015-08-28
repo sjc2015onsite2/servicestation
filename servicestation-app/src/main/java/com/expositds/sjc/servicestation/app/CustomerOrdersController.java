@@ -64,7 +64,7 @@ public class CustomerOrdersController {
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
 			SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
 			
-			Long ordersCount = authorizedUserSiteService.getSiteUserOrdersCount(user);
+			Integer ordersCount = authorizedUserSiteService.getSiteUserOrdersCount(user);
 			Long lastPage = ordersCount / pageSize;
 			
 			if(endPage >= lastPage) endPage = lastPage;

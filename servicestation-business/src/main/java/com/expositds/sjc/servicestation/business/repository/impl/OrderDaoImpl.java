@@ -1,5 +1,6 @@
 package com.expositds.sjc.servicestation.business.repository.impl;
 
+import java.math.BigInteger;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -25,16 +26,14 @@ public class OrderDaoImpl extends AbstractHibernateDao<OrderEntity, Long> implem
 	}
 
 	@Override
-	public Long getSiteUserOrdersCount(Long id) {
+	public Integer getSiteUserOrdersCount(Long id) {
 		
-		String query = "set @count = 0;"
-				+ "call get_site_user_orders_count(:id, @count);"
-				+ "select @count;";
+		String query = "call get_site_user_orders_count(:id);";
 		
-		return (Long) getSession().
+		return ((BigInteger) getSession().
 							createSQLQuery(query).
 							setParameter("id", id).
-							uniqueResult();
+							uniqueResult()).intValue();
 	}
 
 }

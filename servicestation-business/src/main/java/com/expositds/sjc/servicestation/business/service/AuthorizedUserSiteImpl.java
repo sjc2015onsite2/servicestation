@@ -138,7 +138,7 @@ public class AuthorizedUserSiteImpl extends SiteUserImpl implements AuthorizedUs
 	}
 
 	@Override
-	public Long getSiteUserOrdersCount(SiteUser siteUser) {
+	public Integer getSiteUserOrdersCount(SiteUser siteUser) {
 		return orderDao.getSiteUserOrdersCount(siteUser.getId());
 	}
 
