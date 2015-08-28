@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,8 @@ import com.expositds.sjc.servicestation.domain.service.WorkShop;
 @Service
 @Transactional
 public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
+	
+	final static Logger logger = Logger.getLogger(MechanicImpl.class);
 	
 	@Autowired
 	private OrderDao orderDao;
@@ -113,9 +116,12 @@ public class MechanicImpl extends StoreKeeperImpl implements Mechanic {
 		for (Part currentPart : parts.keySet()) {
 			PartEntity currentPartEntity = partDao.findById(currentPart.getPartId());
 			
-			if (affilateEntity.getParts().get(currentPartEntity) - parts.get(currentPart) < 0)
+			if (affilateEntity.getParts().get(currentPartEntity) - parts.get(currentPart) < 0) {
+				PartLimitException ex = new PartLimitException();
+				logger.error("Part limit", ex);
 				throw new PartLimitException();
-			
+			}
+				
 			if (orderEntity.getParts().containsKey(currentPartEntity)) 
 				orderEntity.getParts().put(currentPartEntity, orderEntity.getParts().get(currentPartEntity) + parts.get(currentPart));
 			else orderEntity.getParts().put(currentPartEntity, parts.get(currentPart));
