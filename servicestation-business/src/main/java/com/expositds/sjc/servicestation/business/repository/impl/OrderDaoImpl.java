@@ -16,12 +16,25 @@ public class OrderDaoImpl extends AbstractHibernateDao<OrderEntity, Long> implem
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<OrderEntity> getOrdersStationLimit(Long Id, Long first, Long size) {
+	public List<OrderEntity> getOrdersStationLimit(Long id, Long first, Long size) {
 		
 		return getSession().getNamedQuery("callGetSiteUserOrdersProc")
-						   .setParameter("siteUserId", Id)
+						   .setParameter("siteUserId", id)
 						   .setParameter("first", first)
 	    				   .setParameter("size", size).list();
+	}
+
+	@Override
+	public Integer getSiteUserOrdersCount(Long id) {
+		
+		String query = "set @count = 0;"
+				+ "call get_site_user_orders_count(:id, @count);"
+				+ "select @count;";
+		
+		return (Integer) getSession().
+							createSQLQuery(query).
+							setParameter("id", id).
+							uniqueResult();
 	}
 
 }

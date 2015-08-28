@@ -84,5 +84,12 @@ public interface AuthorizedUserSite extends UserSite {
 	 * @param comment комментарий
 	 */
 	public void publicMechanicComment(Person mechanic, Comment comment);
+	
+	/**
+	 * Метод возвращает количество заявок у пользователя.
+	 * @param sitUser пользователь сайта
+	 * @return количество заявок
+	 */
+	public Integer getSiteUserOrdersCount(Person siteUser);
 
 }

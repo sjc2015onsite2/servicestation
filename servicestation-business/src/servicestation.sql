@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.24, for Win32 (x86)
 --
--- Host: localhost    Database: servicestation
+-- Host: 127.0.0.1    Database: servicestation
 -- ------------------------------------------------------
--- Server version	5.5.23
+-- Server version	5.6.25-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -282,7 +282,7 @@ CREATE TABLE `comments` (
   `visible` bit(1) NOT NULL,
   PRIMARY KEY (`comment_id`),
   UNIQUE KEY `comment_id_UNIQUE` (`comment_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -291,7 +291,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (1,'Удобная станция. Советую.','2015-08-02',2,''),(2,'Грамотный специалист. Рекомендую.','2015-08-02',3,''),(3,'}{орошая Станция!','2015-08-19',2,''),(4,'}{орошая Станция!','2015-08-19',2,''),(5,'}{орошая Станция!','2015-08-19',2,''),(6,'Да','2015-08-19',2,''),(7,'Иваныыыч!','2015-08-19',2,''),(8,'Бесит манера общаться','2015-08-24',2,''),(9,'Сволочи, одним словом','2015-08-24',2,''),(10,'То director','2015-08-24',2,''),(11,'dirrrrr','2015-08-24',2,'\0');
+INSERT INTO `comments` VALUES (1,'Удобная станция. Советую.','2015-08-02',2,''),(2,'Грамотный специалист. Рекомендую.','2015-08-02',3,''),(3,'}{орошая Станция!','2015-08-19',2,''),(4,'}{орошая Станция!','2015-08-19',2,''),(5,'}{орошая Станция!','2015-08-19',2,''),(6,'Да','2015-08-19',2,''),(7,'Иваныыыч!','2015-08-19',2,''),(8,'Бесит манера общаться','2015-08-24',2,''),(9,'Сволочи, одним словом','2015-08-24',2,''),(10,'То director','2015-08-24',2,''),(11,'dirrrrr','2015-08-24',2,'\0'),(12,'Скрытый омментарий','2015-08-28',2,'\0');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -337,7 +337,7 @@ CREATE TABLE `logginers` (
   PRIMARY KEY (`id`,`name`,`login`,`role`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -346,7 +346,7 @@ CREATE TABLE `logginers` (
 
 LOCK TABLES `logginers` WRITE;
 /*!40000 ALTER TABLE `logginers` DISABLE KEYS */;
-INSERT INTO `logginers` VALUES (0,'NULL','NULL',';lsdfmsl;admflsamdclsakmfwasc klmwefmwlkm','MECHANIC'),(1,'Петрович','petrovich','petrovich','MECHANIC'),(2,'Петя','pit','pit','USER'),(3,'Боря','boris','boris','USER'),(4,'Иваныч','ivanych','ivanych','MECHANIC'),(5,'Зина','zina','zina','ACCOUNTANT');
+INSERT INTO `logginers` VALUES (0,'NULL','NULL',';lsdfmsl;admflsamdclsakmfwasc klmwefmwlkm','MECHANIC'),(1,'Петрович','petrovich','petrovich','MECHANIC'),(2,'Петя','pit','pit','USER'),(3,'Боря','boris','boris','USER'),(4,'Иваныч','ivanych','ivanych','MECHANIC'),(5,'Зина','zina','zina','ACCOUNTANT'),(6,'Виктор Петрович','viktor','viktor','CEO');
 /*!40000 ALTER TABLE `logginers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,7 +364,7 @@ CREATE TABLE `marks` (
   `site_user_id` int(11) NOT NULL,
   PRIMARY KEY (`mark_id`),
   UNIQUE KEY `mark_id_UNIQUE` (`mark_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -373,7 +373,7 @@ CREATE TABLE `marks` (
 
 LOCK TABLES `marks` WRITE;
 /*!40000 ALTER TABLE `marks` DISABLE KEYS */;
-INSERT INTO `marks` VALUES (1,4,'2015-08-02',2),(2,3,'2015-08-17',2),(3,5,'2015-08-24',2);
+INSERT INTO `marks` VALUES (1,4,'2015-08-02',2),(2,3,'2015-08-17',2),(3,5,'2015-08-24',2),(4,1,'2015-08-28',2);
 /*!40000 ALTER TABLE `marks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -452,35 +452,58 @@ INSERT INTO `order_has_parts_counts` VALUES (43,1,208),(43,2,2),(45,1,78),(45,2,
 UNLOCK TABLES;
 
 --
--- Temporary table structure for view `order_parts_counts`
+-- Table structure for table `order_has_services_costs`
+--
+
+DROP TABLE IF EXISTS `order_has_services_costs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `order_has_services_costs` (
+  `order_id` int(11) NOT NULL,
+  `service_id` int(11) NOT NULL,
+  `cost` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`order_id`,`service_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_has_services_costs`
+--
+
+LOCK TABLES `order_has_services_costs` WRITE;
+/*!40000 ALTER TABLE `order_has_services_costs` DISABLE KEYS */;
+INSERT INTO `order_has_services_costs` VALUES (43,1,10),(43,2,11),(45,1,10),(45,2,11);
+/*!40000 ALTER TABLE `order_has_services_costs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `order_parts_counts`
 --
 
 DROP TABLE IF EXISTS `order_parts_counts`;
 /*!50001 DROP VIEW IF EXISTS `order_parts_counts`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE TABLE `order_parts_counts` (
-  `order_id` tinyint NOT NULL,
-  `count` tinyint NOT NULL,
-  `part_name` tinyint NOT NULL
-) ENGINE=MyISAM */;
+/*!50001 CREATE VIEW `order_parts_counts` AS SELECT 
+ 1 AS `order_id`,
+ 1 AS `count`,
+ 1 AS `part_name`*/;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary table structure for view `order_services_costs_counts`
+-- Temporary view structure for view `order_services_costs_counts`
 --
 
 DROP TABLE IF EXISTS `order_services_costs_counts`;
 /*!50001 DROP VIEW IF EXISTS `order_services_costs_counts`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE TABLE `order_services_costs_counts` (
-  `order_id` tinyint NOT NULL,
-  `cost` tinyint NOT NULL,
-  `count` tinyint NOT NULL,
-  `name` tinyint NOT NULL,
-  `sum` tinyint NOT NULL
-) ENGINE=MyISAM */;
+/*!50001 CREATE VIEW `order_services_costs_counts` AS SELECT 
+ 1 AS `order_id`,
+ 1 AS `cost`,
+ 1 AS `count`,
+ 1 AS `name`,
+ 1 AS `sum`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -512,6 +535,31 @@ LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
 INSERT INTO `orders` VALUES (1,'NEW','2015-08-18',NULL,'Сильная вибрация при скорости больше 80 км//ч',NULL,NULL,NULL),(38,'NEW','2015-08-18',NULL,'Всё время открывается капот. Невозможно ехать.',NULL,NULL,NULL),(39,'ACCEPTED','2015-08-18','2015-08-25','Муравьи в салоне',3,NULL,NULL),(40,'ACCEPTED','2015-08-22','2015-08-25','Бора плохо тянет',NULL,NULL,NULL),(41,'ACCEPTED','2015-08-19',NULL,'Сломалась труба',NULL,NULL,NULL),(42,'NEW','2015-08-19',NULL,'поломка тачки',NULL,NULL,NULL),(43,'READY','2015-08-19','2015-08-25','Коробка предач заедает. колёса отваливаются. крыша сетает. стёклы дребезжат. вонает в салоне. фары отвалились. поцарапанная и не ездит.',2,NULL,NULL),(44,'NEW','2015-08-24',NULL,'Проблема с колесом',NULL,NULL,'(29) 884 21 43'),(45,'ACCEPTED','2015-08-24','2015-08-25','Проблема',4,NULL,'435435435'),(46,'ACCEPTED','2015-08-24',NULL,'северная проблема',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders_services_count`
+--
+
+DROP TABLE IF EXISTS `orders_services_count`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orders_services_count` (
+  `order_id` int(11) NOT NULL,
+  `service_id` int(11) NOT NULL,
+  `count` int(11) DEFAULT NULL,
+  PRIMARY KEY (`order_id`,`service_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders_services_count`
+--
+
+LOCK TABLES `orders_services_count` WRITE;
+/*!40000 ALTER TABLE `orders_services_count` DISABLE KEYS */;
+INSERT INTO `orders_services_count` VALUES (43,1,2),(43,2,1),(45,1,1),(45,2,1);
+/*!40000 ALTER TABLE `orders_services_count` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -653,7 +701,7 @@ CREATE TABLE `persons` (
   `person_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`person_id`),
   UNIQUE KEY `person_id_UNIQUE` (`person_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -662,7 +710,7 @@ CREATE TABLE `persons` (
 
 LOCK TABLES `persons` WRITE;
 /*!40000 ALTER TABLE `persons` DISABLE KEYS */;
-INSERT INTO `persons` VALUES (1),(4),(5);
+INSERT INTO `persons` VALUES (1),(4),(5),(6);
 /*!40000 ALTER TABLE `persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -816,18 +864,17 @@ INSERT INTO `site_aggregator_has_stations_station_profiles` VALUES (1,1,1),(1,2,
 UNLOCK TABLES;
 
 --
--- Temporary table structure for view `site_aggregator_services_ids_names`
+-- Temporary view structure for view `site_aggregator_services_ids_names`
 --
 
 DROP TABLE IF EXISTS `site_aggregator_services_ids_names`;
 /*!50001 DROP VIEW IF EXISTS `site_aggregator_services_ids_names`*/;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
-/*!50001 CREATE TABLE `site_aggregator_services_ids_names` (
-  `site_aggregator_id` tinyint NOT NULL,
-  `station_id` tinyint NOT NULL,
-  `station_name` tinyint NOT NULL
-) ENGINE=MyISAM */;
+/*!50001 CREATE VIEW `site_aggregator_services_ids_names` AS SELECT 
+ 1 AS `site_aggregator_id`,
+ 1 AS `station_id`,
+ 1 AS `station_name`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -953,31 +1000,6 @@ INSERT INTO `station_has_affilates_affilate_profiles` VALUES (1,2,2),(2,3,3);
 UNLOCK TABLES;
 
 --
--- Table structure for table `station_has_credentials_persons`
---
-
-DROP TABLE IF EXISTS `station_has_credentials_persons`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `station_has_credentials_persons` (
-  `station_id` int(11) NOT NULL,
-  `credential_id` int(11) NOT NULL,
-  `person_id` int(11) NOT NULL,
-  PRIMARY KEY (`credential_id`,`person_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `station_has_credentials_persons`
---
-
-LOCK TABLES `station_has_credentials_persons` WRITE;
-/*!40000 ALTER TABLE `station_has_credentials_persons` DISABLE KEYS */;
-INSERT INTO `station_has_credentials_persons` VALUES (1,3,1);
-/*!40000 ALTER TABLE `station_has_credentials_persons` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `station_has_logins`
 --
 
@@ -1027,31 +1049,6 @@ INSERT INTO `station_has_orders_affilates` VALUES (3,1,1),(4,38,1),(2,39,3),(2,4
 UNLOCK TABLES;
 
 --
--- Table structure for table `station_has_persons_positions`
---
-
-DROP TABLE IF EXISTS `station_has_persons_positions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `station_has_persons_positions` (
-  `station_id` int(11) NOT NULL,
-  `person_id` int(11) NOT NULL,
-  `position` varchar(45) NOT NULL,
-  PRIMARY KEY (`person_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `station_has_persons_positions`
---
-
-LOCK TABLES `station_has_persons_positions` WRITE;
-/*!40000 ALTER TABLE `station_has_persons_positions` DISABLE KEYS */;
-INSERT INTO `station_has_persons_positions` VALUES (1,1,'MECHANIC');
-/*!40000 ALTER TABLE `station_has_persons_positions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `station_persons`
 --
 
@@ -1071,7 +1068,7 @@ CREATE TABLE `station_persons` (
 
 LOCK TABLES `station_persons` WRITE;
 /*!40000 ALTER TABLE `station_persons` DISABLE KEYS */;
-INSERT INTO `station_persons` VALUES (1,1),(2,4),(1,5);
+INSERT INTO `station_persons` VALUES (1,1),(2,4),(1,5),(1,6);
 /*!40000 ALTER TABLE `station_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1095,7 +1092,7 @@ CREATE TABLE `station_profile_has_comments` (
 
 LOCK TABLES `station_profile_has_comments` WRITE;
 /*!40000 ALTER TABLE `station_profile_has_comments` DISABLE KEYS */;
-INSERT INTO `station_profile_has_comments` VALUES (1,1),(1,3),(1,4),(1,5),(2,6),(3,9),(4,10),(4,11);
+INSERT INTO `station_profile_has_comments` VALUES (1,1),(1,3),(1,4),(1,5),(2,6),(3,9),(4,10),(4,11),(1,12);
 /*!40000 ALTER TABLE `station_profile_has_comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1119,7 +1116,7 @@ CREATE TABLE `station_profile_has_marks` (
 
 LOCK TABLES `station_profile_has_marks` WRITE;
 /*!40000 ALTER TABLE `station_profile_has_marks` DISABLE KEYS */;
-INSERT INTO `station_profile_has_marks` VALUES (1,1),(4,2),(3,3);
+INSERT INTO `station_profile_has_marks` VALUES (1,1),(4,2),(3,3),(1,4);
 /*!40000 ALTER TABLE `station_profile_has_marks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1288,6 +1285,30 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `get_site_user_orders_count` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_site_user_orders_count`(in siteuserid int, out count int)
+BEGIN
+	select 
+		count(*) into count 
+	from 
+		site_user_has_orders_stations
+	where 
+		site_user_id = siteuserid;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `get_station_by_order_id` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1314,7 +1335,6 @@ DELIMITER ;
 -- Final view structure for view `order_parts_counts`
 --
 
-/*!50001 DROP TABLE IF EXISTS `order_parts_counts`*/;
 /*!50001 DROP VIEW IF EXISTS `order_parts_counts`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -1333,7 +1353,6 @@ DELIMITER ;
 -- Final view structure for view `order_services_costs_counts`
 --
 
-/*!50001 DROP TABLE IF EXISTS `order_services_costs_counts`*/;
 /*!50001 DROP VIEW IF EXISTS `order_services_costs_counts`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -1352,7 +1371,6 @@ DELIMITER ;
 -- Final view structure for view `site_aggregator_services_ids_names`
 --
 
-/*!50001 DROP TABLE IF EXISTS `site_aggregator_services_ids_names`*/;
 /*!50001 DROP VIEW IF EXISTS `site_aggregator_services_ids_names`*/;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
@@ -1376,4 +1394,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-28  0:08:48
+-- Dump completed on 2015-08-28 12:16:08
