@@ -83,34 +83,27 @@ public class StationEntity  {
 	private String name;
 	
 	/**
-	 * Идентификатор СТО, который используют клиент и сотрудники.
-	 */
-	@Column(name = "person_station_id")
-	private String personStationId;
-
-	/**
 	 * Создаёт новую станцию.
 	 * 
 	 * @param name название СТО
 	 * @param personStationId идентификатор СТО, который используют клиент и сотрудники
 	 */
-	public StationEntity(String name, String personStationId) {
+	public StationEntity(String name) {
 		this.name = name;
-		this.personStationId = personStationId;
 		this.affilates = new HashMap<>();
 		this.orders = new HashMap<>();
 		this.persons = new HashSet<>();
 	}
 	
 	public StationEntity() {
-		this(null, null);
+		this(null);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((personStationId == null) ? 0 : personStationId.hashCode());
+		result = prime * result + ((stationId == null) ? 0 : stationId.hashCode());
 		return result;
 	}
 
@@ -123,10 +116,10 @@ public class StationEntity  {
 		if (getClass() != obj.getClass())
 			return false;
 		StationEntity other = (StationEntity) obj;
-		if (personStationId == null) {
-			if (other.personStationId != null)
+		if (stationId == null) {
+			if (other.stationId != null)
 				return false;
-		} else if (!personStationId.equals(other.personStationId))
+		} else if (!stationId.equals(other.stationId))
 			return false;
 		return true;
 	}
@@ -170,16 +163,6 @@ public class StationEntity  {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getPersonStationId() {
-		return personStationId;
-	}
-
-	public void setPersonStationId(String personStationId) {
-		this.personStationId = personStationId;
-	}
-
-	
 	
 		
 }

@@ -359,6 +359,7 @@ DROP TABLE IF EXISTS `mechanic_profiles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mechanic_profiles` (
   `mechanic_profile_id` int(11) NOT NULL AUTO_INCREMENT,
+  `info` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`mechanic_profile_id`),
   UNIQUE KEY `mechanic_profile_id_UNIQUE` (`mechanic_profile_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
@@ -370,7 +371,7 @@ CREATE TABLE `mechanic_profiles` (
 
 LOCK TABLES `mechanic_profiles` WRITE;
 /*!40000 ALTER TABLE `mechanic_profiles` DISABLE KEYS */;
-INSERT INTO `mechanic_profiles` VALUES (1),(2);
+INSERT INTO `mechanic_profiles` VALUES (1,'Грамотнй специалист с большим опытом работы'),(2,'Перспективный стажёр');
 /*!40000 ALTER TABLE `mechanic_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -955,6 +956,7 @@ DROP TABLE IF EXISTS `station_profiles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `station_profiles` (
   `station_profile_id` int(11) NOT NULL AUTO_INCREMENT,
+  `info` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`station_profile_id`),
   UNIQUE KEY `station_profile_id_UNIQUE` (`station_profile_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
@@ -966,7 +968,7 @@ CREATE TABLE `station_profiles` (
 
 LOCK TABLES `station_profiles` WRITE;
 /*!40000 ALTER TABLE `station_profiles` DISABLE KEYS */;
-INSERT INTO `station_profiles` VALUES (1),(2),(3),(4);
+INSERT INTO `station_profiles` VALUES (1,'Станция расположена в живописном лесу около нарочанских озёр'),(2,'Доблесная история станции создаёт образ надёжного партнера'),(3,'Посредственный сервис, зато цены не кусаются'),(4,'Кофе предлагают замечательный, но автомобиль им лучше не оставлять');
 /*!40000 ALTER TABLE `station_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -980,7 +982,6 @@ DROP TABLE IF EXISTS `stations`;
 CREATE TABLE `stations` (
   `station_id` int(11) NOT NULL AUTO_INCREMENT,
   `station_name` varchar(45) NOT NULL,
-  `person_station_id` varchar(45) NOT NULL,
   PRIMARY KEY (`station_id`),
   UNIQUE KEY `station_id_UNIQUE` (`station_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
@@ -992,7 +993,7 @@ CREATE TABLE `stations` (
 
 LOCK TABLES `stations` WRITE;
 /*!40000 ALTER TABLE `stations` DISABLE KEYS */;
-INSERT INTO `stations` VALUES (1,'Северная автосервисная станция','nord'),(2,'Южная автосервисная станция','south'),(3,'Западная автосервисная станция','west'),(4,'Восточная автосервисная станция','east');
+INSERT INTO `stations` VALUES (1,'Северная автосервисная станция'),(2,'Южная автосервисная станция'),(3,'Западная автосервисная станция'),(4,'Восточная автосервисная станция');
 /*!40000 ALTER TABLE `stations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1220,4 +1221,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-28 22:30:19
+-- Dump completed on 2015-08-29 15:24:27

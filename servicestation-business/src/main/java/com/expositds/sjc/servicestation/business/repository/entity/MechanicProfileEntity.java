@@ -43,6 +43,12 @@ public class MechanicProfileEntity {
 	private Set<CommentEntity> comments;
 	
 	/**
+	 * Информация о механике.
+	 */
+	@Column(name = "info")
+	private String info;
+	
+	/**
 	 * Создаёт новый профиль о механике.
 	 */
 	public MechanicProfileEntity() {
@@ -74,28 +80,28 @@ public class MechanicProfileEntity {
 		return true;
 	}
 
-
-	public Long getMechanicPofileId() {
+	public Long getMechanicProfileId() {
 		return mechanicProfileId;
 	}
 
-
-	public void setMechanicPofileId(Long mechanicPofileId) {
-		this.mechanicProfileId = mechanicPofileId;
+	public void setMechanicProfileId(Long mechanicProfileId) {
+		this.mechanicProfileId = mechanicProfileId;
 	}
-
 
 	public Set<CommentEntity> getComments() {
 		return comments;
 	}
 
-
 	public void setComments(Set<CommentEntity> comments) {
 		this.comments = comments;
 	}
 
+	public String getInfo() {
+		return info;
+	}
 
-
-	
+	public void setInfo(String info) {
+		this.info = info;
+	}
 		
 }

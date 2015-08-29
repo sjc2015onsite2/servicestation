@@ -16,7 +16,8 @@ public class MechanicProfileEntityModelConverter implements Converter<MechanicPr
 	@Override
 	public MechanicProfile convert(MechanicProfileEntity source) {
 		MechanicProfile mechanicProfile = new MechanicProfile();
-		mechanicProfile.setMechanicPofileId(source.getMechanicPofileId());
+		mechanicProfile.setMechanicProfileId(source.getMechanicProfileId());
+		mechanicProfile.setInfo(source.getInfo());
 		return mechanicProfile;
 	}
 

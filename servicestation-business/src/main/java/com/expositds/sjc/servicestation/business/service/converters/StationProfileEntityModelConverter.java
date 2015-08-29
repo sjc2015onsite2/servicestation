@@ -17,6 +17,7 @@ public class StationProfileEntityModelConverter implements Converter<StationProf
 	public StationProfile convert(StationProfileEntity source) {
 		StationProfile stationProfile = new StationProfile();
 		stationProfile.setStationProfileId(source.getStationProfileId());
+		stationProfile.setInfo(source.getInfo());
 		return stationProfile;
 	}
 

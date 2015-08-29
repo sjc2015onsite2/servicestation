@@ -11,7 +11,7 @@ public class StationEntityModelConverter implements Converter<StationEntity, Sta
 
 	@Override
 	public Station convert(StationEntity source) {
-		Station station = new Station(source.getName(), source.getPersonStationId());
+		Station station = new Station(source.getName());
 		station.setStationId(source.getStationId());
 		return station;
 	}

@@ -25,6 +25,11 @@ public class StationProfile {
 	 */
 	private Set<Mark> marks;
 	
+	/**
+	 * Информация о станции.
+	 */
+	private String info;
+	
 	public StationProfile() {
 		this.comments = new HashSet<>();
 		this.marks = new HashSet<>();
@@ -55,6 +60,14 @@ public class StationProfile {
 		return true;
 	}
 
+	public Long getStationProfileId() {
+		return stationProfileId;
+	}
+
+	public void setStationProfileId(Long stationProfileId) {
+		this.stationProfileId = stationProfileId;
+	}
+
 	public Set<Comment> getComments() {
 		return comments;
 	}
@@ -71,14 +84,12 @@ public class StationProfile {
 		this.marks = marks;
 	}
 
-	public Long getStationProfileId() {
-		return stationProfileId;
+	public String getInfo() {
+		return info;
 	}
 
-	public void setStationProfileId(Long stationProfileId) {
-		this.stationProfileId = stationProfileId;
+	public void setInfo(String info) {
+		this.info = info;
 	}
-	
-	
 	
 }

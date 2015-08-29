@@ -36,28 +36,55 @@ public class Station  {
 	 * Название СТО.
 	 */
 	private String name;
-	
-	/**
-	 * Идентификатор СТО, который используют клиент и сотрудники.
-	 */
-	private String personStationId;
 
 	/**
 	 * Создаёт новую станцию.
 	 * 
 	 * @param name название СТО
-	 * @param personStationId идентификатор СТО, который используют клиент и сотрудники
+	 * @param info информация об СТО
 	 */
-	public Station(String name, String personStationId) {
+	public Station(String name) {
 		this.name = name;
-		this.personStationId = personStationId;
 		this.affilates = new HashMap<>();
 		this.orders = new HashMap<>();
 		this.employees = new HashSet<>();
 	}
 	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((stationId == null) ? 0 : stationId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Station other = (Station) obj;
+		if (stationId == null) {
+			if (other.stationId != null)
+				return false;
+		} else if (!stationId.equals(other.stationId))
+			return false;
+		return true;
+	}
+
 	public Station() {
-		this(null, null);
+		this(null);
+	}
+
+	public Long getStationId() {
+		return stationId;
+	}
+
+	public void setStationId(Long stationId) {
+		this.stationId = stationId;
 	}
 
 	public Map<Affilate, AffilateProfile> getAffilates() {
@@ -76,22 +103,6 @@ public class Station  {
 		this.orders = orders;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public String getPersonStationId() {
-		return personStationId;
-	}
-
-	public Long getStationId() {
-		return stationId;
-	}
-
-	public void setStationId(Long stationId) {
-		this.stationId = stationId;
-	}
-
 	public Set<Person> getEmployees() {
 		return employees;
 	}
@@ -100,14 +111,12 @@ public class Station  {
 		this.employees = employees;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public void setPersonStationId(String personStationId) {
-		this.personStationId = personStationId;
-	}
-	
-	
 	
 }

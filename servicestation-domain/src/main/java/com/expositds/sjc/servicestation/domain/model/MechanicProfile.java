@@ -20,6 +20,11 @@ public class MechanicProfile {
 	 */
 	private Set<Comment> comments;
 	
+	/**
+	 * Информация о механике.
+	 */
+	private String info;
+	
 	public MechanicProfile() {
 		this.comments = new HashSet<>();
 	}
@@ -49,6 +54,14 @@ public class MechanicProfile {
 		return true;
 	}
 
+	public Long getMechanicProfileId() {
+		return mechanicProfileId;
+	}
+
+	public void setMechanicProfileId(Long mechanicProfileId) {
+		this.mechanicProfileId = mechanicProfileId;
+	}
+
 	public Set<Comment> getComments() {
 		return comments;
 	}
@@ -57,13 +70,12 @@ public class MechanicProfile {
 		this.comments = comments;
 	}
 
-	public Long getMechanicProfileId() {
-		return mechanicProfileId;
+	public String getInfo() {
+		return info;
 	}
 
-	public void setMechanicPofileId(Long mechanicPofileId) {
-		this.mechanicProfileId = mechanicPofileId;
+	public void setInfo(String info) {
+		this.info = info;
 	}
-		
 	
 }
