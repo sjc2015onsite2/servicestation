@@ -5,7 +5,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="col-sm-offset-2 col-sm-6">
+<div class="col-sm-offset-3 col-sm-6">
 	<table class="table table-striped table-hover table-bordered">
   		<tr>
 	  		<th width="35%">Name</th>
@@ -22,7 +22,7 @@
   	</table>
 </div>
 <security:authorize access="hasRole('ROLE_ACCOUNTANT')">
-	<div class="col-sm-4">
+	<div class="col-sm-3">
 		<button data-toggle="modal" data-target="#salary-modal" type="button" class="btn btn-warning btn-sm">Change salary</button>
 	</div>
 </security:authorize>
@@ -30,35 +30,31 @@
 <div class="modal fade" id="salary-modal">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content col-sm-offset-1 col-sm-10">
+				<form action="employees" method="POST" class="form-horizontal" role="form">
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Change salary</h4>
 			</div>
 
 			<div class="modal-body">
-				<form action="employees" method="POST" class="form-horizontal" role="form">
-					<div class="col-sm-2">
+					<div class="form-group">
 						<label class="text-left">Select employee:</label>
-					</div>
-					<div class="col-sm-10">
 						<select name="personId" class="form-control">
 							<c:forEach var="person" items="${personsData}">
 								<option value="${person[3]}">${person[0]}</option>
 							</c:forEach>
 						</select>
-						<input name="newsalary" type="text" class="form-control"
-							placeholder="Enter salary">
 					</div>
-					<div>
-						<br />
-						<button type="submit" class="btn btn-warning btn-sm">Change</button>
+					<div class="form-group">
+						<input name="newsalary" type="text" class="form-control" placeholder="Enter salary">
 					</div>
-				</form>
 			</div>
 
 			<div class="modal-footer">
+				<button type="submit" class="btn btn-warning btn-sm">Change</button>
 				<button type="button" class="btn btn-default bnt-sm" data-dismiss="modal">Cancel</button>
 			</div>
+				</form>
 		</div>
 	</div>
 </div>

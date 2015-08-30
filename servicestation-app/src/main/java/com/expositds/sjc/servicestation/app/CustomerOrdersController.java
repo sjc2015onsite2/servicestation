@@ -1,7 +1,6 @@
 
 package com.expositds.sjc.servicestation.app;
 
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +28,10 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
 /**
  * <b>CustomerOrdersController</b>
  * 
- * @author Sergey Rybakov, Oleg Ryzhko
+ * Контроллер отвечает за отображение списка сделанных клиентом заявок
+ * 
+ * @author Sergey Rybakov
+ * @author Oleg Ryzhko
  * */
 
 
@@ -50,19 +52,38 @@ public class CustomerOrdersController {
 	private StationsDtoBuilder stationsDtoBuilder;
 	
 		@RequestMapping(value = "/myorders", method = RequestMethod.GET)
-		public ModelAndView myorders(@RequestParam(value = "page", required = false) Long page,
-									 Authentication auth) {
+		public ModelAndView myorders(
+				@RequestParam(value = "page", required = false) Long page,
+				Authentication auth) {
 			
 			if(page==null) page = 1L;
 			Long pageSize = 3L;
-			
 			Long startPage = page;
-			
 			Long endPage = page + 5;
-			
 			
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
 			SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
+			
+			Map<Order, Station> orders = new HashMap<>();
+			orders.putAll(authorizedUserSiteService.getOrdersLimit(user, (page-1)*pageSize+1, pageSize));
+			String[][] allOrders = new String[orders.size()][8];
+			int i = 0;
+			for(Order currentOrder : orders.keySet()){
+				CustomerOrderDto customerOrderDto = customerOrderDtoBuilder.build(currentOrder);
+				allOrders[i][0] = customerOrderDto.getProblemDescription();
+				allOrders[i][1] = customerOrderDto.getOrderStatus();
+				allOrders[i][2] = customerOrderDto.getStationName();
+				allOrders[i][3] = customerOrderDto.getMechanicName();
+				Integer cost = new Integer(0);
+				for(int j = 0; j < customerOrderDto.getServiceNames().size(); j++){
+					cost+=customerOrderDto.getServiceSums().get(j);
+				}
+				allOrders[i][4] = cost.toString();
+				allOrders[i][5] = customerOrderDto.getCreatedDate();
+				allOrders[i][6] = customerOrderDto.getNotificationMessage();
+				allOrders[i][7] = customerOrderDto.getOrderId().toString();
+				i++;
+			}
 			
 			int ordersCount = authorizedUserSiteService.getSiteUserOrdersCount(user);
 			Long lastPage = ordersCount / pageSize;
@@ -71,7 +92,7 @@ public class CustomerOrdersController {
 			if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;
 			
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("orders", authorizedUserSiteService.getOrdersLimit(user, (page-1)*pageSize+1, pageSize));
+			mav.addObject("allOrders", allOrders);
 			mav.addObject("page", page);
 			mav.addObject("startpage", startPage);
 			mav.addObject("endpage", endPage);
@@ -108,7 +129,7 @@ public class CustomerOrdersController {
 			mav.addObject("services", services);
 			mav.addObject("customerOrderDto", customerOrderDto);
 			mav.addObject("stationsDto", stationsDto);
-			mav.addObject("change", change); ;
+			mav.addObject("change", change);
 			mav.setViewName("customer.order.data");
 			
 			return mav;

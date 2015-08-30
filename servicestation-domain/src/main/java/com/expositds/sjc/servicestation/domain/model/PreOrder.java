@@ -1,5 +1,9 @@
 package com.expositds.sjc.servicestation.domain.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 /**
  * Класс содержит информацию о предзаказе, для передачи от сайта-агрегатора СТО.
  * 

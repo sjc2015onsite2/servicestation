@@ -1,6 +1,11 @@
 package com.expositds.sjc.servicestation.business.service.dto;
 
-import com.expositds.sjc.servicestation.domain.model.Order;
+import com.expositds.sjc.servicestation.business.repository.dto.CustomerOrderDto;
+/**
+ * 
+ * @author Rybakov Sergey
+ *
+ */
 
 public class NotificationDto {
 
@@ -8,9 +13,12 @@ public class NotificationDto {
 	
 	private String message;
 	
-	public NotificationDto(Order order){
-		this.orderId = order.getOrderId().toString();
-		this.message = order.getNotification().getMessage().toString();
+	private String machanicName;
+	
+	public NotificationDto(CustomerOrderDto customerOrderDto){
+		this.orderId = customerOrderDto.getOrderId().toString();
+		this.machanicName = customerOrderDto.getMechanicName();
+		this.message = customerOrderDto.getNotificationMessage();
 	}
 
 	public String getOrderId() {
@@ -20,5 +28,9 @@ public class NotificationDto {
 	public String getMessage() {
 		return message;
 	}
-	
+
+	public String getMachanicName() {
+		return machanicName;
+	}
+
 }

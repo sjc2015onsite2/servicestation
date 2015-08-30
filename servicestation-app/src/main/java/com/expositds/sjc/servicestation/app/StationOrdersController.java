@@ -25,7 +25,9 @@ import com.expositds.sjc.servicestation.domain.service.Accountant;
 import com.expositds.sjc.servicestation.domain.service.Identification;
 
 /**
- * <b>CustomerOrdersController</b>
+ * <b>StationsOrdersController</b>
+ * 
+ * Контроллер отвечает за отображение списка заявок на ремонт сделанных клиентами на данную станцию
  * 
  * @author Sergey Rybakov
  * */

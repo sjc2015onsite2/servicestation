@@ -7,16 +7,16 @@
 
 	<div class="col-sm-12">
 		<div class="col-sm-6">
-			<h4 class="text-center">Order ${customerOrderDto.orderId}</h4>
+			<h4 class="text-center">Order ${customerOrderDto.orderId}</h4>	
 		</div>
-		<c:if test="${change eq true }">
-			<security:authorize access="hasRole('ROLE_USER')">
+		<security:authorize access="hasRole('ROLE_USER')">
+			<c:if test="${change eq true }">
 				<div>
 					<button data-toggle="modal" data-target="#change-modal"
 						type="button" class="btn btn-warning col-sm-offset-3">Change station</button>
 				</div>
-			</security:authorize>
-		</c:if>
+			</c:if>
+		</security:authorize>
 	</div>
 
 	<security:authorize access="hasRole('ROLE_USER')">
@@ -48,9 +48,9 @@
 			</div>
 		</div>
 	</security:authorize>
-	
+
 	<security:authorize access="hasRole('ROLE_MECHANIC')">
-		<c:if test="${not empty order.contactData }">
+		<c:if test="${not empty contactData}">
 			<div class="col-sm-offset-1 col-sm-10">
 				<br /> 
 				<br />
@@ -61,7 +61,7 @@
 				</div>
 				<div class="col-sm-9">
 					<p class="text-left">
-						<em>${order.contactData }</em>
+						<em>${contactData}</em>
 					</p>
 				</div>
 			</div>
@@ -101,7 +101,7 @@
 		<security:authorize access="hasRole('ROLE_MECHANIC')">
 			<div class="col-sm-1">
 				<p class="text-left">
-					<em>${order.status }</em>
+					<em>${customerOrderDto.orderStatus}</em>
 				</p>
 			</div>
 			<div class="col-sm-2">
@@ -122,7 +122,7 @@
 		<div class="col-sm-5">
 			<ol>
 				<c:forEach var="service" items="${services}">
-					<li>${service[0] } x${service[1] } (${service[2] } BYR)</li>
+					<li>${service[0]} x${service[1]} (${service[2]} BYR)</li>
 				</c:forEach>
 			</ol>
 		</div>
@@ -132,7 +132,7 @@
 			</div>
 		</security:authorize>
 	</div>
-
+	
 	<div class="col-sm-offset-1 col-sm-10">
 		<br /> <br />
 		<div class="col-sm-3">
@@ -153,7 +153,7 @@
 			</div>
 		</security:authorize>
 	</div>
-
+ 
 	<div class="col-sm-offset-1 col-sm-10">
 		<br /> <br />
 		<div class="col-sm-3">
@@ -185,21 +185,21 @@
 		
 		<security:authorize access="hasRole('ROLE_MECHANIC')">
 
-			<c:if test="${not empty  completedate }">
+			<c:if test="${not empty  customerOrderDto.completedDate }">
 				<div class="col-sm-1">
 					<p class="text-left">
-						<em>${completedate }</em>
+						<em>${customerOrderDto.completedDate }</em>
 					</p>
 				</div>
 			</c:if>
 			
-			<c:if test="${empty completedate }">
+			<c:if test="${empty customerOrderDto.completedDate }">
 				<form action="../myorders/completedate" method='POST'>
 					<div class="col-sm-2">
 						<input name="completedate" type="text" class="form-control input-sm" placeholder="Enter date">
 					</div>
 					<div class="col-sm-4">
-						<input name="orderId" value="${order.orderId }" hidden="true" placeholder="mm.dd.yyyy">
+						<input name="orderId" value="${customerOrderDto.orderId }" hidden="true" placeholder="mm.dd.yyyy">
 						<button type="submit" class="btn btn-warning btn-sm">Save</button>
 					</div>
 				</form>
@@ -221,7 +221,7 @@
 		</div>
 	</div>
 
-<c:if test="${empty order.contactData }">
+<c:if test="${empty contactData}">
 	<div class="col-sm-offset-1 col-sm-10">
 		<br /> <br />
 		<div class="col-sm-3">
@@ -237,20 +237,20 @@
 			</div>
 		</security:authorize>
 		<security:authorize access="hasRole('ROLE_MECHANIC')">
-			<c:if test="${not empty order.notification }">
+			<c:if test="${not empty customerOrderDto.notificationMessage}">
 				<div class="col-sm-9">
 					<p class="text-left">
-						<em>${order.notification.message }</em>
+						<em>${customerOrderDto.notificationMessage}</em>
 					</p>
 				</div>
 			</c:if>
-			<c:if test="${empty order.notification }">
+			<c:if test="${empty customerOrderDto.notificationMessage}">
 				<form action="../myorders/nitification" method='POST'>
 					<div class="col-sm-5">
 						<textarea name="notification" class="form-control" rows="2"></textarea>
 					</div>
 					<div class="col-sm-4"></div>
-					<input name="orderId" value="${order.orderId }" hidden="true">
+					<input name="orderId" value="${customerOrderDto.orderId }" hidden="true">
 					<button type="submit" class="btn btn-warning btn-sm">Save</button>
 				</form>
 			</c:if>
@@ -263,36 +263,33 @@
 <div class="modal fade" id="addpart-modal">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content col-sm-offset-1 col-sm-10">
+				<form class="form-horizontal" action="../myorders/addparts" method='POST' role="form">
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Add part</h4>
 			</div>
 
 			<div class="modal-body">
-				<form class="form-horizontal" action="../myorders/addparts"
-					method='POST' role="form">
-					<div class="col-sm-2">
-						<label class="text-left">Select work:</label>
-					</div>
-					<div class="col-sm-10">
+					<div class="form-group has-feedback">
+						<label class="text-left">Select part:</label>
 						<select name="partId" multiple class="form-control">
-							<c:forEach var="part" items="${parts}">
+							<c:forEach var="part" items="${allparts}">
 								<option value="${part[0]}">${part[1]}</option>
 							</c:forEach>
-						</select> <input name="orderId" value="${order.orderId }" hidden="true">
-						<input name="quantity" type="text" class="form-control"
-							placeholder="Enter quantity">
+						</select> 
 					</div>
-					<div>
-						<br />
-						<button type="submit" class="btn btn-warning btn-sm">Add</button>
+					<input name="orderId" value="${customerOrderDto.orderId }" hidden="true">
+					<div class="form-group has-feedback">
+						<label class="text-left">Enter quantity:</label>
+						<input name="quantity" type="text" class="form-control" placeholder="Enter quantity">
 					</div>
-				</form>
 			</div>
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="submit" class="btn btn-warning btn-sm">Add</button>
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
 			</div>
+				</form>
 		</div>
 	</div>
 </div>
@@ -302,111 +299,88 @@
 <div class="modal fade" id="addwork-modal">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content col-sm-offset-1 col-sm-10">
+				<form class="form-horizontal" action="../myorders/addworks" method='POST' role="form">
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Add work</h4>
 			</div>
 
 			<div class="modal-body">
-				<form class="form-horizontal" action="../myorders/addworks"
-					method='POST' role="form">
-					<div class="col-sm-2">
+					<div class="form-group has-feedback">
 						<label class="text-left">Select work:</label>
-					</div>
-					<div class="col-sm-10">
 						<select name="workId" multiple class="form-control">
-							<c:forEach var="work" items="${works}">
-								<option value="${work.key.serviceId }">${work.key.name }</option>
+							<c:forEach var="work" items="${allworks}">
+								<option value="${work[0]}">${work[1]}</option>
 							</c:forEach>
-						</select> <input name="orderId" value="${order.orderId }" hidden="true">
+						</select> <input name="orderId" value="${customerOrderDto.orderId }" hidden="true">
 					</div>
-					<div>
-						<br />
-						<button type="submit" class="btn btn-warning btn-sm">Add</button>
-					</div>
-				</form>
 			</div>
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="submit" class="btn btn-warning btn-sm">Add</button>
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
 			</div>
+				</form>
 		</div>
 	</div>
 </div>
 
 
-
-
 <div class="modal fade" id="changestatus-modal">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content col-sm-offset-3 col-sm-6">
+				<form class="form-horizontal" action="../myorders/changestatus" method='POST' role="form">
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Change status</h4>
 			</div>
 
 			<div class="modal-body">
-				<form class="form-horizontal" action="../myorders/changestatus"
-					method='POST' role="form">
-					<div class="col-sm-2">
+					<div class="form-group has-feedback">
 						<label class="text-left">Select statusé:</label>
-					</div>
-					<div class="col-sm-10">
 						<select name="newstatus" class="form-control">
 							<c:forEach var="status" items="${statuses}">
-								<option>${status }</option>
+								<option>${status}</option>
 							</c:forEach>
-						</select> <input name="orderId" value="${order.orderId }" hidden="true">
+						</select> 
+						<input name="orderId" value="${customerOrderDto.orderId }" hidden="true">
 					</div>
-					<div>
-						<br />
-						<button type="submit" class="btn btn-warning btn-sm">Change</button>
-					</div>
-				</form>
 			</div>
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="submit" class="btn btn-warning btn-sm">Change</button>
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
 			</div>
+				</form>
 		</div>
 	</div>
 </div>
 
-
-
-
 <div class="modal fade" id="change-modal">
 	<div class="modal-dialog modal-sm">
 		<div class="modal-content col-sm-offset-1 col-sm-10">
+		<form class="form-horizontal" action="../../user/myorders/changestation" method='POST' role="form">
 			<div class="modal-header">
 				<button class="close" type="button" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Change station</h4>
 			</div>
 
 			<div class="modal-body">
-				<form class="form-horizontal"
-					action="../../user/myorders/changestation" method='POST'
-					role="form">
-					<div class="col-sm-2">
+					<div class="form-group has-feedback">
 						<label class="text-left">Select stationé:</label>
-					</div>
-					<div class="col-sm-10">
 						<select name="stationId" multiple class="form-control">
 							<c:forEach var="station" items="${stationsDto.stationsIdAndNames}">
 								<option value="${station.key }">${station.value}</option>
 							</c:forEach>
 						</select> <input name="orderId" value="${customerOrderDto.orderId }" hidden="true">
 					</div>
-					<div>
-						<br />
-						<button type="submit" class="btn btn-warning btn-sm">Change</button>
-					</div>
-				</form>
 			</div>
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="submit" class="btn btn-warning btn-sm">Change</button>
+				<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
 			</div>
+		</form>
 		</div>
 	</div>
 </div>

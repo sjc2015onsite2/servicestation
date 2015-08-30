@@ -4,16 +4,15 @@
  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
-      
-<div class="col-sm-offset-1" >
+<h3 class="text-center">Comments about "${stationName}"</h3>
+<div class="col-sm-offset-2 col-sm-8" >
 	<c:forEach var="comment" items="${comments}" >
         <br />
         <br />
   	    <blockquote>
-        	<footer><strong>Station: </strong>"Station 1"</footer>
+        	<footer><strong>Author: </strong>"${comment.key.author.name}"</footer>
             <p class="text-primary">${comment.key.comment}</p>
-            <footer>${comment.key.author.name}<em> ${comment.value}</em></footer>
+            <footer><em> ${comment.value}</em></footer>
         </blockquote>
 	</c:forEach>
 </div>

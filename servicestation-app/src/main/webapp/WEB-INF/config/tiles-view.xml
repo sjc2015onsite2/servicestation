@@ -98,14 +98,14 @@
 		<put-attribute name="body" value="/WEB-INF/views/mechanic/notifications.log.jsp" />
 	</definition>
 	
-	<definition name="change.order.data" extends="base.definition">
-		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/mechanic/change.order.data.jsp" />
-	</definition>
-	
 	<definition name="one.part.order" extends="base.definition">
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/mechanic/one.part.order.jsp" />
+	</definition>
+	
+	<definition name="ceo.notifications.log" extends="base.definition">
+		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/ceo.notifications.log.jsp" />
 	</definition>
 	
 	<definition name="station" extends="base.definition">
@@ -141,6 +141,11 @@
 	<definition name="mechanics.comments" extends="base.definition">
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/mechanics.comments.jsp" />
+	</definition>
+	
+	<definition name="registration" extends="base.definition">
+		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/customer/registration.jsp" />
 	</definition>
 	
 </tiles-definitions> 

@@ -3,7 +3,6 @@ package com.expositds.sjc.servicestation.app;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +20,12 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
 
 /**
  * CreateCommentsController
+ * Контроллер отвечает за создание комментариев о странциях и механиках
  * 
-
  * @author Sergey Rybakov
 */
 @Controller
+@RequestMapping(value = "/user")
 public class CreateCommentsController {
 
 	@Autowired
@@ -34,7 +34,7 @@ public class CreateCommentsController {
 	@Autowired
 	private Identification identificationService;
 	
-	@RequestMapping(value = "/user/createstationcomment", method = { RequestMethod.GET })
+	@RequestMapping(value = "/createstationcomment", method = RequestMethod.GET)
 	public ModelAndView createStationComment() {
 		
 		ModelAndView mav = new ModelAndView();
@@ -43,12 +43,12 @@ public class CreateCommentsController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/user/createstationcomment", method = RequestMethod.POST )
+	@RequestMapping(value = "/createstationcomment", method = RequestMethod.POST )
 	public ModelAndView createStationComment(
 			@RequestParam(value = "stationId", required = true) Station station,
 			Authentication auth,
 			@RequestParam(required = true) String comment,
-			@RequestParam String notvisible){
+			String notvisible){
 		
 		boolean visible = true;
 		if(notvisible.equals("yes")){
@@ -68,7 +68,7 @@ public class CreateCommentsController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/user/createmechaniccomment", method = { RequestMethod.GET })
+	@RequestMapping(value = "/createmechaniccomment", method = RequestMethod.GET)
 	public ModelAndView createMechanicComment() {
 		
 		Set<Station> stations = authorizedUserSite.getServiceStations();
@@ -85,12 +85,12 @@ public class CreateCommentsController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/user/createmechaniccomment", method = RequestMethod.POST )
+	@RequestMapping(value = "/createmechaniccomment", method = RequestMethod.POST )
 	public ModelAndView createMechanicComment(
 			@RequestParam(value = "mechanicId", required = true) Person mechanic,
 			Authentication auth,
 			@RequestParam(required = true) String comment,
-			@RequestParam String notvisible){
+			String notvisible){
 		
 		boolean visible = true;
 		if(notvisible.equals("yes")){

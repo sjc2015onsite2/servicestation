@@ -7,13 +7,13 @@
 	<div class="table-responsive col-sm-offset-2 col-sm-6">
 	    <table class="table table-striped table-hover table-bordered">
 	        <tr>
-		        <th width="20%">ID</th>
+		        <th width="20%">Part ID</th>
 		        <th>Name of spare part</th>
 		        <th width="20%">Quantity on stock</th>
 	        </tr>
 	        <c:forEach var="part" items="${parts}" >
 		        <tr class="warning">
-			        <td>${part.key.partId}</td>
+			        <td>Part ${part.key.partId}</td>
 			        <td>${part.key.name}</td>
 			        <td>${part.value}</td>
 		        </tr>

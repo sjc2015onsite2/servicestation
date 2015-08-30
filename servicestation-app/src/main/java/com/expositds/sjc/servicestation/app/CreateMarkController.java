@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
 
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.SiteUser;
@@ -27,6 +26,7 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
 
 
 @Controller
+@RequestMapping(value = "/user")
 public class CreateMarkController {
 
 	@Autowired
@@ -35,7 +35,7 @@ public class CreateMarkController {
 	@Autowired
 	private Identification identificationService;
 	
-	@RequestMapping(value = "/user/createmark", method = { RequestMethod.GET })
+	@RequestMapping(value = "/createmark", method = RequestMethod.GET)
 	public ModelAndView getForm() {
 		
 		Set<Station> stations = authorizedUserSite.getServiceStations();
@@ -46,7 +46,7 @@ public class CreateMarkController {
 		
 	}
 	
-	@RequestMapping(value = "/user/createmark", method = RequestMethod.POST )
+	@RequestMapping(value = "/createmark", method = RequestMethod.POST )
 	public String createMark(
 			@RequestParam(value = "stationId", required = true) Station station,
 			Authentication auth,
@@ -55,12 +55,8 @@ public class CreateMarkController {
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
 		SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
 		
-		//authorizedUserSite.createMark(user, markValue);
 		authorizedUserSite.publicMark(station, authorizedUserSite.createMark(user, markValue));
 		
 		return "redirect:/stationslist";
 	}
-	
-	
-	
 }

@@ -1,6 +1,5 @@
 package com.expositds.sjc.servicestation.app;
 
-import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.expositds.sjc.servicestation.domain.model.Logginer;
-import com.expositds.sjc.servicestation.domain.model.OrderStatus;
-import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.model.PartOrder;
 import com.expositds.sjc.servicestation.domain.model.PartOrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Person;
@@ -26,12 +23,15 @@ import com.expositds.sjc.servicestation.domain.service.Mechanic;
 
 
 /**
-* <b>SparePartListController</b>
+* <b>OrderOfPartsController</b>
+* 
+* Контроллер отображает список заявок на детали сделанных всеми механиками станции
 * 
 * @author Sergey Rybakov
 * */
 
 @Controller
+@RequestMapping(value = "/mechanic")
 public class OrdersOfPartsControler {
 	
 	@Autowired
@@ -40,7 +40,7 @@ public class OrdersOfPartsControler {
 	@Autowired
 	private Mechanic mechanicService;
 	
-	@RequestMapping(value = "/mechanic/partsorders", method = RequestMethod.GET)
+	@RequestMapping(value = "/partsorders", method = RequestMethod.GET)
 	public ModelAndView showListOfPartsOrders(Authentication auth) {
 		
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
@@ -63,13 +63,12 @@ public class OrdersOfPartsControler {
 	return mav;
 	}
 	
-	@RequestMapping(value = "/mechanic/partsorders", method = RequestMethod.POST)
+	@RequestMapping(value = "/partsorders", method = RequestMethod.POST)
 	public ModelAndView changeStatusOfPartsOrder(
 			@RequestParam(value = "orderId") PartOrder partOrder) {
 		PartOrderStatus partOrderStatus = PartOrderStatus.READY;
 		mechanicService.setPartOrderStatus(partOrder, partOrderStatus);
 		
-	
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/mechanic/partsorders");
 	return mav;

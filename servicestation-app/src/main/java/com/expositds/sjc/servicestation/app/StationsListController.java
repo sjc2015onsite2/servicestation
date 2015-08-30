@@ -2,12 +2,8 @@ package com.expositds.sjc.servicestation.app;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,13 +13,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.expositds.sjc.servicestation.domain.model.Comment;
-import com.expositds.sjc.servicestation.domain.model.Mark;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.NonAuthorizedUserSite;
 
 /**
- *
+ *<b>StationsListController</b>
+ * 
+ * Контроллер отображает список станций, механиков каждой станции 
+ * и коментрарии о каждой станции и механике
  * 
  * @author Sergey Rybakov
  * */
@@ -36,7 +34,7 @@ public class StationsListController {
 	private NonAuthorizedUserSite nonAuthorizedUserSite;	
 	
 	
-	@RequestMapping(value = "/stationslist", method = { RequestMethod.GET })
+	@RequestMapping(value = "/stationslist", method = RequestMethod.GET)
 	public ModelAndView createOrder() {
 		
 		Set<Station> stations = nonAuthorizedUserSite.getServiceStations();
@@ -53,7 +51,7 @@ public class StationsListController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/stationscomments/{stationId}", method = { RequestMethod.GET })
+	@RequestMapping(value = "/stationscomments/{stationId}", method = RequestMethod.GET)
 	public ModelAndView stationsComments(@PathVariable("stationId") Station station) {
 		
 		Set<Comment> stationsComments = nonAuthorizedUserSite.getServiceStationComments(station);
@@ -66,28 +64,38 @@ public class StationsListController {
 			
 			comments.put(currentcomment, dateFormat.format(currentcomment.getDate().getTime()));
 		}
-		
 		mav.addObject("comments", comments);
+		mav.addObject("stationName", station.getName());
 		mav.setViewName("stationsComments");
 		return mav;
 	}
 	
-	@RequestMapping(value = "/mechanicslist/{stationId}", method = { RequestMethod.GET })
+	@RequestMapping(value = "/mechanicslist/{stationId}", method = RequestMethod.GET)
 	public ModelAndView stationsMechanics(@PathVariable("stationId") Station station) {
 		
 		Set<Person> mechanics = nonAuthorizedUserSite.getServiceStationMechanics(station);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("stationName", station.getName());
 		mav.addObject("mechanicsList", mechanics);
 		mav.setViewName("mechanics.list");
 		return mav;
 	}
 	
-	@RequestMapping(value = "/mechanicscomments/{personId}", method = { RequestMethod.GET })
+	@RequestMapping(value = "/mechanicscomments/{personId}", method = RequestMethod.GET)
 	public ModelAndView mechanicsComments(@PathVariable("personId") Person person) {
 		
 		Set<Comment> mechanicsComments = nonAuthorizedUserSite.getMechanicComments(person);
+		
+		Map<Comment,String> comments = new HashMap<>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		for(Comment currentcomment : mechanicsComments){
+			comments.put(currentcomment, dateFormat.format(currentcomment.getDate().getTime()));
+		}
+		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("mechanicsComments", mechanicsComments);
+		mav.addObject("mechanicName", person.getName());
+		mav.addObject("comments", comments);
 		mav.setViewName("mechanicsComments");
 		return mav;
 	}
