@@ -1,5 +1,9 @@
 package com.expositds.sjc.servicestation.domain.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 /**
  * Базовый пользователь сайта-агрегатора и СТО.
  * 
@@ -16,16 +20,26 @@ public class Logginer {
 	/**
 	 * Имя залогинивающегося.
 	 */
+	@NotNull
+	@Pattern(regexp = "[a-zA-Zа-яА-Я]*")
 	private String name;
 	
 	/**
 	 * Логин залогинивающегося.
 	 */
+	@NotNull
+	@Pattern(regexp = "[a-zA-Z0-9]*",
+			message="Username must be alphanumeric with no spaces.")
+	@Size(min=5, max=15,
+			message="Name must be between 5 and 15 characters long.")
 	private String login;
 	
 	/**
 	 * Пароль залогинивающегося.
 	 */
+	@NotNull
+	@Size(min=5, max=15,
+		message="The password must be at least 6 characters long.")
 	private String password;
 	
 	/**

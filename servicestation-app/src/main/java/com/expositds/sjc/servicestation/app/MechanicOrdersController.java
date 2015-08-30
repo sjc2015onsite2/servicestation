@@ -2,17 +2,13 @@ package com.expositds.sjc.servicestation.app;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,28 +17,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.expositds.sjc.servicestation.business.repository.dto.CustomerOrderDto;
+import com.expositds.sjc.servicestation.business.repository.dto.StationsDto;
+import com.expositds.sjc.servicestation.business.service.dto.builders.CustomerOrderDtoBuilder;
+import com.expositds.sjc.servicestation.business.service.dto.builders.StationsDtoBuilder;
 import com.expositds.sjc.servicestation.domain.exception.PartLimitException;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
-import com.expositds.sjc.servicestation.domain.model.Comment;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.Service;
-import com.expositds.sjc.servicestation.domain.model.SiteUser;
-import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.AuthorizedUserSite;
 import com.expositds.sjc.servicestation.domain.service.Identification;
 import com.expositds.sjc.servicestation.domain.service.Mechanic;
-import com.expositds.sjc.servicestation.domain.service.WorkShop;
 
 
 /**
 * <b>MechanicOrdersController</b>
 * 
-* @author Sergey Rybakov
+* Контроллер отвечает за отображения списка свободных заявок, которые механик может взять себе;
+* список заявок с которыми работает механик;
+* отвечает за работу с конкретной заявкой заявкой.
 * 
+* @author Sergey Rybakov
 * */
 
 @Controller
@@ -56,7 +55,34 @@ public class MechanicOrdersController {
 	private AuthorizedUserSite authorizedUserSiteService;
 	
 	@Autowired
+	private CustomerOrderDtoBuilder customerOrderDtoBuilder;
+
+	@Autowired
+	private StationsDtoBuilder stationsDtoBuilder;
+	
+	@Autowired
 	private Mechanic mechanicService;
+	
+	@RequestMapping(value = "/freeorders", method = RequestMethod.GET)
+	public ModelAndView showFreeOrders(Authentication auth){
+		
+		Logginer logginer = identificationService.getLogginerByName(auth.getName());
+		Person mechanic = identificationService.getPersonById(logginer.getId().toString());
+		
+		Set<Order> freeorders = mechanicService.getMechanicFreeOrders(mechanic);
+		
+		Map<Order, String> orders = new HashMap<>();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		for(Order currentorder : freeorders){
+			orders.put(currentorder, dateFormat.format(currentorder.getCreateDate().getTime()));
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("orders", orders);
+		mav.setViewName("free.orders");
+	return mav;
+	}
 	
 	@RequestMapping(value = "/myorders", method = RequestMethod.GET)
 	public ModelAndView showOrdersOfMechanic(Authentication auth) {
@@ -82,41 +108,53 @@ public class MechanicOrdersController {
 	@RequestMapping(value = "/myorders/{orderId}", method = RequestMethod.GET)
 	public ModelAndView freeOrder(@PathVariable("orderId") Order order){
 		
-		String completedate = new String();
-		String createdate = new String();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-		if(order.getCompleteDate() != null)
-			completedate = dateFormat.format(order.getCompleteDate().getTime());
-		createdate = dateFormat.format(order.getCreateDate().getTime());
+		StationsDto stationsDto = stationsDtoBuilder.build();
+		CustomerOrderDto customerOrderDto = customerOrderDtoBuilder.build(order);
 		
 		Person mechanic = identificationService.getMechanicByOrder(order);
 		Affilate affilate = identificationService.getAffilateByMechanic(mechanic);
 		
-		Integer cost = new Integer(0);
-		
-		String[][] serviceRows = new String[order.getServices().size()][4]; 
-		int i = 0;
-		for (Service currentService : order.getServices().keySet()) {
-			serviceRows[i][0] = currentService.getName();
-			serviceRows[i][1] = order.getServices().get(currentService).toString();
-			serviceRows[i][2] = order.getOrderServicesPriceList().get(currentService).toString();
-			serviceRows[i][3] = Integer.toString((Integer.parseInt(serviceRows[i][1]) * Integer.parseInt(serviceRows[i][2])));
-			cost += Integer.parseInt(serviceRows[i][3]);
-			i++;
+		String[][] services = new String[customerOrderDto.getServiceNames().size()][3];
+		for(int i = 0; i < customerOrderDto.getServiceNames().size(); i++){
+			services[i][0] = customerOrderDto.getPartNames().get(i);
+			services[i][1] = customerOrderDto.getServiceCounts().get(i).toString();
+			services[i][2] = customerOrderDto.getServiceSums().get(i).toString();
+		}
+		String[][] parts = new String[customerOrderDto.getPartNames().size()][2];
+		for(int i = 0; i < customerOrderDto.getPartNames().size(); i++){
+			parts[i][0] = customerOrderDto.getPartNames().get(i);
+			parts[i][1] = customerOrderDto.getPartCounts().get(i).toString();
 		}
 		
+		Map<Service, Integer> works = new HashMap<>();
+		works.putAll(mechanicService.getServicesCost(affilate));
+		String[][] allworks = new String[works.keySet().size()][2];
+		int i = 0;
+		for(Service currentWork : works.keySet()){
+			allworks[i][0] = currentWork.getServiceId().toString();
+			allworks[i][1] = currentWork.getName();
+			i++; 
+		}
 		
+		Map<Part, Integer> allpartsandquantity = new HashMap<>();
+		allpartsandquantity.putAll(mechanicService.getPartsQuantity(affilate));
+		String[][] allparts = new String[allpartsandquantity.keySet().size()][2];
+		int j = 0;
+		for(Part currentPart : allpartsandquantity.keySet()){
+			allparts[j][0] = currentPart.getPartId().toString();
+			allparts[j][1] = currentPart.getName();
+			j++; 
+		}
+			
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("statuses", OrderStatus.values());
-		mav.addObject("stations", authorizedUserSiteService.getServiceStations());
-		mav.addObject("completedate", completedate);
-		mav.addObject("createdate", createdate);
-		mav.addObject("order", order);
-		mav.addObject("cost", cost); 
-		mav.addObject("serviceRows", serviceRows); 
-		mav.addObject("partstoorder", order.getParts());
-		mav.addObject("parts", mechanicService.getPartsQuantity(affilate));
-		mav.addObject("works", mechanicService.getServicesCost(affilate));
+		mav.addObject("services", services);
+		mav.addObject("parts", parts);
+		mav.addObject("customerOrderDto", customerOrderDto);
+		mav.addObject("stationsDto", stationsDto);
+		mav.addObject("contactData", order.getContactData());
+		mav.addObject("allparts", allparts);
+		mav.addObject("allworks", allworks);
 		mav.setViewName("customer.order.data");
 		return mav;
 	}
@@ -141,7 +179,6 @@ public class MechanicOrdersController {
 			@RequestParam(value = "orderId") Order order,
 			@RequestParam OrderStatus newstatus) {
 		mechanicService.setOrderStatus(order, newstatus);
-		
 		
 		ModelAndView mav = new ModelAndView();
 		Long id = order.getOrderId();
@@ -209,27 +246,4 @@ public class MechanicOrdersController {
 		mav.setViewName("redirect:/mechanic/myorders/"+id);
 	return mav;
 	}
-	
-	@RequestMapping(value = "/freeorders", method = RequestMethod.GET)
-	public ModelAndView showFreeOrders(Authentication auth){
-		
-		Logginer logginer = identificationService.getLogginerByName(auth.getName());
-		Person mechanic = identificationService.getPersonById(logginer.getId().toString());
-		
-		Set<Order> freeorders = mechanicService.getMechanicFreeOrders(mechanic);
-		
-		Map<Order, String> orders = new HashMap<>();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
-		for(Order currentorder : freeorders){
-			orders.put(currentorder, dateFormat.format(currentorder.getCreateDate().getTime()));
-		}
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("orders", orders);
-		mav.setViewName("free.orders");
-	return mav;
-	}
-	
-	
 }

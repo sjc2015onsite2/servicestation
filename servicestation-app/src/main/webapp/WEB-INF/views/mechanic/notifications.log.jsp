@@ -5,7 +5,7 @@
 <div class="table-responsive col-sm-offset-2 col-sm-8">
     <table class="table table-striped table-hover table-bordered">
         <tr>
-	        <th width="20%">ID of order</th>
+	        <th width="20%">Order ID</th>
 	        <th>Notification</th>
         </tr>
         <c:forEach var="notification" items="${notificationsDto}">

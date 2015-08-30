@@ -4,17 +4,15 @@
  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
-
-
-      <div class="col-sm-offset-1" >
-      <c:forEach var="comment" items="${mechanicsComments}" >
+<h3 class="text-center">Comments about ${mechanicName}</h3>
+<div class="col-sm-offset-3 col-sm-6" >
+	<c:forEach var="comment" items="${comments}" >
+    	<br />
         <br />
-        <br />
-  	     <blockquote>
-          <footer><strong>Station: </strong>"Station 1" --- <strong>Mechanic: </strong>Mechanic 1</footer>
-            <p class="text-primary">${comment.comment}</p>
-            <footer>Jason Statham  <em>05.08.2015</em></footer>
-          </blockquote>
-          </c:forEach>
-      </div>
+  	    <blockquote>
+        	<footer><strong>Author: </strong>"${comment.key.author.name}"</footer>
+        	<p class="text-primary">${comment.key.comment}</p>
+            <footer><em>${comment.value}</em></footer>
+        </blockquote>
+	</c:forEach>
+</div>

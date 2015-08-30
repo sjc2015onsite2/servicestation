@@ -5,6 +5,11 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 
+/**
+*
+*@author Rybakov Sergey
+**/
+
 public class RegistrationValidator implements Validator{
 	@Override
 	public boolean supports(Class<?> paramClass) {

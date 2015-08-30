@@ -1,9 +1,7 @@
 package com.expositds.sjc.servicestation.app;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,18 +16,20 @@ import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.model.PartOrder;
 import com.expositds.sjc.servicestation.domain.model.Person;
-import com.expositds.sjc.servicestation.domain.model.Affilate; 
 import com.expositds.sjc.servicestation.domain.service.Identification;
 import com.expositds.sjc.servicestation.domain.service.Mechanic;
 
 
 /**
-* <b></b>
+* <b>OnePartOrderController</b>
+* 
+* Контроллер отвечает за создание новой заявки на детали
 * 
 * @author Sergey Rybakov
 * */
 
 @Controller
+@RequestMapping(value = "/mechanic")
 public class OnePartOrderController {
 	
 	@Autowired
@@ -38,7 +38,7 @@ public class OnePartOrderController {
 	@Autowired
 	private Mechanic mechanicService;
 	
-	@RequestMapping(value = "/mechanic/partorder/{partOrderId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/partorder/{partOrderId}", method = RequestMethod.GET)
 	public ModelAndView partOrder(Authentication auth,
 			@PathVariable(value = "partOrderId") PartOrder partOrder) {
 		
@@ -53,7 +53,7 @@ public class OnePartOrderController {
 	return mav;
 	}
 	
-	@RequestMapping(value = "/mechanic/partorder", method = RequestMethod.POST)
+	@RequestMapping(value = "/partorder", method = RequestMethod.POST)
 	public ModelAndView addParts(Authentication auth,
 			@RequestParam(value = "partOrderId") PartOrder partOrder,
 			@RequestParam(value = "partId") Part part,
@@ -68,7 +68,7 @@ public class OnePartOrderController {
 	return mav;
 	}
 	
-	@RequestMapping(value = "/mechanic/newpartorder", method = RequestMethod.POST)
+	@RequestMapping(value = "/newpartorder", method = RequestMethod.POST)
 	public ModelAndView newPartOrder(Authentication auth) {
 		
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
@@ -79,5 +79,4 @@ public class OnePartOrderController {
 		mav.setViewName("redirect:/mechanic/partorder/" + partOrder.getPartOrderId());
 	return mav;
 	}
-	
 }

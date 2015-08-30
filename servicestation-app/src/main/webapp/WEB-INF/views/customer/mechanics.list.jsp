@@ -2,7 +2,9 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div class="col-sm-offset-2 col-sm-5">
+<div class="col-sm-offset-3 col-sm-6">
+	<h3>"${stationName}"</h3>
+	<br/>
 	<table class="table table-hover">
          <tr>
              <th width="50%">Name</th>
@@ -13,9 +15,9 @@
       <c:forEach var="mechanic" items="${mechanicsList}" >
       <c:url value="/mechanicscomments/${mechanic.id}" var="viewMechanicsCommentsUrl" />
                <tr>
-                	<td>${mechanic.name}</td>
-                	<td>стаж: 200 лет<p> механик года 2025</td>
-                	<td class="text-center"><a href="${viewMechanicsCommentsUrl}">Comments</a></td>
+                	<td><br/>${mechanic.name}</td>
+                	<td><br/>стаж: 200 лет<p> механик года 2025</td>
+                	<td class="text-center"><a href="${viewMechanicsCommentsUrl}"><br/><button type="button" class="btn btn-info btn-sm">Comments</button></a></td>
                 </tr>
       </c:forEach>
     </table>

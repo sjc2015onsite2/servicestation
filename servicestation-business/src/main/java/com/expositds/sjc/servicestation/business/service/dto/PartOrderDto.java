@@ -8,6 +8,12 @@ import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.model.PartOrder;
 import com.expositds.sjc.servicestation.domain.model.PartOrderStatus;
 
+/**
+ * 
+ * @author Rybakov Sergey
+ *
+ */
+
 public class PartOrderDto implements Comparable<PartOrderDto>{
 	
 	private String id;

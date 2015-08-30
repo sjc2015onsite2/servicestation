@@ -7,7 +7,7 @@
 	<div class="table-responsive col-sm-offset-1 col-sm-10">
 	    <table class="table table-striped table-hover table-bordered">
 	        <tr>
-		        <th width="10%">ID</th>
+		        <th width="10%">PartOrder ID</th>
 		        <th width="50%">Order</th>
 		        <th width="12%">Status</th>
 		        <th width="11%">Ready</th>
@@ -24,7 +24,7 @@
 						</ol>
 			        </td>
 			        <td>${order.status }</td>
-			        <td>
+			        <td class="text-center">
 			        	<c:if test="${order.changeStatus eq true }">
 			        		<form action="../mechanic/partsorders" method='POST' class="form-horizontal" role="form">
 			        			<button type="submit" class="btn btn-warning btn-sm">READY</button>

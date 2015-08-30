@@ -4,6 +4,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <nav class="navbar navbar-default" role="navigation">
 	<div class="container-fluid">
@@ -90,7 +91,7 @@
           	<security:authorize access="isAnonymous()">
             	<form class="navbar-form navbar-right"> 
             		<button name="submit" type="submit" class="btn btn-success" data-toggle ="modal" data-target="#authorization-modal">Sign in</button>
-            		<button name="submit" type="submit" class="btn btn-info" data-toggle ="modal" data-target="#registration-modal">Sing up</button>
+            		<a href="<c:url value="/newcustomer" />" ><button type="button" class="btn btn-info">Sing up</button></a>
             	</form>
             </security:authorize>   
             
@@ -123,7 +124,7 @@
     </div>
 </nav>
 
-<!-- Registration-modal  -->
+<!-- Registration-modal  
 
 <div class="modal fade" id="registration-modal">
 	<div class="modal-dialog modal-sm">
@@ -137,15 +138,18 @@
 	      		<div class="modal-body">
 	          		<div class="form-group has-feedback">
 	                	<input type="text" class="form-control" name="name" placeholder="Enter user name">
+	                	<sf:errors name="name" cssClass="error"/>
 	          		</div>
 	          		<div class="form-group has-feedback">
-	               		<input type="text" class="form-control" name="login" id="" placeholder="Enter login">
+	               		<input type="text" class="form-control" name="login" placeholder="Enter login">
+	                	<sf:errors name="login" cssClass="error"/>
 	          		</div>
 	          		<div class="form-group has-feedback">
-	               		<input type="password" class="form-control" name="password" id="" placeholder="Enter password">
+	               		<input type="password" class="form-control" name="password" placeholder="Enter password">
+	                	<sf:errors name="password" cssClass="error"/>
 	          		</div>
 	          		<div class="form-group has-feedback">
-	                	<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Repeat password">
+	                	<input type="password" class="form-control" placeholder="Repeat password">
 	          		</div>
 	      		</div>
       		<div class="modal-footer">
@@ -155,7 +159,7 @@
       		
     	</div>
   	</div>
-</div>
+</div-->
 
 <!-- Authorization-modal  -->
 
@@ -163,28 +167,26 @@
 	<div class="modal-dialog modal-sm">
     	<div class="modal-content col-sm-offset-4 col-sm-6">
     	
+        		<form class="form-horizontal"  action="j_spring_security_check" method='POST' role="form">
         	<div class="modal-header">
         		<button class="close" type="button" data-dismiss="modal">&times;</button>
         		<h4 class="modal-title"><spring:message code="header.authorization"/></h4>
       		</div>
 
       		<div class="modal-body">
-        		<form class="form-horizontal"  action="j_spring_security_check" method='POST' role="form">
           			<div class="form-group has-feedback">
                 		<input type="text" class="form-control" name="username" id="exampleInputEmail2" placeholder="Enter user name">
           			</div>
           			<div class="form-group has-feedback">
                 		<input type="password" class="form-control" name="password" id="exampleInputPassword2" placeholder="Enter password">
           			</div>
-          			<div class="col-sm-offset-8 col-sm-10">
-              			<button type="submit" class="btn btn-success" ><spring:message code="header.signin"/></button>
-          			</div>
-        		</form>
       		</div>
 
       		<div class="modal-footer">
-        		<button type="button" class="btn btn-default" data-dismiss="modal"><spring:message code="header.cancel"/></button>
+      			<button type="submit" class="btn btn-success btn-sm" ><spring:message code="header.signin"/></button>
+        		<button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><spring:message code="header.cancel"/></button>
       		</div>
+        		</form>
       		
     	</div>
   	</div>

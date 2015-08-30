@@ -1,6 +1,5 @@
 package com.expositds.sjc.servicestation.app;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -23,7 +22,9 @@ import com.expositds.sjc.servicestation.domain.service.Accountant;
 import com.expositds.sjc.servicestation.domain.service.Identification;
 
 /**
- * <b>CustomerOrdersController</b>
+ * <b>AffiliatesController</b>
+ * Контроллер отвечает за отображение информации об арендной плате филиалов конкретной станции
+ * и обрабатывает формы для изменения арендной платы конекретного филиала
  * 
  * @author Sergey Rybakov
  * @author Alexey Suslov
@@ -71,7 +72,7 @@ public class AffiliatesController {
 		@RequestMapping(value = {"/accountant/affiliates", "/ceo/affiliates"}, method = RequestMethod.POST)
 		public ModelAndView changeRent(Authentication auth,
 				@RequestParam(value="affiliateId") Affilate affiliate,
-				@RequestParam Integer newrent) {
+				Integer newrent) {
 			
 			Calendar now = new GregorianCalendar();
 			Calendar nowDate = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));

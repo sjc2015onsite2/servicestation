@@ -23,7 +23,7 @@ import com.expositds.sjc.servicestation.domain.service.ServiceStation;
  * Реализует интерфейс NonAuthorizedUserSite.
  * 
  * @author Alexey Suslov
- *
+ * @author Rybakov Sergey
  */
 @Service
 @Transactional
@@ -74,6 +74,7 @@ public class NonAuthorizedUserSiteImpl extends SiteUserImpl implements NonAuthor
 		SiteUserEntity siteUserEntity = new SiteUserEntity(siteUser.getName(), siteUser.getRole());
 		siteUserEntity.setLogin(siteUser.getLogin());
 		siteUserEntity.setPassword(siteUser.getPassword());
+		siteUserEntity.setRole(siteUser.getRole());
 		siteUserDao.save(siteUserEntity);
 	}
 	
