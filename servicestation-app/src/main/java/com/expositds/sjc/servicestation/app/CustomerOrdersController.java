@@ -14,8 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.expositds.sjc.servicestation.business.repository.dto.CustomerOrderDto;
 import com.expositds.sjc.servicestation.business.repository.dto.StationsDto;
-import com.expositds.sjc.servicestation.business.service.dto.builders.CustomerOrderDtoBuilder;
-import com.expositds.sjc.servicestation.business.service.dto.builders.StationsDtoBuilder;
+import com.expositds.sjc.servicestation.business.service.DtosBuilder;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.SiteUser;
@@ -44,10 +43,7 @@ public class CustomerOrdersController {
 	private Identification identificationService;
 	
 	@Autowired
-	private CustomerOrderDtoBuilder customerOrderDtoBuilder;
-	
-	@Autowired
-	private StationsDtoBuilder stationsDtoBuilder;
+	private DtosBuilder dtosBuilder;
 	
 		@RequestMapping(value = "/myorders", method = RequestMethod.GET)
 		public ModelAndView myorders(
@@ -67,7 +63,7 @@ public class CustomerOrdersController {
 			String[][] allOrders = new String[orders.size()][8];
 			int i = 0;
 			for(Order currentOrder : orders.keySet()){
-				CustomerOrderDto customerOrderDto = customerOrderDtoBuilder.build(currentOrder);
+				CustomerOrderDto customerOrderDto = dtosBuilder.build(currentOrder);
 				allOrders[i][0] = customerOrderDto.getProblemDescription();
 				allOrders[i][1] = customerOrderDto.getOrderStatus();
 				allOrders[i][2] = customerOrderDto.getStationName();
@@ -108,8 +104,8 @@ public class CustomerOrdersController {
 				}
 			}
 			
-			StationsDto stationsDto = stationsDtoBuilder.build();
-			CustomerOrderDto customerOrderDto = customerOrderDtoBuilder.build(order);
+			StationsDto stationsDto = dtosBuilder.build();
+			CustomerOrderDto customerOrderDto = dtosBuilder.build(order);
 			
 			String[][] services = new String[customerOrderDto.getServiceNames().size()][3];
 			for(int i = 0; i < customerOrderDto.getServiceNames().size(); i++){

@@ -19,8 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.expositds.sjc.servicestation.business.repository.dto.CustomerOrderDto;
 import com.expositds.sjc.servicestation.business.repository.dto.StationsDto;
-import com.expositds.sjc.servicestation.business.service.dto.builders.CustomerOrderDtoBuilder;
-import com.expositds.sjc.servicestation.business.service.dto.builders.StationsDtoBuilder;
+import com.expositds.sjc.servicestation.business.service.DtosBuilder;
 import com.expositds.sjc.servicestation.domain.exception.PartLimitException;
 import com.expositds.sjc.servicestation.domain.model.Affilate;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
@@ -55,10 +54,10 @@ public class MechanicOrdersController {
 	private AuthorizedUserSite authorizedUserSiteService;
 	
 	@Autowired
-	private CustomerOrderDtoBuilder customerOrderDtoBuilder;
+	private DtosBuilder customerOrderDtoBuilder;
 
 	@Autowired
-	private StationsDtoBuilder stationsDtoBuilder;
+	private DtosBuilder dtosBuilder;
 	
 	@Autowired
 	private Mechanic mechanicService;
@@ -108,7 +107,7 @@ public class MechanicOrdersController {
 	@RequestMapping(value = "/myorders/{orderId}", method = RequestMethod.GET)
 	public ModelAndView freeOrder(@PathVariable("orderId") Order order){
 		
-		StationsDto stationsDto = stationsDtoBuilder.build();
+		StationsDto stationsDto = dtosBuilder.build();
 		CustomerOrderDto customerOrderDto = customerOrderDtoBuilder.build(order);
 		
 		Person mechanic = identificationService.getMechanicByOrder(order);

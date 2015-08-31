@@ -7,8 +7,6 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -17,12 +15,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  *
  */
 @Entity
-@NamedNativeQueries({
-	@NamedNativeQuery(
-		name = "callCustomerOrderDtoProc", 
-		query = "call customer_order_dto(:orderId)",
-		resultClass = CustomerOrderDto.class)})
-	public class CustomerOrderDto {
+public class CustomerOrderDto {
 	
 	@Id
 	@Column(name = "orders.order_id")

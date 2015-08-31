@@ -23,6 +23,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.expositds.sjc.servicestation.business.repository.dto.CustomerOrderDto;
+import com.expositds.sjc.servicestation.business.repository.dto.MechanicNotificationDto;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 
 /**
@@ -36,8 +38,15 @@ import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 	@NamedNativeQuery(
 		name = "callGetSiteUserOrdersProc",
 		query = "call get_site_user_orders(:siteUserId, :first, :size)",
-		resultClass = OrderEntity.class
-	)
+		resultClass = OrderEntity.class),
+	@NamedNativeQuery(
+		name = "callCustomerOrderDtoProc", 
+		query = "call customer_order_dto(:orderId)",
+		resultClass = CustomerOrderDto.class),
+	@NamedNativeQuery(
+		name = "callGetNotificationsByMechanicIdProc", 
+		query = "call get_notifications_by_mechanic_id(:personId)",
+		resultClass = MechanicNotificationDto.class)
 })
 public class OrderEntity {
 	

@@ -3,6 +3,7 @@ package com.expositds.sjc.servicestation.app;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.expositds.sjc.servicestation.business.repository.dto.CustomerOrderDto;
+import com.expositds.sjc.servicestation.business.repository.dto.MechanicNotificationDto;
+import com.expositds.sjc.servicestation.business.service.DtosBuilder;
 import com.expositds.sjc.servicestation.business.service.dto.NotificationDto;
-import com.expositds.sjc.servicestation.business.service.dto.builders.CustomerOrderDtoBuilder;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Person;
@@ -38,30 +40,23 @@ import com.expositds.sjc.servicestation.domain.service.Mechanic;
 public class NotificationsLogController {
 	
 	@Autowired
-	private Mechanic mechanicService;
-	
-	@Autowired
 	private Identification identificationService;
 	
 	@Autowired
 	private Ceo ceoService;
 	
 	@Autowired
-	private CustomerOrderDtoBuilder customerOrderDtoBuilder;
+	private DtosBuilder dtosBuilder;
 	
 	@RequestMapping(value = "/mechanic/notificationslog", method = RequestMethod.GET)
 	public ModelAndView showNotificationsLog(Authentication auth) {
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
 		Person mechanic = identificationService.getPersonById(logginer.getId().toString());
 		
-		Set <Order> orders =  new HashSet<>();
-		orders = mechanicService.getMechanicOrders(mechanic);
 		
-		Set<NotificationDto> notificationsDto = new HashSet<>();
-		for(Order currentorder : orders){
-			if(currentorder.getNotification() != null)
-				notificationsDto.add(new NotificationDto(customerOrderDtoBuilder.build(currentorder)));
-		}
+		
+		List<MechanicNotificationDto> notificationsDto = dtosBuilder.build(mechanic);
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("notificationsDto", notificationsDto);
@@ -87,7 +82,7 @@ public class NotificationsLogController {
 		Set<NotificationDto> notificationsDto = new HashSet<>();
 		for(Order currentorder : orders){
 			if(currentorder.getNotification() != null)
-				notificationsDto.add(new NotificationDto(customerOrderDtoBuilder.build(currentorder)));
+				notificationsDto.add(new NotificationDto(dtosBuilder.build(currentorder)));
 		}
 		
 		ModelAndView mav = new ModelAndView();

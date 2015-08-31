@@ -1,4 +1,4 @@
-package com.expositds.sjc.servicestation.business.service;
+package com.expositds.sjc.servicestation.business.service.impl;
 
 import java.io.Serializable;
 
