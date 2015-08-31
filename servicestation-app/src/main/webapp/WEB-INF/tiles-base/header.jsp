@@ -91,7 +91,7 @@
           	<security:authorize access="isAnonymous()">
             	<form class="navbar-form navbar-right"> 
             		<button name="submit" type="submit" class="btn btn-success" data-toggle ="modal" data-target="#authorization-modal">Sign in</button>
-            		<a href="<c:url value="/newcustomer" />" ><button type="button" class="btn btn-info">Sing up</button></a>
+            		<a href="<c:url value="/newcustomer"/>"><button type="button" class="btn btn-info">Sing up</button></a>
             	</form>
             </security:authorize>   
             
@@ -123,43 +123,6 @@
         
     </div>
 </nav>
-
-<!-- Registration-modal  
-
-<div class="modal fade" id="registration-modal">
-	<div class="modal-dialog modal-sm">
-    	<div class="modal-content col-sm-offset-4 col-sm-6">
-    	
-        	<div class="modal-header">
-        		<button class="close" type="button" data-dismiss="modal">&times;</button>
-        		<h4 class="modal-title">Registration</h4>
-      		</div>
-			<form:form class="form-horizontal" action="newcustomer" comandName="siteUser" method="POST" role="form">
-	      		<div class="modal-body">
-	          		<div class="form-group has-feedback">
-	                	<input type="text" class="form-control" name="name" placeholder="Enter user name">
-	                	<sf:errors name="name" cssClass="error"/>
-	          		</div>
-	          		<div class="form-group has-feedback">
-	               		<input type="text" class="form-control" name="login" placeholder="Enter login">
-	                	<sf:errors name="login" cssClass="error"/>
-	          		</div>
-	          		<div class="form-group has-feedback">
-	               		<input type="password" class="form-control" name="password" placeholder="Enter password">
-	                	<sf:errors name="password" cssClass="error"/>
-	          		</div>
-	          		<div class="form-group has-feedback">
-	                	<input type="password" class="form-control" placeholder="Repeat password">
-	          		</div>
-	      		</div>
-      		<div class="modal-footer">
-        		<button type="submit" class="btn btn-info" >Sing up</button>
-      		</div>
-      		</form:form>
-      		
-    	</div>
-  	</div>
-</div-->
 
 <!-- Authorization-modal  -->
 

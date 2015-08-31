@@ -11,6 +11,7 @@
 		<put-attribute name="footer" value="/WEB-INF/tiles-base/footer.jsp" />
 	</definition>
 	
+	
 	<definition name="base.error" template="/WEB-INF/views/error.jsp">
 		<put-attribute name="layout" value="/WEB-INF/tiles-base/layout.jsp"/>
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
@@ -141,6 +142,11 @@
 	<definition name="mechanics.comments" extends="base.definition">
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/mechanics.comments.jsp" />
+	</definition>
+	
+	<definition name="Authorization" extends="base.definition">
+		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/customer/Authorization.jsp" />
 	</definition>
 	
 	<definition name="registration" extends="base.definition">

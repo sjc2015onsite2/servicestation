@@ -21,7 +21,10 @@ public class Logginer {
 	 * Имя залогинивающегося.
 	 */
 	@NotNull
-	@Pattern(regexp = "[a-zA-Zа-яА-Я]*")
+	@Pattern(regexp = "[a-zA-Zа-яА-Я ]*",
+	message="Username must be alphabetic.")
+	@Size(min=5, max=15,
+	message="Name must be at least 2 characters long.")
 	private String name;
 	
 	/**
@@ -29,17 +32,19 @@ public class Logginer {
 	 */
 	@NotNull
 	@Pattern(regexp = "[a-zA-Z0-9]*",
-			message="Username must be alphanumeric with no spaces.")
-	@Size(min=5, max=15,
-			message="Name must be between 5 and 15 characters long.")
+	message="Username must be alphanumeric with no spaces.")
+	@Size(min=5,
+	message="Login must be at least 6 characters long.")
 	private String login;
 	
 	/**
 	 * Пароль залогинивающегося.
 	 */
 	@NotNull
-	@Size(min=5, max=15,
-		message="The password must be at least 6 characters long.")
+	@Pattern(regexp = "[a-zA-Z0-9]*",
+	message="Username must be alphanumeric with no spaces.")
+	@Size(min=5,
+	message="The password must be at least 6 characters long.")
 	private String password;
 	
 	/**

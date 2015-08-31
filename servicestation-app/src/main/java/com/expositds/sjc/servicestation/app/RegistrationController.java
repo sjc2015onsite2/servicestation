@@ -29,8 +29,15 @@ public class RegistrationController {
 	private NonAuthorizedUserSite nonAuthorizedUserSiteImpl;
 	
 	@RequestMapping(value = "/newcustomer", method = RequestMethod.GET)
-	public String registration() {
+	public String registration(Model model) {
 		
+		SiteUser defaultSiteUser = new SiteUser();
+		//defaultSiteUser.setId(0L);
+		defaultSiteUser.setName("Enter name");
+		defaultSiteUser.setLogin("Enter login");
+		defaultSiteUser.setPassword("123456");
+		
+		model.addAttribute("siteUser", defaultSiteUser);
 		return "registration";
 	}
 	
@@ -39,15 +46,15 @@ public class RegistrationController {
 			@Valid @ModelAttribute SiteUser siteUser, 
 			BindingResult result, Model model) {
 		
-		RegistrationValidator registrationValidator = new RegistrationValidator();
-		registrationValidator.validate(siteUser, result);
+		//RegistrationValidator registrationValidator = new RegistrationValidator();
+		// registrationValidator.validate(siteUser, result);
 		
 		siteUser.setRole(LogginerRole.USER);
 		
-		String view = "redirect:/user/myorders";
+		String view = "Authorization";
 		
 		if (result.hasErrors()) {
-			view = "base.error";
+			view = "redirect:/authorization";
 		} else {
 			if (siteUser != null) {
 				nonAuthorizedUserSiteImpl.saveSiteUser(siteUser);
