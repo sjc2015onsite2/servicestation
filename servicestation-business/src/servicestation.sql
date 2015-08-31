@@ -138,7 +138,7 @@ CREATE TABLE `affilate_orders_persons` (
 
 LOCK TABLES `affilate_orders_persons` WRITE;
 /*!40000 ALTER TABLE `affilate_orders_persons` DISABLE KEYS */;
-INSERT INTO `affilate_orders_persons` VALUES (3,39,4),(3,40,4),(3,41,4),(2,43,1),(2,45,1),(2,46,1);
+INSERT INTO `affilate_orders_persons` VALUES (3,39,4),(3,40,4),(3,41,4),(2,43,1),(2,45,1),(2,46,1),(2,47,1),(3,51,4);
 /*!40000 ALTER TABLE `affilate_orders_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -448,7 +448,7 @@ CREATE TABLE `orders` (
   `order_contact_data` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`order_id`),
   UNIQUE KEY `order_id_UNIQUE` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -457,7 +457,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'NEW','2015-08-18',NULL,'Сильная вибрация при скорости больше 80 км//ч',NULL,NULL,NULL),(38,'NEW','2015-08-18',NULL,'Всё время открывается капот. Невозможно ехать.',NULL,NULL,NULL),(39,'ACCEPTED','2015-08-18','2015-08-25','Муравьи в салоне',3,NULL,NULL),(40,'ACCEPTED','2015-08-22','2015-08-25','Бора плохо тянет',NULL,NULL,NULL),(41,'ACCEPTED','2015-08-19',NULL,'Сломалась труба',NULL,NULL,NULL),(42,'NEW','2015-08-19',NULL,'поломка тачки',NULL,NULL,NULL),(43,'READY','2015-08-19','2015-08-25','Коробка предач заедает. колёса отваливаются. крыша сетает. стёклы дребезжат. вонает в салоне. фары отвалились. поцарапанная и не ездит.',2,NULL,NULL),(44,'NEW','2015-08-24',NULL,'Проблема с колесом',NULL,NULL,'(29) 884 21 43'),(45,'ACCEPTED','2015-08-24','2015-08-25','Проблема',4,NULL,'435435435'),(46,'ACCEPTED','2015-08-24',NULL,'северная проблема',NULL,NULL,NULL),(47,'NEW','2015-08-28',NULL,'Автомобиль не заводится. Щелкает что-то под капотом.',NULL,NULL,NULL),(48,'NEW','2015-08-28',NULL,'Дворники не работают. Стоп сигнал не горит.',NULL,NULL,NULL),(49,'NEW','2015-08-28',NULL,'Отвалился бампер после удара о столб',NULL,NULL,NULL),(50,'NEW','2015-08-28',NULL,'Сигнализация заблокировала автомобиль. Невозможно попасть внурь.',NULL,NULL,NULL);
+INSERT INTO `orders` VALUES (1,'NEW','2015-08-18',NULL,'Сильная вибрация при скорости больше 80 км//ч',NULL,NULL,NULL),(38,'NEW','2015-08-18',NULL,'Всё время открывается капот. Невозможно ехать.',NULL,NULL,NULL),(39,'ACCEPTED','2015-08-18','2015-08-25','Муравьи в салоне',3,NULL,NULL),(40,'ACCEPTED','2015-08-22','2015-08-25','Бора плохо тянет',NULL,NULL,NULL),(41,'ACCEPTED','2015-08-19',NULL,'Сломалась труба',NULL,NULL,NULL),(42,'NEW','2015-08-19',NULL,'поломка тачки',NULL,NULL,NULL),(43,'READY','2015-08-19','2015-08-25','Коробка предач заедает. колёса отваливаются. крыша сетает. стёклы дребезжат. вонает в салоне. фары отвалились. поцарапанная и не ездит.',2,NULL,NULL),(44,'NEW','2015-08-24',NULL,'Проблема с колесом',NULL,NULL,'(29) 884 21 43'),(45,'ACCEPTED','2015-08-24','2015-08-25','Проблема',4,NULL,'435435435'),(46,'ACCEPTED','2015-08-24',NULL,'северная проблема',NULL,NULL,NULL),(47,'ACCEPTED','2015-08-28',NULL,'Автомобиль не заводится. Щелкает что-то под капотом.',NULL,NULL,NULL),(48,'NEW','2015-08-28',NULL,'Дворники не работают. Стоп сигнал не горит.',NULL,NULL,NULL),(49,'NEW','2015-08-28',NULL,'Отвалился бампер после удара о столб',NULL,NULL,NULL),(50,'NEW','2015-08-28',NULL,'Сигнализация заблокировала автомобиль. Невозможно попасть внурь.',NULL,NULL,NULL),(51,'PENDING','2015-08-29',NULL,'Сильно пахнет бензином в салоне.',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -575,7 +575,7 @@ CREATE TABLE `person_has_dates_salarys` (
   `person_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `salary` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`person_id`)
+  PRIMARY KEY (`person_id`,`date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -660,7 +660,7 @@ CREATE TABLE `site_aggregator_has_orders_stations` (
 
 LOCK TABLES `site_aggregator_has_orders_stations` WRITE;
 /*!40000 ALTER TABLE `site_aggregator_has_orders_stations` DISABLE KEYS */;
-INSERT INTO `site_aggregator_has_orders_stations` VALUES (1,1,3),(1,38,4),(1,39,2),(1,40,2),(1,41,2),(1,42,4),(1,43,1),(1,44,2),(1,45,1),(1,46,1),(1,47,1),(1,48,2),(1,49,1),(1,50,1);
+INSERT INTO `site_aggregator_has_orders_stations` VALUES (1,1,3),(1,38,4),(1,39,2),(1,40,2),(1,41,2),(1,42,4),(1,43,1),(1,44,2),(1,45,1),(1,46,1),(1,47,1),(1,48,2),(1,49,1),(1,50,1),(1,51,2);
 /*!40000 ALTER TABLE `site_aggregator_has_orders_stations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -797,7 +797,7 @@ CREATE TABLE `site_user_has_orders_stations` (
 
 LOCK TABLES `site_user_has_orders_stations` WRITE;
 /*!40000 ALTER TABLE `site_user_has_orders_stations` DISABLE KEYS */;
-INSERT INTO `site_user_has_orders_stations` VALUES (2,1,3),(2,38,4),(2,39,2),(3,40,2),(2,41,2),(2,42,4),(2,43,1),(2,46,1),(7,47,1),(7,48,2),(3,49,1),(3,50,1);
+INSERT INTO `site_user_has_orders_stations` VALUES (2,1,3),(2,38,4),(2,39,2),(3,40,2),(2,41,2),(2,42,4),(2,43,1),(2,46,1),(7,47,1),(7,48,2),(3,49,1),(3,50,1),(2,51,2);
 /*!40000 ALTER TABLE `site_user_has_orders_stations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -871,7 +871,7 @@ CREATE TABLE `station_has_orders_affilates` (
 
 LOCK TABLES `station_has_orders_affilates` WRITE;
 /*!40000 ALTER TABLE `station_has_orders_affilates` DISABLE KEYS */;
-INSERT INTO `station_has_orders_affilates` VALUES (3,1,1),(4,38,1),(2,39,3),(2,40,3),(2,41,3),(4,42,1),(1,43,2),(2,44,1),(1,45,2),(1,46,2),(1,47,1),(2,48,1),(1,49,1),(1,50,1);
+INSERT INTO `station_has_orders_affilates` VALUES (3,1,1),(4,38,1),(2,39,3),(2,40,3),(2,41,3),(4,42,1),(1,43,2),(2,44,1),(1,45,2),(1,46,2),(1,47,2),(2,48,1),(1,49,1),(1,50,1),(2,51,3);
 /*!40000 ALTER TABLE `station_has_orders_affilates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1083,7 +1083,55 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_affilate_by_part_order_id`(in partorderid int)
 BEGIN
-	select * from affilates where affilate_id IN (select affilate_id from affilate_has_part_orders_persons where part_order_id = partorderid);
+	select 
+		affilate_id,
+        person_affilate_id
+	from 
+		affilates 
+	where 
+		affilate_id IN 
+			(select 
+				affilate_id 
+			from 
+				affilate_has_part_orders_persons 
+			where 
+				part_order_id = partorderid);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `get_notifications_by_mechanic_id` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_notifications_by_mechanic_id`(IN mechanicid int)
+BEGIN
+  SELECT
+   orders.order_id,
+    client_notifications.client_notification
+ FROM
+  orders
+   LEFT JOIN
+    client_notifications
+     USING (client_notification_id)
+ WHERE
+  orders.order_id IN
+   (SELECT
+    order_id
+   FROM
+    affilate_orders_persons
+   WHERE
+    person_id = mechanicid)
+   AND
+    client_notification_id IS NOT NULL;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1103,7 +1151,28 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_site_user_orders`(in siteuserid int, in startorder int, in countorder int)
 BEGIN
 
-   	select * from orders where order_id IN (select order_id from site_user_has_orders_stations where site_user_id = siteuserid) limit startorder, countorder;
+   	select 
+		order_id,
+        order_status,
+        order_create_date,
+        order_compleate_date,
+        order_problem_description,
+        client_notification_id,
+        client_order_id,
+        order_contact_data
+	from 
+		orders 
+	where 
+		order_id IN 
+			(select 
+				order_id 
+			from 
+				site_user_has_orders_stations 
+			where 
+				site_user_id = siteuserid) 
+					limit 
+						startorder, 
+                        countorder;
     
     
 END ;;
@@ -1149,7 +1218,19 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_station_by_order_id`(in orderid int)
 BEGIN
 
-	select * from stations where station_id IN (select station_id from site_aggregator_has_orders_stations where order_id = orderid);
+	select 
+		station_id,
+        station_name
+	from 
+		stations 
+	where 
+		station_id IN 
+			(select 
+				station_id 
+			from 
+				site_aggregator_has_orders_stations 
+			where 
+				order_id = orderid);
 
 END ;;
 DELIMITER ;
@@ -1221,4 +1302,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-29 15:24:27
+-- Dump completed on 2015-08-31 21:17:17
