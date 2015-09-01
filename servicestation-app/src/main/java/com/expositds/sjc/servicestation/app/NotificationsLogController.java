@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.expositds.sjc.servicestation.business.repository.dto.CeoNotificationDto;
 import com.expositds.sjc.servicestation.business.repository.dto.CustomerOrderDto;
 import com.expositds.sjc.servicestation.business.repository.dto.MechanicNotificationDto;
 import com.expositds.sjc.servicestation.business.service.DtosBuilder;
-import com.expositds.sjc.servicestation.business.service.dto.NotificationDto;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Person;
@@ -55,7 +55,7 @@ public class NotificationsLogController {
 		
 		
 		
-		List<MechanicNotificationDto> notificationsDto = dtosBuilder.build(mechanic);
+		List<MechanicNotificationDto> notificationsDto = dtosBuilder.buildMechanicNotificationDto(mechanic);
 		
 		
 		ModelAndView mav = new ModelAndView();
@@ -70,20 +70,10 @@ public class NotificationsLogController {
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
 		Person ceo = identificationService.getPersonById(logginer.getId().toString());
 		
-		Station station = identificationService.getStationByPerson(ceo);
 		
-		Calendar now = new GregorianCalendar();
-		Calendar startDate = new GregorianCalendar(2000, 1, 1);
-		Calendar nowDate = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
 		
-		Set <Order> orders =  new HashSet<>();
-		orders.addAll(ceoService.getServiceStationOrders(station, startDate, nowDate));
+		List<CeoNotificationDto> notificationsDto = dtosBuilder.buildCeoNotificationDto(ceo);
 		
-		Set<NotificationDto> notificationsDto = new HashSet<>();
-		for(Order currentorder : orders){
-			if(currentorder.getNotification() != null)
-				notificationsDto.add(new NotificationDto(dtosBuilder.build(currentorder)));
-		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("notificationsDto", notificationsDto);

@@ -16,11 +16,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyJoinColumn;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.expositds.sjc.servicestation.business.repository.dto.PartOrderDto;
 import com.expositds.sjc.servicestation.domain.model.PartOrderStatus;
 
 /**
@@ -30,6 +33,11 @@ import com.expositds.sjc.servicestation.domain.model.PartOrderStatus;
  */
 @Entity
 @Table(name = "part_orders")
+@NamedNativeQueries({
+	@NamedNativeQuery(
+		name = "callPartOrderDtoProc",
+		query = "call part_order_dto(:partOrderId)",
+		resultClass = PartOrderDto.class)})
 public class PartOrderEntity {
 	
 	/**

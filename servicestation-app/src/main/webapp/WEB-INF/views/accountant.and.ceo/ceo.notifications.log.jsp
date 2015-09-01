@@ -12,7 +12,7 @@
         <c:forEach var="notification" items="${notificationsDto}">
 		    <tr class="warning">
 			    <td>Order ${notification.orderId}</td>
-			    <td>${notification.machanicName}</td>
+			    <td>${notification.mechanicName}</td>
 			    <td>${notification.message}</td>
 		    </tr>
         </c:forEach>

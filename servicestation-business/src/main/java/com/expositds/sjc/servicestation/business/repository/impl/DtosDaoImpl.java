@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.expositds.sjc.servicestation.business.repository.dao.DtosDao;
+import com.expositds.sjc.servicestation.business.repository.dto.CeoNotificationDto;
 import com.expositds.sjc.servicestation.business.repository.dto.CustomerOrderDto;
 import com.expositds.sjc.servicestation.business.repository.dto.MechanicNotificationDto;
+import com.expositds.sjc.servicestation.business.repository.dto.PartOrderDto;
 import com.expositds.sjc.servicestation.business.repository.dto.StationsDto;
 
 /**
@@ -46,6 +48,23 @@ public class DtosDaoImpl implements DtosDao {
 				 .getNamedQuery("callGetNotificationsByMechanicIdProc")
 			     .setParameter("personId", id)
 		         .list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CeoNotificationDto> getCeoNotificationDto(Long id) {
+		return getSession()
+				 .getNamedQuery("callGetNotificationsByCeoIdProc")
+			     .setParameter("personId", id)
+		         .list();
+	}
+
+	@Override
+	public PartOrderDto getPartOrderDto(Long id) {
+		return (PartOrderDto) getSession()
+				 .getNamedQuery("callPartOrderDtoProc")
+			     .setParameter("partOrderId", id)
+		         .uniqueResult();
 	}
 
 }

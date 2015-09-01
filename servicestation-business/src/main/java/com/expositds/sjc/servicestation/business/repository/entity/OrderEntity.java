@@ -23,6 +23,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.expositds.sjc.servicestation.business.repository.dto.CeoNotificationDto;
 import com.expositds.sjc.servicestation.business.repository.dto.CustomerOrderDto;
 import com.expositds.sjc.servicestation.business.repository.dto.MechanicNotificationDto;
 import com.expositds.sjc.servicestation.domain.model.OrderStatus;
@@ -46,7 +47,11 @@ import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 	@NamedNativeQuery(
 		name = "callGetNotificationsByMechanicIdProc", 
 		query = "call get_notifications_by_mechanic_id(:personId)",
-		resultClass = MechanicNotificationDto.class)
+		resultClass = MechanicNotificationDto.class),
+	@NamedNativeQuery(
+		name = "callGetNotificationsByCeoIdProc", 
+		query = "call get_notifications_by_ceo_id(:personId)",
+		resultClass = CeoNotificationDto.class)		
 })
 public class OrderEntity {
 	

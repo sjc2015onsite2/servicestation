@@ -16,7 +16,8 @@ import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.PartOrder;
 import com.expositds.sjc.servicestation.domain.model.PartOrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Person;
-import com.expositds.sjc.servicestation.business.service.dto.PartOrderDto;
+import com.expositds.sjc.servicestation.business.repository.dto.PartOrderDto;
+import com.expositds.sjc.servicestation.business.service.DtosBuilder;
 import com.expositds.sjc.servicestation.domain.model.Affilate; 
 import com.expositds.sjc.servicestation.domain.service.Identification;
 import com.expositds.sjc.servicestation.domain.service.Mechanic;
@@ -40,6 +41,9 @@ public class OrdersOfPartsControler {
 	@Autowired
 	private Mechanic mechanicService;
 	
+	@Autowired
+	private DtosBuilder dtosBuilder;
+	
 	@RequestMapping(value = "/partsorders", method = RequestMethod.GET)
 	public ModelAndView showListOfPartsOrders(Authentication auth) {
 		
@@ -53,7 +57,7 @@ public class OrdersOfPartsControler {
 		Set<PartOrderDto> partOrdersDto = new TreeSet<>();
 		
 		for (PartOrder currentorder : partsorders){
-			partOrdersDto.add(new PartOrderDto(currentorder));
+			partOrdersDto.add(dtosBuilder.build(currentorder));
 		}
 	
 		ModelAndView mav = new ModelAndView();
