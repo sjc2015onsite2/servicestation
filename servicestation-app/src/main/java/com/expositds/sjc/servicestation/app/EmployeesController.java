@@ -47,15 +47,18 @@ public class EmployeesController {
 			Set<Person> employees = new HashSet<>();
 			employees.addAll(accountantService.getServiceStationEmloyees(identificationService.getStationByPerson(accountant)));
 			
-			String[][] personsData = new String[employees.size()][4];
+			String[][] personsData = new String[employees.size()][5];
 			int i = 0;
 			Calendar now = new GregorianCalendar();
 			Calendar nowDate = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+			Calendar yesterDate = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+			yesterDate.add(Calendar.DAY_OF_MONTH, -1);
 			for(Person currentPerson : employees){
 				personsData[i][0] = currentPerson.getName();
 				personsData[i][1] = currentPerson.getRole().toString();
 				personsData[i][2] = accountantService.getEmployeeSalary(currentPerson, nowDate, nowDate).toString();
 				personsData[i][3] = currentPerson.getId().toString();
+				personsData[i][4] = accountantService.getEmployeeSalary(currentPerson, yesterDate, yesterDate).toString();
 				i++;
 			}
 			

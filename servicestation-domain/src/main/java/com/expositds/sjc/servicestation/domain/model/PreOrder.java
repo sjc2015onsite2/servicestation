@@ -19,11 +19,21 @@ public class PreOrder {
 	/**
 	 * Описание проблеммы, с которой клиент обратился в СТО.
 	 */
+	@NotNull
+	@Pattern(regexp = "[a-zA-Zа-яА-Я0-9 ]*",
+	message="problemDescription must be alphanumeric.")
+	@Size(min=5,
+	message="problemDescription must be at least 5 characters long.")
 	private String problemDescription;
 	
 	/**
 	 * Контактные данные незарегестрированного пользователя.
 	 */
+	@NotNull
+	@Pattern(regexp = "[0-9]*",
+	message="contactData must be numeric.")
+	@Size(min=9, max=9,
+	message="contactData must be 9 characters long.")
 	private String contactData;
 	
 	/**

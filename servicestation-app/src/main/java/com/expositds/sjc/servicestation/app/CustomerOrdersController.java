@@ -1,5 +1,7 @@
 package com.expositds.sjc.servicestation.app;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -101,9 +103,12 @@ public class CustomerOrdersController {
 		@RequestMapping(value = "/myorders/{orderId}", method = RequestMethod.GET)
 		public ModelAndView myorder(@PathVariable("orderId") Order order) {
 			
+			Calendar now = new GregorianCalendar();
+			Calendar nowDate = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+			
 			boolean change = false;
 			if(order.getCompleteDate() != null){
-				if(order.getCompleteDate().compareTo(order.getCreateDate()) < 0){
+				if(order.getCompleteDate().compareTo(nowDate) < 0){
 					change = true;
 				}
 			}

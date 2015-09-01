@@ -10,12 +10,14 @@
   		<tr>
 	  		<th width="35%">Name</th>
 	  		<th>Position</th>
-	  		<th>Salary (BYR)</th>
+	  		<th>Yesterday's salary (BYR)</th>
+	  		<th>Today's salary (BYR)</th>
   		</tr>
   		<c:forEach var="person" items="${personsData}">
   			<tr class="warning">
 	  			<td>${person[0]}</td>
 	  			<td>${person[1]}</td>
+	  			<td>${person[4]}</td>
 	  			<td>${person[2]}</td>
   			</tr>
   		</c:forEach>

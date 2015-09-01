@@ -144,6 +144,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/mechanics.comments.jsp" />
 	</definition>
 	
+	<definition name="marks" extends="base.definition">
+		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/accountant.and.ceo/marks.jsp" />
+	</definition>
+	
 	<definition name="Authorization" extends="base.definition">
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/customer/Authorization.jsp" />

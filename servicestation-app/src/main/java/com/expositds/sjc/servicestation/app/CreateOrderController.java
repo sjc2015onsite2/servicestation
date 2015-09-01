@@ -6,6 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;
+import com.expositds.sjc.servicestation.domain.model.PreOrder;
 import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.AuthorizedUserSite;
@@ -41,10 +43,10 @@ public class CreateOrderController {
 	private Identification identificationService;
 	
 	@RequestMapping(value = {"/createorder", "/"}, method = RequestMethod.GET)
-	public ModelAndView createOrder() {
+	public ModelAndView createOrder(Model model) {
 		
 		Set<Station> stations = authorizedUserSite.getServiceStations();
-				
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("stations",  stations);
 		mav.setViewName("createOrder");

@@ -84,6 +84,7 @@
                     	</ul>
                 	</li>
                 	<li><a href="<c:url value="/ceo/notificationslog" />" ><spring:message code="ceo.header.notifications"/></a></li>
+                	<li><a href="<c:url value="/ceo/marks" />" ><spring:message code="ceo.header.marks"/></a></li>
             	</security:authorize>
             	
           	</ul>  
