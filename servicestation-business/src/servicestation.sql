@@ -37,7 +37,7 @@ CREATE TABLE `affilate_has_part_orders_persons` (
 
 LOCK TABLES `affilate_has_part_orders_persons` WRITE;
 /*!40000 ALTER TABLE `affilate_has_part_orders_persons` DISABLE KEYS */;
-INSERT INTO `affilate_has_part_orders_persons` VALUES (2,1,1),(2,2,1),(2,3,1),(2,4,1),(2,5,1);
+INSERT INTO `affilate_has_part_orders_persons` VALUES (2,1,1),(2,2,1),(2,3,1),(2,4,1),(2,5,1),(2,6,8);
 /*!40000 ALTER TABLE `affilate_has_part_orders_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `affilate_has_parts_counts` (
 
 LOCK TABLES `affilate_has_parts_counts` WRITE;
 /*!40000 ALTER TABLE `affilate_has_parts_counts` DISABLE KEYS */;
-INSERT INTO `affilate_has_parts_counts` VALUES (2,1,437),(2,2,600);
+INSERT INTO `affilate_has_parts_counts` VALUES (2,1,437),(2,2,600),(2,3,15);
 /*!40000 ALTER TABLE `affilate_has_parts_counts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +87,7 @@ CREATE TABLE `affilate_has_persons` (
 
 LOCK TABLES `affilate_has_persons` WRITE;
 /*!40000 ALTER TABLE `affilate_has_persons` DISABLE KEYS */;
-INSERT INTO `affilate_has_persons` VALUES (2,1),(3,4);
+INSERT INTO `affilate_has_persons` VALUES (2,1),(3,4),(2,8);
 /*!40000 ALTER TABLE `affilate_has_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +138,7 @@ CREATE TABLE `affilate_orders_persons` (
 
 LOCK TABLES `affilate_orders_persons` WRITE;
 /*!40000 ALTER TABLE `affilate_orders_persons` DISABLE KEYS */;
-INSERT INTO `affilate_orders_persons` VALUES (3,39,4),(3,40,4),(3,41,4),(2,43,1),(2,45,1),(2,46,1);
+INSERT INTO `affilate_orders_persons` VALUES (3,39,4),(3,40,4),(3,41,4),(2,43,1),(2,45,1),(2,46,1),(2,50,8);
 /*!40000 ALTER TABLE `affilate_orders_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +228,7 @@ CREATE TABLE `client_notifications` (
   `client_notification` varchar(1024) NOT NULL,
   PRIMARY KEY (`client_notification_id`),
   UNIQUE KEY `client_notification_id_UNIQUE` (`client_notification_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,7 +237,7 @@ CREATE TABLE `client_notifications` (
 
 LOCK TABLES `client_notifications` WRITE;
 /*!40000 ALTER TABLE `client_notifications` DISABLE KEYS */;
-INSERT INTO `client_notifications` VALUES (1,'Выполнение заказа переносится на неопределённый срок. Ожидаем запчастей.'),(2,'уведомление'),(3,'notification'),(4,'уккуцаца');
+INSERT INTO `client_notifications` VALUES (1,'Выполнение заказа переносится на неопределённый срок. Ожидаем запчастей.'),(2,'уведомление'),(3,'notification'),(4,'уккуцаца'),(5,'Отправлен запрос на завод в Штутгард.');
 /*!40000 ALTER TABLE `client_notifications` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,7 +285,7 @@ CREATE TABLE `logginers` (
   PRIMARY KEY (`id`,`name`,`login`,`role`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +294,7 @@ CREATE TABLE `logginers` (
 
 LOCK TABLES `logginers` WRITE;
 /*!40000 ALTER TABLE `logginers` DISABLE KEYS */;
-INSERT INTO `logginers` VALUES (0,'NULL','NULL',';lsdfmsl;admflsamdclsakmfwasc klmwefmwlkm','MECHANIC'),(1,'Петрович','petrovich','petrovich','MECHANIC'),(2,'Петя','pit','pit','USER'),(3,'Боря','boris','boris','USER'),(4,'Иваныч','ivanych','ivanych','MECHANIC'),(5,'Зина','zina','zina','ACCOUNTANT'),(6,'Виктор Петрович','viktor','viktor','CEO'),(7,'Анатоль','tolik','tolik','USER');
+INSERT INTO `logginers` VALUES (0,'NULL','NULL',';lsdfmsl;admflsamdclsakmfwasc klmwefmwlkm','MECHANIC'),(1,'Петрович','petrovich','petrovich','MECHANIC'),(2,'Петя','pit','pit','USER'),(3,'Боря','boris','boris','USER'),(4,'Иваныч','ivanych','ivanych','MECHANIC'),(5,'Зина','zina','zina','ACCOUNTANT'),(6,'Виктор Петрович','viktor','viktor','CEO'),(7,'Анатоль','tolik','tolik','USER'),(8,'Ганс','gans','gans','MECHANIC');
 /*!40000 ALTER TABLE `logginers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,7 +362,7 @@ CREATE TABLE `mechanic_profiles` (
   `info` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`mechanic_profile_id`),
   UNIQUE KEY `mechanic_profile_id_UNIQUE` (`mechanic_profile_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -371,7 +371,7 @@ CREATE TABLE `mechanic_profiles` (
 
 LOCK TABLES `mechanic_profiles` WRITE;
 /*!40000 ALTER TABLE `mechanic_profiles` DISABLE KEYS */;
-INSERT INTO `mechanic_profiles` VALUES (1,'Грамотнй специалист с большим опытом работы'),(2,'Перспективный стажёр');
+INSERT INTO `mechanic_profiles` VALUES (1,'Грамотнй специалист с большим опытом работы'),(2,'Перспективный стажёр'),(3,'Механик прямо из Германии. Плохо говорит по-русски');
 /*!40000 ALTER TABLE `mechanic_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -457,7 +457,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'NEW','2015-08-18',NULL,'Сильная вибрация при скорости больше 80 км//ч',NULL,NULL,NULL),(38,'NEW','2015-08-18',NULL,'Всё время открывается капот. Невозможно ехать.',NULL,NULL,NULL),(39,'ACCEPTED','2015-08-18','2015-08-25','Муравьи в салоне',3,NULL,NULL),(40,'ACCEPTED','2015-08-22','2015-08-25','Бора плохо тянет',NULL,NULL,NULL),(41,'ACCEPTED','2015-08-19',NULL,'Сломалась труба',NULL,NULL,NULL),(42,'NEW','2015-08-19',NULL,'поломка тачки',NULL,NULL,NULL),(43,'READY','2015-08-19','2015-08-25','Коробка предач заедает. колёса отваливаются. крыша сетает. стёклы дребезжат. вонает в салоне. фары отвалились. поцарапанная и не ездит.',2,NULL,NULL),(44,'NEW','2015-08-24',NULL,'Проблема с колесом',NULL,NULL,'(29) 884 21 43'),(45,'ACCEPTED','2015-08-24','2015-08-25','Проблема',4,NULL,'435435435'),(46,'ACCEPTED','2015-08-24',NULL,'северная проблема',NULL,NULL,NULL),(47,'NEW','2015-08-28',NULL,'Автомобиль не заводится. Щелкает что-то под капотом.',NULL,NULL,NULL),(48,'NEW','2015-08-28',NULL,'Дворники не работают. Стоп сигнал не горит.',NULL,NULL,NULL),(49,'NEW','2015-08-28',NULL,'Отвалился бампер после удара о столб',NULL,NULL,NULL),(50,'NEW','2015-08-28',NULL,'Сигнализация заблокировала автомобиль. Невозможно попасть внурь.',NULL,NULL,NULL);
+INSERT INTO `orders` VALUES (1,'NEW','2015-08-18',NULL,'Сильная вибрация при скорости больше 80 км//ч',NULL,NULL,NULL),(38,'NEW','2015-08-18',NULL,'Всё время открывается капот. Невозможно ехать.',NULL,NULL,NULL),(39,'ACCEPTED','2015-08-18','2015-08-25','Муравьи в салоне',3,NULL,NULL),(40,'ACCEPTED','2015-08-22','2015-08-25','Бора плохо тянет',NULL,NULL,NULL),(41,'ACCEPTED','2015-08-19',NULL,'Сломалась труба',NULL,NULL,NULL),(42,'NEW','2015-08-19',NULL,'поломка тачки',NULL,NULL,NULL),(43,'READY','2015-08-19','2015-08-25','Коробка предач заедает. колёса отваливаются. крыша сетает. стёклы дребезжат. вонает в салоне. фары отвалились. поцарапанная и не ездит.',2,NULL,NULL),(44,'NEW','2015-08-24',NULL,'Проблема с колесом',NULL,NULL,'(29) 884 21 43'),(45,'ACCEPTED','2015-08-24','2015-08-25','Проблема',4,NULL,'435435435'),(46,'ACCEPTED','2015-08-24',NULL,'северная проблема',NULL,NULL,NULL),(47,'NEW','2015-08-28',NULL,'Автомобиль не заводится. Щелкает что-то под капотом.',NULL,NULL,NULL),(48,'NEW','2015-08-28',NULL,'Дворники не работают. Стоп сигнал не горит.',NULL,NULL,NULL),(49,'NEW','2015-08-28',NULL,'Отвалился бампер после удара о столб',NULL,NULL,NULL),(50,'ACCEPTED','2015-08-28',NULL,'Сигнализация заблокировала автомобиль. Невозможно попасть внурь.',5,NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -508,9 +508,23 @@ CREATE TABLE `part_order_has_parts_counts` (
 
 LOCK TABLES `part_order_has_parts_counts` WRITE;
 /*!40000 ALTER TABLE `part_order_has_parts_counts` DISABLE KEYS */;
-INSERT INTO `part_order_has_parts_counts` VALUES (1,1,2),(2,1,12),(3,1,200),(3,2,300),(4,1,22),(5,1,1);
+INSERT INTO `part_order_has_parts_counts` VALUES (1,1,2),(2,1,12),(3,1,200),(3,2,300),(4,1,22),(5,1,1),(6,3,234);
 /*!40000 ALTER TABLE `part_order_has_parts_counts` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `part_order_parts_counts`
+--
+
+DROP TABLE IF EXISTS `part_order_parts_counts`;
+/*!50001 DROP VIEW IF EXISTS `part_order_parts_counts`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `part_order_parts_counts` AS SELECT 
+ 1 AS `part_order_id`,
+ 1 AS `count`,
+ 1 AS `part_name`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `part_orders`
@@ -525,7 +539,7 @@ CREATE TABLE `part_orders` (
   `status` varchar(45) NOT NULL,
   `client_part_order_id` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`part_order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -534,7 +548,7 @@ CREATE TABLE `part_orders` (
 
 LOCK TABLES `part_orders` WRITE;
 /*!40000 ALTER TABLE `part_orders` DISABLE KEYS */;
-INSERT INTO `part_orders` VALUES (1,'2015-08-01','READY',NULL),(2,'2015-08-24','READY',NULL),(3,'2015-08-25','READY',NULL),(4,'2015-08-26','READY',NULL),(5,'2015-08-26','READY',NULL);
+INSERT INTO `part_orders` VALUES (1,'2015-08-01','READY',NULL),(2,'2015-08-24','READY',NULL),(3,'2015-08-25','READY',NULL),(4,'2015-08-26','READY',NULL),(5,'2015-08-26','READY',NULL),(6,'2015-09-01','PENDING',NULL);
 /*!40000 ALTER TABLE `part_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -551,7 +565,7 @@ CREATE TABLE `parts` (
   `part_name` varchar(45) NOT NULL,
   PRIMARY KEY (`part_id`),
   UNIQUE KEY `part_id_UNIQUE` (`part_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -560,7 +574,7 @@ CREATE TABLE `parts` (
 
 LOCK TABLES `parts` WRITE;
 /*!40000 ALTER TABLE `parts` DISABLE KEYS */;
-INSERT INTO `parts` VALUES (1,'TRW-76568','Тормозные колодки передние'),(2,'TRW-67904','Тормозные колодки задние');
+INSERT INTO `parts` VALUES (1,'TRW-76568','Тормозные колодки передние'),(2,'TRW-67904','Тормозные колодки задние'),(3,'Febi-3456','Тяга стабилизатора');
 /*!40000 ALTER TABLE `parts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -600,7 +614,7 @@ CREATE TABLE `persons` (
   `person_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`person_id`),
   UNIQUE KEY `person_id_UNIQUE` (`person_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -609,7 +623,7 @@ CREATE TABLE `persons` (
 
 LOCK TABLES `persons` WRITE;
 /*!40000 ALTER TABLE `persons` DISABLE KEYS */;
-INSERT INTO `persons` VALUES (1),(4),(5),(6);
+INSERT INTO `persons` VALUES (1),(4),(5),(6),(8);
 /*!40000 ALTER TABLE `persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -685,7 +699,7 @@ CREATE TABLE `site_aggregator_has_persons_mechanic_profiles` (
 
 LOCK TABLES `site_aggregator_has_persons_mechanic_profiles` WRITE;
 /*!40000 ALTER TABLE `site_aggregator_has_persons_mechanic_profiles` DISABLE KEYS */;
-INSERT INTO `site_aggregator_has_persons_mechanic_profiles` VALUES (1,1,1),(1,4,2);
+INSERT INTO `site_aggregator_has_persons_mechanic_profiles` VALUES (1,1,1),(1,4,2),(1,8,3);
 /*!40000 ALTER TABLE `site_aggregator_has_persons_mechanic_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -871,7 +885,7 @@ CREATE TABLE `station_has_orders_affilates` (
 
 LOCK TABLES `station_has_orders_affilates` WRITE;
 /*!40000 ALTER TABLE `station_has_orders_affilates` DISABLE KEYS */;
-INSERT INTO `station_has_orders_affilates` VALUES (3,1,1),(4,38,1),(2,39,3),(2,40,3),(2,41,3),(4,42,1),(1,43,2),(2,44,1),(1,45,2),(1,46,2),(1,47,1),(2,48,1),(1,49,1),(1,50,1);
+INSERT INTO `station_has_orders_affilates` VALUES (3,1,1),(4,38,1),(2,39,3),(2,40,3),(2,41,3),(4,42,1),(1,43,2),(2,44,1),(1,45,2),(1,46,2),(1,47,1),(2,48,1),(1,49,1),(1,50,2);
 /*!40000 ALTER TABLE `station_has_orders_affilates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -895,7 +909,7 @@ CREATE TABLE `station_persons` (
 
 LOCK TABLES `station_persons` WRITE;
 /*!40000 ALTER TABLE `station_persons` DISABLE KEYS */;
-INSERT INTO `station_persons` VALUES (1,1),(2,4),(1,5),(1,6);
+INSERT INTO `station_persons` VALUES (1,1),(2,4),(1,5),(1,6),(1,8);
 /*!40000 ALTER TABLE `station_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1090,6 +1104,142 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `get_mechanic_part_orders_dto` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_mechanic_part_orders_dto`(IN mechanicid INT(10))
+BEGIN
+
+ SELECT part_orders.part_order_id,
+     part_orders.date,
+     part_orders.status,
+  (part_orders.status = 'PENDING') AS canchange
+ FROM part_orders
+ WHERE part_orders.part_order_id in
+ 	(select part_order_id
+	from affilate_has_part_orders_persons
+	where person_id = mechanicid);
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `get_notifications_by_ceo_id` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_notifications_by_ceo_id`(IN ceoid INT(10))
+BEGIN
+
+ DECLARE stationid INT;
+
+ SELECT station_id
+   INTO stationid
+   FROM station_persons
+  WHERE station_persons.person_id = ceoid;
+
+
+ SELECT orders.order_id,
+        client_notifications.client_notification,
+		logginers.name
+    FROM orders
+ LEFT JOIN client_notifications
+     USING (client_notification_id)
+	 LEFT JOIN affilate_orders_persons 
+	 USING (order_id) 
+	 left join logginers
+	 on logginers.id = affilate_orders_persons.person_id
+	 
+	 
+	   
+   WHERE orders.order_id
+     IN (SELECT order_id
+        FROM station_has_orders_affilates
+       WHERE station_has_orders_affilates.station_id = stationid)
+   AND client_notifications.client_notification_id IS NOT NULL;
+ 
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `get_notifications_by_mechanic_id` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_notifications_by_mechanic_id`(IN mechanicid int)
+BEGIN
+  SELECT
+   orders.order_id,
+    client_notifications.client_notification
+ FROM
+  orders
+   LEFT JOIN
+    client_notifications
+     USING (client_notification_id)
+ WHERE
+  orders.order_id IN
+   (SELECT
+    order_id
+   FROM
+    affilate_orders_persons
+   WHERE
+    person_id = mechanicid)
+   AND
+    client_notification_id IS NOT NULL;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `get_parts_by_part_order_id` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_parts_by_part_order_id`(
+   IN partorderid   INT(10))
+BEGIN                                                                     
+
+	select parts.part_name, part_order_has_parts_counts.count
+	from part_order_has_parts_counts 
+	left join parts using (part_id)
+	where part_order_has_parts_counts.part_order_id = partorderid;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `get_site_user_orders` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1195,6 +1345,24 @@ DELIMITER ;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `part_order_parts_counts`
+--
+
+/*!50001 DROP VIEW IF EXISTS `part_order_parts_counts`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `part_order_parts_counts` AS select `part_order_has_parts_counts`.`part_order_id` AS `part_order_id`,`part_order_has_parts_counts`.`count` AS `count`,`parts`.`part_name` AS `part_name` from (`part_order_has_parts_counts` left join `parts` on((`parts`.`part_id` = `part_order_has_parts_counts`.`part_id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `site_aggregator_services_ids_names`
 --
 
@@ -1221,4 +1389,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-29 15:24:27
+-- Dump completed on 2015-09-02 12:15:52

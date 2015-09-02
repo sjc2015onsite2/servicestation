@@ -1,4 +1,4 @@
-package com.expositds.sjc.servicestation.business.service;
+package com.expositds.sjc.servicestation.business.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

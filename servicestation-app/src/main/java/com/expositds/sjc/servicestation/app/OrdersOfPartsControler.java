@@ -1,6 +1,7 @@
 package com.expositds.sjc.servicestation.app;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -16,7 +17,8 @@ import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.PartOrder;
 import com.expositds.sjc.servicestation.domain.model.PartOrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Person;
-import com.expositds.sjc.servicestation.business.service.dto.PartOrderDto;
+import com.expositds.sjc.servicestation.business.repository.dto.PartOrderDto;
+import com.expositds.sjc.servicestation.business.service.DtosBuilder;
 import com.expositds.sjc.servicestation.domain.model.Affilate; 
 import com.expositds.sjc.servicestation.domain.service.Identification;
 import com.expositds.sjc.servicestation.domain.service.Mechanic;
@@ -40,21 +42,18 @@ public class OrdersOfPartsControler {
 	@Autowired
 	private Mechanic mechanicService;
 	
+	@Autowired
+	private DtosBuilder dtosBuilder;
+	
 	@RequestMapping(value = "/partsorders", method = RequestMethod.GET)
 	public ModelAndView showListOfPartsOrders(Authentication auth) {
 		
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
 		Person mechanic = identificationService.getPersonById(logginer.getId().toString());
-		Affilate affiliate = identificationService.getAffilateByMechanic(mechanic);
 		
-		Set<PartOrder> partsorders = new HashSet<>();
-		partsorders = mechanicService.getPartOrders(affiliate);
 		
-		Set<PartOrderDto> partOrdersDto = new TreeSet<>();
+		List<PartOrderDto> partOrdersDto = dtosBuilder.build(mechanic);
 		
-		for (PartOrder currentorder : partsorders){
-			partOrdersDto.add(new PartOrderDto(currentorder));
-		}
 	
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("partOrdersDto", partOrdersDto);
