@@ -8,7 +8,6 @@ import com.expositds.sjc.servicestation.business.repository.dto.MechanicNotifica
 import com.expositds.sjc.servicestation.business.repository.dto.PartOrderDto;
 import com.expositds.sjc.servicestation.business.repository.dto.StationsDto;
 import com.expositds.sjc.servicestation.domain.model.Order;
-import com.expositds.sjc.servicestation.domain.model.PartOrder;
 import com.expositds.sjc.servicestation.domain.model.Person;
 
 /**
@@ -27,6 +26,6 @@ public interface DtosBuilder {
 	
 	public List<CeoNotificationDto> buildCeoNotificationDto(Person ceo);
 	
-	public PartOrderDto build(PartOrder partOrder);
+	public List<PartOrderDto> build(Person mechanic);
 	
 }

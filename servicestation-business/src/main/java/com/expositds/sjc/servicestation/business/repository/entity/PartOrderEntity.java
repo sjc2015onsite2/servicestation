@@ -35,8 +35,8 @@ import com.expositds.sjc.servicestation.domain.model.PartOrderStatus;
 @Table(name = "part_orders")
 @NamedNativeQueries({
 	@NamedNativeQuery(
-		name = "callPartOrderDtoProc",
-		query = "call part_order_dto(:partOrderId)",
+		name = "callGetMechanicPartOrdersDtoProc",
+		query = "call get_mechanic_part_orders_dto(:personId)",
 		resultClass = PartOrderDto.class)})
 public class PartOrderEntity {
 	

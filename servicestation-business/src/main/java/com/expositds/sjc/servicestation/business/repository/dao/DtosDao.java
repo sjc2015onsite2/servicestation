@@ -24,6 +24,6 @@ public interface DtosDao {
 	
 	public List<CeoNotificationDto> getCeoNotificationDto(Long id);
 	
-	public PartOrderDto getPartOrderDto(Long id);
+	public List<PartOrderDto> getPartOrderDto(Long id);
 	
 }

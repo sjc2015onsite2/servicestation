@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -15,6 +17,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "parts")
+@NamedNativeQueries({
+	@NamedNativeQuery(
+		name = "callGetPartsByPartOrderProc",
+		query = "call get_parts_by_part_order_id(:partOrderId)")})
 public class PartEntity {
 	
 	/**

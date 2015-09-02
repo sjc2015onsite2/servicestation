@@ -59,12 +59,22 @@ public class DtosDaoImpl implements DtosDao {
 		         .list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public PartOrderDto getPartOrderDto(Long id) {
-		return (PartOrderDto) getSession()
-				 .getNamedQuery("callPartOrderDtoProc")
-			     .setParameter("partOrderId", id)
-		         .uniqueResult();
+	public List<PartOrderDto> getPartOrderDto(Long id) {
+		List<PartOrderDto> result = getSession()
+									 .getNamedQuery("callGetMechanicPartOrdersDtoProc")
+								     .setParameter("personId", id)
+							         .list();
+		
+		for (PartOrderDto currentPartOrderDto : result) {
+			List<String[]> parts = getSession().getNamedQuery("callGetPartsByPartOrderProc")
+									.setParameter("partOrderId", currentPartOrderDto.getId())
+									.list();
+			currentPartOrderDto.setParts(parts);
+		}
+		
+		return result;
 	}
 
 }

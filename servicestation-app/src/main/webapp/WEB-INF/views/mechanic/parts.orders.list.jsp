@@ -19,7 +19,7 @@
 			        <td>
 			        	<ol>
 			        		<c:forEach var="part" items="${order.parts }">
-					    		<li>${part.key } (x)${part.value}</li>
+					    		<li>${part[0] } (x)${part[1]}</li>
 					    	</c:forEach>
 						</ol>
 			        </td>

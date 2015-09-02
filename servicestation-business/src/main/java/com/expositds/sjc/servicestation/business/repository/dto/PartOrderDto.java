@@ -1,14 +1,10 @@
 package com.expositds.sjc.servicestation.business.repository.dto;
 
 import java.util.List;
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import javax.persistence.Transient;
 
 /**
  * @author Alexey Suslov
@@ -21,21 +17,8 @@ public class PartOrderDto {
 	@Column(name = "part_order_id")
 	private Integer id;
 	
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@ElementCollection
-	@CollectionTable(
-			name = "part_order_parts_counts",
-			joinColumns = @JoinColumn(name = "part_order_id"))
-	@Column(name = "part_name")
-	private List<String> partNames;
-	
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@ElementCollection
-	@CollectionTable(
-			name = "part_order_parts_counts",
-			joinColumns = @JoinColumn(name = "part_order_id"))
-	@Column(name = "count")
-	private List<Integer> partCounts;
+	@Transient
+	private List<String[]> parts;
 	
 	@Column(name = "status")
 	private String status;
@@ -54,20 +37,12 @@ public class PartOrderDto {
 		this.id = id;
 	}
 
-	public List<String> getPartNames() {
-		return partNames;
+	public List<String[]> getParts() {
+		return parts;
 	}
 
-	public void setPartNames(List<String> partNames) {
-		this.partNames = partNames;
-	}
-
-	public List<Integer> getPartCounts() {
-		return partCounts;
-	}
-
-	public void setPartCounts(List<Integer> partCounts) {
-		this.partCounts = partCounts;
+	public void setParts(List<String[]> parts) {
+		this.parts = parts;
 	}
 
 	public String getStatus() {
@@ -93,8 +68,5 @@ public class PartOrderDto {
 	public void setChangeStatus(boolean changeStatus) {
 		this.changeStatus = changeStatus;
 	}
-
-	
-	
 
 }

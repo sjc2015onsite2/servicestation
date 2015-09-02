@@ -1,6 +1,7 @@
 package com.expositds.sjc.servicestation.app;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -49,16 +50,10 @@ public class OrdersOfPartsControler {
 		
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
 		Person mechanic = identificationService.getPersonById(logginer.getId().toString());
-		Affilate affiliate = identificationService.getAffilateByMechanic(mechanic);
 		
-		Set<PartOrder> partsorders = new HashSet<>();
-		partsorders = mechanicService.getPartOrders(affiliate);
 		
-		Set<PartOrderDto> partOrdersDto = new TreeSet<>();
+		List<PartOrderDto> partOrdersDto = dtosBuilder.build(mechanic);
 		
-		for (PartOrder currentorder : partsorders){
-			partOrdersDto.add(dtosBuilder.build(currentorder));
-		}
 	
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("partOrdersDto", partOrdersDto);

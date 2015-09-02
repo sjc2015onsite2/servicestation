@@ -14,7 +14,6 @@ import com.expositds.sjc.servicestation.business.repository.dto.PartOrderDto;
 import com.expositds.sjc.servicestation.business.repository.dto.StationsDto;
 import com.expositds.sjc.servicestation.business.service.DtosBuilder;
 import com.expositds.sjc.servicestation.domain.model.Order;
-import com.expositds.sjc.servicestation.domain.model.PartOrder;
 import com.expositds.sjc.servicestation.domain.model.Person;
 
 /**
@@ -49,8 +48,8 @@ public class DtosBuilderImpl implements DtosBuilder {
 	}
 
 	@Override
-	public PartOrderDto build(PartOrder partOrder) {
-		return dtosDao.getPartOrderDto(partOrder.getPartOrderId());
+	public List<PartOrderDto> build(Person mechanic) {
+		return dtosDao.getPartOrderDto(mechanic.getId());
 	}
 		
 		
