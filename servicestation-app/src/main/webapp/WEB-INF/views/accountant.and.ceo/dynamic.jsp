@@ -31,6 +31,7 @@
 		<br />
 		<br />
 		<table class="table table-striped table-hover table-bordered">
+			
 	  		<tr>
 		  		<th width="20%">Month</th>
 		  		<th class="text-danger">Expenses (BYR)</th>
@@ -55,7 +56,7 @@
 <div class="col-sm-6">
 	<div class="col-sm-offset-1 col-sm-8">
 		<br />
-		<br />
+		<p class="text-center"><strong><em>${affiliateName}</em></strong></p>
 		<table class="table table-striped table-hover table-bordered">
 	  		<tr>
 		  		<th width="20%">Month</th>

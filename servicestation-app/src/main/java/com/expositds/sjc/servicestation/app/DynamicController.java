@@ -117,6 +117,7 @@ public class DynamicController {
 			}
 			
 			ModelAndView mav = new ModelAndView();
+			mav.addObject("affiliateName", affilate.getAffilateCode());
 			mav.addObject("stationData", stationData);
 			mav.addObject("affiliateData", affiliateData);
 			mav.addObject("affiliates", accountantService.getServiceStationAffilate(station));

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.expositds.sjc.servicestation.app.validator.RegistrationValidator;
 import com.expositds.sjc.servicestation.domain.model.LogginerRole;
 import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.service.NonAuthorizedUserSite;
