@@ -17,7 +17,6 @@ public class MechanicProfileEntityModelConverter implements Converter<MechanicPr
 	public MechanicProfile convert(MechanicProfileEntity source) {
 		MechanicProfile mechanicProfile = new MechanicProfile();
 		mechanicProfile.setMechanicProfileId(source.getMechanicProfileId());
-		mechanicProfile.setInfo(source.getInfo());
 		return mechanicProfile;
 	}
 

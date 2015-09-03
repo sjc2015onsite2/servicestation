@@ -20,11 +20,6 @@ public class MechanicProfile {
 	 */
 	private Set<Comment> comments;
 	
-	/**
-	 * Информация о механике.
-	 */
-	private String info;
-	
 	public MechanicProfile() {
 		this.comments = new HashSet<>();
 	}
@@ -70,12 +65,4 @@ public class MechanicProfile {
 		this.comments = comments;
 	}
 
-	public String getInfo() {
-		return info;
-	}
-
-	public void setInfo(String info) {
-		this.info = info;
-	}
-	
 }

@@ -17,6 +17,7 @@ public class PersonEntityModelConverter implements Converter<PersonEntity, Perso
 	public Person convert(PersonEntity source) {
 		Person person = new Person(source.getName(), source.getRole());
 		person.setId(source.getId());
+		person.setInfo(source.getInfo());
 		return person;
 	}
 

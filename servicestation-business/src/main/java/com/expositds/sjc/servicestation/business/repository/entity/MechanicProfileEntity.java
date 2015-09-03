@@ -43,12 +43,6 @@ public class MechanicProfileEntity {
 	private Set<CommentEntity> comments;
 	
 	/**
-	 * Информация о механике.
-	 */
-	@Column(name = "info")
-	private String info;
-	
-	/**
 	 * Создаёт новый профиль о механике.
 	 */
 	public MechanicProfileEntity() {
@@ -94,14 +88,6 @@ public class MechanicProfileEntity {
 
 	public void setComments(Set<CommentEntity> comments) {
 		this.comments = comments;
-	}
-
-	public String getInfo() {
-		return info;
-	}
-
-	public void setInfo(String info) {
-		this.info = info;
 	}
 		
 }

@@ -359,7 +359,6 @@ DROP TABLE IF EXISTS `mechanic_profiles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `mechanic_profiles` (
   `mechanic_profile_id` int(11) NOT NULL AUTO_INCREMENT,
-  `info` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`mechanic_profile_id`),
   UNIQUE KEY `mechanic_profile_id_UNIQUE` (`mechanic_profile_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -371,7 +370,7 @@ CREATE TABLE `mechanic_profiles` (
 
 LOCK TABLES `mechanic_profiles` WRITE;
 /*!40000 ALTER TABLE `mechanic_profiles` DISABLE KEYS */;
-INSERT INTO `mechanic_profiles` VALUES (1,'Грамотнй специалист с большим опытом работы'),(2,'Перспективный стажёр'),(3,'Механик прямо из Германии. Плохо говорит по-русски');
+INSERT INTO `mechanic_profiles` VALUES (1),(2),(3);
 /*!40000 ALTER TABLE `mechanic_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -634,6 +633,7 @@ DROP TABLE IF EXISTS `persons`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `persons` (
   `person_id` int(11) NOT NULL AUTO_INCREMENT,
+  `info` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`person_id`),
   UNIQUE KEY `person_id_UNIQUE` (`person_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
@@ -645,7 +645,7 @@ CREATE TABLE `persons` (
 
 LOCK TABLES `persons` WRITE;
 /*!40000 ALTER TABLE `persons` DISABLE KEYS */;
-INSERT INTO `persons` VALUES (1),(4),(5),(6),(8);
+INSERT INTO `persons` VALUES (1,'Грамотнй специалист с большим опытом работы'),(4,'Перспективный стажёр'),(5,NULL),(6,NULL),(8,'Перспективный стажёр');
 /*!40000 ALTER TABLE `persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -992,10 +992,9 @@ DROP TABLE IF EXISTS `station_profiles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `station_profiles` (
   `station_profile_id` int(11) NOT NULL AUTO_INCREMENT,
-  `info` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`station_profile_id`),
   UNIQUE KEY `station_profile_id_UNIQUE` (`station_profile_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1004,7 +1003,7 @@ CREATE TABLE `station_profiles` (
 
 LOCK TABLES `station_profiles` WRITE;
 /*!40000 ALTER TABLE `station_profiles` DISABLE KEYS */;
-INSERT INTO `station_profiles` VALUES (1,'Станция расположена в живописном лесу около нарочанских озёр'),(2,'Доблесная история станции создаёт образ надёжного партнера'),(3,'Посредственный сервис, зато цены не кусаются'),(4,'Кофе предлагают замечательный, но автомобиль им лучше не оставлять');
+INSERT INTO `station_profiles` VALUES (1),(2),(3),(4);
 /*!40000 ALTER TABLE `station_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1018,6 +1017,7 @@ DROP TABLE IF EXISTS `stations`;
 CREATE TABLE `stations` (
   `station_id` int(11) NOT NULL AUTO_INCREMENT,
   `station_name` varchar(45) NOT NULL,
+  `info` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`station_id`),
   UNIQUE KEY `station_id_UNIQUE` (`station_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
@@ -1029,7 +1029,7 @@ CREATE TABLE `stations` (
 
 LOCK TABLES `stations` WRITE;
 /*!40000 ALTER TABLE `stations` DISABLE KEYS */;
-INSERT INTO `stations` VALUES (1,'Северная автосервисная станция'),(2,'Южная автосервисная станция'),(3,'Западная автосервисная станция'),(4,'Восточная автосервисная станция');
+INSERT INTO `stations` VALUES (1,'Северная автосервисная станция','Станция расположена в живописном лесу около нарочанских озёр'),(2,'Южная автосервисная станция','Доблесная история станции создаёт образ надёжного партнера'),(3,'Западная автосервисная станция','Посредственный сервис, зато цены не кусаются'),(4,'Восточная автосервисная станция','Кофе предлагают замечательный, но автомобиль им лучше не оставлять');
 /*!40000 ALTER TABLE `stations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1411,4 +1411,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-03 10:24:02
+-- Dump completed on 2015-09-03 11:08:18

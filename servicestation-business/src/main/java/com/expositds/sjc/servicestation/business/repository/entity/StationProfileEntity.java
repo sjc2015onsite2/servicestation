@@ -51,12 +51,6 @@ public class StationProfileEntity {
 			joinColumns = @JoinColumn(name = "station_profile_id"),
 			inverseJoinColumns = @JoinColumn(name = "mark_id"))
 	private Set<MarkEntity> marks;
-	
-	/**
-	 * Информация о СТО.
-	 */
-	@Column(name = "info")
-	private String info;
 
 	public StationProfileEntity() {
 		this.comments = new HashSet<>();
@@ -110,14 +104,6 @@ public class StationProfileEntity {
 
 	public void setMarks(Set<MarkEntity> marks) {
 		this.marks = marks;
-	}
-
-	public String getInfo() {
-		return info;
-	}
-
-	public void setInfo(String info) {
-		this.info = info;
 	}
 
 }

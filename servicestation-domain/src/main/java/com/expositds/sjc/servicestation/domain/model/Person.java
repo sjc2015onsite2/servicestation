@@ -17,6 +17,11 @@ public class Person extends Logginer {
 	private Map<Calendar, Integer> salary;
 	
 	/**
+	 * Информация о механике.
+	 */
+	private String info;
+	
+	/**
 	 * Создаёт нового сотрудника.
 	 * 
 	 * @param name имя нового сотрудника.
@@ -37,6 +42,14 @@ public class Person extends Logginer {
 
 	public void setSalary(Map<Calendar, Integer> salary) {
 		this.salary = salary;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
 	}
 	
 	

@@ -83,6 +83,12 @@ public class StationEntity  {
 	private String name;
 	
 	/**
+	 * Информация о СТО.
+	 */
+	@Column(name = "info")
+	private String info;
+	
+	/**
 	 * Создаёт новую станцию.
 	 * 
 	 * @param name название СТО
@@ -163,6 +169,14 @@ public class StationEntity  {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
 	
-		
+	
 }

@@ -36,6 +36,11 @@ public class Station  {
 	 * Название СТО.
 	 */
 	private String name;
+	
+	/**
+	 * Информация о станции.
+	 */
+	private String info;
 
 	/**
 	 * Создаёт новую станцию.
@@ -118,5 +123,15 @@ public class Station  {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	
+	
 	
 }

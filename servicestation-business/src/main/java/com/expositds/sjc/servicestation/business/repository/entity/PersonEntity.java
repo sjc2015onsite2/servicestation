@@ -37,6 +37,12 @@ public class PersonEntity extends LogginerEntity{
 	private Map<Calendar, Integer> salary;
 	
 	/**
+	 * Информация о механике.
+	 */
+	@Column(name = "info")
+	private String info;
+	
+	/**
 	 * Создаёт нового сотрудника.
 	 * 
 	 * @param name имя нового сотрудника.
@@ -57,6 +63,14 @@ public class PersonEntity extends LogginerEntity{
 
 	public void setSalary(Map<Calendar, Integer> salary) {
 		this.salary = salary;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
 	}
 	
 	

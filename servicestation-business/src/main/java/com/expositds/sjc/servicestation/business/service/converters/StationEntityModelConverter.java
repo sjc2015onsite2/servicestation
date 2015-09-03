@@ -13,6 +13,7 @@ public class StationEntityModelConverter implements Converter<StationEntity, Sta
 	public Station convert(StationEntity source) {
 		Station station = new Station(source.getName());
 		station.setStationId(source.getStationId());
+		station.setInfo(source.getInfo());
 		return station;
 	}
 

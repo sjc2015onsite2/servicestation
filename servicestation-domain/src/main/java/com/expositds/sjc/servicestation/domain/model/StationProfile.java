@@ -25,11 +25,6 @@ public class StationProfile {
 	 */
 	private Set<Mark> marks;
 	
-	/**
-	 * Информация о станции.
-	 */
-	private String info;
-	
 	public StationProfile() {
 		this.comments = new HashSet<>();
 		this.marks = new HashSet<>();
@@ -84,12 +79,5 @@ public class StationProfile {
 		this.marks = marks;
 	}
 
-	public String getInfo() {
-		return info;
-	}
-
-	public void setInfo(String info) {
-		this.info = info;
-	}
 	
 }
