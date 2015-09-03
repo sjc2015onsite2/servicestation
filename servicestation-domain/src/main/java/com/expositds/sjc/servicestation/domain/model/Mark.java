@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
  * @author Alexey Suslov
  */
 
-public class Mark {
+public class Mark implements Comparable<Mark>{
 	
 	/**
 	 * Идентификатор оценки.
@@ -104,6 +104,11 @@ public class Mark {
 
 	public void setAuthor(SiteUser author) {
 		this.author = author;
+	}
+
+	@Override
+	public int compareTo(Mark o) {
+		return (int) (o.getDate().getTimeInMillis() - this.getDate().getTimeInMillis());
 	}
 	
 	

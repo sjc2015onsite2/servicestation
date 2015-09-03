@@ -3,10 +3,14 @@ package com.expositds.sjc.servicestation.app;
 import java.util.Map;
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,40 +47,61 @@ public class CreateOrderController {
 	private Identification identificationService;
 	
 	@RequestMapping(value = {"/createorder", "/"}, method = RequestMethod.GET)
-	public ModelAndView createOrder(Model model) {
+	public String createOrder(Model model) {
+		
+		Order defoultOrder = new Order();
+		defoultOrder.setProblemDescription("Problem");
+		defoultOrder.setContactData("(99)999 99 99");
 		
 		Set<Station> stations = authorizedUserSite.getServiceStations();
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("stations",  stations);
-		mav.setViewName("createOrder");
-		return mav;
+		model.addAttribute("stations",  stations);
+		model.addAttribute("order", defoultOrder);
+		
+		return "createOrder";
 	}
 	
 	@RequestMapping(value = "/createorder", method = RequestMethod.POST)
 	public String createOrder(
 			@RequestParam(value = "stationId", required = true) Station station,
 			Authentication auth,
-			String problemDescription,
-			String contactData){
+			@Valid @ModelAttribute Order order,
+			BindingResult result,
+			Model model){
 		
-		nonAuthorizedUserSite.createOrder(contactData, problemDescription, station);
-		return "redirect:/createorder";
+		Set<Station> stations = authorizedUserSite.getServiceStations();
+		model.addAttribute("stations",  stations);
+		
+		if (result.hasErrors()) 
+			return "createOrder";
+		
+		nonAuthorizedUserSite.createOrder(order.getContactData(), order.getProblemDescription(), station);
+		return "createOrder";
 	}
 	
 	@RequestMapping(value = "/createorder/user", method = RequestMethod.POST)
 	public ModelAndView createOrder(
 			@RequestParam(value = "stationId", required = true) Station station,
-			String problemDescription,
-			Authentication auth){
+			@Valid @ModelAttribute Order order,
+			BindingResult result,
+			Authentication auth,
+			Model model){		
+		
+		Set<Station> stations = authorizedUserSite.getServiceStations();
+		model.addAttribute("stations",  stations);
+		
+		ModelAndView mav = new ModelAndView();
+		if (result.hasErrors()) {
+			mav.setViewName("createOrder");
+			return mav;
+		}
 		
 		Logginer logginer = identificationService.getLogginerByName(auth.getName());
 		SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
 		
-		authorizedUserSite.createOrder(user, problemDescription, station);
+		authorizedUserSite.createOrder(user, order.getProblemDescription(), station);
 		Map<Order, Station> orders = authorizedUserSite.getOrders(user);
 		
-		ModelAndView mav = new ModelAndView();
 		mav.addObject("orders", orders);
 		mav.setViewName("redirect:/user/myorders/");
 		return mav;

@@ -1,5 +1,6 @@
 package com.expositds.sjc.servicestation.domain.model;
 
+
 /**
  * Класс содержит информацию о предзаказе, для передачи от сайта-агрегатора СТО.
  * 
