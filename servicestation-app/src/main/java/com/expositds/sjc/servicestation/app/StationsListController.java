@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,11 +58,10 @@ public class StationsListController {
 		Set<Comment> stationsComments = nonAuthorizedUserSite.getServiceStationComments(station);
 		ModelAndView mav = new ModelAndView();
 		
-		Map<Comment,String> comments = new HashMap<>();
+		Map<Comment,String> comments = new TreeMap<>();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
 		for(Comment currentcomment : stationsComments){
-			
 			comments.put(currentcomment, dateFormat.format(currentcomment.getDate().getTime()));
 		}
 		mav.addObject("comments", comments);
@@ -86,9 +86,8 @@ public class StationsListController {
 		
 		Set<Comment> mechanicsComments = nonAuthorizedUserSite.getMechanicComments(person);
 		
-		Map<Comment,String> comments = new HashMap<>();
+		Map<Comment,String> comments = new TreeMap<>();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
 		for(Comment currentcomment : mechanicsComments){
 			comments.put(currentcomment, dateFormat.format(currentcomment.getDate().getTime()));
 		}

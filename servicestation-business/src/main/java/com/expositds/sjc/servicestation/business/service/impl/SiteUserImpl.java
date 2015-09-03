@@ -3,6 +3,7 @@ package com.expositds.sjc.servicestation.business.service.impl;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
@@ -106,7 +107,7 @@ public abstract class SiteUserImpl implements UserSite {
 		StationProfileEntity stationProfileEntity = stationsEntity.get(stationEntity);
 		Set<CommentEntity> commentsEntity = stationProfileEntity.getComments();
 		
-		Set<Comment> commentsModel = new HashSet<>();
+		Set<Comment> commentsModel = new TreeSet<>();
 		
 		for (CommentEntity currentCommentEntity : commentsEntity) {
 			if (currentCommentEntity.isVisible())

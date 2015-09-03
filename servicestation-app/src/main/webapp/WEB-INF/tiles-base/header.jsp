@@ -40,7 +40,7 @@
             	
             
             	<security:authorize access="hasRole('ROLE_USER')">
-					<li><a href="<c:url value="/createorder" />"><spring:message code="customer.header.createorder"/></a></li>
+					<li><a href="<c:url value="../user/createorder" />"><spring:message code="customer.header.createorder"/></a></li>
 					<li><a href="<c:url value="/stationslist" />"><spring:message code="customer.header.stationslist"/></a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"><spring:message code="customer.header.createcomment"/> <b class="caret"></b></a>

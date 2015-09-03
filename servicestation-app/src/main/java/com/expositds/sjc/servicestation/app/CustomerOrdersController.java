@@ -2,8 +2,8 @@ package com.expositds.sjc.servicestation.app;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -30,7 +30,6 @@ import com.expositds.sjc.servicestation.domain.service.Identification;
  * Контроллер отвечает за отображение списка сделанных клиентом заявок
  * 
  * @author Sergey Rybakov
- * @author Oleg Ryzhko
  * */
 
 
@@ -60,8 +59,8 @@ public class CustomerOrdersController {
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
 			SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
 			
-			Map<Order, Station> orders = new HashMap<>();
-			orders.putAll(authorizedUserSiteService.getOrdersLimit(user, (page-1)*pageSize+1, pageSize));
+			Map<Order, Station> orders = new TreeMap<>();
+			orders.putAll(authorizedUserSiteService.getOrdersLimit(user, (page-1)*pageSize+2, pageSize));
 			String[][] allOrders = new String[orders.size()][8];
 			int i = 0;
 			for(Order currentOrder : orders.keySet()){

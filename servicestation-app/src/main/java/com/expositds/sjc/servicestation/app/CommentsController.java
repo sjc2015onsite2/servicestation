@@ -1,10 +1,10 @@
 package com.expositds.sjc.servicestation.app;
 
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -52,7 +52,7 @@ public class CommentsController {
 		Station station = identificationService.getStationByPerson(ceo);
 		Set<Comment> stationsComments = ceoService.getServiceStationComments(station);
 		
-		Map<Comment,String> comments = new HashMap<>();
+		Map<Comment,String> comments = new TreeMap<>();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
 		for(Comment currentcomment : stationsComments){
@@ -96,7 +96,7 @@ public class CommentsController {
 		
 		Set<Comment> mechanicsComments = authorizedUserSite.getMechanicComments(mechanic);
 		
-		Map<Comment,String> comments = new HashMap<>();
+		Map<Comment,String> comments = new TreeMap<>();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
 		for(Comment currentcomment : mechanicsComments){

@@ -4,9 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -67,7 +67,7 @@ public class StationOrdersController {
 			
 			Station station = identificationService.getStationByPerson(accountant);
 			
-			Set<Order> allOrders = new HashSet<>();
+			Set<Order> allOrders = new TreeSet<>();
 			allOrders.addAll(accountantService.getServiceStationOrders(station, sDate, fDate));
 			
 			String[][] ordersData = new String[allOrders.size()][5];

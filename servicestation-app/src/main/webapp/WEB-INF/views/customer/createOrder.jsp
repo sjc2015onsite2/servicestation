@@ -7,14 +7,16 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <security:authorize access="hasRole('ROLE_USER')">
-	<c:url value="createorder/user" var="action" />
+	<c:url value="../user/createorder" var="action" />
 </security:authorize>
 
 <security:authorize access="isAnonymous()">
 	<c:url value="createorder" var="action" />
 </security:authorize>
 
-<form:form action="${action}" commandName="order" class="form-horizontal" role="form"  method="POST">
+            
+    <security:authorize access="hasRole('ROLE_USER')">
+    <form:form action="${action}" commandName="order" class="form-horizontal" role="form"  method="POST">
 
 	<div class="col-sm-offset-4 col-sm-4">
 		<div class="form-group has-default">
@@ -26,8 +28,6 @@
             </select>
 		</div>
 	</div>
-            
-    <security:authorize access="hasRole('ROLE_USER')">
 	    <div class="col-sm-offset-4 col-sm-4">
 	    	<div class="form-group has-default">
 	        	<form:label path="problemDescription" class="control-label" for="id1"><spring:message code="customer.createorder.problem"/></form:label>
@@ -41,9 +41,22 @@
        	 		<br />
 	        </div>
         </div>
+        </form:form>
     </security:authorize>
             
     <security:authorize access="isAnonymous()">
+    <form:form action="${action}" commandName="order" class="form-horizontal" role="form"  method="POST">
+
+	<div class="col-sm-offset-4 col-sm-4">
+		<div class="form-group has-default">
+    		<label class="control-label" for="id1"><spring:message code="customer.createorder.selectstation"/></label>
+        	<select multiple class="form-control" name="stationId">
+            	<c:forEach var="station" items="${stations}" >
+                	<option value="${station.stationId}">${station.name}</option>
+                </c:forEach>
+            </select>
+		</div>
+	</div>
     	<div class="col-sm-offset-4 col-sm-4">
        		<div class="form-group has-feedback">
        			<form:label path="problemDescription" class="control-label" for="id1"><spring:message code="customer.createorder.problem"/></form:label>
@@ -63,5 +76,5 @@
        	 		<br />
        	  	</div>
        	</div>
+       	</form:form>
 	</security:authorize>
-</form:form>

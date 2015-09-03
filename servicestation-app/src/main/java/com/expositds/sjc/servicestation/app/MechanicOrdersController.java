@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -70,7 +71,7 @@ public class MechanicOrdersController {
 		
 		Set<Order> freeorders = mechanicService.getMechanicFreeOrders(mechanic);
 		
-		Map<Order, String> orders = new HashMap<>();
+		Map<Order, String> orders = new TreeMap<>();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
 		for(Order currentorder : freeorders){
@@ -90,7 +91,7 @@ public class MechanicOrdersController {
 		Person mechanic = identificationService.getPersonById(logginer.getId().toString());
 		Set<Order> myorders = mechanicService.getMechanicOrders(mechanic);
 		
-		Map<Order,String> ordersanddate = new HashMap<>();
+		Map<Order,String> ordersanddate = new TreeMap<>();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM.dd.yyyy");
 		
 		for(Order currentorder : myorders){

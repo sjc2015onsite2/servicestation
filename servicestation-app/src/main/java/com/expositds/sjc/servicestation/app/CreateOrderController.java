@@ -46,7 +46,7 @@ public class CreateOrderController {
 	@Autowired
 	private Identification identificationService;
 	
-	@RequestMapping(value = {"/createorder", "/"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/createorder", "/", "/user/createorder"}, method = RequestMethod.GET)
 	public String createOrder(Model model) {
 		
 		Order defoultOrder = new Order();
@@ -79,7 +79,7 @@ public class CreateOrderController {
 		return "orderCreated";
 	}
 	
-	@RequestMapping(value = "/createorder/user", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/createorder", method = RequestMethod.POST)
 	public ModelAndView createOrder(
 			@RequestParam(value = "stationId", required = true) Station station,
 			@Valid @ModelAttribute Order order,
@@ -91,7 +91,7 @@ public class CreateOrderController {
 		model.addAttribute("stations",  stations);
 		
 		ModelAndView mav = new ModelAndView();
-		if (result.hasErrors()) {
+		if (result.hasFieldErrors("problemDescription")) {
 			mav.setViewName("createOrder");
 			return mav;
 		}
@@ -103,7 +103,7 @@ public class CreateOrderController {
 		Map<Order, Station> orders = authorizedUserSite.getOrders(user);
 		
 		mav.addObject("orders", orders);
-		mav.setViewName("redirect:/user/myorders/");
+		mav.setViewName("redirect:/user/myorders");
 		return mav;
 	}
 }

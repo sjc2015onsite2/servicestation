@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
  * 
  * @author Alexey Suslov
  */
-public class Order {
+public class Order implements Comparable<Order>{
 	
 	/**
 	 * Идентификатор заказа.
@@ -233,6 +233,12 @@ public class Order {
 
 	public void setContactData(String contactData) {
 		this.contactData = contactData;
+	}
+
+	@Override
+	public int compareTo(Order o) {
+		
+		return (int) (o.getOrderId() - orderId);
 	}
 
 	

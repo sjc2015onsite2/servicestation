@@ -108,7 +108,7 @@ public class Mark implements Comparable<Mark>{
 
 	@Override
 	public int compareTo(Mark o) {
-		return (int) (o.getDate().getTimeInMillis() - this.getDate().getTimeInMillis());
+		return (int) (o.getMarkId() - markId);
 	}
 	
 	

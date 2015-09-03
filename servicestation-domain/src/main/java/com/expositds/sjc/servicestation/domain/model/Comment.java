@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
  * 
  * @author Alexey Suslov
  */
-public class Comment {
+public class Comment implements Comparable<Comment> {
 	
 	/**
 	 * Идентификатор комментария.
@@ -116,6 +116,16 @@ public class Comment {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+
+	@Override
+	public int compareTo(Comment o) {
+		return (int) (o.getCommentId() - commentId);
+	}
+
+	@Override
+	public String toString() {
+		return commentId.toString();
 	}
 	
 	

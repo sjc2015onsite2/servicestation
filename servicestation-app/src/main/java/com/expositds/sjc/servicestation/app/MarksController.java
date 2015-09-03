@@ -51,14 +51,14 @@ public class MarksController {
 			Station station = identificationService.getStationByPerson(ceo);
 			marks.addAll(ceoService.getServiceStationMarks(station));
 			
-			Map<Mark,String> marksanddate = new HashMap<>();
+			Map<Mark,String> marksanddate = new TreeMap<>();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			
 			for(Mark currentMark : marks){
 				marksanddate.put(currentMark, dateFormat.format(currentMark.getDate().getTime()));
 			}
 			
-			int mark = 0; int i = 0;
+			double mark = 0; int i = 0;
 			for(Mark currentMark : marks){
 				mark += currentMark.getMark();
 				i++;
