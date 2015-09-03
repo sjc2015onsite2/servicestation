@@ -5,8 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
-
-	    	<h4 class="text-center">Authorization</h4>
+<h4 class="text-center">Authorization</h4>
 
 <div class="col-sm-offset-4 col-sm-4">
 <c:if test="${not empty error}">
