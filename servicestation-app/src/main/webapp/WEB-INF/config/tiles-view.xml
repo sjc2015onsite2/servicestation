@@ -28,6 +28,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/customer/createOrder.jsp" />
 	</definition>
 	
+	<definition name="orderCreated" extends="base.definition">
+		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/customer/orderCreated.jsp" />
+	</definition>
+	
 	<definition name="stations.list" extends="base.definition">
 		<put-attribute name="header" value="/WEB-INF/tiles-base/header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/customer/stations.list.jsp" />
