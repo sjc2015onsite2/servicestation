@@ -60,7 +60,7 @@ public class CustomerOrdersController {
 			SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
 			
 			Map<Order, Station> orders = new TreeMap<>();
-			orders.putAll(authorizedUserSiteService.getOrdersLimit(user, (page-1)*pageSize+2, pageSize));
+			orders.putAll(authorizedUserSiteService.getOrdersLimit(user, (page-1)*pageSize, pageSize));
 			String[][] allOrders = new String[orders.size()][8];
 			int i = 0;
 			for(Order currentOrder : orders.keySet()){

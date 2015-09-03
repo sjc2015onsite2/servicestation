@@ -40,7 +40,7 @@
             	
             
             	<security:authorize access="hasRole('ROLE_USER')">
-					<li><a href="<c:url value="../user/createorder" />"><spring:message code="customer.header.createorder"/></a></li>
+					<li><a href="<c:url value="/user/createorder" />"><spring:message code="customer.header.createorder"/></a></li>
 					<li><a href="<c:url value="/stationslist" />"><spring:message code="customer.header.stationslist"/></a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"><spring:message code="customer.header.createcomment"/> <b class="caret"></b></a>
@@ -131,7 +131,7 @@
 	<div class="modal-dialog modal-sm">
     	<div class="modal-content col-sm-offset-4 col-sm-6">
     	
-        		<form class="form-horizontal"  action="j_spring_security_check" method='POST' role="form">
+        		<form class="form-horizontal"  action="/servicestation-app/j_spring_security_check" method='POST' role="form">
         	<div class="modal-header">
         		<button class="close" type="button" data-dismiss="modal">&times;</button>
         		<h4 class="modal-title"><spring:message code="header.authorization"/></h4>
