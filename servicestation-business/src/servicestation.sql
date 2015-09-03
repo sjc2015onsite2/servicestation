@@ -1272,11 +1272,26 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_site_user_orders`(in siteuserid int, in startorder int, in countorder int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_site_user_orders`(in siteuserid int, 
+																	in startorder int, 
+																	in countorder int)
 BEGIN
 
-   	select * from orders where order_id IN (select order_id from site_user_has_orders_stations where site_user_id = siteuserid) limit startorder, countorder;
-    
+   	select orders.client_notification_id,
+			orders.client_order_id,
+			orders.order_compleate_date,
+			orders.order_contact_data,
+			orders.order_create_date,
+			orders.order_id,
+			orders.order_problem_description,
+			orders.order_status
+	from orders 
+	where order_id IN 
+		(select order_id 
+		from site_user_has_orders_stations 
+		where site_user_id = siteuserid) 
+	ORDER BY order_id DESC
+	LIMIT  startorder, countorder;
     
 END ;;
 DELIMITER ;
@@ -1411,4 +1426,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-03 11:08:18
+-- Dump completed on 2015-09-03 14:43:12
