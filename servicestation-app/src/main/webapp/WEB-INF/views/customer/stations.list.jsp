@@ -16,7 +16,7 @@
                <c:url value="/mechanicslist/${station.stationId}" var="viewMechanicsListUrl" />
                <tr>
                 	<td><br/>${station.name}</td>
-                	<td><br/>MTC (29)884-21-43<p> ул. Кабяка 12/1</td>
+                	<td><br/>${station.info}</td>
                 	<td class="text-center"><a href="${viewStationsCommentsUrl}"><br/><button type="button" class="btn btn-info btn-sm">Comments</button></a></td>
                 	<td class="text-center"><a href="${viewMechanicsListUrl}"><br/><button type="button" class="btn btn-info btn-sm">Mechanics</button></a></td>
                 	<td class="text-center text-warning"><h2>${stationMarks.get(station.stationId)}</h2></td>

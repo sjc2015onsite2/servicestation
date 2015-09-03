@@ -16,7 +16,7 @@
       <c:url value="/mechanicscomments/${mechanic.id}" var="viewMechanicsCommentsUrl" />
                <tr>
                 	<td><br/>${mechanic.name}</td>
-                	<td><br/>стаж: 200 лет<p> механик года 2025</td>
+                	<td><br/>${machanic.info}</td>
                 	<td class="text-center"><a href="${viewMechanicsCommentsUrl}"><br/><button type="button" class="btn btn-info btn-sm">Comments</button></a></td>
                 </tr>
       </c:forEach>
