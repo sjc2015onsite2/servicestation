@@ -7,8 +7,8 @@
 	<br/>
 	<table class="table table-hover">
          <tr>
-             <th width="50%">Name</th>
-             <th width="30%">Information</th>
+             <th width="30%">Name</th>
+             <th width="40%">Information</th>
              <th class="text-center">Show comments</th>
          </tr>
          
@@ -16,7 +16,7 @@
       <c:url value="/mechanicscomments/${mechanic.id}" var="viewMechanicsCommentsUrl" />
                <tr>
                 	<td><br/>${mechanic.name}</td>
-                	<td><br/>${machanic.info}</td>
+                	<td>${mechanic.info}</td>
                 	<td class="text-center"><a href="${viewMechanicsCommentsUrl}"><br/><button type="button" class="btn btn-info btn-sm">Comments</button></a></td>
                 </tr>
       </c:forEach>
