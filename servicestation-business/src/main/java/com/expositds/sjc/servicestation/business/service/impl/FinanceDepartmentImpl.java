@@ -75,9 +75,9 @@ public class FinanceDepartmentImpl implements FinanceDepartment {
 		Set<Order> readyOrders = new HashSet<>();
 		
 		for (OrderEntity currentOrderEntity : stationEntity.getOrders().keySet())
-			if (currentOrderEntity.getStatus().equals(OrderStatus.READY) &&
+			if (currentOrderEntity.getStatus().equals(OrderStatus.READY) && (currentOrderEntity.getCompleteDate() != null) &&
 					currentOrderEntity.getCompleteDate().compareTo(startDate) >= 0 &&
-					currentOrderEntity.getCompleteDate().compareTo(endDate) <= 0)
+					currentOrderEntity.getCompleteDate().compareTo(endDate) <= 0) 
 				readyOrders.add(conversionService.convert(currentOrderEntity, Order.class));
 		
 		return readyOrders;

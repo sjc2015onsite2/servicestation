@@ -114,7 +114,7 @@ public class CustomerOrdersController {
 			
 			String[][] services = new String[customerOrderDto.getServiceNames().size()][3];
 			for(int i = 0; i < customerOrderDto.getServiceNames().size(); i++){
-				services[i][0] = customerOrderDto.getPartNames().get(i);
+				services[i][0] = customerOrderDto.getServiceNames().get(i);
 				services[i][1] = customerOrderDto.getServiceCounts().get(i).toString();
 				services[i][2] = customerOrderDto.getServiceSums().get(i).toString();
 			}

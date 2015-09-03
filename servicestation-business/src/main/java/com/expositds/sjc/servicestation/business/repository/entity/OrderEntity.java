@@ -80,7 +80,7 @@ public class OrderEntity {
 	 */
 	@ElementCollection
 	@CollectionTable(
-			name = "orders_services_counts_costs",
+			name = "orders_services_counts",
 			joinColumns = @JoinColumn(name = "order_id"))
 	@MapKeyJoinColumn(name = "service_id")
 	@Column(name = "count")
@@ -91,7 +91,7 @@ public class OrderEntity {
 	 */
 	@ElementCollection
 	@CollectionTable(
-			name = "orders_services_counts_costs",
+			name = "orders_services_costs",
 			joinColumns = @JoinColumn(name = "order_id"))
 	@MapKeyJoinColumn(name = "service_id")
 	@Column(name = "cost")

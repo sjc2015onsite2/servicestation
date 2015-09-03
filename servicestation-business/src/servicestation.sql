@@ -37,7 +37,7 @@ CREATE TABLE `affilate_has_part_orders_persons` (
 
 LOCK TABLES `affilate_has_part_orders_persons` WRITE;
 /*!40000 ALTER TABLE `affilate_has_part_orders_persons` DISABLE KEYS */;
-INSERT INTO `affilate_has_part_orders_persons` VALUES (2,1,1),(2,2,1),(2,3,1),(2,4,1),(2,5,1),(2,6,8);
+INSERT INTO `affilate_has_part_orders_persons` VALUES (2,1,1),(2,2,1),(2,3,1),(2,4,1),(2,5,1),(2,6,8),(2,7,1);
 /*!40000 ALTER TABLE `affilate_has_part_orders_persons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `affilate_has_parts_counts` (
 
 LOCK TABLES `affilate_has_parts_counts` WRITE;
 /*!40000 ALTER TABLE `affilate_has_parts_counts` DISABLE KEYS */;
-INSERT INTO `affilate_has_parts_counts` VALUES (2,1,437),(2,2,600),(2,3,15);
+INSERT INTO `affilate_has_parts_counts` VALUES (2,1,437),(2,2,600),(2,3,20);
 /*!40000 ALTER TABLE `affilate_has_parts_counts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -396,7 +396,7 @@ CREATE TABLE `order_has_parts_counts` (
 
 LOCK TABLES `order_has_parts_counts` WRITE;
 /*!40000 ALTER TABLE `order_has_parts_counts` DISABLE KEYS */;
-INSERT INTO `order_has_parts_counts` VALUES (43,1,208),(43,2,2),(45,1,78),(45,2,245),(46,1,2);
+INSERT INTO `order_has_parts_counts` VALUES (43,1,208),(43,2,2),(45,1,78),(45,2,245),(46,1,2),(50,3,2);
 /*!40000 ALTER TABLE `order_has_parts_counts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -424,8 +424,8 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE VIEW `order_services_costs_counts` AS SELECT 
  1 AS `order_id`,
- 1 AS `cost`,
  1 AS `count`,
+ 1 AS `cost`,
  1 AS `name`,
  1 AS `sum`*/;
 SET character_set_client = @saved_cs_client;
@@ -457,34 +457,56 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'NEW','2015-08-18',NULL,'Сильная вибрация при скорости больше 80 км//ч',NULL,NULL,NULL),(38,'NEW','2015-08-18',NULL,'Всё время открывается капот. Невозможно ехать.',NULL,NULL,NULL),(39,'ACCEPTED','2015-08-18','2015-08-25','Муравьи в салоне',3,NULL,NULL),(40,'ACCEPTED','2015-08-22','2015-08-25','Бора плохо тянет',NULL,NULL,NULL),(41,'ACCEPTED','2015-08-19',NULL,'Сломалась труба',NULL,NULL,NULL),(42,'NEW','2015-08-19',NULL,'поломка тачки',NULL,NULL,NULL),(43,'READY','2015-08-19','2015-08-25','Коробка предач заедает. колёса отваливаются. крыша сетает. стёклы дребезжат. вонает в салоне. фары отвалились. поцарапанная и не ездит.',2,NULL,NULL),(44,'NEW','2015-08-24',NULL,'Проблема с колесом',NULL,NULL,'(29) 884 21 43'),(45,'ACCEPTED','2015-08-24','2015-08-25','Проблема',4,NULL,'435435435'),(46,'ACCEPTED','2015-08-24',NULL,'северная проблема',NULL,NULL,NULL),(47,'NEW','2015-08-28',NULL,'Автомобиль не заводится. Щелкает что-то под капотом.',NULL,NULL,NULL),(48,'NEW','2015-08-28',NULL,'Дворники не работают. Стоп сигнал не горит.',NULL,NULL,NULL),(49,'NEW','2015-08-28',NULL,'Отвалился бампер после удара о столб',NULL,NULL,NULL),(50,'ACCEPTED','2015-08-28',NULL,'Сигнализация заблокировала автомобиль. Невозможно попасть внурь.',5,NULL,NULL);
+INSERT INTO `orders` VALUES (1,'NEW','2015-08-18',NULL,'Сильная вибрация при скорости больше 80 км//ч',NULL,NULL,NULL),(38,'NEW','2015-08-18',NULL,'Всё время открывается капот. Невозможно ехать.',NULL,NULL,NULL),(39,'ACCEPTED','2015-08-18','2015-08-25','Муравьи в салоне',3,NULL,NULL),(40,'ACCEPTED','2015-08-22','2015-08-25','Бора плохо тянет',NULL,NULL,NULL),(41,'ACCEPTED','2015-08-19',NULL,'Сломалась труба',NULL,NULL,NULL),(42,'NEW','2015-08-19',NULL,'поломка тачки',NULL,NULL,NULL),(43,'READY','2015-08-19','2015-08-25','Коробка предач заедает. колёса отваливаются. крыша сетает. стёклы дребезжат. вонает в салоне. фары отвалились. поцарапанная и не ездит.',2,NULL,NULL),(44,'NEW','2015-08-24',NULL,'Проблема с колесом',NULL,NULL,'(29) 884 21 43'),(45,'ACCEPTED','2015-08-24','2015-08-25','Проблема',4,NULL,'435435435'),(46,'READY','2015-08-24',NULL,'северная проблема',NULL,NULL,NULL),(47,'NEW','2015-08-28',NULL,'Автомобиль не заводится. Щелкает что-то под капотом.',NULL,NULL,NULL),(48,'NEW','2015-08-28',NULL,'Дворники не работают. Стоп сигнал не горит.',NULL,NULL,NULL),(49,'NEW','2015-08-28',NULL,'Отвалился бампер после удара о столб',NULL,NULL,NULL),(50,'ACCEPTED','2015-08-28','2015-09-11','Сигнализация заблокировала автомобиль. Невозможно попасть внурь.',5,NULL,NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `orders_services_counts_costs`
+-- Table structure for table `orders_services_costs`
 --
 
-DROP TABLE IF EXISTS `orders_services_counts_costs`;
+DROP TABLE IF EXISTS `orders_services_costs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `orders_services_counts_costs` (
+CREATE TABLE `orders_services_costs` (
   `order_id` int(11) NOT NULL,
   `service_id` int(11) NOT NULL,
-  `count` int(11) DEFAULT NULL,
-  `cost` int(11) DEFAULT NULL,
-  PRIMARY KEY (`order_id`,`service_id`)
+  `cost` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `orders_services_counts_costs`
+-- Dumping data for table `orders_services_costs`
 --
 
-LOCK TABLES `orders_services_counts_costs` WRITE;
-/*!40000 ALTER TABLE `orders_services_counts_costs` DISABLE KEYS */;
-INSERT INTO `orders_services_counts_costs` VALUES (43,1,2,10),(43,2,1,11),(45,1,1,10),(45,2,1,11);
-/*!40000 ALTER TABLE `orders_services_counts_costs` ENABLE KEYS */;
+LOCK TABLES `orders_services_costs` WRITE;
+/*!40000 ALTER TABLE `orders_services_costs` DISABLE KEYS */;
+INSERT INTO `orders_services_costs` VALUES (43,1,10),(43,2,11),(45,1,10),(45,2,11),(50,1,10),(46,2,11);
+/*!40000 ALTER TABLE `orders_services_costs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders_services_counts`
+--
+
+DROP TABLE IF EXISTS `orders_services_counts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orders_services_counts` (
+  `order_id` int(11) NOT NULL,
+  `service_id` int(11) NOT NULL,
+  `count` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders_services_counts`
+--
+
+LOCK TABLES `orders_services_counts` WRITE;
+/*!40000 ALTER TABLE `orders_services_counts` DISABLE KEYS */;
+INSERT INTO `orders_services_counts` VALUES (43,1,2),(43,2,1),(45,1,1),(45,2,1),(50,1,1),(46,2,1);
+/*!40000 ALTER TABLE `orders_services_counts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -508,7 +530,7 @@ CREATE TABLE `part_order_has_parts_counts` (
 
 LOCK TABLES `part_order_has_parts_counts` WRITE;
 /*!40000 ALTER TABLE `part_order_has_parts_counts` DISABLE KEYS */;
-INSERT INTO `part_order_has_parts_counts` VALUES (1,1,2),(2,1,12),(3,1,200),(3,2,300),(4,1,22),(5,1,1),(6,3,234);
+INSERT INTO `part_order_has_parts_counts` VALUES (1,1,2),(2,1,12),(3,1,200),(3,2,300),(4,1,22),(5,1,1),(6,3,234),(7,3,7);
 /*!40000 ALTER TABLE `part_order_has_parts_counts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -539,7 +561,7 @@ CREATE TABLE `part_orders` (
   `status` varchar(45) NOT NULL,
   `client_part_order_id` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`part_order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -548,7 +570,7 @@ CREATE TABLE `part_orders` (
 
 LOCK TABLES `part_orders` WRITE;
 /*!40000 ALTER TABLE `part_orders` DISABLE KEYS */;
-INSERT INTO `part_orders` VALUES (1,'2015-08-01','READY',NULL),(2,'2015-08-24','READY',NULL),(3,'2015-08-25','READY',NULL),(4,'2015-08-26','READY',NULL),(5,'2015-08-26','READY',NULL),(6,'2015-09-01','PENDING',NULL);
+INSERT INTO `part_orders` VALUES (1,'2015-08-01','READY',NULL),(2,'2015-08-24','READY',NULL),(3,'2015-08-25','READY',NULL),(4,'2015-08-26','READY',NULL),(5,'2015-08-26','READY',NULL),(6,'2015-09-01','PENDING',NULL),(7,'2015-09-03','READY',NULL);
 /*!40000 ALTER TABLE `part_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1339,7 +1361,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `order_services_costs_counts` AS select `orders_services_counts_costs`.`order_id` AS `order_id`,`orders_services_counts_costs`.`cost` AS `cost`,`orders_services_counts_costs`.`count` AS `count`,`services`.`name` AS `name`,(`orders_services_counts_costs`.`cost` * `orders_services_counts_costs`.`count`) AS `sum` from (`orders_services_counts_costs` left join `services` on((`orders_services_counts_costs`.`service_id` = `services`.`service_id`))) */;
+/*!50001 VIEW `order_services_costs_counts` AS select `orders_services_counts`.`order_id` AS `order_id`,`orders_services_counts`.`count` AS `count`,`orders_services_costs`.`cost` AS `cost`,`services`.`name` AS `name`,(`orders_services_counts`.`count` * `orders_services_costs`.`cost`) AS `sum` from ((`orders_services_counts` left join `orders_services_costs` on((`orders_services_counts`.`order_id` = `orders_services_costs`.`order_id`))) left join `services` on((`orders_services_counts`.`service_id` = `services`.`service_id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -1389,4 +1411,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-02 12:15:52
+-- Dump completed on 2015-09-03 10:14:16
