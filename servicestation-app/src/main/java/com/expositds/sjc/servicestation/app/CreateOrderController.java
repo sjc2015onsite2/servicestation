@@ -76,7 +76,7 @@ public class CreateOrderController {
 			return "createOrder";
 		
 		nonAuthorizedUserSite.createOrder(order.getContactData(), order.getProblemDescription(), station);
-		return "createOrder";
+		return "orderCreated";
 	}
 	
 	@RequestMapping(value = "/createorder/user", method = RequestMethod.POST)
