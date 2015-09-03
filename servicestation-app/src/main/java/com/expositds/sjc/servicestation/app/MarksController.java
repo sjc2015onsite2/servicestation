@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -46,9 +48,10 @@ public class MarksController {
 			Logginer logginer = identificationService.getLogginerByName(auth.getName());
 			Person ceo = identificationService.getPersonById(logginer.getId().toString());
 			
-			Set<Mark> marks = new HashSet<>();
+			Set<Mark> marks = new TreeSet<>();
 			Station station = identificationService.getStationByPerson(ceo);
 			marks.addAll(ceoService.getServiceStationMarks(station));
+			
 			Map<Mark,String> marksanddate = new HashMap<>();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			
