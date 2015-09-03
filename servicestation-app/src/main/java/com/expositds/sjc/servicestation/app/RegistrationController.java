@@ -54,7 +54,7 @@ public class RegistrationController {
 		String view = "Authorization";
 		
 		if (result.hasErrors()) {
-			view = "redirect:/authorization";
+			view = "registration";
 		} else {
 			if (siteUser != null) {
 				nonAuthorizedUserSiteImpl.saveSiteUser(siteUser);

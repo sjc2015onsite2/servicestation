@@ -5,6 +5,10 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 /**
  * Класс представляет собой заяву на ремонт.
  * 
@@ -50,6 +54,9 @@ public class Order {
 	/**
 	 * Описание проблеммы, с которой клиент обратился в СТО.
 	 */
+	@NotNull
+	@Size(min=1,
+	message="problemDescription must be at least 1 characters long.")
 	private String problemDescription;
 	
 	/**
@@ -65,6 +72,11 @@ public class Order {
 	/**
 	 * Контактные данные незарегестрированного пользователя.
 	 */
+	@NotNull
+	@Pattern(regexp = "[0-9 -+()]*",
+	message="contactData must be numeric.")
+	@Size(min=6, 
+	message="contactData must be at least 6 characters long.")
 	private String contactData;
 	
 	/**
