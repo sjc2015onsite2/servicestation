@@ -15,4 +15,11 @@
             <footer><em>${comment.value}</em></footer>
         </blockquote>
 	</c:forEach>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
 </div>

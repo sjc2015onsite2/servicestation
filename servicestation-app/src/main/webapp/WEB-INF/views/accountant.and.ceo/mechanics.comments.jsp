@@ -17,6 +17,10 @@
 	            <footer><em>${comment.value}</em></footer>
 	        </blockquote>
 		</c:forEach>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
 	</div>
 	<form action="../ceo/mechanicscomments" method="POST">
 		<div class="col-sm-4">

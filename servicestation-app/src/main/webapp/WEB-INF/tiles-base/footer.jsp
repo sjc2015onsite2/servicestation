@@ -7,23 +7,32 @@
 
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/footer.css"/>" />
 
-<div id="footer">
-<ul class="list-inline">
-<li><p> &copy; SJC-2015 |</p></li>
-	<c:set var="currentLocale">${pageContext.response.locale}</c:set>
-	<c:set var="localeCode" value="${fn:toUpperCase(currentLocale)}" />
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+	<div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        	<ul class="nav navbar-nav">
+        	<p class="navbar-text"> &copy; SJC-2015 |</p>
+				<c:set var="currentLocale">${pageContext.response.locale}</c:set>
+				<c:set var="localeCode" value="${fn:toUpperCase(currentLocale)}" />
 	
-	<c:set var="availLanguages" value="EN,RU" />
-	<c:if test="${!fn:contains(availLanguages, localeCode)}">
-	  <c:set var="localeCode" value="EN" />
-	</c:if>
+				<c:set var="availLanguages" value="EN,RU" />
+				<c:if test="${!fn:contains(availLanguages, localeCode)}">
+				  <c:set var="localeCode" value="EN" />
+				</c:if>
 	
- 	<c:forEach var="lang" items="${availLanguages}">
- 	    <c:set var="langHTML" value="${lang}" />
-	 	<c:if test="${lang eq localeCode}">
-		  <c:set var="langHTML" value="<b><u>${lang}</u></b>" />
-		</c:if>
-    	<li><a href="${currentPage}?lang=${lang}">${langHTML}</a></li>	
-	</c:forEach>
-</ul>
-</div>
+			 	<c:forEach var="lang" items="${availLanguages}">
+			 	    <c:set var="langHTML" value="${lang}" />
+				 	<c:if test="${lang eq localeCode}">
+					  <c:set var="langHTML" value="<b><u>${lang}</u></b>" />
+					</c:if>
+			    	<li><a href="${currentPage}?lang=${lang}">${langHTML}</a></li>	
+				</c:forEach>
+        		
+          	</ul>  
+        </div>
+    </div>
+</nav>
+
