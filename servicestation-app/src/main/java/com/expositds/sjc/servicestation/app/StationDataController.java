@@ -71,6 +71,10 @@ public class StationDataController {
 				@RequestParam String finishdate) throws ParseException {
 			
 			Calendar now = new GregorianCalendar();
+			Calendar firstDayOfLastMonth = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 1);
+			firstDayOfLastMonth.add(Calendar.MONTH, -1);
+			Calendar lastDayOfLastMonth = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 1);
+			lastDayOfLastMonth.add(Calendar.DAY_OF_MONTH, -1);
 			Calendar firstDayOfCurrentMonth = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), 1);
 			Calendar nowDate = new GregorianCalendar(now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
 			
@@ -86,6 +90,8 @@ public class StationDataController {
 			fDate.setTime(sdf.parse(finishdate));
 			
 			ModelAndView mav = new ModelAndView();
+			mav.addObject("lustMonthProfit", accountantService.getServiceStationProfit(station, firstDayOfLastMonth, lastDayOfLastMonth));
+			mav.addObject("lustMonthExpenses", accountantService.getServiceStationCharges(station, firstDayOfLastMonth, lastDayOfLastMonth));
 			mav.addObject("profit", accountantService.getServiceStationProfit(station, sDate, fDate));
 			mav.addObject("expenses", accountantService.getServiceStationCharges(station, sDate, fDate));
 			mav.addObject("currentMonthProfit", accountantService.getServiceStationProfit(station, firstDayOfCurrentMonth, nowDate));
