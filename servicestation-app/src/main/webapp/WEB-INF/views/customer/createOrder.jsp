@@ -20,7 +20,7 @@
 
 	<div class="col-sm-offset-4 col-sm-4">
 		<div class="form-group has-default">
-    		<label path class="control-label" for="id1"><spring:message code="customer.createorder.selectstation"/></label>
+    		<label class="control-label" for="id1"><spring:message code="customer.createorder.selectstation"/></label>
         	<select multiple class="form-control" name="stationId">
             	<c:forEach var="station" items="${stations}" >
                 	<option value="${station.stationId}">${station.name}</option>

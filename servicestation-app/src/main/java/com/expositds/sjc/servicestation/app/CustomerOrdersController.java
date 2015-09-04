@@ -60,7 +60,7 @@ public class CustomerOrdersController {
 			SiteUser user = identificationService.getSiteUserById(logginer.getId().toString());
 			
 			Map<Order, Station> orders = new TreeMap<>();
-			orders.putAll(authorizedUserSiteService.getOrdersLimit(user, (page-1)*pageSize, pageSize));
+			orders.putAll(authorizedUserSiteService.getOrdersLimit(user, (page-1L)*pageSize, 3L));
 			String[][] allOrders = new String[orders.size()][8];
 			int i = 0;
 			for(Order currentOrder : orders.keySet()){
@@ -82,6 +82,8 @@ public class CustomerOrdersController {
 			
 			int ordersCount = authorizedUserSiteService.getSiteUserOrdersCount(user);
 			Long lastPage = ordersCount / pageSize;
+			if(ordersCount % pageSize != 0)
+				lastPage++;
 			
 			if(endPage >= lastPage) endPage = lastPage;
 			if(endPage >= 5 && (endPage - startPage) < 5) startPage = endPage -5;

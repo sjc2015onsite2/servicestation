@@ -172,7 +172,7 @@
 		<br />
 		<div class="col-sm-3">
 			<p class="text-left">
-				<strong>CompleteDate: </strong>
+				<strong>CompletedDate: </strong>
 			</p>
 		</div>
 		<security:authorize access="hasRole('ROLE_USER')">
@@ -211,7 +211,7 @@
 		<br />
 		<div class="col-sm-3">
 			<p class="text-left">
-				<strong>CreateDate: </strong>
+				<strong>CreatedDate: </strong>
 			</p>
 		</div>
 		<div class="col-sm-9">
@@ -219,6 +219,11 @@
 				<em>${customerOrderDto.createdDate}</em>
 			</p>
 		</div>
+		<br />
+	<br />
+	<br />
+	<br />
+	<br />
 	</div>
 
 <c:if test="${empty contactData}">
@@ -255,6 +260,16 @@
 				</form>
 			</c:if>
 		</security:authorize>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
 	</div>
 </c:if>
 

@@ -10,8 +10,7 @@
         <br />
   	    <blockquote>
         	<footer><strong>Author: </strong>${mark.key.author.name}</footer>
-        	<br />
-            <p class="text-warning">${mark.key.mark}</p>
+            <h4 class="text-warning">  ${mark.key.mark}</h4>
             <footer><em>${mark.value}</em></footer>
         </blockquote>
 	</c:forEach>

@@ -18,7 +18,7 @@
 </c:if>
 </div>
 
-<form action="../j_spring_security_check" method="POST">
+<form action="/servicestation-app/j_spring_security_check" method="POST">
 	<div class="col-sm-offset-5 col-sm-2">
 	  	<div class="form-group">
 	    	<label>Login</label>

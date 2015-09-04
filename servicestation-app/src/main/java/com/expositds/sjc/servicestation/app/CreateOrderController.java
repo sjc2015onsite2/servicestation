@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.expositds.sjc.servicestation.domain.model.Logginer;
 import com.expositds.sjc.servicestation.domain.model.Order;
-import com.expositds.sjc.servicestation.domain.model.PreOrder;
 import com.expositds.sjc.servicestation.domain.model.SiteUser;
 import com.expositds.sjc.servicestation.domain.model.Station;
 import com.expositds.sjc.servicestation.domain.service.AuthorizedUserSite;
@@ -91,7 +90,7 @@ public class CreateOrderController {
 		model.addAttribute("stations",  stations);
 		
 		ModelAndView mav = new ModelAndView();
-		if (result.hasErrors()) {
+		if (result.hasFieldErrors("problemDescription")) {
 			mav.setViewName("createOrder");
 			return mav;
 		}
