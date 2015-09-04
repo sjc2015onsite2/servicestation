@@ -2,6 +2,8 @@ package com.expositds.sjc.servicestation.app;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -72,7 +74,7 @@ public class CreateCommentsController {
 	public ModelAndView createMechanicComment() {
 		
 		Set<Station> stations = authorizedUserSite.getServiceStations();
-		Set<Person> mechanics = new HashSet<>();
+		Set<Person> mechanics = new TreeSet<>();
 		
 		for(Station currentstation : stations) {
 			Set<Person> currentPersons = authorizedUserSite.getServiceStationMechanics(currentstation);

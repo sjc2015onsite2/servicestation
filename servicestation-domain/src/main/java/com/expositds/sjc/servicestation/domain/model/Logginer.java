@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
  * @author Alexey Suslov
  *
  */
-public class Logginer {
+public class Logginer implements Comparable<Logginer>{
 
 	/**
 	 * Идентификатор залогинивающегося.
@@ -116,7 +116,11 @@ public class Logginer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+
+	@Override
+	public int compareTo(Logginer o) {
+		
+		return (int) -(o.getName().compareTo(name));
+	}	
 	
 }
