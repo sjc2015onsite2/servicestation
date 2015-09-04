@@ -81,7 +81,7 @@ public class CreateOrderController {
 	
 	@RequestMapping(value = "/user/createorder", method = RequestMethod.POST)
 	public ModelAndView createOrder(
-			@RequestParam(value = "stationId", required = true) Station station,
+			@RequestParam(value = "stationId") Station station,
 			@Valid @ModelAttribute Order order,
 			BindingResult result,
 			Authentication auth,
@@ -91,7 +91,7 @@ public class CreateOrderController {
 		model.addAttribute("stations",  stations);
 		
 		ModelAndView mav = new ModelAndView();
-		if (result.hasFieldErrors("problemDescription")) {
+		if (result.hasErrors()) {
 			mav.setViewName("createOrder");
 			return mav;
 		}

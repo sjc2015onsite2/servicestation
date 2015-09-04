@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +44,11 @@ public class StationsListController {
 		
 		Map<Long, Double> stationMarks = new HashMap<>();
 		for(Station currentStation : stations){
-			stationMarks.put(currentStation.getStationId(), nonAuthorizedUserSite.getAverageStationMark(currentStation));
+			double newmark = nonAuthorizedUserSite.getAverageStationMark(currentStation);
+			if(!Double.isNaN(newmark))
+				newmark = new BigDecimal(nonAuthorizedUserSite.getAverageStationMark(currentStation)).setScale(1, RoundingMode.UP).doubleValue();
+			
+			stationMarks.put(currentStation.getStationId(), newmark);
 		}
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("stations",  stations);

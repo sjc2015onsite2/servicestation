@@ -1,5 +1,7 @@
 package com.expositds.sjc.servicestation.app;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -64,9 +66,14 @@ public class MarksController {
 				i++;
 			}
 			mark = mark / i;
+			double newmark;
+			if(!Double.isNaN(mark))
+				newmark = new BigDecimal(mark).setScale(1, RoundingMode.UP).doubleValue();
+			else
+				newmark = mark;
 			
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("mark", mark);
+			mav.addObject("mark", newmark);
 			mav.addObject("marksanddate", marksanddate);
 			mav.setViewName("marks");
 			return mav;
