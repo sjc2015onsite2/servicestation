@@ -1,8 +1,5 @@
 package com.expositds.sjc.servicestation.app;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -15,16 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.expositds.sjc.servicestation.business.repository.dto.CeoNotificationDto;
-import com.expositds.sjc.servicestation.business.repository.dto.CustomerOrderDto;
 import com.expositds.sjc.servicestation.business.repository.dto.MechanicNotificationDto;
 import com.expositds.sjc.servicestation.business.service.DtosBuilder;
 import com.expositds.sjc.servicestation.domain.model.Logginer;
-import com.expositds.sjc.servicestation.domain.model.Order;
 import com.expositds.sjc.servicestation.domain.model.Person;
-import com.expositds.sjc.servicestation.domain.model.Station;
-import com.expositds.sjc.servicestation.domain.service.Ceo;
 import com.expositds.sjc.servicestation.domain.service.Identification;
-import com.expositds.sjc.servicestation.domain.service.Mechanic;
 
 
 /**
@@ -42,9 +34,6 @@ public class NotificationsLogController {
 	
 	@Autowired
 	private Identification identificationService;
-	
-	@Autowired
-	private Ceo ceoService;
 	
 	@Autowired
 	private DtosBuilder dtosBuilder;

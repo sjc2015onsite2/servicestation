@@ -1,7 +1,5 @@
 package com.expositds.sjc.servicestation.app;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -19,7 +17,6 @@ import com.expositds.sjc.servicestation.domain.model.PartOrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.business.repository.dto.PartOrderDto;
 import com.expositds.sjc.servicestation.business.service.DtosBuilder;
-import com.expositds.sjc.servicestation.domain.model.Affilate; 
 import com.expositds.sjc.servicestation.domain.service.Identification;
 import com.expositds.sjc.servicestation.domain.service.Mechanic;
 

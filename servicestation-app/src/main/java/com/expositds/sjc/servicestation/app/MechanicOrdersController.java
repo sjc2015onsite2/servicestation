@@ -29,7 +29,6 @@ import com.expositds.sjc.servicestation.domain.model.OrderStatus;
 import com.expositds.sjc.servicestation.domain.model.Part;
 import com.expositds.sjc.servicestation.domain.model.Person;
 import com.expositds.sjc.servicestation.domain.model.Service;
-import com.expositds.sjc.servicestation.domain.service.AuthorizedUserSite;
 import com.expositds.sjc.servicestation.domain.service.Identification;
 import com.expositds.sjc.servicestation.domain.service.Mechanic;
 
@@ -50,9 +49,6 @@ public class MechanicOrdersController {
 	
 	@Autowired
 	private Identification identificationService;
-	
-	@Autowired
-	private AuthorizedUserSite authorizedUserSiteService;
 	
 	@Autowired
 	private DtosBuilder customerOrderDtoBuilder;
