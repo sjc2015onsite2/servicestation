@@ -11,7 +11,7 @@ import javax.persistence.Transient;
  *
  */
 @Entity
-public class PartOrderDto {
+public class PartOrderDto implements Comparable<PartOrderDto> {
 	
 	@Id
 	@Column(name = "part_order_id")
@@ -67,6 +67,12 @@ public class PartOrderDto {
 
 	public void setChangeStatus(boolean changeStatus) {
 		this.changeStatus = changeStatus;
+	}
+
+	@Override
+	public int compareTo(PartOrderDto o) {
+		
+		return o.getId()-id;
 	}
 
 }

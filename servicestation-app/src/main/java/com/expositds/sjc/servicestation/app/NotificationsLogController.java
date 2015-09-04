@@ -5,6 +5,7 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -55,8 +56,8 @@ public class NotificationsLogController {
 		
 		
 		
-		List<MechanicNotificationDto> notificationsDto = dtosBuilder.buildMechanicNotificationDto(mechanic);
-		
+		Set<MechanicNotificationDto> notificationsDto = new TreeSet<>();
+		notificationsDto.addAll(dtosBuilder.buildMechanicNotificationDto(mechanic));
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("notificationsDto", notificationsDto);

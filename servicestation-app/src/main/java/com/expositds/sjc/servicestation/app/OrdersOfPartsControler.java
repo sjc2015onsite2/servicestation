@@ -52,7 +52,8 @@ public class OrdersOfPartsControler {
 		Person mechanic = identificationService.getPersonById(logginer.getId().toString());
 		
 		
-		List<PartOrderDto> partOrdersDto = dtosBuilder.build(mechanic);
+		Set<PartOrderDto> partOrdersDto = new TreeSet<>();
+		partOrdersDto.addAll(dtosBuilder.build(mechanic));
 		
 	
 		ModelAndView mav = new ModelAndView();

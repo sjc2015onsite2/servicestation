@@ -9,7 +9,7 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class MechanicNotificationDto {
+public class MechanicNotificationDto implements Comparable<MechanicNotificationDto>{
 	
 	@Id
 	@Column(name = "order_id")
@@ -32,6 +32,12 @@ public class MechanicNotificationDto {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	@Override
+	public int compareTo(MechanicNotificationDto o) {
+		
+		return (int) (o.getOrderId().compareTo(orderId));
 	}
 	
 	
