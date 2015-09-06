@@ -9,9 +9,9 @@
 <div class="col-sm-offset-4 col-sm-4">
 	<table class="table table-striped table-hover table-bordered">
   		<tr>
-	  		<th width="30%">Affiliate</th>
-	  		<th>Rent for currentMonth </th>
-	  		<th>Rent for today </th>
+	  		<th width="20%">Affiliate</th>
+	  		<th>Total rent for month (BYR)</th>
+	  		<th>Rent for today (BYR)</th>
   		</tr>
   		<c:forEach var="data" items="${affilData}">
   			<tr class="warning">

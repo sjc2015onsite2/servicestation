@@ -94,12 +94,12 @@ public class CommentsController {
 		Set<Person> mechanics = new HashSet<>();
 		mechanics.addAll(authorizedUserSite.getServiceStationMechanics(station));
 		
-		Set<Comment> mechanicsComments = authorizedUserSite.getMechanicComments(mechanic);
-		
+		Map<Person, Set<Comment>> mechanicsAndComments = ceoService.getMechanicsComments(station);
+		Set<Comment> mechanicComments = mechanicsAndComments.get(mechanic);
 		Map<Comment,String> comments = new TreeMap<>();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
-		for(Comment currentcomment : mechanicsComments){
+		for(Comment currentcomment : mechanicComments){
 			comments.put(currentcomment, dateFormat.format(currentcomment.getDate().getTime()));
 		}
 		ModelAndView mav = new ModelAndView();

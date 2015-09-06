@@ -92,14 +92,14 @@
 	
 	<!--Exception mapper-->
 	
-	<!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
 	    <property name="defaultErrorView" value="base.error" /> 
 	    <property name="exceptionMappings">
         <props>
             <prop key="com.expositds.sjc.servicestation.domain.exception.PartLimitException">part.limit.error</prop>
            </props>
     </property>  
-	</bean> -->
+	</bean>
 	
 	<bean id="beansValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
